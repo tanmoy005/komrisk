@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet, Image, Pressable } from 'react-native';
+import React from 'react';
+import Colors from '../constants/Colors';
+import { FontAwesome } from '@expo/vector-icons';
+import ComplianceChartData from '@/assets/data/chartdata';
 import { PieChart } from 'react-native-chart-kit';
-// import { ChartData, ChartType } from "@/src/types";
-
+import { Link, useSegments } from 'expo-router';
+import { Card, Text } from 'react-native-elements';
 interface ChartData {
   label: string;
   color: string | null;
@@ -15,63 +18,79 @@ interface ChartData {
 }
 interface ChartType {
   name: string;
-  population: string | null;
+  population: number | null;
   color: string | null;
   legendFontColor: string | null;
-  legendFontSize: string | null;
+  legendFontSize: number | null;
 }
 
-const PieChartData: React.FC = () => {
 
-  // const { chartData ,title,subTitle,yAxisName,xAxisName} = ChartData;
-  let data: Array<ChartType> = [];
-  // const [chartdatalist, setChartdatalist] = useState<ChartType>();
-  // const chartdatalist : ChartType[] ;
-  // { name: 'Red', population: 25, color: '#FF5733', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-  // { name: 'Green', population: 75, color: '#33FF57', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-  // ];
-  // const mappedChartData: ChartType[] = chartData.map((data: ChartData) => {
-  //   return {
-  //     name: data.label,
-  //     population: data.value.toString(),
-  //     color: data.color,
-  //     legendFontColor: data.color, // or another property you want to use
-  //     legendFontSize: "12px", // or another value you want to set
-  //   };
-  // });
+const PieChartData = () => {
 
-  // data: [] = chartData.map((data: ChartData) => {
-  //   return {
-  //     name: data.label,
-  //     population: data.value,
-  //     color: data.color,
-  //     legendFontColor: data.color,
-  //     legendFontSize: 15
-  //   }
-  // });
-  // <button key={index}>{myButton}</button>);
-
+  const { chartData, title, subTitle, yAxisName, xAxisName } = ComplianceChartData;
+  const filteredchartData: ChartData[] = chartData.filter(x => x.label !== "NULL" || x.color !== null);
+  console.log('filteredchartData', filteredchartData);
+  const mappedChartData: ChartType[] = filteredchartData.map((data: ChartData) => {
+    // if (data.label != null && data) {
+    return {
+      name: data.label,
+      population: data.value,
+      color: data.color,
+      legendFontColor: data.color, // or another property you want to use
+      legendFontSize: 12, // or another value you want to set
+    };
+    // }
+  });
 
 
   return (
-    <View>
-      {/* <PieChart
-        data={mappedChartData}
-        width={300}
-        height={200}
-        chartConfig={{
-          backgroundColor: '#ffffff',
-          backgroundGradientFrom: '#ffffff',
-          backgroundGradientTo: '#ffffff',
-          decimalPlaces: 2,
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-        }}
-        accessor={title}
-        backgroundColor="transparent"
-        paddingLeft="15"
-      /> */}
-    </View>
+    <Link href="/dashboard/chartDataList" asChild>
+      <Pressable style={styles.container}>
+        <Card containerStyle={styles.cardContainer}>
+          <PieChart
+            data={mappedChartData}
+            width={300}
+            height={200}
+            chartConfig={{
+              backgroundColor: '#ffffff',
+              backgroundGradientFrom: '#ffffff',
+              backgroundGradientTo: '#ffffff',
+              decimalPlaces: 2,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            }}
+            accessor="population"
+            backgroundColor="transparent"
+            paddingLeft="15"
+          />
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{subTitle}</Text>
+        </Card>
+      </Pressable>
+    </Link >
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cardContainer: {
+    width: '80%', // Adjust the width as needed
+  },
+  title: {
+    fontWeight: '500',
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  subtitleContainer: {
+    flexDirection: 'row',
+    gap: 5,
+  },
+
+});
+
 
 export default PieChartData;

@@ -15,7 +15,16 @@ export type ChartType = {
   legendFontColor:string | null;
   legendFontSize:string | null;
 };
-
+export type ChartDisplayData = {
+  label: number;
+  color: string | null;
+  value: string;
+  data: {
+    dataFilter: null,
+    type: string,
+    userFilter: null
+};
+};
 
 
 

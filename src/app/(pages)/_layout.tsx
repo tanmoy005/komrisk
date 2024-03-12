@@ -7,10 +7,9 @@ import { Stack } from 'expo-router';
 const Page_layout = () => {
     return (
         <Stack>
-            
-            <View style={styles.container}>
-                <Stack.Screen name="(pages)" options={{headerTitle:"Test", headerShown: true }} />
-                <Stack.Screen name="(pages)/signin" options={{ headerShown: false }} />
+            <View style={styles.container} >
+                <Stack.Screen name="index" options={{headerTitle:"Test", headerShown: true }}  />
+                <Stack.Screen name="signin" options={{ headerShown: false }} />
             </View>
         </Stack>
     )

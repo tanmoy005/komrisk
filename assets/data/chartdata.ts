@@ -1,4 +1,4 @@
-const ChartData = {
+const ComplianceChartData = {
     "title": "Compliance Activity Status",
     "subTitle": "01/01/2021 - 31/12/2023",
     "xAxisName": "Compliance",
@@ -6,7 +6,7 @@ const ChartData = {
     "chartData": [
         {
             "label": "COMPLETED",
-            "color": "00FF00",
+            "color": "#00FF00",
             "value": 89,
             "link": {
                 "dataFilter": null,
@@ -16,7 +16,7 @@ const ChartData = {
         },
         {
             "label": "INITIATED",
-            "color": "FFBF00",
+            "color": "#FFBF00",
             "value": 1458,
             "link": {
                 "dataFilter": null,
@@ -36,7 +36,7 @@ const ChartData = {
         },
         {
             "label": "PENDING",
-            "color": "FF0000",
+            "color": "#FF0000",
             "value": 19,
             "link": {
                 "dataFilter": null,
@@ -56,3 +56,4 @@ const ChartData = {
         }
     ]
 }
+export default ComplianceChartData;
