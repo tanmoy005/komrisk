@@ -7,6 +7,7 @@ import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
 import { connect } from 'react-redux';
 import { BaseUrl } from '@/src/types';
 import { getLocalStorageItem, SetLocalStorageItem } from '@/src/utils';
+import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
 
 
 
@@ -39,48 +40,21 @@ let Workspace = () => {
       Alert.alert("Alert", "Workspace can not be empty");
     }
     else {
-
-      try {
-        const payLoad = {
-          Url: `https://${workSpaceName}.komrisk.com`
-        };
-        const url = `komrisk/api/auth/authURL`;
-
-        const api = axios.create({
-          baseURL: "https://komrisknxtcont.komrisk.com/"
-        });
-        console.log("url", url);
-
-        const response = await api.post(url, payLoad, {
-          headers: {
-            "API-KEY": "1d339a8918bfd92522267f0dd76415f8",
-            "Content-Type": "application/json",
-            "Cookie": "JSESSIONID=86FE4C0D803C89A638BEC0F75AF59C5A"
-          }
-        });
-        console.log('response', response);
-        if (response.status === 200) {
-          // <Redirect href={'/signin'} />
-          const workSpace = { workSpaceName };
-          dispatch(storeBaseUrl(workSpace));
-          console.log('workspace', workSpace);
-          
-          // SetLocalStorageItem('workSpace', workSpace);
-          router.push("/signin");
-          // const local = getLocalStorageItem('workSpace');
-          // console.log("local", local);
-        } else {
-        }
-      } catch (error) {
+      const payLoad = {
+        Url: `https://${workSpaceName}.komrisk.com`
+      };
+      const {error, status} = await AuthenticateWorkspace(payLoad);
+      
+      if (status === 200) {
+        router.push("/signin");
+      } else {
         Alert.alert("error", error.message);
-        console.log('error', error);
-
       }
     }
 
   }
-  
-  
+
+
   // const handleSubmitWorkSpace = async () => {
   //     const payLoad = {
   //       Url: `https://${workSpaceName}.komrisk.com`
