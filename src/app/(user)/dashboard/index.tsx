@@ -8,7 +8,7 @@ import PieChartData from "@/src/components/PieChart";
 export default function MenuListItem() {
   return (
     <Text>
-      <PieChartData/>
+      {/* <PieChartData/> */}
       
     </Text>
   );

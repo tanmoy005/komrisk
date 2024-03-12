@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, ToastAndroid, Alert } from 'react-native';
 import axios from "axios";
 import { Redirect, router } from 'expo-router';
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
+import { connect } from 'react-redux';
+import { BaseUrl } from '@/src/types';
+import { getLocalStorageItem, SetLocalStorageItem } from '@/src/utils';
 
 
 
@@ -12,21 +15,26 @@ export const connection = {
   //  https://komrisknxtcont.komrisk.com/komrisk
   // apiBaseUrl:`http://localhost:${port}`
 }
-export const api = axios.create({
-  baseURL: connection.apiBaseUrl
-});
+
 
 
 
 let Workspace = () => {
 
 
-  //    const [baseURL, setBaseURL] = useState();
-  const [baseURL, setBaseURL] = useState<string>('');
+  //    const [workSpaceName, setWorkSpaceName] = useState();
+  const [workSpaceName, setWorkSpaceName] = useState<string>('');
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const apiSlice = useSelector((state: Object) => state)
+  // console.log("apiSlice34343", apiSlice);
+
+
+  // }, [])
 
   const handleSubmitWorkSpace = async () => {
-// rrouter.push("/signin");
-    if (baseURL === undefined || baseURL === '') {
+    // rrouter.push("/signin");
+    if (workSpaceName === undefined || workSpaceName === '') {
 
       Alert.alert("Alert", "Workspace can not be empty");
     }
@@ -34,18 +42,17 @@ let Workspace = () => {
 
       try {
         const payLoad = {
-          Url: `https://${baseURL}.komrisk.com`
+          Url: `https://${workSpaceName}.komrisk.com`
         };
         const url = `komrisk/api/auth/authURL`;
-  
+
         const api = axios.create({
           baseURL: "https://komrisknxtcont.komrisk.com/"
         });
         console.log("url", url);
-  
+
         const response = await api.post(url, payLoad, {
           headers: {
-  
             "API-KEY": "1d339a8918bfd92522267f0dd76415f8",
             "Content-Type": "application/json",
             "Cookie": "JSESSIONID=86FE4C0D803C89A638BEC0F75AF59C5A"
@@ -54,20 +61,29 @@ let Workspace = () => {
         console.log('response', response);
         if (response.status === 200) {
           // <Redirect href={'/signin'} />
+          const workSpace = { workSpaceName };
+          dispatch(storeBaseUrl(workSpace));
+          console.log('workspace', workSpace);
+          
+          // SetLocalStorageItem('workSpace', workSpace);
           router.push("/signin");
+          // const local = getLocalStorageItem('workSpace');
+          // console.log("local", local);
         } else {
         }
       } catch (error) {
         Alert.alert("error", error.message);
         console.log('error', error);
-  
+
       }
     }
-    console.log('werwer');
+
   }
+  
+  
   // const handleSubmitWorkSpace = async () => {
   //     const payLoad = {
-  //       Url: `https://${baseURL}.komrisk.com`
+  //       Url: `https://${workSpaceName}.komrisk.com`
   //     };
   //     console.log('handleSubmitWorkSpace');
   //     try {
@@ -95,8 +111,8 @@ let Workspace = () => {
       <SafeAreaView style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          onChangeText={(value: string) => setBaseURL(value)}
-          value={baseURL}
+          onChangeText={(value: string) => setWorkSpaceName(value)}
+          value={workSpaceName}
           placeholder="Your workspace name..."
         />
       </SafeAreaView>

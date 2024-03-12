@@ -3,10 +3,15 @@ import React from 'react';
 import Button from '@/src/components/Button';
 import { Link, Redirect } from 'expo-router';
 import Workspace from './(pages)';
+import { Provider } from 'react-redux';
+import store from '../store';
 
 const index = () => {
   return (
-    <Redirect href={'/(pages)/'} />
+    <Provider store={store}>
+       <Workspace />
+      {/* <Redirect href={'/(pages)/'} /> */}
+    </Provider>
     // <View style={{ flex: 1, justifyContent: 'center', padding: 10 }}>
     //   <Workspace />
     //   {/* <Link href={'/(user)'} asChild>

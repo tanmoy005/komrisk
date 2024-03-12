@@ -23,39 +23,39 @@ interface ChartType {
 
 const PieChartData: React.FC = () => {
 
-  const { chartData ,title,subTitle,yAxisName,xAxisName} = ChartData;
+  // const { chartData ,title,subTitle,yAxisName,xAxisName} = ChartData;
   let data: Array<ChartType> = [];
   // const [chartdatalist, setChartdatalist] = useState<ChartType>();
   // const chartdatalist : ChartType[] ;
   // { name: 'Red', population: 25, color: '#FF5733', legendFontColor: '#7F7F7F', legendFontSize: 15 },
   // { name: 'Green', population: 75, color: '#33FF57', legendFontColor: '#7F7F7F', legendFontSize: 15 },
   // ];
-  const mappedChartData: ChartType[] = chartData.map((data: ChartData) => {
-    return {
-      name: data.label,
-      population: data.value.toString(),
-      color: data.color,
-      legendFontColor: data.color, // or another property you want to use
-      legendFontSize: "12px", // or another value you want to set
-    };
-  });
+  // const mappedChartData: ChartType[] = chartData.map((data: ChartData) => {
+  //   return {
+  //     name: data.label,
+  //     population: data.value.toString(),
+  //     color: data.color,
+  //     legendFontColor: data.color, // or another property you want to use
+  //     legendFontSize: "12px", // or another value you want to set
+  //   };
+  // });
 
-  data: [] = chartData.map((data: ChartData) => {
-    return {
-      name: data.label,
-      population: data.value,
-      color: data.color,
-      legendFontColor: data.color,
-      legendFontSize: 15
-    }
-  });
+  // data: [] = chartData.map((data: ChartData) => {
+  //   return {
+  //     name: data.label,
+  //     population: data.value,
+  //     color: data.color,
+  //     legendFontColor: data.color,
+  //     legendFontSize: 15
+  //   }
+  // });
   // <button key={index}>{myButton}</button>);
 
 
 
   return (
     <View>
-      <PieChart
+      {/* <PieChart
         data={mappedChartData}
         width={300}
         height={200}
@@ -69,7 +69,7 @@ const PieChartData: React.FC = () => {
         accessor={title}
         backgroundColor="transparent"
         paddingLeft="15"
-      />
+      /> */}
     </View>
   );
 };

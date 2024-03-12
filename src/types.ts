@@ -67,3 +67,7 @@ export type Profile = {
   id: string;
   group: string;
 };
+
+export interface BaseUrl {
+  baseURl: String
+}
