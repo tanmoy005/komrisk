@@ -80,3 +80,7 @@ export type Profile = {
 export interface BaseUrl {
   baseURl: String
 }
+export interface UserModel {
+  username: string,
+  password: string
+}
