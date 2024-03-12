@@ -99,3 +99,7 @@ export type ChartListDataItem = {
   taskId: number;
   complianceGenId: string| null;
 }
+export interface UserModel {
+  username: string,
+  password: string
+}
