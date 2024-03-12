@@ -80,3 +80,22 @@ export type Profile = {
 export interface BaseUrl {
   baseURl: String
 }
+
+export type ChartListDataItem = {
+  mapId: number;
+  complianceId: number;
+  title: string| null;
+  taskName: string| null;
+  description: string | null;
+  nameOfLaw: string| null;
+  department:string| null;
+  opUnit: string| null;
+  owner: string| null;
+  currOwner: string| null;
+  reviewer: string| null;
+  dueDate: string| null;
+  impact: string| null;
+  status: number;
+  taskId: number;
+  complianceGenId: string| null;
+}
