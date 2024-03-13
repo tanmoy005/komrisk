@@ -1,5 +1,5 @@
 import { ActivityStatusDataPayLoad } from '@/src/types';
-import Server from '../server'
+import Server from '@/src/server/server'
 
 const GetActivityStatusData = async (payLoad: ActivityStatusDataPayLoad) => {
     const url = `/komrisk/api/complianceReports/activityStatusData`;

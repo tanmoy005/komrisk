@@ -111,6 +111,13 @@ export interface ActivityStatusDataPayLoad {
   viewAs: string;
   end: string;
 }
+export interface ComplianceStatusDataPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+}
 export interface ActivityStatusData{
   title: string | null;
   subTitle: string | null;
@@ -118,7 +125,13 @@ export interface ActivityStatusData{
   yAxisName: string | null;
   chartData: ChartData[] | null
 }
-
+export interface ComplianceStatusData{
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: ChartData[] | null
+}
 export interface ChartData {
   label: string;
   color: string | null;

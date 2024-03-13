@@ -41,9 +41,27 @@ export default function TabLayout() {
 
         headerShown: useClientOnlyValue(false, true),
       }}>
-      
       <Tabs.Screen
         name="complianceStatus"
+        options={{
+          title: 'Compliance Status',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="checkbox-marked-circle-plus-outline" size={24} color="black" />,
+          tabBarItemStyle: {
+            marginBottom: 10,
+            borderRadius: 6,
+            margin: 10,
+            padding: 10,
+            backgroundColor: "#fff"
+          },
+          tabBarIconStyle: {
+            padding: 1
+          },
+
+        }}
+      />
+      <Tabs.Screen
+        name="activityStatus"
         options={{
           title: 'Activity Status',
           headerShown: false,
@@ -63,29 +81,9 @@ export default function TabLayout() {
 
         }}
       />
-            <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Compliance Status',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="checkbox-marked-circle-plus-outline" size={24} color="black" />,
-          tabBarItemStyle: {
-            // fontSize: 12,
 
-            marginBottom: 10,
-            borderRadius: 6,
-            margin: 10,
-            padding: 10,
-            backgroundColor: "#fff"
-          },
-          tabBarIconStyle: {
-            padding: 1
-          },
-
-        }}
-      />
       <Tabs.Screen
-        name="two"
+        name="incidentStatus"
         options={{
           title: 'Incident Activity',
           headerShown: false,

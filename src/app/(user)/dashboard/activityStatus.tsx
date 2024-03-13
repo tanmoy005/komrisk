@@ -1,9 +1,8 @@
-import { Image, StyleSheet } from 'react-native';
-import { Text, View } from '@/src/components/Themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import ComplianceStatusInfo from '@/src/components/GetComplianceStatusInfo';
+import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
+import ActivityStatusInfo from "@/src/components/GetActivityStatusInfo";
+// const Product = products[3];
 
-const ComplianceStatus = () => {
+const ActivityStatus = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
@@ -11,11 +10,13 @@ const ComplianceStatus = () => {
         <Image style={{ width: 100 }} source={require('@/assets/images/Komrisk-Logo-small.png')} />
       </View>
       <View style={styles.chartContainer}>
-        <ComplianceStatusInfo />
+        {/* <ComplianceStatusInfo /> */}
+        <ActivityStatusInfo />
       </View>
     </SafeAreaView>
   );
-}
+};
+
 
 const styles = StyleSheet.create({
   container: {
@@ -45,4 +46,4 @@ const styles = StyleSheet.create({
     width: '80%', // Adjust the width as needed
   },
 });
-export default ComplianceStatus;
+export default ActivityStatus;
