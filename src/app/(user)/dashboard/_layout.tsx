@@ -1,67 +1,112 @@
-import { StyleSheet } from 'react-native';
+import React from 'react';
+// import FontAwesome5  from '@expo/vector-icons/FontAwesome';
+import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'
 
-import EditScreenInfo from '@/src/components/EditScreenInfo';
-import { Text, View } from '@/src/components/Themed';
-import PieChartData from '@/src/components/PieChart';
+import { Link, Tabs } from 'expo-router';
+import { Image, Pressable } from 'react-native';
+
 import Colors from '@/src/constants/Colors';
-import { FontAwesome } from '@expo/vector-icons';
-import { Link, Stack } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import { useColorScheme } from '@/src/components/useColorScheme';
+import { useClientOnlyValue } from '@/src/components/useClientOnlyValue';
 
-export default function TabTwoScreen() {
+// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof FontAwesome5>['name'];
+  color: string;
+}) {
+  return <FontAwesome5 size={20} style={{ marginBottom: -3 }} {...props} />;
+}
+
+export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const CustomHeaderTitle = ({ children }) => (
-    <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 15 }}>
-      <Text>{children}</Text>
-    </View>
-  );
-  return <Stack screenOptions={{
-    headerRight: () => (
-      <Link href="/modal" asChild>
-        <Pressable>
-          {({ pressed }) => (
-            <FontAwesome
-              name="bars"
-              size={25}
-              color={Colors[colorScheme ?? 'light'].text}
-              style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-            />
-          )}
-        </Pressable>
-      </Link>
-    ),
-  }}>
-    <Stack.Screen name='index'
-      options={{
-        title: "Dashboard",
-        headerTitleAlign: 'center',
-        headerStyle: {
-          backgroundColor: '#F6EEF4', // Change the background color here
-        },
-      }} />
-  </Stack>;
-};
-// </Stack >
-//   <View style={styles.container}>
-//     <Text style={styles.title}>Tab Two</Text>
-//     <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-//     {/* <EditScreenInfo path="app/(tabs)/two.tsx" /> */}
-//     <PieChartData />
-//   </View>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+  return (
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarStyle: {
+          height: 80,
+          backgroundColor: "#F1F1F1",
+
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '400',
+          lineHeight: 16,
+          textAlign: 'center',
+          color: '#000000'
+        },
+        // Disable the static render of the header on web
+        // to prevent a hydration error in React Navigation v6.
+
+        headerShown: useClientOnlyValue(false, true),
+      }}>
+      
+      <Tabs.Screen
+        name="complianceStatus"
+        options={{
+          title: 'Activity Status',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => <TabBarIcon name="tasks" color={"#000"} />,
+          tabBarItemStyle: {
+            // fontSize: 12,
+
+            marginBottom: 10,
+            borderRadius: 6,
+            margin: 10,
+            padding: 10,
+            backgroundColor: "#fff"
+          },
+          tabBarIconStyle: {
+            padding: 1
+          },
+
+        }}
+      />
+            <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Compliance Status',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="checkbox-marked-circle-plus-outline" size={24} color="black" />,
+          tabBarItemStyle: {
+            // fontSize: 12,
+
+            marginBottom: 10,
+            borderRadius: 6,
+            margin: 10,
+            padding: 10,
+            backgroundColor: "#fff"
+          },
+          tabBarIconStyle: {
+            padding: 1
+          },
+
+        }}
+      />
+      <Tabs.Screen
+        name="two"
+        options={{
+          title: 'Incident Activity',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="information" size={24} color="black" />,
+          tabBarItemStyle: {
+            // fontSize: 12,
+
+            marginBottom: 10,
+            borderRadius: 6,
+            margin: 10,
+            padding: 10,
+            backgroundColor: "#fff"
+          },
+          tabBarIconStyle: {
+            padding: 1
+          },
+
+        }}
+      />
+
+
+    </Tabs>
+  );
+}
