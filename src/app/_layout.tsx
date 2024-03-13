@@ -7,6 +7,9 @@ import { useEffect } from 'react';
 
 import { useColorScheme } from '@/src/components/useColorScheme';
 import CartProvider from '@/src/provider/CartProvider';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from '../store/RootReducer';
+import { Provider } from 'react-redux';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -47,16 +50,19 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const store = configureStore({
+    reducer: rootReducer,
+  });
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      
+    <Provider store={store}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(pages)" options={{ headerShown: false }} />
           <Stack.Screen name="(user)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{   presentation: 'modal', }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal', }} />
         </Stack>
-      
-    </ThemeProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }

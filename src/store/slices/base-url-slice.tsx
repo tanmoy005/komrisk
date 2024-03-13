@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice,PayloadAction  } from "@reduxjs/toolkit"
 
 interface SomeAction {
     payload: { workSpaceName: String }; // Define the type of the payload

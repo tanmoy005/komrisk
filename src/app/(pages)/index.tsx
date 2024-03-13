@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, ToastAndroid, Alert } from 'react-native';
-import axios from "axios";
-import { Redirect, router } from 'expo-router';
+import { router } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
-import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
-import { connect } from 'react-redux';
-import { BaseUrl } from '@/src/types';
-import { getLocalStorageItem, SetLocalStorageItem } from '@/src/utils';
-import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
+import { RootState } from '@/src/store/RootReducer';
+
 
 
 
@@ -20,18 +16,22 @@ export const connection = {
 
 
 
-let Workspace = () => {
+const Workspace = () => {
 
 
   //    const [workSpaceName, setWorkSpaceName] = useState();
   const [workSpaceName, setWorkSpaceName] = useState<string>('');
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const apiSlice = useSelector((state: Object) => state.baseUrlSlice)
-  // console.log("apiSlice34343", apiSlice);
+
+  
+  const dispatch = useDispatch();
+  const count = useSelector((state: RootState) => state.counter.count);
+  console.log("apiSlice34343", count);
+  useEffect(() => { 
+    // const apiSlice = useSelector((state) => state.baseUrlSlice)
+ 
 
 
-  // }, [])
+  }, [])
 
   const handleSubmitWorkSpace = async () => {
     // rrouter.push("/signin");
@@ -42,33 +42,10 @@ let Workspace = () => {
     else {
       router.push("/signin");
 
-      // const payLoad = {
-      //   Url: `https://${workSpaceName}.komrisk.com`
-      // };
-      // const {error, status} = await AuthenticateWorkspace(payLoad);
-      
-      // if (status === 200) {
-      //   router.push("/signin");
-      // } else {
-      //   Alert.alert("error", error.message);
-      // }
     }
 
   }
 
-
-  // const handleSubmitWorkSpace = async () => {
-  //     const payLoad = {
-  //       Url: `https://${workSpaceName}.komrisk.com`
-  //     };
-  //     console.log('handleSubmitWorkSpace');
-  //     try {
-  //       const response = await AuthURL(payLoad);
-  //       console.log("response", response);
-  //     } catch (error) {
-  //       console.log('error', error);
-  //     }
-  // }
 
 
   return (
@@ -143,5 +120,4 @@ const styles = StyleSheet.create({
   }
 });
 
-console.log("Workspace", Workspace);
 export default Workspace;
