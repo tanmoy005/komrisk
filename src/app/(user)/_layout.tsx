@@ -75,7 +75,7 @@ export default function TabTwoScreen() {
           )}
         </Pressable>
       </Link>,
-  }}>,
+  }}>
     <Stack.Screen name='index'
       options={{
         title: "Dashboard",

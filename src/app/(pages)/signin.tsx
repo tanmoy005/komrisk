@@ -14,7 +14,7 @@ let SignIn = () => {
 
     // const dispatch = useDispatch();
     const handleSubmitSignIn = async () => {
-        
+
         // console.log('werwer');
         // router.push("/(user)/dashboard");
         if (username === '' || password === '') {
@@ -27,7 +27,7 @@ let SignIn = () => {
         }
         const { data, error, status } = await AuthenticateUser(payLoad);
         console.log('data', data);
-        
+
         if (status === 200) {
             router.push("/(user)/dashboard/complianceStatus");
             // dispatch(storeLoginData({
@@ -59,15 +59,22 @@ let SignIn = () => {
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                {/* <Image style={{ width: 230 }} source={require('../../../assets/images/Komrisk-Logo.png')} /> */}
+                <Image style={{ width: 100 }} source={require('@/assets/images/Komrisk-Logo-small.png')} />
+            </View>
+            <View style={styles.loginImageContainer}>
+                <Image style={{ width: 300, height: 300 }} source={require('@/assets/images/Ellipse 4.png')} />
+                <Image style={styles.humanImg} source={require('@/assets/images/Human.png')} />
+                {/* <Image style={{ width: 100 }} source={require('@/assets/images/Polygon 3.png')} /> */}
 
-                <Image style={{ width: 230 }} source={require('@/assets/images/Komrisk-Logo.png')} />
+            </View>
+            {/* <View style={styles.logoContainer}>
+
                 <View style={styles.lexLogoContainer}>
                     <Image source={require('@/assets/images/Rectangle98.png')} />
                     <Text>BY</Text>
                     <Image source={require('@/assets/images/Lex-Logo.png')} />
                 </View>
-            </View>
+            </View> */}
 
             <SafeAreaView style={styles.inputContainer}>
                 <View style={styles.inputBox}>
@@ -104,8 +111,19 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 50,
+        padding: 50
         // backgroundColor: "red"
+    },
+    loginImageContainer: {
+        flexDirection: "row",
+        position: "relative",
+        marginLeft: 70
+    },
+    humanImg:{
+        position: "absolute",
+        bottom: -40,
+        left: "30%",
+        // transform: "translateX(-50%)"
     },
     input: {
         height: 40,
@@ -116,7 +134,8 @@ const styles = StyleSheet.create({
         color: '#99A3A4'
     },
     inputContainer: {
-        alignSelf: 'stretch',
+        alignItems: 'stretch',
+        width: '100%',
         marginTop: 100
     },
     inputBox: {
@@ -130,7 +149,8 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch'
     },
     logoContainer: {
-        marginTop: 120
+        alignItems: 'flex-end',
+        width: '100%'
     },
     lexLogoContainer: {
         marginTop: 10,
