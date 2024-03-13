@@ -1,20 +1,20 @@
-export type ChartData = {
-  label: number;
-  color: string | null;
-  value: string;
-  link: {
-    dataFilter: null,
-    type: string,
-    userFilter: null
-};
-};
-export type ChartType = {
-  name:string;
-  population:string | null;
-  color:string | null;
-  legendFontColor:string | null;
-  legendFontSize:string | null;
-};
+// export type ChartData = {
+//   label: number;
+//   color: string | null;
+//   value: string;
+//   link: {
+//     dataFilter: null,
+//     type: string,
+//     userFilter: null
+// };
+// };
+// export type ChartType = {
+//   name:string;
+//   population:string | null;
+//   color:string | null;
+//   legendFontColor:string | null;
+//   legendFontSize:string | null;
+// };
 export type ChartDisplayData = {
   label: number;
   color: string | null;
@@ -102,4 +102,37 @@ export type ChartListDataItem = {
 export interface UserModel {
   username: string,
   password: string
+}
+
+export interface ActivityStatusDataPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+}
+export interface ActivityStatusData{
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: ChartData[] | null
+}
+
+export interface ChartData {
+  label: string;
+  color: string | null;
+  value: number;
+  link: {
+    dataFilter: any; // You may want to replace 'any' with a more specific type
+    type: string;
+    userFilter: any; // You may want to replace 'any' with a more specific type
+  };
+}
+export interface ChartType {
+  name: string;
+  population: number | null;
+  color: string | null;
+  legendFontColor: string | null;
+  legendFontSize: number | null;
 }

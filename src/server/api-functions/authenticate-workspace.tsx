@@ -5,7 +5,7 @@ interface WorkspacePayLoad {
 
 const AuthenticateWorkspace = async (payLoad: WorkspacePayLoad) => {
     const url = `komrisk/api/auth/authURL`;
-    const response = await Server(payLoad, url, 'POST');
+    const response = await Server(payLoad, url, 'POST', false);
 
     return response
 }

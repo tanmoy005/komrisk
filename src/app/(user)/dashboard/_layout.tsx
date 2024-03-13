@@ -10,6 +10,11 @@ import { Pressable, useColorScheme } from 'react-native';
 
 export default function TabTwoScreen() {
   const colorScheme = useColorScheme();
+  const CustomHeaderTitle = ({ children }) => (
+    <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 15 }}>
+      <Text>{children}</Text>
+    </View>
+  );
   return <Stack screenOptions={{
     headerRight: () => (
       <Link href="/modal" asChild>
@@ -26,7 +31,14 @@ export default function TabTwoScreen() {
       </Link>
     ),
   }}>
-    <Stack.Screen name='index' options={{ title: "Dashboard" }} />
+    <Stack.Screen name='index'
+      options={{
+        title: "Dashboard",
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#F6EEF4', // Change the background color here
+        },
+      }} />
   </Stack>;
 };
 // </Stack >

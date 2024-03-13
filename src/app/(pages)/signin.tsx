@@ -14,50 +14,19 @@ let SignIn = () => {
         //   router.push("/(user)/");
         // <Redirect href={'/(user)/dashboard/'} />
         console.log('werwer');
-        const payLoad: UserModel ={
-                    username,
-                    password
-                }
-                const {error, status} = await AuthenticateUser(payLoad);
-                if (status === 200) {
-                    router.push("/(user)/dashboard");
-                  } else {
-                    Alert.alert("error", error.message);
-                  }
-        // try {
-        //     const url = `https://komrisknxtcont.komrisk.com/komrisk/api/auth/login`;
-        //     const payLoad: UserModel ={
-        //         username,
-        //         password
-        //     }
+        router.push("/(user)/dashboard");
 
-        //     const api = axios.create({
-        //         baseURL: "https://komrisknxtcont.komrisk.com/"
-        //     });
-        //     console.log("url", url);
-
-        //     const response = await api.post(url, payLoad, {
-        //         headers: {
-
-        //             "API-KEY": "1d339a8918bfd92522267f0dd76415f8",
-        //             "Content-Type": "application/json",
-        //             "Cookie": "JSESSIONID=86FE4C0D803C89A638BEC0F75AF59C5A"
-        //         }
-        //     });
-        //     console.log('response', response);
-        //     if (response.status === 200) {
-        //         Alert.alert("succsess", "you have successfully logged in");
-        //         // <Redirect href={'/(user)'} />
-        //         router.push("/(user)/");
-        //     } else {
-        //         Alert.alert("error",)
-        //     }
-        // } catch (error) {
-        //     console.log('error', error);
-
-        //     Alert.alert("error", "User authentication failed")
-
+        // const payLoad: UserModel = {
+        //     username,
+        //     password
         // }
+        // const { error, status } = await AuthenticateUser(payLoad);
+        // if (status === 200) {
+        //     router.push("/(user)/dashboard");
+        // } else {
+        //     Alert.alert("error", error.message);
+        // }
+     
     }
 
     // const handleSubmitSignIn = async () => {

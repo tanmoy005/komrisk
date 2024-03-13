@@ -3,7 +3,7 @@ import Server from '../server';
 
 const AuthenticateUser = async(payLoad: UserModel) => {
     const url = `komrisk/api/auth/login`;
-    const response = await Server(payLoad, url, 'POST');
+    const response = await Server(payLoad, url, 'POST', false);
 
     return response
 }

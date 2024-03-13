@@ -40,16 +40,18 @@ let Workspace = () => {
       Alert.alert("Alert", "Workspace can not be empty");
     }
     else {
-      const payLoad = {
-        Url: `https://${workSpaceName}.komrisk.com`
-      };
-      const {error, status} = await AuthenticateWorkspace(payLoad);
+      router.push("/signin");
+
+      // const payLoad = {
+      //   Url: `https://${workSpaceName}.komrisk.com`
+      // };
+      // const {error, status} = await AuthenticateWorkspace(payLoad);
       
-      if (status === 200) {
-        router.push("/signin");
-      } else {
-        Alert.alert("error", error.message);
-      }
+      // if (status === 200) {
+      //   router.push("/signin");
+      // } else {
+      //   Alert.alert("error", error.message);
+      // }
     }
 
   }
