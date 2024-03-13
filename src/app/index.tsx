@@ -1,10 +1,8 @@
-import { View, Text } from 'react-native';
 import React from 'react';
-import Button from '@/src/components/Button';
-import { Link, Redirect } from 'expo-router';
 import Workspace from './(pages)';
 import { Provider } from 'react-redux';
 import store from '../store';
+// import store from '../store';
 
 const index = () => {
   return (

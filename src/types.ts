@@ -149,3 +149,23 @@ export interface ChartType {
   legendFontColor: string | null;
   legendFontSize: number | null;
 }
+
+interface UserCredentials extends UserModel {
+  token: string;
+}
+export interface UserCredentialsPayload {
+  payload:  UserCredentials; // Define the type of the payload
+}
+
+interface BaseUrlSlice {
+  data: string;
+}
+interface LoginDataSlice {
+  data: UserCredentialsPayload;
+}
+export interface ReduxState {
+  baseUrlSlice: BaseUrlSlice;
+  loginDataSlice:{
+    data: UserCredentials;
+  }
+}

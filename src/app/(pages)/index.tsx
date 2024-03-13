@@ -25,9 +25,9 @@ let Workspace = () => {
 
   //    const [workSpaceName, setWorkSpaceName] = useState();
   const [workSpaceName, setWorkSpaceName] = useState<string>('');
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // useEffect(() => {
-  //   const apiSlice = useSelector((state: Object) => state)
+  //   const apiSlice = useSelector((state: Object) => state.baseUrlSlice)
   // console.log("apiSlice34343", apiSlice);
 
 

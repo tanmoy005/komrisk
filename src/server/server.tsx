@@ -1,9 +1,14 @@
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { ReduxState } from '../types';
 
 interface Response { data: any, error: any, status: number | null };
 
 const Server = async (payLoad: object, url: string, method: string, hasToken: boolean = true) => {
 
+    // const loginDataSlice = useSelector( (state) => state.loginDataSlice);
+    // console.log("loginDataSlice", loginDataSlice);
+    
     const api = axios.create({
         baseURL: "https://komrisknxtcont.komrisk.com/"
     });
@@ -16,7 +21,7 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
     }
     const authHeader = {
         ...commonHeader,
-        "Authorization": "Bearer  eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjkyLCJleHBpcmF0aW9uVGltZSI6MTcxMDM0MjYyMSwiaXNzdWVyIjoiaHR0cHM6Ly93d3cua29tcmlzay5jb20ifQ.7qjjJzDvVyWB3eCc8YXeEAzkPpQ06ViMbfBAaRZfACQ"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjkyLCJleHBpcmF0aW9uVGltZSI6MTcxMDM0MjYyMSwiaXNzdWVyIjoiaHR0cHM6Ly93d3cua29tcmlzay5jb20ifQ.7qjjJzDvVyWB3eCc8YXeEAzkPpQ06ViMbfBAaRZfACQ"
 
     }
     const headers =

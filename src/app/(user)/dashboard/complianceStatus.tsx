@@ -1,7 +1,7 @@
-import { Image, StyleSheet } from 'react-native';
-import { Text, View } from '@/src/components/Themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import ComplianceStatusInfo from '@/src/components/GetComplianceStatusInfo';
+import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
+import ActivityStatusInfo from "@/src/components/GetActivityStatusInfo";
+import ComplianceStatusInfo from "@/src/components/GetComplianceStatusInfo";
+// const Product = products[3];
 
 const ComplianceStatus = () => {
   return (
@@ -15,7 +15,8 @@ const ComplianceStatus = () => {
       </View>
     </SafeAreaView>
   );
-}
+};
+
 
 const styles = StyleSheet.create({
   container: {

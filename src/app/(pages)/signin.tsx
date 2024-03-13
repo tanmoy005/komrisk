@@ -4,29 +4,42 @@ import axios from "axios";
 import { Redirect, router } from 'expo-router';
 import { UserModel } from '@/src/types';
 import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
+import { useDispatch } from 'react-redux';
+import { storeLoginData } from '@/src/store/slices/login-data-slice';
 
 
 let SignIn = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
+    // const dispatch = useDispatch();
     const handleSubmitSignIn = async () => {
-        //   router.push("/(user)/");
-        // <Redirect href={'/(user)/dashboard/'} />
-        console.log('werwer');
-        router.push("/(user)/dashboard");
-
-        // const payLoad: UserModel = {
-        //     username,
-        //     password
-        // }
-        // const { error, status } = await AuthenticateUser(payLoad);
-        // if (status === 200) {
-        //     router.push("/(user)/dashboard");
-        // } else {
-        //     Alert.alert("error", error.message);
-        // }
-     
+        
+        // console.log('werwer');
+        // router.push("/(user)/dashboard");
+        if (username === '' || password === '') {
+            Alert.alert("error", 'Username or password cannot be empty');
+            return;
+        }
+        const payLoad: UserModel = {
+            username,
+            password
+        }
+        const { data, error, status } = await AuthenticateUser(payLoad);
+        console.log('data', data);
+        
+        if (status === 200) {
+            router.push("/(user)/dashboard/complianceStatus");
+            // dispatch(storeLoginData({
+            //     username,
+            //     password,
+            //     token: data.token
+            // }))
+        } else {
+            Alert.alert("error", error.message);
+        }
+        setUsername('');
+        setPassword('');
     }
 
     // const handleSubmitSignIn = async () => {

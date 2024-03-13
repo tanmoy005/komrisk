@@ -10,7 +10,6 @@ const ActivityStatus = () => {
         <Image style={{ width: 100 }} source={require('@/assets/images/Komrisk-Logo-small.png')} />
       </View>
       <View style={styles.chartContainer}>
-        {/* <ComplianceStatusInfo /> */}
         <ActivityStatusInfo />
       </View>
     </SafeAreaView>

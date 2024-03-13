@@ -18,7 +18,7 @@ const BaseUrlSlice = createSlice({
             // state.push(action.payload);
         },
         removeBaseUrl(state, action) {
-            // state = {};
+           state.data = {}
 
         },
     }
