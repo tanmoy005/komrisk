@@ -15,8 +15,54 @@ export default function TabTwoScreen() {
   //     <Text>{children}</Text>
   //   </View>
   // );
+  // const CustomHeaderRight = () => (
+  //   <View style={{ flexDirection: 'row', marginRight: 10 }}>
+  //     <Link href="/modal" asChild>
+  //       <Pressable>
+  //         {({ pressed }) => (
+  //           <FontAwesome
+  //             name="bars"
+  //             size={25}
+  //             color={Colors[colorScheme ?? 'light'].text}
+  //             style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+  //           />
+  //         )}
+  //       </Pressable>
+  //     </Link>
+  //     <Link href="/(pages)/signin" asChild>
+  //       <Pressable>
+  //         {({ pressed }) => (
+  //           <FontAwesome
+  //             name="sign-out"
+  //             size={25}
+  //             color={Colors[colorScheme ?? 'light'].text}
+  //             style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+  //           />
+  //         )}
+  //       </Pressable>
+  //     </Link>
+  //     {/* Add more Pressable components for additional icons */}
+  //   </View>
+  // );
   return <Stack screenOptions={{
-    headerRight: () => (
+    headerStyle: {
+      backgroundColor: '#F6EEF4',
+    },
+    title: "Dashboard",
+    headerLeft: () =>
+      <Link href="/(pages)/signin" asChild>
+        <Pressable>
+          {({ pressed }) => (
+            <FontAwesome
+              name="sign-out"
+              size={25}
+              color={Colors[colorScheme ?? 'light'].text}
+              style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+            />
+          )}
+        </Pressable>
+      </Link>,
+    headerRight: () =>
       <Link href="/modal" asChild>
         <Pressable>
           {({ pressed }) => (
@@ -28,9 +74,8 @@ export default function TabTwoScreen() {
             />
           )}
         </Pressable>
-      </Link>
-    ),
-  }}>
+      </Link>,
+  }}>,
     <Stack.Screen name='index'
       options={{
         title: "Dashboard",

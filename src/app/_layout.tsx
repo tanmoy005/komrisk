@@ -54,7 +54,7 @@ function RootLayoutNav() {
         <Stack>
           <Stack.Screen name="(pages)" options={{ headerShown: false }} />
           <Stack.Screen name="(user)" options={{ headerShown: false }} />
-          {/* <Stack.Screen name="cart" options={{ presentation: 'modal' }} /> */}
+          <Stack.Screen name="modal" options={{   presentation: 'modal', }} />
         </Stack>
       
     </ThemeProvider>

@@ -1,20 +1,4 @@
-// export type ChartData = {
-//   label: number;
-//   color: string | null;
-//   value: string;
-//   link: {
-//     dataFilter: null,
-//     type: string,
-//     userFilter: null
-// };
-// };
-// export type ChartType = {
-//   name:string;
-//   population:string | null;
-//   color:string | null;
-//   legendFontColor:string | null;
-//   legendFontSize:string | null;
-// };
+
 export type ChartDisplayData = {
   label: number;
   color: string | null;
@@ -23,54 +7,9 @@ export type ChartDisplayData = {
     dataFilter: null,
     type: string,
     userFilter: null
-};
-};
-
-
-
-export type Product = {
-  id: number;
-  image: string | null;
-  name: string;
-  price: number;
-};
-export type PizzaSize = 'Reguler' | 'Medium' | 'Large' ;
-
-export type CartItem = {
-  id: string;
-  product: Product;
-  product_id: number;
-  size: PizzaSize;
-  quantity: number;
+  };
 };
 
-export const OrderStatusList: OrderStatus[] = [
-  'New',
-  'Cooking',
-  'Delivering',
-  'Delivered',
-];
-
-export type OrderStatus = 'New' | 'Cooking' | 'Delivering' | 'Delivered';
-
-export type Order = {
-  id: number;
-  created_at: string;
-  total: number;
-  user_id: string;
-  status: OrderStatus;
-
-  order_items?: OrderItem[];
-};
-
-export type OrderItem = {
-  id: number;
-  product_id: number;
-  products: Product;
-  order_id: number;
-  size: PizzaSize;
-  quantity: number;
-};
 
 export type Profile = {
   id: string;
@@ -84,20 +23,20 @@ export interface BaseUrl {
 export type ChartListDataItem = {
   mapId: number;
   complianceId: number;
-  title: string| null;
-  taskName: string| null;
+  title: string | null;
+  taskName: string | null;
   description: string | null;
-  nameOfLaw: string| null;
-  department:string| null;
-  opUnit: string| null;
-  owner: string| null;
-  currOwner: string| null;
-  reviewer: string| null;
-  dueDate: string| null;
-  impact: string| null;
+  nameOfLaw: string | null;
+  department: string | null;
+  opUnit: string | null;
+  owner: string | null;
+  currOwner: string | null;
+  reviewer: string | null;
+  dueDate: string | null;
+  impact: string | null;
   status: number;
   taskId: number;
-  complianceGenId: string| null;
+  complianceGenId: string | null;
 }
 export interface UserModel {
   username: string,
@@ -111,6 +50,14 @@ export interface ActivityStatusDataPayLoad {
   viewAs: string;
   end: string;
 }
+export interface ActivityStatusDataListPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+  status: string;
+}
 export interface ComplianceStatusDataPayLoad {
   username: string;
   password: string;
@@ -118,14 +65,14 @@ export interface ComplianceStatusDataPayLoad {
   viewAs: string;
   end: string;
 }
-export interface ActivityStatusData{
+export interface ActivityStatusData {
   title: string | null;
   subTitle: string | null;
   xAxisName: string | null;
   yAxisName: string | null;
   chartData: ChartData[] | null
 }
-export interface ComplianceStatusData{
+export interface ComplianceStatusData {
   title: string | null;
   subTitle: string | null;
   xAxisName: string | null;
@@ -150,22 +97,17 @@ export interface ChartType {
   legendFontSize: number | null;
 }
 
-interface UserCredentials extends UserModel {
-  token: string;
+export interface ActivityStatusDataListPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+  status: string;
 }
-export interface UserCredentialsPayload {
-  payload:  UserCredentials; // Define the type of the payload
-}
-
-interface BaseUrlSlice {
-  data: string;
-}
-interface LoginDataSlice {
-  data: UserCredentialsPayload;
-}
-export interface ReduxState {
-  baseUrlSlice: BaseUrlSlice;
-  loginDataSlice:{
-    data: UserCredentials;
-  }
+export interface ActivityStatusDataList {
+  sEcho: string | null;
+  aaData: ChartListDataItem[] | null;
+  iTotalRecords: number | null;
+  iTotalDisplayRecords: number | null;
 }
