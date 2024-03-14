@@ -5,6 +5,8 @@ import { Alert, StyleSheet, Text } from 'react-native';
 import { View } from 'react-native';
 import DropDown from './Dropdown';
 import PieChartData from './PieChart';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/RootReducer';
 
 const ActivityStatusInfo = () => {
   {
@@ -16,17 +18,18 @@ const ActivityStatusInfo = () => {
       chartData: null
     });
     const [chartData, setChartData] = useState<ChartType[]>([]);
-
+    const useCredential = useSelector((state: RootState) => state.useCredential.payload);
+    
     const handleGetActivityStatusData = async () => {
 
       const payLoad: ActivityStatusDataPayLoad = {
-        username: "anirban@elogixmail.com",
-        password: "An1rban@2023",
+        ...useCredential,
         start: "01/01/2021",
         viewAs: "COMPANY HEAD",
         end: "31/12/2023"
       }
-
+      console.log("payLoad", payLoad);
+      
       const { data, error, status } = await GetActivityStatusData(payLoad);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;

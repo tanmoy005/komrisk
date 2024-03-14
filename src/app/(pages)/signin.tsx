@@ -6,6 +6,7 @@ import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
 import { useDispatch } from 'react-redux';
 import { storeUserDetails } from '@/src/store/slices/login-data-slice';
 import { setDataToAsyncStorage } from '@/src/utils';
+import { storeUserCredential } from '@/src/store/slices/user-credential-slice';
 
 
 let SignIn = () => {
@@ -30,6 +31,7 @@ let SignIn = () => {
 
         if (status === 200) {
             dispatch(storeUserDetails(data));
+            dispatch(storeUserCredential(payLoad));
             setDataToAsyncStorage('token', data.token);
             router.push("/(user)/dashboard/complianceStatus");
         } else {
@@ -39,7 +41,7 @@ let SignIn = () => {
         setPassword('');
     }
 
-  
+
 
     return (
         <View style={styles.container}>
@@ -47,6 +49,10 @@ let SignIn = () => {
                 <Image style={{ width: 100 }} source={require('@/assets/images/Komrisk-Logo-small.png')} />
             </View>
             <View style={styles.loginImageContainer}>
+                {/* <View style={styles.workspaceHeading}>
+                    <Text>Workspace</Text>
+                    <Text>Workspace name here</Text>
+                </View> */}
                 <Image style={{ width: 300, height: 300 }} source={require('@/assets/images/Ellipse 4.png')} />
                 <Image style={styles.humanImg} source={require('@/assets/images/Human.png')} />
                 {/* <Image style={{ width: 100 }} source={require('@/assets/images/Polygon 3.png')} /> */}
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
         position: "relative",
         marginLeft: 70
     },
-    humanImg:{
+    humanImg: {
         position: "absolute",
         bottom: -40,
         left: "30%",
