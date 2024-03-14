@@ -1,9 +1,15 @@
 // rootReducer.ts
 import { combineReducers } from 'redux';
-import counterSlice from './slices/counter-slice';
+import baseUrlSlice from './slices/base-url-slice';
+import loginDataSlice from './slices/login-data-slice';
+import userCredeintialSlice from './slices/user-credential-slice';
 
 const rootReducer = combineReducers({
-  counter: counterSlice.reducer,
+  baseUrl: baseUrlSlice,
+  useCredential: userCredeintialSlice,
+  loggedUserDetails: loginDataSlice
+
+
   // Add other reducers as needed
 });
 

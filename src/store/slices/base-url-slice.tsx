@@ -1,24 +1,34 @@
-import { createSlice,PayloadAction  } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface SomeAction {
-    payload: { workSpaceName: String }; // Define the type of the payload
+interface BaseURLState {
+    payload: {
+        workspaceName: string;
+        baseUrl: string;
+    }
 }
-const initialState = {
-    data: {},
+const initialState: BaseURLState = {
+    payload: {
+        workspaceName: "",
+        baseUrl: ""
+    }
 };
+
+
 const BaseUrlSlice = createSlice({
     name: "baseUrlSlice",
     initialState,
     reducers: {
-        storeBaseUrl(state, action: SomeAction) {
+        storeBaseUrl(state, action: BaseURLState) {
             console.log("action", action);
-            state.data = action.payload;
+            state.payload.workspaceName = action.payload.workspaceName;
+            state.payload.baseUrl = action.payload.baseUrl;
             console.log('state', state);
 
             // state.push(action.payload);
         },
-        removeBaseUrl(state, action) {
-           state.data = {}
+        removeBaseUrl(state) {
+            state.payload.workspaceName = ""
+            state.payload.baseUrl = ""
 
         },
     }

@@ -16,7 +16,7 @@ import counterSlice from "./slices/counter-slice";
 // );
 const store = configureStore({
     reducer: {
-      counter: counterSlice.reducer,
+        baseUrl: counterSlice.reducer,
       // Add other slices as needed
     },
   });

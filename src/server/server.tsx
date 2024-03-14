@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { ReduxState } from '../types';
+import { RootState } from '../store/RootReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getDataFromAsyncStorage } from '../utils';
+
 
 interface Response { data: any, error: any, status: number | null };
 
@@ -8,9 +11,14 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
 
     // const loginDataSlice = useSelector( (state) => state.loginDataSlice);
     // console.log("loginDataSlice", loginDataSlice);
+    console.log('server');
     
+    // const workSpacePayload = useSelector((state: RootState) => state.baseUrl.payload);
+    const baseUrl =  await getDataFromAsyncStorage('baseUrl');
+    const token =  await getDataFromAsyncStorage('token');
+    console.log('server222',baseUrl);
     const api = axios.create({
-        baseURL: "https://komrisknxtcont.komrisk.com/"
+        baseURL: baseUrl  
     });
     console.log("url", url);
 
@@ -21,12 +29,12 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
     }
     const authHeader = {
         ...commonHeader,
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjkyLCJleHBpcmF0aW9uVGltZSI6MTcxMDM0MjYyMSwiaXNzdWVyIjoiaHR0cHM6Ly93d3cua29tcmlzay5jb20ifQ.7qjjJzDvVyWB3eCc8YXeEAzkPpQ06ViMbfBAaRZfACQ"
+        "Authorization": `Bearer ${token}`
 
     }
     const headers =
     {
-        headers: hasToken ? authHeader: commonHeader
+        headers: token ? authHeader: commonHeader
     }
     let response: Response = { data: "", error: "", status: null };
 

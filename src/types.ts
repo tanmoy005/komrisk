@@ -111,3 +111,26 @@ export interface ActivityStatusDataList {
   iTotalRecords: number | null;
   iTotalDisplayRecords: number | null;
 }
+
+
+export interface UserDetails {
+  token: string | null;
+  userDetails: {
+    userId: number;
+    username: string;
+    firstName: string;
+    lastName: string;
+    displayName: string;
+    phone: number|null;
+    mobile: number|null;
+    role: string;
+    company: string;
+    operatingUnit: string;
+    department: string;
+    wipEnabled: boolean|null,
+    actualDateCompletionAllowed: boolean|null;
+    requestReassignmentAllowed: boolean|null;
+    uploadLink: boolean|null;
+    dateTimePicker: boolean|null
+  }
+}

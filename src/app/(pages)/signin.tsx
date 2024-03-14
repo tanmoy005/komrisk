@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, ToastAndroid, Alert } from 'react-native';
-import axios from "axios";
-import { Redirect, router } from 'expo-router';
+import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Alert } from 'react-native';
+import { router } from 'expo-router';
 import { UserModel } from '@/src/types';
 import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
 import { useDispatch } from 'react-redux';
-import { storeLoginData } from '@/src/store/slices/login-data-slice';
+import { storeUserDetails } from '@/src/store/slices/login-data-slice';
+import { setDataToAsyncStorage } from '@/src/utils';
 
 
 let SignIn = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const handleSubmitSignIn = async () => {
 
         // console.log('werwer');
@@ -29,12 +29,9 @@ let SignIn = () => {
         console.log('data', data);
 
         if (status === 200) {
+            dispatch(storeUserDetails(data));
+            setDataToAsyncStorage('token', data.token);
             router.push("/(user)/dashboard/complianceStatus");
-            // dispatch(storeLoginData({
-            //     username,
-            //     password,
-            //     token: data.token
-            // }))
         } else {
             Alert.alert("error", error.message);
         }
@@ -42,19 +39,7 @@ let SignIn = () => {
         setPassword('');
     }
 
-    // const handleSubmitSignIn = async () => {
-    //     const payLoad = {
-    //       Url: `https://${baseURL}.komrisk.com`
-    //     };
-    //     console.log('handleSubmitSignIn');
-    //     try {
-    //       const response = await AuthURL(payLoad);
-    //       console.log("response", response);
-    //     } catch (error) {
-    //       console.log('error', error);
-    //     }
-    // }
-
+  
 
     return (
         <View style={styles.container}>

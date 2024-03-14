@@ -2,7 +2,7 @@ import { ComplianceStatusDataPayLoad } from '@/src/types';
 import Server from '@/src/server/server'
 
 const GetComplianceStatusData = async (payLoad: ComplianceStatusDataPayLoad) => {
-    const url = `/komrisk/api/complianceReports/comparisonData`;
+    const url = `/complianceReports/comparisonData`;
 
     const response = await Server(payLoad, url, 'POST');
 

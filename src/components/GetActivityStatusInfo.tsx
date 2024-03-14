@@ -52,6 +52,7 @@ const ActivityStatusInfo = () => {
 
     }
     useEffect(() => {
+      console.log('filteredchartData')
       handleGetActivityStatusData();
     }, []);
 

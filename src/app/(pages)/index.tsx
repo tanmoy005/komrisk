@@ -3,6 +3,10 @@ import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, ToastAn
 import { router } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from '@/src/store/RootReducer';
+import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
+import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setDataToAsyncStorage } from '@/src/utils';
 
 
 
@@ -22,13 +26,13 @@ const Workspace = () => {
   //    const [workSpaceName, setWorkSpaceName] = useState();
   const [workSpaceName, setWorkSpaceName] = useState<string>('');
 
-  
+
   const dispatch = useDispatch();
-  const count = useSelector((state: RootState) => state.counter.count);
-  console.log("apiSlice34343", count);
-  useEffect(() => { 
+
+
+  useEffect(() => {
     // const apiSlice = useSelector((state) => state.baseUrlSlice)
- 
+
 
 
   }, [])
@@ -40,8 +44,24 @@ const Workspace = () => {
       Alert.alert("Alert", "Workspace can not be empty");
     }
     else {
-      router.push("/signin");
+      const payLoad = {
+        Url: `https://${workSpaceName}.komrisk.com`
+      };
+      const baseURL = `${payLoad.Url}/komrisk/api`;
+      setDataToAsyncStorage('baseUrl', baseURL);
+      const { error, status } = await AuthenticateWorkspace(payLoad);
 
+      if (status === 200) {
+        
+        dispatch(storeBaseUrl({ 
+          workspaceName: workSpaceName,
+          baseUrl: baseURL 
+        }));
+        router.push("/signin");
+      } else {
+        setDataToAsyncStorage('baseUrl', "");
+        Alert.alert("error", "Unknown workspace");
+      }
     }
 
   }
