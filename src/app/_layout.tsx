@@ -4,9 +4,7 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-
 import { useColorScheme } from '@/src/components/useColorScheme';
-import CartProvider from '@/src/provider/CartProvider';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from '../store/RootReducer';
 import { Provider } from 'react-redux';

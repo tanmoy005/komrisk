@@ -1,10 +1,7 @@
 import React from 'react';
 // import FontAwesome5  from '@expo/vector-icons/FontAwesome';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'
-
-import { Link, Tabs } from 'expo-router';
-import { Image, Pressable } from 'react-native';
-
+import { Tabs } from 'expo-router';
 import Colors from '@/src/constants/Colors';
 import { useColorScheme } from '@/src/components/useColorScheme';
 import { useClientOnlyValue } from '@/src/components/useClientOnlyValue';

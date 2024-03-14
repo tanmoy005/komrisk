@@ -1,4 +1,4 @@
-import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, View } from "react-native";
 import ActivityStatusInfo from "@/src/components/GetActivityStatusInfo";
 // const Product = products[3];
 

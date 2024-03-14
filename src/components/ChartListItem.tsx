@@ -1,9 +1,7 @@
-import { Image, StyleSheet, Text, Pressable } from "react-native";
-import Colors from "@/src/constants/Colors";
-import { ChartListDataItem, Product } from "@/src/types";
-import { Link, useSegments } from "expo-router";
+import { StyleSheet, Text, Pressable } from "react-native";
+import { ChartListDataItem } from "@/src/types";
+import { Link } from "expo-router";
 import { View } from "./Themed";
-// import ProductDetailsView from "@/src/app/(tabs)/menu/[id]";
 
 type ChartItemProps = {
   data: ChartListDataItem

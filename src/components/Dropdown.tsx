@@ -19,7 +19,7 @@ const DropDown = () => {
         items={items}
         setOpen={setOpen}
         setValue={setSelectedValue}
-        setItems={null}
+        // setItems={null}
         style={{ width: 100, alignItems: 'center', alignSelf: 'center' }}
         onChangeValue={(value) => console.log(value)} // Optional callback when the selected value changes
       />

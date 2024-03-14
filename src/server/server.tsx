@@ -9,18 +9,12 @@ interface Response { data: any, error: any, status: number | null };
 
 const Server = async (payLoad: object, url: string, method: string, hasToken: boolean = true) => {
 
-    // const loginDataSlice = useSelector( (state) => state.loginDataSlice);
-    // console.log("loginDataSlice", loginDataSlice);
-    console.log('server');
-    
-    // const workSpacePayload = useSelector((state: RootState) => state.baseUrl.payload);
-    const baseUrl =  await getDataFromAsyncStorage('baseUrl');
-    const token =  await getDataFromAsyncStorage('token');
-    console.log('server222',baseUrl);
+    const baseUrl = await getDataFromAsyncStorage('baseUrl');
+    const token = await getDataFromAsyncStorage('token');
+
     const api = axios.create({
-        baseURL: baseUrl  
+        baseURL: baseUrl
     });
-    console.log("url", url);
 
     const commonHeader = {
         "API-KEY": "1d339a8918bfd92522267f0dd76415f8",
@@ -34,7 +28,7 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
     }
     const headers =
     {
-        headers: token ? authHeader: commonHeader
+        headers: token ? authHeader : commonHeader
     }
     let response: Response = { data: "", error: "", status: null };
 

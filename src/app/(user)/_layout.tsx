@@ -1,8 +1,4 @@
 import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/src/components/EditScreenInfo';
-import { Text, View } from '@/src/components/Themed';
-import PieChartData from '@/src/components/PieChart';
 import Colors from '@/src/constants/Colors';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link, Stack } from 'expo-router';

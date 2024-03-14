@@ -10,12 +10,6 @@ const Page_layout = () => {
             <Stack.Screen name="index" options={{ headerTitle: "Test", headerShown: true }} />
             <Stack.Screen name="signin" options={{ headerShown: false }} />
         </Stack>
-        // <Stack>
-        //     <View style={styles.container} >
-        //         <Stack.Screen name="index" options={{headerTitle:"Test", headerShown: true }}  />
-        //         <Stack.Screen name="signin" options={{ headerShown: false }} />
-        //     </View>
-        // </Stack>
     )
 }
 
