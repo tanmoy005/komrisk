@@ -5,9 +5,9 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { useColorScheme } from '@/src/components/useColorScheme';
-import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from '../store/RootReducer';
 import { Provider } from 'react-redux';
+import store from '../store';
+// import { AppRegistry } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -48,9 +48,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const store = configureStore({
-    reducer: rootReducer,
-  });
+
 
   return (
     <Provider store={store}>
@@ -64,3 +62,4 @@ function RootLayoutNav() {
     </Provider>
   );
 }
+// AppRegistry.registerComponent('komrisk', () => RootLayoutNav);

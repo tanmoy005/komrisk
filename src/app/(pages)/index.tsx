@@ -4,7 +4,8 @@ import { router } from 'expo-router';
 import { useDispatch } from "react-redux";
 import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
 import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
-import { setDataToAsyncStorage } from '@/src/utils';
+import setDataToAsyncStorage from '@/src/utils/associate/set-to-async-storage';
+
 
 
 const Workspace = () => {
@@ -29,10 +30,8 @@ const Workspace = () => {
 
       if (status === 200) {
 
-        dispatch(storeBaseUrl({
-          workspaceName: workSpaceName,
-          baseUrl: baseURL
-        }));
+        dispatch(storeBaseUrl({ workspaceName: workSpaceName, baseUrl: baseURL }));
+
         router.push("/signin");
       } else {
         setDataToAsyncStorage('baseUrl', "");

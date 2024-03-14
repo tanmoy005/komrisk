@@ -1,4 +1,3 @@
-import { View } from '@/src/components/Themed'
 import React from 'react'
 import { StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';

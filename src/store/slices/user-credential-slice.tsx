@@ -12,22 +12,22 @@ const initialState: UserCredentialState = {
 };
 
 
-const UserCredeintialSlice = createSlice({
-    name: "userCredeintialSlice",
+const UserCredentialSlice = createSlice({
+    name: "baseUrlSlice",
     initialState,
     reducers: {
         storeUserCredential(state, action: UserCredentialState) {
             console.log("action", action);
             state.payload = action.payload;
-            console.log('state', state);
 
             // state.push(action.payload);
         },
         removeUserCredential(state) {
             state = initialState
+
         },
     }
 })
 
-export default UserCredeintialSlice.reducer
-export const { storeUserCredential, removeUserCredential } = UserCredeintialSlice.actions;
+export default UserCredentialSlice.reducer
+export const { storeUserCredential, removeUserCredential } = UserCredentialSlice.actions;

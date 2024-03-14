@@ -1,8 +1,5 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/RootReducer';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getDataFromAsyncStorage } from '../utils';
+import getDataFromAsyncStorage from '../utils/associate/get-from-async-storage';
 
 
 interface Response { data: any, error: any, status: number | null };

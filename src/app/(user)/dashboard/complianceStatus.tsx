@@ -1,5 +1,4 @@
 import { Image, SafeAreaView, StyleSheet, View } from "react-native";
-import ActivityStatusInfo from "@/src/components/GetActivityStatusInfo";
 import ComplianceStatusInfo from "@/src/components/GetComplianceStatusInfo";
 // const Product = products[3];
 

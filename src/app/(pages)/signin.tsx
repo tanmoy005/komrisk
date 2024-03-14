@@ -4,10 +4,10 @@ import { router } from 'expo-router';
 import { UserModel } from '@/src/types';
 import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
 import { useDispatch, useSelector } from 'react-redux';
-import { storeUserDetails } from '@/src/store/slices/login-data-slice';
-import { setDataToAsyncStorage } from '@/src/utils';
-import { storeUserCredential } from '@/src/store/slices/user-credential-slice';
+import {storeUserDetails} from '@/src/store/slices/login-data-slice';
 import { RootState } from '@/src/store/RootReducer';
+import {storeUserCredential} from '@/src/store/slices/user-credential-slice';
+import setDataToAsyncStorage from '@/src/utils/associate/set-to-async-storage';
 
 
 let SignIn = () => {
@@ -50,10 +50,10 @@ let SignIn = () => {
             <View style={styles.logoContainer}>
                 <Image style={{ width: 100 }} source={require('@/assets/images/Komrisk-Logo-small.png')} />
             </View>
-                <View style={styles.workspaceHeadingSection}>
-                    <Text style={styles.workspaceHeading}>Workspace</Text>
-                    <Text style={styles.workspaceName}>{workspaceName}</Text>
-                </View>
+            <View style={styles.workspaceHeadingSection}>
+                <Text style={styles.workspaceHeading}>Workspace</Text>
+                <Text style={styles.workspaceName}>{workspaceName}</Text>
+            </View>
             <View style={styles.loginImageContainer}>
                 <Image style={{ width: 250, height: 250 }} source={require('@/assets/images/Ellipse 4.png')} />
                 <Image style={styles.humanImg} source={require('@/assets/images/Human.png')} />
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     },
     humanImg: {
         height: 175,
-        width:   150,
+        width: 150,
         position: "absolute",
         bottom: -30,
         left: "15%",
@@ -156,22 +156,22 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignSelf: 'stretch'
     },
-    workspaceHeadingSection:{
+    workspaceHeadingSection: {
         position: 'absolute',
         left: 50,
         top: '35%',
         zIndex: 1
     },
-    workspaceHeading:{
+    workspaceHeading: {
         color: '#26262C',
         fontWeight: "400",
         fontSize: 24
     },
-    workspaceName:{
+    workspaceName: {
         marginTop: 10,
         fontSize: 12
     },
-    smallFont:{
+    smallFont: {
         fontSize: 16,
         fontWeight: "400"
     }
