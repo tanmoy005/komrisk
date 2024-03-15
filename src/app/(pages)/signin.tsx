@@ -5,6 +5,8 @@ import { Redirect, router } from 'expo-router';
 import { UserModel } from '@/src/types';
 import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/src/store/rootReducer';
 // import { useDispatch } from 'react-redux';
 // import { storeLoginData } from '@/src/store/slices/login-data-slice';
 
@@ -13,7 +15,10 @@ let SignIn = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    // const dispatch = useDispatch();
+    const workspaceName = useSelector((state: RootState) => state.baseUrl.payload.workSpaceName);
+    console.log("workspaceName",workspaceName);
+    
+    const dispatch = useDispatch();
     const handleSubmitSignIn = async () => {
 
         // console.log('werwer');
@@ -33,11 +38,11 @@ let SignIn = () => {
 
             setDataToAsyncStorage('token', data.token);
             router.push("/(user)/dashboard/complianceStatus");
-            // dispatch(storeLoginData({
-            //     username,
-            //     password,
-            //     token: data.token
-            // }))
+            dispatch(storeLoginData({
+                username,
+                password,
+                token: data.token
+            }))
         } else {
             Alert.alert("error", "Invalid Credentials");
             return;
@@ -55,8 +60,8 @@ let SignIn = () => {
             </View>
             <View style={styles.workspaceHeadingSection}>
                 <Text style={styles.workspaceHeading}>Workspace</Text>
-                {/* <Text style={styles.workspaceName}>{workspaceName}</Text> */}
-                <Text style={styles.workspaceName}>{"workspaceName"}</Text>
+                 <Text style={styles.workspaceName}>{workspaceName}</Text> 
+                {/* <Text style={styles.workspaceName}>{"workspaceName"}</Text> */}
 
             </View>
             <View style={styles.loginImageContainer}>

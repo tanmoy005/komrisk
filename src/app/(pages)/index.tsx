@@ -3,31 +3,18 @@ import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, Alert }
 import { router } from 'expo-router';
 import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
-
-
-
-export const connection = {
-  apiBaseUrl: `https://komrisknxtcont.komrisk.com/komrisk/api/`
-}
-
-
+import { useDispatch } from 'react-redux';
+import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
 
 
 const Workspace = () => {
 
   const [workSpaceName, setWorkSpaceName] = useState<string>('');
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const apiSlice = useSelector((state: Object) => state.baseUrlSlice)
-  // console.log("apiSlice34343", apiSlice);
-
-
-  // }, [])
+  const dispatch = useDispatch();
 
   const handleSubmitWorkSpace = async () => {
 
     if (workSpaceName === undefined || workSpaceName === '') {
-
       Alert.alert("Alert", "Workspace can not be empty");
     }
     else {
@@ -40,7 +27,7 @@ const Workspace = () => {
 
       if (status === 200) {
 
-        // dispatch(storeBaseUrl({ workspaceName: workSpaceName, baseUrl: baseURL }));
+        dispatch(storeBaseUrl({ workSpaceName: workSpaceName, baseUrl: baseURL }));
 
         router.push("/signin");
       } else {

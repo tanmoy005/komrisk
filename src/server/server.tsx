@@ -16,7 +16,7 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
         // baseURL: "https://komrisknxtcont.komrisk.com/"
         baseURL: baseUrl
     });
-    console.log("url", url);
+    console.log("url", url,baseUrl);
 
     const commonHeader = {
         "API-KEY": "1d339a8918bfd92522267f0dd76415f8",

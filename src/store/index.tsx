@@ -1,15 +1,9 @@
-import { configureStore  } from "@reduxjs/toolkit";
-import loginDataSlice from "./slices/login-data-slice";
-import baseUrlSlice from "./slices/base-url-slice";
-
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./rootReducer";
 
 const store = configureStore(
     {
-        reducer: {
-            baseUrlSlice: baseUrlSlice,
-            loginDataSlice: loginDataSlice
-        }       
+        reducer: rootReducer
     }
 );
-
 export default store;
