@@ -19,7 +19,7 @@ const PieChartData = ({ ChartData, Title, SubTitle }: ChartItemProps) => {
     <Link href="/chartDataList" asChild>
       <Pressable >
         <Card containerStyle={styles.cardContainer}>
-          {/* <PieChart
+          <PieChart
             data={ChartData}
             width={350}
             height={250}
@@ -34,7 +34,7 @@ const PieChartData = ({ ChartData, Title, SubTitle }: ChartItemProps) => {
             backgroundColor="transparent"
             paddingLeft="15"
             hasLegend= {true}
-          /> */}
+          />
           <Text style={styles.title}>{Title}</Text>
           <Text style={styles.title}>{SubTitle}</Text>
         </Card>
