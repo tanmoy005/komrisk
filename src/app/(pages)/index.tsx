@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, ToastAndroid, Alert } from 'react-native';
-import axios from "axios";
-import { Redirect, router } from 'expo-router';
-import { useDispatch, useSelector } from "react-redux";
-import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
-import { connect } from 'react-redux';
-import { BaseUrl } from '@/src/types';
-import { getLocalStorageItem, SetLocalStorageItem } from '@/src/utils';
+import React, { useState } from 'react';
+import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, Alert } from 'react-native';
+import { router } from 'expo-router';
 import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
 
 
 
 export const connection = {
   apiBaseUrl: `https://komrisknxtcont.komrisk.com/komrisk/api/`
-  //  https://komrisknxtcont.komrisk.com/komrisk
-  // apiBaseUrl:`http://localhost:${port}`
 }
 
 
 
 
-let Workspace = () => {
+const Workspace = () => {
 
-
-  //    const [workSpaceName, setWorkSpaceName] = useState();
   const [workSpaceName, setWorkSpaceName] = useState<string>('');
   // const dispatch = useDispatch();
   // useEffect(() => {
@@ -34,48 +24,35 @@ let Workspace = () => {
   // }, [])
 
   const handleSubmitWorkSpace = async () => {
-    // rrouter.push("/signin");
+
     if (workSpaceName === undefined || workSpaceName === '') {
 
       Alert.alert("Alert", "Workspace can not be empty");
     }
     else {
-      router.push("/signin");
+      const payLoad = {
+        Url: `https://${workSpaceName}.komrisk.com`
+      };
+      const baseURL = `${payLoad.Url}/komrisk/api`;
+      // setDataToAsyncStorage('baseUrl', baseURL);
+      const { error, status } = await AuthenticateWorkspace(payLoad);
 
-      // const payLoad = {
-      //   Url: `https://${workSpaceName}.komrisk.com`
-      // };
-      // const {error, status} = await AuthenticateWorkspace(payLoad);
-      
-      // if (status === 200) {
-      //   router.push("/signin");
-      // } else {
-      //   Alert.alert("error", error.message);
-      // }
+      if (status === 200) {
+
+        // dispatch(storeBaseUrl({ workspaceName: workSpaceName, baseUrl: baseURL }));
+
+        router.push("/signin");
+      } else {
+        // setDataToAsyncStorage('baseUrl', "");
+        Alert.alert("error", "Unknown workspace");
+      }
     }
 
   }
 
-
-  // const handleSubmitWorkSpace = async () => {
-  //     const payLoad = {
-  //       Url: `https://${workSpaceName}.komrisk.com`
-  //     };
-  //     console.log('handleSubmitWorkSpace');
-  //     try {
-  //       const response = await AuthURL(payLoad);
-  //       console.log("response", response);
-  //     } catch (error) {
-  //       console.log('error', error);
-  //     }
-  // }
-
-
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        {/* <Image style={{ width: 230 }} source={require('../../../assets/images/Komrisk-Logo.png')} /> */}
-
         <Image style={{ width: 230 }} source={require('@/assets/images/Komrisk-Logo.png')} />
         <View style={styles.lexLogoContainer}>
           <Image source={require('@/assets/images/Rectangle98.png')} />
@@ -94,7 +71,6 @@ let Workspace = () => {
       </SafeAreaView>
       <View style={styles.submitBtnContainer}>
         <Button
-          //   style={styles.submitBtn}
           title="Next"
           color="#A097DC"
           onPress={handleSubmitWorkSpace}
@@ -142,6 +118,4 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   }
 });
-
-console.log("Workspace", Workspace);
 export default Workspace;

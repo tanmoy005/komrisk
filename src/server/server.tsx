@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { ReduxState } from '../types';
+// import { useSelector } from 'react-redux';
+// import { ReduxState } from '../types';
 
 interface Response { data: any, error: any, status: number | null };
 
@@ -21,7 +21,7 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
     }
     const authHeader = {
         ...commonHeader,
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjkyLCJleHBpcmF0aW9uVGltZSI6MTcxMDM0MjYyMSwiaXNzdWVyIjoiaHR0cHM6Ly93d3cua29tcmlzay5jb20ifQ.7qjjJzDvVyWB3eCc8YXeEAzkPpQ06ViMbfBAaRZfACQ"
+        "Authorization": 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjkyLCJleHBpcmF0aW9uVGltZSI6MTcxMDUzMDg0MywiaXNzdWVyIjoiaHR0cHM6Ly93d3cua29tcmlzay5jb20ifQ.oPjHAVhrgD7xNsjH2p3bSjbFDAF3tgRo5UnInOEep_c'
 
     }
     const headers =
