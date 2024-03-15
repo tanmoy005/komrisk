@@ -9,14 +9,14 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
 
     // const loginDataSlice = useSelector( (state) => state.loginDataSlice);
     // console.log("loginDataSlice", loginDataSlice);
-    
+
     const baseUrl = await getDataFromAsyncStorage('baseUrl');
     const token = await getDataFromAsyncStorage('token');
     const api = axios.create({
         // baseURL: "https://komrisknxtcont.komrisk.com/"
         baseURL: baseUrl
     });
-    console.log("url", url,baseUrl);
+    // console.log("url", url,baseUrl);
 
     const commonHeader = {
         "API-KEY": "1d339a8918bfd92522267f0dd76415f8",
@@ -31,7 +31,7 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
     }
     const headers =
     {
-        headers: hasToken ? authHeader: commonHeader
+        headers: hasToken ? authHeader : commonHeader
     }
     let response: Response = { data: "", error: "", status: null };
 

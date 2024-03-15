@@ -7,6 +7,7 @@ import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
+import { storeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice';
 // import { useDispatch } from 'react-redux';
 // import { storeLoginData } from '@/src/store/slices/login-data-slice';
 
@@ -16,13 +17,11 @@ let SignIn = () => {
     const [password, setPassword] = useState<string>('');
 
     const workspaceName = useSelector((state: RootState) => state.baseUrl.payload.workSpaceName);
-    console.log("workspaceName",workspaceName);
-    
+    // console.log("workspaceName", workspaceName);
+
     const dispatch = useDispatch();
     const handleSubmitSignIn = async () => {
 
-        // console.log('werwer');
-        // router.push("/(user)/dashboard/complianceStatus");
         if (username === '' || password === '') {
             Alert.alert("error", 'Username or password cannot be empty');
             return;
@@ -32,17 +31,13 @@ let SignIn = () => {
             password
         }
         const { data, error, status } = await AuthenticateUser(payLoad);
-        console.log('data', data, status);
+        // console.log('data', data, status);
 
         if (status === 200) {
 
             setDataToAsyncStorage('token', data.token);
             router.push("/(user)/dashboard/complianceStatus");
-            dispatch(storeLoginData({
-                username,
-                password,
-                token: data.token
-            }))
+            dispatch(storeAuthUserCred({ username, password }))
         } else {
             Alert.alert("error", "Invalid Credentials");
             return;
@@ -60,7 +55,7 @@ let SignIn = () => {
             </View>
             <View style={styles.workspaceHeadingSection}>
                 <Text style={styles.workspaceHeading}>Workspace</Text>
-                 <Text style={styles.workspaceName}>{workspaceName}</Text> 
+                <Text style={styles.workspaceName}>{workspaceName}</Text>
                 {/* <Text style={styles.workspaceName}>{"workspaceName"}</Text> */}
 
             </View>

@@ -5,6 +5,8 @@ import { Alert, StyleSheet, Text } from 'react-native';
 import { View } from 'react-native';
 import DropDown from './Dropdown';
 import PieChartData from './PieChart';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/rootReducer';
 
 const ComplianceStatusInfo = () => {
   {
@@ -16,18 +18,19 @@ const ComplianceStatusInfo = () => {
       chartData: null
     });
     const [chartData, setChartData] = useState<ChartType[]>([]);
-
+    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const handleGetComplianceStatusData = async () => {
 
       const payLoad: ComplianceStatusDataPayLoad = {
-        username: "anirban@elogixmail.com",
-        password: "An1rban@2023",
+        ...useCredential,
         start: "01/01/2021",
         viewAs: "COMPANY HEAD",
         end: "31/12/2023"
       }
 
       const { data, error, status } = await GetComplianceStatusData(payLoad);
+      // console.log("dataCom",data,error,status);
+      
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
         setActivityStatusChartData(data);
@@ -44,7 +47,7 @@ const ComplianceStatusInfo = () => {
             legendFontSize: 10, // or another value you want to set
           };
         });
-        console.log('filteredchartData', mappedChartData);
+        // console.log('filteredchartData', mappedChartData);
         setChartData(mappedChartData);
       } else {
         Alert.alert("error", error.message);
