@@ -8,7 +8,7 @@ const Page_layout = () => {
     return (
         <Stack>
             {/* <View style={styles.container} > */}
-                <Stack.Screen name="index" options={{headerTitle:"Test", headerShown: true }}  />
+                <Stack.Screen name="index" options={{headerTitle:"Komrisk", headerShown: false }}  />
                 <Stack.Screen name="signin" options={{ headerShown: false }} />
             {/* </View> */}
         </Stack>

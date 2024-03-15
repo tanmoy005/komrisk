@@ -1,14 +1,13 @@
 import { Link, Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
-
 import { Text, View } from '@/src/components/Themed';
 
 export default function NotFoundScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
+      <Stack.Screen options={{ title: 'Incident Activity' }} />
       <View style={styles.container}>
-        <Text style={styles.title}>This screen is under constraction.</Text>
+        <Text style={styles.title}>This screen is under construction.</Text>
 
         <Link href="/" style={styles.link}>
           <Text style={styles.linkText}>Go to home screen!</Text>

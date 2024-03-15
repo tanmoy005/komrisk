@@ -4,6 +4,7 @@ import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, ToastAn
 import { Redirect, router } from 'expo-router';
 import { UserModel } from '@/src/types';
 import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
+import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 // import { useDispatch } from 'react-redux';
 // import { storeLoginData } from '@/src/store/slices/login-data-slice';
 
@@ -26,9 +27,11 @@ let SignIn = () => {
             password
         }
         const { data, error, status } = await AuthenticateUser(payLoad);
-        console.log('data', data,status);
+        console.log('data', data, status);
 
         if (status === 200) {
+
+            setDataToAsyncStorage('token', data.token);
             router.push("/(user)/dashboard/complianceStatus");
             // dispatch(storeLoginData({
             //     username,

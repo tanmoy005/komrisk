@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, Alert } from 'react-native';
 import { router } from 'expo-router';
 import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
+import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 
 
 
@@ -34,7 +35,7 @@ const Workspace = () => {
         Url: `https://${workSpaceName}.komrisk.com`
       };
       const baseURL = `${payLoad.Url}/komrisk/api`;
-      // setDataToAsyncStorage('baseUrl', baseURL);
+      setDataToAsyncStorage('baseUrl', baseURL);
       const { error, status } = await AuthenticateWorkspace(payLoad);
 
       if (status === 200) {
@@ -43,7 +44,7 @@ const Workspace = () => {
 
         router.push("/signin");
       } else {
-        // setDataToAsyncStorage('baseUrl', "");
+        setDataToAsyncStorage('baseUrl', "");
         Alert.alert("error", "Unknown workspace");
       }
     }
