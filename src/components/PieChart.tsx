@@ -1,9 +1,9 @@
-import { StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { PieChart } from 'react-native-chart-kit';
-import { Link } from 'expo-router';
 import { Card, Text } from 'react-native-elements';
 import { ChartType } from '../types';
+import CardSkelton from './skelton/CardSkelton';
 
 
 type ChartItemProps = {
@@ -16,30 +16,34 @@ type ChartItemProps = {
 const PieChartData = ({ ChartData, Title, SubTitle }: ChartItemProps) => {
 
   return (
-    <Link href="/chartDataList" asChild>
-      <Pressable >
-        <Card containerStyle={styles.cardContainer}>
-          <PieChart
-            data={ChartData}
-            width={350}
-            height={250}
-            chartConfig={{
-              backgroundColor: '#ffffff',
-              backgroundGradientFrom: '#ffffff',
-              backgroundGradientTo: '#ffffff',
-              decimalPlaces: 2,
-              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-            }}
-            accessor="population"
-            backgroundColor="transparent"
-            paddingLeft="15"
-            hasLegend= {true}
-          />
-          <Text style={styles.title}>{Title}</Text>
-          <Text style={styles.title}>{SubTitle}</Text>
-        </Card>
-      </Pressable>
-    </Link >
+    <Card containerStyle={styles.cardContainer}>
+      {
+        ChartData.length > 0 ?
+          <View>
+            <PieChart
+              data={ChartData}
+              width={350}
+              height={250}
+              chartConfig={{
+                backgroundColor: '#ffffff',
+                backgroundGradientFrom: '#ffffff',
+                backgroundGradientTo: '#ffffff',
+                decimalPlaces: 2,
+                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              }}
+              accessor="population"
+              backgroundColor="transparent"
+              paddingLeft="15"
+              hasLegend={true}
+            />
+            <Text style={styles.title}>{Title}</Text>
+            <Text style={styles.title}>{SubTitle}</Text>
+          </View>
+          :
+          <CardSkelton />
+      }
+    </Card>
+
   );
 };
 
@@ -65,9 +69,8 @@ const styles = StyleSheet.create({
   },
   subtitleContainer: {
     flexDirection: 'row',
-    gap: 5,
-  },
-
+    gap: 5
+  }
 });
 
 

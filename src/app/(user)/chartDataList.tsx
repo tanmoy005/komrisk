@@ -8,10 +8,16 @@ import ChartListItem from '@/src/components/ChartListItem';
 const ChartDataList = () => {
     const { items, total } = useCartContext();
     const { aaData } = ComplianceChartDataList;
+
+    console.log("aaData", aaData);
+    
+
     return (
         <FlatList
             data={aaData}
+            // data={[]}
             renderItem={({ item }) => <ChartListItem data={item} />}
+            // renderItem={({ item = null }) =>  console.log("item4444", item)}
             contentContainerStyle={{ gap: 10, padding: 10 }}
         />
     )

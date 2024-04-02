@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, Alert } from 'react-native';
+import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert } from 'react-native';
 import { router } from 'expo-router';
 import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 import { useDispatch } from 'react-redux';
 import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
+import Button from '@/src/components/Button';
 
 
 const Workspace = () => {
@@ -59,8 +60,15 @@ const Workspace = () => {
       </SafeAreaView>
       <View style={styles.submitBtnContainer}>
         <Button
-          title="Next"
-          color="#A097DC"
+          btnColor={'#A097DC'}
+          text='Next'
+          style={{
+            paddingVertical: 20,
+            paddingHorizontal: 48,
+            fontWeight: '400',
+            fontSize: 16,
+            borderRadius: 5
+          }}
           onPress={handleSubmitWorkSpace}
         />
       </View>
@@ -77,10 +85,11 @@ const styles = StyleSheet.create({
     // backgroundColor: "red"
   },
   input: {
-    height: 40,
+    // height: 60,
     borderColor: '#D9D9D9',
     borderWidth: 2,
-    paddingHorizontal: 10,
+    padding: 13,
+    // paddingHorizontal: 20,
     borderRadius: 5,
     color: '#99A3A4'
   },
@@ -101,6 +110,7 @@ const styles = StyleSheet.create({
   lexLogoContainer: {
     marginTop: 10,
     flexDirection: 'row',
+    paddingLeft: 10,
     alignItems: 'center',
     justifyContent: 'space-between',
     alignSelf: 'stretch'

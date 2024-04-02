@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityStatusData, ActivityStatusDataPayLoad, ChartData, ChartType } from '../types';
 import GetActivityStatusData from '../server/api-functions/get-activity-status-data';
-import { Alert, StyleSheet, Text } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text } from 'react-native';
 import { View } from 'react-native';
 import DropDown from './Dropdown';
 import PieChartData from './PieChart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
+import { Link } from 'expo-router';
+import BarChartData from './BarChart';
+import DonatChartData from './DonatChart';
 
 const ActivityStatusInfo = () => {
   {
@@ -18,7 +21,16 @@ const ActivityStatusInfo = () => {
       chartData: null
     });
     const [chartData, setChartData] = useState<ChartType[]>([]);
+    const [currentChart, setCurrentChart] = useState<string>('PIE');
+    console.log('currentChart', currentChart);
+
+    const chartItems = [
+      { label: 'PIE', value: 'PIE' },
+      { label: 'BAR', value: 'BAR' },
+      { label: 'DONUT', value: 'DONUT' },
+    ];
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+
     const handleGetActivityStatusData = async () => {
 
       const payLoad: ActivityStatusDataPayLoad = {
@@ -27,6 +39,7 @@ const ActivityStatusInfo = () => {
         viewAs: "COMPANY HEAD",
         end: "31/12/2023"
       }
+      console.log("payLoad", payLoad);
 
       const { data, error, status } = await GetActivityStatusData(payLoad);
       if (status === 200) {
@@ -45,7 +58,7 @@ const ActivityStatusInfo = () => {
             legendFontSize: 10, // or another value you want to set
           };
         });
-        // console.log('filteredchartData', mappedChartData);
+        console.log('filteredchartData', mappedChartData);
         setChartData(mappedChartData);
       } else {
         Alert.alert("error", error.message);
@@ -53,16 +66,55 @@ const ActivityStatusInfo = () => {
 
     }
     useEffect(() => {
+      console.log('filteredchartData')
       handleGetActivityStatusData();
     }, []);
 
 
     return (
       <View style={styles.chartContainer}>
-        <PieChartData ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle} />
+        <Link href="/(ChartReport)/GetActivityStatusDataListDetailsInfo" asChild>
+          <Pressable>
+            {/* {ChartComponent} */}
+            {/* <ChartComponent ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle}/> */}
+            {/* {items.map((({ Component }) => {
+              return (
+                <Component ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle} />
+              )
+            }))} */}
+            {
+              currentChart === 'PIE' &&
+              <PieChartData
+                ChartData={chartData}
+                Title={activityStatusChartData.title}
+                SubTitle={activityStatusChartData.subTitle}
+              />
+            }
+            {
+              currentChart === 'BAR' &&
+              <BarChartData
+                ChartData={chartData}
+                Title={activityStatusChartData.title}
+                SubTitle={activityStatusChartData.subTitle}
+              />
+            }
+            {
+              currentChart === 'DONUT' &&
+              <DonatChartData
+                ChartData={chartData}
+                Title={activityStatusChartData.title}
+                SubTitle={activityStatusChartData.subTitle}
+              />
+            }
+          </Pressable>
+        </Link>
         <View style={styles.chartSelctorContainer}>
           <Text>Chart Type</Text>
-          <DropDown />
+          <DropDown
+            selectedValue={currentChart}
+            dropdownItems={chartItems}
+            setSelectedValue={setCurrentChart}
+          />
         </View>
       </View>
     )

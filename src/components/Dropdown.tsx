@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import { Dispatch } from '@reduxjs/toolkit';
+import React, { SetStateAction, useState } from 'react';
 import { View, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const DropDown = () => {
-    const items = [
-      { label: 'PIE', value: 'item1' },
-      { label: 'BAR', value: 'item2' },
-      { label: 'DONUT', value: 'item3' },
-    ];
-  const [selectedValue, setSelectedValue] = useState(items[0].value);
+interface DropDownItem {
+  label: string;
+  value: string;
+}
+interface Dropdown {
+  dropdownItems: DropDownItem[];
+  setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
+  selectedValue: any;
+}
+
+const DropDown = ({setSelectedValue, dropdownItems, selectedValue}:Dropdown) => {
+
+  // const [selectedValue, setSelectedValue] = useState(items[0].value);
   const [open, setOpen] = useState(false);
 
   return (
@@ -16,11 +23,11 @@ const DropDown = () => {
       <DropDownPicker
         open={open}
         value={selectedValue}
-        items={items}
+        items={dropdownItems}
         setOpen={setOpen}
         setValue={setSelectedValue}
-        setItems={null}
-        style={{ width: 100, alignItems: 'center', alignSelf: 'center' }}
+        // setItems={null}
+        style={{ width: 130, alignItems: 'center', alignSelf: 'center' }}
         onChangeValue={(value) => console.log(value)} // Optional callback when the selected value changes
       />
     </View>

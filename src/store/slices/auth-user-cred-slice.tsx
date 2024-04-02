@@ -15,8 +15,7 @@ const AuthUserCredSlice = createSlice({
         },
         removeAuthUserCred(state, action) {
             state = initialState
-
-        },
+        }
     }
 })
 

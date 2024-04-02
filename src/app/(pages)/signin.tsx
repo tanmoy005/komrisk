@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, SafeAreaView, Button, Image, Text, ToastAndroid, Alert } from 'react-native';
+import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, ToastAndroid, Alert } from 'react-native';
 // import axios from "axios";
 import { Redirect, router } from 'expo-router';
 import { UserModel } from '@/src/types';
@@ -8,6 +8,7 @@ import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
 import { storeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice';
+import Button from '@/src/components/Button';
 // import { useDispatch } from 'react-redux';
 // import { storeLoginData } from '@/src/store/slices/login-data-slice';
 
@@ -53,19 +54,21 @@ let SignIn = () => {
             <View style={styles.logoContainer}>
                 <Image style={{ width: 100 }} source={require('@/assets/images/Komrisk-Logo-small.png')} />
             </View>
-            <View style={styles.workspaceHeadingSection}>
-                <Text style={styles.workspaceHeading}>Workspace</Text>
-                <Text style={styles.workspaceName}>{workspaceName}</Text>
-                {/* <Text style={styles.workspaceName}>{"workspaceName"}</Text> */}
+            <View style={styles.workSpaceImageContainer}>
+                <View style={styles.workspaceHeadingSection}>
+                    <Text style={styles.workspaceHeading}>Workspace</Text>
+                    <Text style={styles.workspaceName}>{workspaceName}</Text>
+                    {/* <Text style={styles.workspaceName}>{"workspaceName"}</Text> */}
 
-            </View>
-            <View style={styles.loginImageContainer}>
-                <Image style={{ width: 250, height: 250 }} source={require('@/assets/images/Ellipse 4.png')} />
-                <Image style={styles.humanImg} source={require('@/assets/images/Human.png')} />
-                {/* <Image style={{ width: 100 }} source={require('@/assets/images/Polygon 3.png')} /> */}
+                </View>
+                <View style={styles.loginImageContainer}>
+                    <Image style={{ width: 250, height: 250 }} source={require('@/assets/images/Ellipse 4.png')} />
+                    <Image style={styles.humanImg} source={require('@/assets/images/Human.png')} />
+                    {/* <Image style={{ width: 100 }} source={require('@/assets/images/Polygon 3.png')} /> */}
 
+                </View>
+                <Text style={styles.smallFont}>Just one more step</Text>
             </View>
-            <Text style={styles.smallFont}>Just one more step</Text>
             {/* <View style={styles.logoContainer}>
 
                 <View style={styles.lexLogoContainer}>
@@ -93,14 +96,27 @@ let SignIn = () => {
                         placeholder="Password"
                     />
                 </View>
+                <Text style={styles.forgetPass}>Forgot password ?</Text>
             </SafeAreaView>
             <View style={styles.submitBtnContainer}>
                 <Button
+                    btnColor={'#A097DC'}
+                    text='Login'
+                    style={{
+                        paddingVertical: 20,
+                        paddingHorizontal: 48,
+                        fontWeight: '400',
+                        fontSize: 16,
+                        borderRadius: 5
+                    }}
+                    onPress={handleSubmitSignIn}
+                />
+                {/* <Button
                     //   style={styles.submitBtn}
                     title="Login"
                     color="#A097DC"
                     onPress={handleSubmitSignIn}
-                />
+                /> */}
             </View>
         </View>
     );
@@ -113,6 +129,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 50
         // backgroundColor: "red"
+    },
+    workSpaceImageContainer: {
+        width: '100%',
+        position: 'relative',
+        marginTop: -55,
     },
     loginImageContainer: {
         flexDirection: "row",
@@ -127,11 +148,18 @@ const styles = StyleSheet.create({
         left: "15%",
         // transform: "translateX(-50%)"
     },
+    forgetPass: {
+        textAlign: 'right',
+        marginRight: 11,
+        marginTop: 20,
+        color: '#A097DC'
+    },
     input: {
-        height: 40,
+        // height: 60,
         borderColor: '#D9D9D9',
         borderWidth: 2,
-        paddingHorizontal: 10,
+        padding: 13,
+        // paddingHorizontal: 20,
         borderRadius: 5,
         color: '#99A3A4'
     },
@@ -151,7 +179,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch'
     },
     logoContainer: {
-        paddingVertical: 20,
+        marginTop: 50,
         alignItems: 'flex-end',
         width: '100%'
     },
@@ -164,8 +192,8 @@ const styles = StyleSheet.create({
     },
     workspaceHeadingSection: {
         position: 'absolute',
-        left: 50,
-        top: '35%',
+        left: 0,
+        top: '40%',
         zIndex: 1
     },
     workspaceHeading: {
@@ -179,7 +207,9 @@ const styles = StyleSheet.create({
     },
     smallFont: {
         fontSize: 16,
-        fontWeight: "400"
+        fontWeight: "400",
+        marginTop: 40,
+        textAlign: 'center'
     }
 });
 export default SignIn;

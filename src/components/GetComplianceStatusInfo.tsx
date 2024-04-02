@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { ComplianceStatusDataPayLoad, ChartData, ChartType, ComplianceStatusData } from '../types';
 import GetComplianceStatusData from '../server/api-functions/get-compliance-status-data';
-import { Alert, StyleSheet, Text } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text } from 'react-native';
 import { View } from 'react-native';
 import DropDown from './Dropdown';
 import PieChartData from './PieChart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
+import DonatChartData from './DonatChart';
+import BarChartData from './BarChart';
+import { Link } from 'expo-router';
 
 const ComplianceStatusInfo = () => {
   {
@@ -18,7 +21,14 @@ const ComplianceStatusInfo = () => {
       chartData: null
     });
     const [chartData, setChartData] = useState<ChartType[]>([]);
+    const [currentChart, setCurrentChart] = useState<string>('PIE');
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+    const chartItems = [
+      { label: 'PIE', value: 'PIE' },
+      { label: 'BAR', value: 'BAR' },
+      { label: 'DONUT', value: 'DONUT' },
+    ];
+
     const handleGetComplianceStatusData = async () => {
 
       const payLoad: ComplianceStatusDataPayLoad = {
@@ -29,8 +39,6 @@ const ComplianceStatusInfo = () => {
       }
 
       const { data, error, status } = await GetComplianceStatusData(payLoad);
-      // console.log("dataCom",data,error,status);
-      
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
         setActivityStatusChartData(data);
@@ -47,7 +55,7 @@ const ComplianceStatusInfo = () => {
             legendFontSize: 10, // or another value you want to set
           };
         });
-        // console.log('filteredchartData', mappedChartData);
+        console.log('filteredchartData', mappedChartData);
         setChartData(mappedChartData);
       } else {
         Alert.alert("error", error.message);
@@ -61,10 +69,42 @@ const ComplianceStatusInfo = () => {
 
     return (
       <View style={styles.chartContainer}>
-        <PieChartData ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle} />
+        <Link href="/(ChartReport)/GetComplianceStatusDataListDetailsInfo" asChild>
+          <Pressable>
+            {
+              currentChart === 'PIE' &&
+              <PieChartData
+                ChartData={chartData}
+                Title={activityStatusChartData.title}
+                SubTitle={activityStatusChartData.subTitle}
+              />
+            }
+            {
+              currentChart === 'BAR' &&
+              <BarChartData
+                ChartData={chartData}
+                Title={activityStatusChartData.title}
+                SubTitle={activityStatusChartData.subTitle}
+              />
+            }
+            {
+              currentChart === 'DONUT' &&
+              <DonatChartData
+                ChartData={chartData}
+                Title={activityStatusChartData.title}
+                SubTitle={activityStatusChartData.subTitle}
+              />
+            }
+          </Pressable>
+        </Link>
+        {/* <PieChartData ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle} /> */}
         <View style={styles.chartSelctorContainer}>
           <Text>Chart Type</Text>
-          <DropDown />
+          <DropDown
+            selectedValue={currentChart}
+            dropdownItems={chartItems}
+            setSelectedValue={setCurrentChart}
+          />
         </View>
       </View>
     )

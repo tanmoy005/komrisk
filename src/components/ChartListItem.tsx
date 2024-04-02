@@ -1,27 +1,69 @@
 import { Image, StyleSheet, Text, Pressable } from "react-native";
 import Colors from "@/src/constants/Colors";
-import { ChartListDataItem, Product } from "@/src/types";
+import { ChartListDataItem } from "@/src/types";
 import { Link, useSegments } from "expo-router";
 import { View } from "./Themed";
+import ContentLoader, { Rect, Circle } from 'react-content-loader/native'
+import ChartItemSkelton from "./skelton/ChartItemSkelton";
+
+// import { Skeleton } from "moti/skeleton";
 // import ProductDetailsView from "@/src/app/(tabs)/menu/[id]";
 
 type ChartItemProps = {
   data: ChartListDataItem
 }
+const isObjectEmpty = (objectName) => {
+  return Object.keys(objectName).length === 0
+}
 const ChartListItem = ({ data }: ChartItemProps) => {
   // const segments=useSegments();
   // console.log(segments);
+  console.log("Data1111111111111111111", data);
+  const empty = isObjectEmpty(data);
+  console.log("empty", empty);
 
   return (
     // <Link href={`./menu/${data.id}`} asChild>
     <Link href={`./${data.complianceId}`} asChild>
       <Pressable style={styles.rowContainer}>
-        <View >
-          <Text style={styles.title}>Name : {data.taskName}</Text>
-          <Text style={styles.text}>Op Unit : {data.opUnit} </Text>
-          <Text style={styles.text}>Department : {data.department === null ? "NA" : data.department}</Text>
-          <Text style={styles.subtitleContainer}>Description : {data.description === null ? "NA" : data.description}</Text>
+        <View>
+          {/* {
+            data
+          } */}
+          {
+          }
+          {
+            !isObjectEmpty(data) ?
+              <View>
+                <Text style={styles.title}>Name : {data.taskName}</Text>
+                <Text style={styles.text}>Op Unit : {data.opUnit} </Text>
+                <Text style={styles.text}>Department : {data.department === null ? "NA" : data.department}</Text>
+                <Text style={styles.subtitleContainer}>Description : {data.description === null ? "NA" : data.description}</Text>
+              </View>
+              :
+              // <View>
+              //   <View style={{
+              //     marginBottom: 20
+              //   }}>
 
+              //     <ChartItemSkelton />
+              //   </View>
+              //   <View style={{
+              //     marginBottom: 20
+              //   }}>
+
+              //     <ChartItemSkelton />
+              //   </View>
+              //   <View style={{
+              //     marginBottom: 20
+              //   }}>
+              //     <ChartItemSkelton />
+              //   </View>
+              
+              // </View>
+              <ChartItemSkelton />
+          }
+          {/* <ChartItemSkelton /> */}
         </View>
       </Pressable>
     </Link>
@@ -37,8 +79,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     backgroundColor: 'white',
     borderRadius: 10,
-    // flex: 1,
-    // flexDirection: 'column',
+    width: '100%',
+    flex: 1,
+    flexDirection: 'column',
   },
   text: {
     fontWeight: '500',
@@ -52,5 +95,23 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+});
+
+const styles2 = StyleSheet.create({
+  shape: {
+    justifyContent: 'center',
+    height: 250,
+    width: 250,
+    borderRadius: 25,
+    marginRight: 10,
+    backgroundColor: 'white',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  padded: {
+    padding: 16,
   },
 });

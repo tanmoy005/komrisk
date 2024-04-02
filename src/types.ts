@@ -37,7 +37,7 @@ export type ChartListDataItem = {
   status: number;
   taskId: number;
   complianceGenId: string | null;
-}
+} | {}
 export interface UserModel {
   username: string,
   password: string

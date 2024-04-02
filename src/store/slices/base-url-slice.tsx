@@ -15,7 +15,6 @@ const BaseUrlSlice = createSlice({
         },
         removeBaseUrl(state, action) {
             state = initialState
-
         },
     }
 })

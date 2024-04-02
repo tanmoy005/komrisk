@@ -3,10 +3,10 @@ import { Alert, FlatList, StyleSheet, Text } from 'react-native';
 import { View } from 'react-native';
 import GetActivityStatusDataList from '@/src/server/api-functions/get-activity-status-datalist-details';
 import { ActivityStatusDataList, ActivityStatusDataListPayLoad, ChartListDataItem } from '@/src/types';
-import ChartListItem from '../ChartListItem';
+import ChartListItem from '@/src/components/ChartListItem';
 
 
-const GetActivityStatusDataListDetailsInfo = () => {
+const GetComplianceStatusDataListDetailsInfo = () => {
   {
     const [activityStatusChartDataList, setActivityStatusChartDataList] = useState<ActivityStatusDataList>({
       sEcho: null,
@@ -16,13 +16,11 @@ const GetActivityStatusDataListDetailsInfo = () => {
     });
     const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
 
-   
-    
     const handleGetActivityStatusDataList = async () => {
-      console.log("rerererer");
+      console.log("handleGetActivityStatusDataList");
       
       const payLoad: ActivityStatusDataListPayLoad = {
-        username: "anirban@elogixmail.com",
+        username: " @elogixmail.com",
         password: "An1rban@2023",
         start: "01/01/2021",
         viewAs: "COMPANY HEAD",
@@ -34,25 +32,25 @@ const GetActivityStatusDataListDetailsInfo = () => {
       if (status === 200) {
         const { aaData } = data;
         setActivityStatusChartDataList(data);
-        setDataList(aaData);
-        // setDataList([]);
-        console.log("DataList", aaData);
+        if (aaData.length > 0) {
+          setDataList(aaData);
+        }
       } else {
-        Alert.alert("error", error.message);
+        Alert.alert("error4444", error.message);
       }
+      // setDataList([{}]);
     }
     useEffect(() => {
       handleGetActivityStatusDataList();
     }, []);
 
-    console.log('DataList', DataList);
 
     return (
       <View style={styles.chartContainer}>
         <FlatList
-          data={DataList}
-          renderItem={({ item }) => <ChartListItem data={item} />}
-          contentContainerStyle={{ gap: 10, padding: 10 }}
+            data={DataList}
+            renderItem={({ item }) => <ChartListItem data={item} />}
+            contentContainerStyle={{ gap: 10, padding: 10 }}
         />
       </View>
     )
@@ -74,4 +72,4 @@ const styles = StyleSheet.create({
   },
 
 });
-export default GetActivityStatusDataListDetailsInfo;
+export default GetComplianceStatusDataListDetailsInfo;
