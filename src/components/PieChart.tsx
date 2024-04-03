@@ -1,27 +1,44 @@
 import { StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PieChart } from 'react-native-chart-kit';
 import { Card, Text } from 'react-native-elements';
-import { ChartType } from '../types';
+import { ReportChartData, PieChartType } from '../types';
 import CardSkelton from './skelton/CardSkelton';
 
 
 type ChartItemProps = {
-  ChartData: ChartType[];
+  ReportData: ReportChartData[];
   Title: string | null;
   SubTitle: string | null;
 };
 
 
-const PieChartData = ({ ChartData, Title, SubTitle }: ChartItemProps) => {
+const PieChartData = ({ ReportData, Title, SubTitle }: ChartItemProps) => {
 
+  const [chartData, setChartData] = useState<PieChartType[]>([]);
+
+  useEffect(() => {
+    const ChartDataPie = ReportData && ReportData.map((data: ReportChartData) => {
+      const color = data.color ? "#" + data.color : "#000";
+      return {
+        name: data.label,
+        population: data.value,
+        color: color,
+        legendFontColor: color, // or another property you want to use
+        legendFontSize: 10, // or another value you want to set
+      };
+    });
+    setChartData(ChartDataPie);
+  }, [ReportData]);
+
+  // setChartData(mappedChartData);
   return (
     <Card containerStyle={styles.cardContainer}>
       {
-        ChartData.length > 0 ?
+        chartData.length > 0 ?
           <View>
             <PieChart
-              data={ChartData}
+              data={chartData}
               width={350}
               height={250}
               chartConfig={{

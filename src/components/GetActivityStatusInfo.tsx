@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ActivityStatusData, ActivityStatusDataPayLoad, ChartData, ChartType } from '../types';
+import { ActivityStatusData, ActivityStatusDataPayLoad, ReportChartData } from '../types';
 import GetActivityStatusData from '../server/api-functions/get-activity-status-data';
 import { Alert, Pressable, StyleSheet, Text } from 'react-native';
 import { View } from 'react-native';
@@ -20,9 +20,8 @@ const ActivityStatusInfo = () => {
       yAxisName: null,
       chartData: null
     });
-    const [chartData, setChartData] = useState<ChartType[]>([]);
+    const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [currentChart, setCurrentChart] = useState<string>('PIE');
-    console.log('currentChart', currentChart);
 
     const chartItems = [
       { label: 'PIE', value: 'PIE' },
@@ -39,34 +38,22 @@ const ActivityStatusInfo = () => {
         viewAs: "COMPANY HEAD",
         end: "31/12/2023"
       }
-      console.log("payLoad", payLoad);
+      // //console.log("payLoad", payLoad);
 
       const { data, error, status } = await GetActivityStatusData(payLoad);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
         setActivityStatusChartData(data);
 
-        const filteredchartData: ChartData[] = chartData && chartData.filter((x: ChartData) => x.label !== "NULL" || x.color !== null);
-
-        const mappedChartData: ChartType[] = filteredchartData && filteredchartData.map((data: ChartData) => {
-          const color = data.color ? "#" + data.color : "#000";
-          return {
-            name: data.label,
-            population: data.value,
-            color: color,
-            legendFontColor: color, // or another property you want to use
-            legendFontSize: 10, // or another value you want to set
-          };
-        });
-        console.log('filteredchartData', mappedChartData);
-        setChartData(mappedChartData);
+        const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
+        setFilteredChartData(filteredchartData);
       } else {
         Alert.alert("error", error.message);
       }
 
     }
     useEffect(() => {
-      console.log('filteredchartData')
+      // //console.log('filteredchartData')
       handleGetActivityStatusData();
     }, []);
 
@@ -85,7 +72,7 @@ const ActivityStatusInfo = () => {
             {
               currentChart === 'PIE' &&
               <PieChartData
-                ChartData={chartData}
+                ReportData={filteredChartData}
                 Title={activityStatusChartData.title}
                 SubTitle={activityStatusChartData.subTitle}
               />
@@ -93,19 +80,21 @@ const ActivityStatusInfo = () => {
             {
               currentChart === 'BAR' &&
               <BarChartData
-                ChartData={chartData}
+                ReportData={filteredChartData}
                 Title={activityStatusChartData.title}
                 SubTitle={activityStatusChartData.subTitle}
+                yAxisName={activityStatusChartData.yAxisName}
+                xAxisName={activityStatusChartData.xAxisName}
               />
             }
-            {
+            {/* {
               currentChart === 'DONUT' &&
               <DonatChartData
-                ChartData={chartData}
+                ReportData={filteredChartData}
                 Title={activityStatusChartData.title}
                 SubTitle={activityStatusChartData.subTitle}
               />
-            }
+            } */}
           </Pressable>
         </Link>
         <View style={styles.chartSelctorContainer}>

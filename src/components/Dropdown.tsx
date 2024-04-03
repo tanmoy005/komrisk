@@ -28,7 +28,7 @@ const DropDown = ({setSelectedValue, dropdownItems, selectedValue}:Dropdown) => 
         setValue={setSelectedValue}
         // setItems={null}
         style={{ width: 130, alignItems: 'center', alignSelf: 'center' }}
-        onChangeValue={(value) => console.log(value)} // Optional callback when the selected value changes
+        // onChangeValue={(value) => //console.log(value)} // Optional callback when the selected value changes
       />
     </View>
   );

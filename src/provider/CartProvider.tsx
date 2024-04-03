@@ -21,7 +21,7 @@ const CartProvider = ({ children }: PropsWithChildren) => {
 
     const [items, setItems] = useState<CartItem[]>([]);
     const addItem = (product: Product, size: CartItem['size']) => {
-        // console.log(product,size);
+        // //console.log(product,size);
         const existingItem = items.find(item => item.product === product && item.size === size);
         if (existingItem) {
             updateQuantity(existingItem.id, 1);
@@ -45,7 +45,7 @@ const CartProvider = ({ children }: PropsWithChildren) => {
         ));
     };
     const total=items.reduce((total, item) => total + item.product.price * item.quantity, 0);
-    // console.log(items);
+    // //console.log(items);
     return (
         <CartContext.Provider value={{ items, addItem, updateQuantity,total }}>
             {children}

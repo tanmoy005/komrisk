@@ -20,7 +20,7 @@ const Workspace = () => {
     }
     else {
       const payLoad = {
-        Url: `https://${workSpaceName}.komrisk.com`
+        Url: `https://${workSpaceName.trim()}.komrisk.com`
       };
       const baseURL = `${payLoad.Url}/komrisk/api`;
       setDataToAsyncStorage('baseUrl', baseURL);
@@ -28,7 +28,7 @@ const Workspace = () => {
 
       if (status === 200) {
 
-        dispatch(storeBaseUrl({ workSpaceName: workSpaceName, baseUrl: baseURL }));
+        dispatch(storeBaseUrl({ workSpaceName: workSpaceName.trim(), baseUrl: baseURL }));
 
         router.push("/signin");
       } else {

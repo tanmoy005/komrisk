@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ComplianceStatusDataPayLoad, ChartData, ChartType, ComplianceStatusData } from '../types';
+import { ComplianceStatusDataPayLoad, ReportChartData, ComplianceStatusData } from '../types';
 import GetComplianceStatusData from '../server/api-functions/get-compliance-status-data';
 import { Alert, Pressable, StyleSheet, Text } from 'react-native';
 import { View } from 'react-native';
@@ -20,7 +20,7 @@ const ComplianceStatusInfo = () => {
       yAxisName: null,
       chartData: null
     });
-    const [chartData, setChartData] = useState<ChartType[]>([]);
+    const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [currentChart, setCurrentChart] = useState<string>('PIE');
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const chartItems = [
@@ -43,20 +43,8 @@ const ComplianceStatusInfo = () => {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
         setActivityStatusChartData(data);
 
-        const filteredchartData: ChartData[] = chartData && chartData.filter((x: ChartData) => x.label !== "NULL" || x.color !== null);
-
-        const mappedChartData: ChartType[] = filteredchartData && filteredchartData.map((data: ChartData) => {
-          const color = data.color ? "#" + data.color : "#000";
-          return {
-            name: data.label,
-            population: data.value,
-            color: color,
-            legendFontColor: color, // or another property you want to use
-            legendFontSize: 10, // or another value you want to set
-          };
-        });
-        console.log('filteredchartData', mappedChartData);
-        setChartData(mappedChartData);
+        const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
+        setFilteredChartData(filteredchartData);
       } else {
         Alert.alert("error", error.message);
       }
@@ -74,7 +62,7 @@ const ComplianceStatusInfo = () => {
             {
               currentChart === 'PIE' &&
               <PieChartData
-                ChartData={chartData}
+                ReportData={filteredChartData}
                 Title={activityStatusChartData.title}
                 SubTitle={activityStatusChartData.subTitle}
               />
@@ -82,19 +70,21 @@ const ComplianceStatusInfo = () => {
             {
               currentChart === 'BAR' &&
               <BarChartData
-                ChartData={chartData}
+                ReportData={filteredChartData}
                 Title={activityStatusChartData.title}
                 SubTitle={activityStatusChartData.subTitle}
+                yAxisName={activityStatusChartData.yAxisName}
+                xAxisName={activityStatusChartData.xAxisName}
               />
             }
-            {
+            {/* {
               currentChart === 'DONUT' &&
               <DonatChartData
                 ChartData={chartData}
                 Title={activityStatusChartData.title}
                 SubTitle={activityStatusChartData.subTitle}
               />
-            }
+            } */}
           </Pressable>
         </Link>
         {/* <PieChartData ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle} /> */}

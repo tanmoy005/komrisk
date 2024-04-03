@@ -17,7 +17,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
     const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
 
     const handleGetActivityStatusDataList = async () => {
-      console.log("handleGetActivityStatusDataList");
+      //console.log("handleGetActivityStatusDataList");
       
       const payLoad: ActivityStatusDataListPayLoad = {
         username: " @elogixmail.com",

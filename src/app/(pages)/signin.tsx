@@ -18,7 +18,7 @@ let SignIn = () => {
     const [password, setPassword] = useState<string>('');
 
     const workspaceName = useSelector((state: RootState) => state.baseUrl.payload.workSpaceName);
-    // console.log("workspaceName", workspaceName);
+    // //console.log("workspaceName", workspaceName);
 
     const dispatch = useDispatch();
     const handleSubmitSignIn = async () => {
@@ -32,7 +32,7 @@ let SignIn = () => {
             password
         }
         const { data, error, status } = await AuthenticateUser(payLoad);
-        // console.log('data', data, status);
+        // //console.log('data', data, status);
 
         if (status === 200) {
 

@@ -20,7 +20,7 @@ export interface BaseUrl {
   baseURl: String
 }
 
-export type ChartListDataItem = {
+export interface ChartListDataItem {
   mapId: number;
   complianceId: number;
   title: string | null;
@@ -37,7 +37,7 @@ export type ChartListDataItem = {
   status: number;
   taskId: number;
   complianceGenId: string | null;
-} | {}
+}
 export interface UserModel {
   username: string,
   password: string
@@ -70,16 +70,16 @@ export interface ActivityStatusData {
   subTitle: string | null;
   xAxisName: string | null;
   yAxisName: string | null;
-  chartData: ChartData[] | null
+  chartData: ReportChartData[] | null
 }
 export interface ComplianceStatusData {
   title: string | null;
   subTitle: string | null;
   xAxisName: string | null;
   yAxisName: string | null;
-  chartData: ChartData[] | null
+  chartData: ReportChartData[] | null
 }
-export interface ChartData {
+export interface ReportChartData {
   label: string;
   color: string | null;
   value: number;
@@ -89,14 +89,30 @@ export interface ChartData {
     userFilter: any; // You may want to replace 'any' with a more specific type
   };
 }
-export interface ChartType {
+export interface PieChartType {
   name: string;
   population: number | null;
   color: string | null;
   legendFontColor: string | null;
   legendFontSize: number | null;
 }
+export interface BarChartData {
+  labels: string[];
+  datasets: {
+    data: number[];
+    colors?: string[];
+  }[];
+}
 
+export interface BarChartConfig {
+  backgroundGradientFrom: string;
+  backgroundGradientTo: string;
+  decimalPlaces: number;
+  color: (opacity: number) => string;
+  style: {
+    borderRadius: number;
+  };
+}
 export interface ActivityStatusDataListPayLoad {
   username: string;
   password: string;

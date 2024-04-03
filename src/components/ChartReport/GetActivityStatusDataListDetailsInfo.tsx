@@ -19,7 +19,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
    
     
     const handleGetActivityStatusDataList = async () => {
-      console.log("rerererer");
+      //console.log("rerererer");
       
       const payLoad: ActivityStatusDataListPayLoad = {
         username: "anirban@elogixmail.com",
@@ -36,7 +36,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
         setActivityStatusChartDataList(data);
         setDataList(aaData);
         // setDataList([]);
-        console.log("DataList", aaData);
+        //console.log("DataList", aaData);
       } else {
         Alert.alert("error", error.message);
       }
@@ -45,7 +45,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
       handleGetActivityStatusDataList();
     }, []);
 
-    console.log('DataList', DataList);
+    //console.log('DataList', DataList);
 
     return (
       <View style={styles.chartContainer}>

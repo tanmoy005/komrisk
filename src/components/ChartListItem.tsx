@@ -3,7 +3,6 @@ import Colors from "@/src/constants/Colors";
 import { ChartListDataItem } from "@/src/types";
 import { Link, useSegments } from "expo-router";
 import { View } from "./Themed";
-import ContentLoader, { Rect, Circle } from 'react-content-loader/native'
 import ChartItemSkelton from "./skelton/ChartItemSkelton";
 
 // import { Skeleton } from "moti/skeleton";
@@ -12,26 +11,16 @@ import ChartItemSkelton from "./skelton/ChartItemSkelton";
 type ChartItemProps = {
   data: ChartListDataItem
 }
-const isObjectEmpty = (objectName) => {
+const isObjectEmpty = (objectName: ChartListDataItem) => {
   return Object.keys(objectName).length === 0
 }
 const ChartListItem = ({ data }: ChartItemProps) => {
-  // const segments=useSegments();
-  // console.log(segments);
-  console.log("Data1111111111111111111", data);
-  const empty = isObjectEmpty(data);
-  console.log("empty", empty);
 
   return (
     // <Link href={`./menu/${data.id}`} asChild>
     <Link href={`./${data.complianceId}`} asChild>
       <Pressable style={styles.rowContainer}>
         <View>
-          {/* {
-            data
-          } */}
-          {
-          }
           {
             !isObjectEmpty(data) ?
               <View>
@@ -41,26 +30,6 @@ const ChartListItem = ({ data }: ChartItemProps) => {
                 <Text style={styles.subtitleContainer}>Description : {data.description === null ? "NA" : data.description}</Text>
               </View>
               :
-              // <View>
-              //   <View style={{
-              //     marginBottom: 20
-              //   }}>
-
-              //     <ChartItemSkelton />
-              //   </View>
-              //   <View style={{
-              //     marginBottom: 20
-              //   }}>
-
-              //     <ChartItemSkelton />
-              //   </View>
-              //   <View style={{
-              //     marginBottom: 20
-              //   }}>
-              //     <ChartItemSkelton />
-              //   </View>
-              
-              // </View>
               <ChartItemSkelton />
           }
           {/* <ChartItemSkelton /> */}

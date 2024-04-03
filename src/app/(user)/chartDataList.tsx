@@ -9,7 +9,7 @@ const ChartDataList = () => {
     const { items, total } = useCartContext();
     const { aaData } = ComplianceChartDataList;
 
-    console.log("aaData", aaData);
+    //console.log("aaData", aaData);
     
 
     return (
@@ -17,7 +17,7 @@ const ChartDataList = () => {
             data={aaData}
             // data={[]}
             renderItem={({ item }) => <ChartListItem data={item} />}
-            // renderItem={({ item = null }) =>  console.log("item4444", item)}
+            // renderItem={({ item = null }) =>  //console.log("item4444", item)}
             contentContainerStyle={{ gap: 10, padding: 10 }}
         />
     )
