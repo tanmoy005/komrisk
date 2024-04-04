@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Card, Text } from 'react-native-elements';
 import { ReportChartData, PieChartType, LegendItem } from '../types';
 import CardSkelton from './skelton/CardSkelton';
 import PieChart from 'react-native-pie-chart';
 import { FontAwesome } from '@expo/vector-icons';
+import { screenWidth, styles } from '../style';
 
 
 type ChartItemProps = {
@@ -38,66 +39,47 @@ const PieChartData = ({ ReportData, Title, SubTitle }: ChartItemProps) => {
 
 
   return (
-    <Card containerStyle={styles.cardContainer}>
+    <View >
       {
         dataValue.length > 0 ?
           <View>
-            <PieChart
-              series={dataValue}
-              widthAndHeight={250}
-              sliceColor={colors}
-              // coverRadius={0.45}
-              coverFill={'#FFF'}
-            />
-            {legends && legends.map((label: LegendItem) => {
-              return (
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <FontAwesome
-                    name="circle"
-                    size={25}
-                    color={label.color ?? ""}
-                    style={{ marginRight: 15, opacity: 1 }}
-                  />
-                  <Text style={{ color: label.color ?? '' }}>{label.level ?? ''}</Text>
-                </View>
-              )
-            })}
-            <Text style={styles.title}>{Title}</Text>
-            <Text style={styles.title}>{SubTitle}</Text>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <PieChart
+                series={dataValue}
+                widthAndHeight={screenWidth * .5}
+                sliceColor={colors}
+                // coverRadius={0.45}
+                coverFill={'#FFF'}
+              />
+
+            </View>
+            <View>
+              {legends && legends.map((label: LegendItem) => {
+                return (
+                  <Pressable style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <FontAwesome
+                      name="circle"
+                      size={25}
+                      color={label.color ?? ""}
+                      style={{ marginRight: 15, opacity: 1 }}
+                    />
+                    <Text style={{ color: label.color ?? '' }}>{label.level ?? ''}</Text>
+                  </Pressable>
+                )
+              })}
+              <View style={{alignItems: 'flex-start'}}>
+                <Text style={styles.title}>{Title}</Text>
+                <Text style={styles.title}>{SubTitle}</Text>
+              </View>
+            </View>
           </View>
           :
           <CardSkelton />
       }
-    </Card>
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  cardContainer: {
-    width: '100%', // Adjust the width as needed
-    height: '84%',
-    display: 'flex',
-    justifyContent: 'space-around',
-    backgroundColor: '#F5F5F5',
-    borderRadius: 8,
-    // padding: 9,
-  },
-  title: {
-    fontWeight: '500',
-    fontSize: 16,
-    marginBottom: 5,
-    textAlign: 'center',
-  },
-  subtitleContainer: {
-    flexDirection: 'row',
-    gap: 5
-  }
-});
 
 
 export default PieChartData;

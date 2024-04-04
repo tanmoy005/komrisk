@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
   },
   chartContainer: {
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 75
   },
   cardContainer: {
     width: '80%', // Adjust the width as needed

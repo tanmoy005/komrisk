@@ -10,6 +10,8 @@ import { RootState } from '../store/rootReducer';
 import DonatChartData from './DonatChart';
 import BarChartData from './BarChart';
 import { Link } from 'expo-router';
+import { Card } from 'react-native-elements';
+import { styles } from '../style';
 
 const ComplianceStatusInfo = () => {
   {
@@ -57,8 +59,7 @@ const ComplianceStatusInfo = () => {
 
     return (
       <View style={styles.chartContainer}>
-        <Link href="/(ChartReport)/GetComplianceStatusDataListDetailsInfo" asChild>
-          <Pressable>
+          <Card containerStyle={styles.cardContainer}>
             {
               currentChart === 'PIE' &&
               <PieChartData
@@ -85,8 +86,8 @@ const ComplianceStatusInfo = () => {
                 SubTitle={activityStatusChartData.subTitle}
               />
             }
-          </Pressable>
-        </Link>
+          </Card>
+
         {/* <PieChartData ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle} /> */}
         <View style={styles.chartSelctorContainer}>
           <Text>Chart Type</Text>
@@ -101,19 +102,5 @@ const ComplianceStatusInfo = () => {
   }
 }
 
-const styles = StyleSheet.create({
 
-  chartSelctorContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '75%'
-
-  },
-  chartContainer: {
-    width: '100%',
-    alignItems: 'center'
-  },
-
-});
 export default ComplianceStatusInfo;
