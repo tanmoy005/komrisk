@@ -11,6 +11,7 @@ export type ChartDisplayData = {
 };
 
 
+
 export type Profile = {
   id: string;
   group: string;
@@ -20,6 +21,11 @@ export interface BaseUrl {
   baseURl: String
 }
 
+
+export type LegendItem = {
+  level?: string |null;
+  color?: string|null;
+};
 export interface ChartListDataItem {
   mapId: number;
   complianceId: number;

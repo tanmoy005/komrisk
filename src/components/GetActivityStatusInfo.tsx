@@ -87,14 +87,14 @@ const ActivityStatusInfo = () => {
                 xAxisName={activityStatusChartData.xAxisName}
               />
             }
-            {/* {
+            {
               currentChart === 'DONUT' &&
               <DonatChartData
                 ReportData={filteredChartData}
                 Title={activityStatusChartData.title}
                 SubTitle={activityStatusChartData.subTitle}
               />
-            } */}
+            }
           </Pressable>
         </Link>
         <View style={styles.chartSelctorContainer}>

@@ -1,48 +1,73 @@
-import { StyleSheet, Pressable } from 'react-native';
-import React from 'react';
-import { Link } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import PieChart from 'react-native-pie-chart';
+import { LegendItem, ReportChartData } from '../types';
 import { Card, Text } from 'react-native-elements';
-import { ChartType } from '../types';
+import CardSkelton from './skelton/CardSkelton';
+import { FontAwesome } from '@expo/vector-icons';
 
-
-type ChartItemProps = {
-  ChartData: ChartType[];
+export type dChartItemProps = {
+  ReportData: ReportChartData[];
   Title: string | null;
   SubTitle: string | null;
 };
 
 
-const DonatChartData = ({ ChartData, Title, SubTitle }: ChartItemProps) => {
+const DonatChartData = ({ ReportData, Title, SubTitle }: dChartItemProps) => {
+  const [legends, setLegends] = useState<LegendItem[]>([]);
+  const [colors, setColors] = useState<string[]>([]);
+  const [dataValue, setDataValue] = useState<number[]>([]);
+
+  useEffect(() => {
+    let legendData: LegendItem[] = [];
+    let ChartColor: string[] = [];
+    let ChartValue: number[] = [];
+
+    ReportData.forEach(item => {
+      legendData = [...legendData, { level: item.label, color: `#${item.color ?? '000'}` }]
+      ChartValue.push(item.value);
+      ChartColor.push(`#${item.color ?? '000'}`);
+    });
+    setLegends(legendData);
+    setColors(ChartColor);
+    setDataValue(ChartValue);
+  }, [ReportData]);
+
 
   return (
-    // <Link href="/chartDataList" asChild>
-    //   <Pressable >
     <Card containerStyle={styles.cardContainer}>
-        <Text>Donat Chart</Text>
-      {/* <PieChart
-        data={ChartData}
-        width={350}
-        height={250}
-        chartConfig={{
-          backgroundColor: '#ffffff',
-          backgroundGradientFrom: '#ffffff',
-          backgroundGradientTo: '#ffffff',
-          decimalPlaces: 2,
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-        }}
-        accessor="population"
-        backgroundColor="transparent"
-        paddingLeft="15"
-        hasLegend={true}
-      />
-      <Text style={styles.title}>{Title}</Text>
-      <Text style={styles.title}>{SubTitle}</Text> */}
+      {
+        dataValue.length > 0 ?
+          <View>
+            <PieChart
+              series={dataValue}
+              widthAndHeight={240}
+              sliceColor={colors}
+              coverRadius={0.45}
+              coverFill={'#FFF'}
+            />
+            {legends && legends.map((label: LegendItem) => {
+              return (
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <FontAwesome
+                    name="circle"
+                    size={25}
+                    color={label.color ?? ""}
+                    style={{ marginRight: 15, opacity: 1 }}
+                  />
+                  <Text style={{ color: label.color ?? '' }}>{label.level ?? ''}</Text>
+                </View>
+              )
+            })}
+            <Text style={styles.title}>{Title}</Text>
+            <Text style={styles.title}>{SubTitle}</Text>
+          </View>
+          :
+          <CardSkelton />
+      }
     </Card>
-    //   </Pressable>
-    // </Link >
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -51,23 +76,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardContainer: {
-    width: '90%', // Adjust the width as needed
-    height: '80%',
+    width: '100%', // Adjust the width as needed
+    height: '84%',
     display: 'flex',
     justifyContent: 'space-around',
     backgroundColor: '#F5F5F5',
-    borderRadius: 8
+    borderRadius: 8,
+    // padding: 9,
   },
   title: {
     fontWeight: '500',
     fontSize: 16,
     marginBottom: 5,
+    textAlign: 'center',
   },
   subtitleContainer: {
     flexDirection: 'row',
-    gap: 5,
-  },
-
+    gap: 5
+  }
 });
 
 

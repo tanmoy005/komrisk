@@ -45,6 +45,7 @@ const ComplianceStatusInfo = () => {
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
+
       } else {
         Alert.alert("error", error.message);
       }
@@ -53,7 +54,6 @@ const ComplianceStatusInfo = () => {
     useEffect(() => {
       handleGetComplianceStatusData();
     }, []);
-
 
     return (
       <View style={styles.chartContainer}>
@@ -77,14 +77,14 @@ const ComplianceStatusInfo = () => {
                 xAxisName={activityStatusChartData.xAxisName}
               />
             }
-            {/* {
+            {
               currentChart === 'DONUT' &&
               <DonatChartData
-                ChartData={chartData}
+                ReportData={filteredChartData}
                 Title={activityStatusChartData.title}
                 SubTitle={activityStatusChartData.subTitle}
               />
-            } */}
+            }
           </Pressable>
         </Link>
         {/* <PieChartData ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle} /> */}
