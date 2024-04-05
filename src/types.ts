@@ -1,3 +1,4 @@
+import { PropsWithChildren } from "react";
 
 export type ChartDisplayData = {
   label: number;
@@ -140,3 +141,50 @@ export interface BarChartConfig {
   };
 }
 
+
+
+export type AccordionItemPros = PropsWithChildren<{
+  title: string;
+  descriptions: string;
+}>;
+
+export interface AccordianCommonHeaderProps {
+  title: string;
+  descriptions: string;
+  expanded: boolean;
+  type?: string;
+  setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+  icons: {
+      open: string;
+      close: string;
+  };
+}
+export interface InputFieldProps {
+  value:  string;
+  setInput: React.Dispatch<React.SetStateAction<any>>,
+  placeholder: string;
+  type: string;
+}
+export interface CustomComponentProp extends PropsWithChildren {
+  styles?: {[key: string]: any}
+}
+
+export interface taskCardData {
+  firstSection: {
+      heading: string | null;
+      description: string | null;
+  },
+  secondSection: {
+      heading: string | null;
+      description: string | null;
+  },
+  thirdSection: {
+      dateHeading: string | null;
+      date: string | null;
+      sectionRight: {
+          taskDesg: string | null;
+          name: string | null;
+          pic:  string | null;
+      }[]
+  }
+}
