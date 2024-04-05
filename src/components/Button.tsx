@@ -1,9 +1,13 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleProp, StyleSheet, Text, TextStyle, View } from 'react-native';
 import Colors from '@/src/constants/Colors';
 import { forwardRef } from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { smFont } from '../style';
+
 
 type ButtonProps = {
-  text: string;
+  text?: string;
+  icon?: string;
   style?: {
     padding?: number;
     paddingVertical?: number;
@@ -11,16 +15,25 @@ type ButtonProps = {
     fontWeight?: string;
     fontSize?: number;
     borderRadius?: number;
+    width?: number,
+    height?: number
   };
   type?: string;
   btnColor?: string;
 } & React.ComponentPropsWithoutRef<typeof Pressable>;
 
-const Button = forwardRef<View | null, ButtonProps>(
-  ({ text, btnColor, style, type = 'default', ...pressableProps }, ref) => {
 
-    const backgroundColor = type === 'default' ? btnColor : 'transparent';
-    const color = type === 'default' ? '#fff' : btnColor;
+const Button = forwardRef<View | null, ButtonProps>(
+  ({ text, btnColor, icon, style, type = 'default', ...pressableProps }, ref) => {
+
+    const backgroundColor = (type === 'default' || 'btnIcon') ? btnColor : 'transparent';
+    const color = (type === 'default' || 'btnIcon') ? '#fff' : btnColor;
+    const btnTextStyle: StyleProp<TextStyle> = {
+      color: color,
+      fontSize: style?.fontSize,
+      fontWeight: '400',
+      textAlign: 'center'
+    }
 
     return (
       <Pressable ref={ref} {...pressableProps} >
@@ -29,19 +42,26 @@ const Button = forwardRef<View | null, ButtonProps>(
           paddingHorizontal: style?.paddingHorizontal,
           padding: style?.padding,
           backgroundColor: backgroundColor,
-          borderWidth: 1,
+          borderWidth: 2,
           borderStyle: 'solid',
           borderColor: btnColor,
-          borderRadius: style?.borderRadius
+          borderRadius: style?.borderRadius,
+          width: style?.width,
+          height: style?.height,
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
-          <Text style={
-            {
-              color: color,
-              fontSize: style?.fontSize,
-              fontWeight: '400',
-              textAlign: 'center'
-            }
-          }>{text}</Text>
+          {
+            text &&
+            <Text style={btnTextStyle}>{text}</Text>
+          }
+          {
+            icon &&
+            <Icon name={icon}
+              size={style?.fontSize} color={color}
+              style={btnTextStyle}
+            />
+          }
         </View>
       </Pressable>
     );
