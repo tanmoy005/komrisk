@@ -6,7 +6,7 @@ import { ActivityStatusDataList, ActivityStatusDataListPayLoad, ChartListDataIte
 import ChartListItem from '@/src/components/ChartListItem';
 
 
-const GetActivityStatusDataListDetailsInfo = () => {
+const GetIncidentActivityStatusDataListDetailsInfo = () => {
   {
     const [activityStatusChartDataList, setActivityStatusChartDataList] = useState<ActivityStatusDataList>({
       sEcho: null,
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   },
 
 });
-export default GetActivityStatusDataListDetailsInfo;
+export default GetIncidentActivityStatusDataListDetailsInfo;

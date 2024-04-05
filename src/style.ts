@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     cardContainer: {
-        width: Math.floor(screenWidth * .82), // Adjust the width as needed
-        height: Math.floor(screenWidth * .82),
+        width: Math.floor(screenWidth * .86), // Adjust the width as needed
+        height: Math.floor(screenWidth * .86),
         display: 'flex',
         justifyContent: 'space-around',
         backgroundColor: '#F5F5F5',
@@ -52,5 +52,23 @@ export const styles = StyleSheet.create({
     chartContainer: {
         width: '100%',
         alignItems: 'center'
-    }
+    },
+    dashboardContainer: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 20,
+        backgroundColor: 'white'
+      },
+      imageContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginBottom: 30
+      },
+      dashboardChartContainer: {
+        width: '100%',
+        alignItems: 'center',
+        marginTop: 75
+      },
+      
 });

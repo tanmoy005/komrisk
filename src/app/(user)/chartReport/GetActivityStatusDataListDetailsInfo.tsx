@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, StyleSheet, Text } from 'react-native';
-import { View } from 'react-native';
+import { useEffect, useState } from 'react'
+import { Alert, FlatList, StyleSheet, View } from 'react-native';
 import GetActivityStatusDataList from '@/src/server/api-functions/get-activity-status-datalist-details';
 import { ActivityStatusDataList, ActivityStatusDataListPayLoad, ChartListDataItem } from '@/src/types';
+import { useLocalSearchParams } from 'expo-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/src/store/rootReducer';
+import moment from 'moment';
 import ChartListItem from '@/src/components/ChartListItem';
+import { styles } from '@/src/style';
 
-
-const GetComplianceStatusDataListDetailsInfo = () => {
+const GetActivityStatusDataListDetailsInfo = () => {
   {
     const [activityStatusChartDataList, setActivityStatusChartDataList] = useState<ActivityStatusDataList>({
       sEcho: null,
@@ -14,20 +17,24 @@ const GetComplianceStatusDataListDetailsInfo = () => {
       iTotalRecords: null,
       iTotalDisplayRecords: null,
     });
-    const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
+    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
 
+    const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
+    const { statusType } = useLocalSearchParams();
+    const filterStatus = typeof statusType === 'string' ? statusType : statusType[0];
+    const currentDate: string = moment().format('DD/MM/YYYY');
+    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
     const handleGetActivityStatusDataList = async () => {
       //console.log("handleGetActivityStatusDataList");
-      
-      const payLoad: ActivityStatusDataListPayLoad = {
-        username: " @elogixmail.com",
-        password: "An1rban@2023",
-        start: "01/01/2021",
-        viewAs: "COMPANY HEAD",
-        end: "31/12/2023",
-        status: "initiated"
-      }
 
+      const payLoad: ActivityStatusDataListPayLoad = {
+        ...useCredential,
+        start: startDate,
+        viewAs: "COMPANY HEAD",
+        end: currentDate,
+        status: filterStatus
+      }
+      // console.log("handleGetActivityStatusDataList", payLoad);
       const { data, error, status } = await GetActivityStatusDataList(payLoad);
       if (status === 200) {
         const { aaData } = data;
@@ -48,28 +55,14 @@ const GetComplianceStatusDataListDetailsInfo = () => {
     return (
       <View style={styles.chartContainer}>
         <FlatList
-            data={DataList}
-            renderItem={({ item }) => <ChartListItem data={item} />}
-            contentContainerStyle={{ gap: 10, padding: 10 }}
+          data={DataList}
+          renderItem={({ item }) => <ChartListItem data={item} />}
+          contentContainerStyle={{ gap: 10, padding: 10 }}
         />
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
 
-  chartSelctorContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '75%'
-
-  },
-  chartContainer: {
-    width: '100%',
-    alignItems: 'center'
-  },
-
-});
-export default GetComplianceStatusDataListDetailsInfo;
+export default GetActivityStatusDataListDetailsInfo;

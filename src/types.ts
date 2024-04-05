@@ -23,8 +23,9 @@ export interface BaseUrl {
 
 
 export type LegendItem = {
-  level?: string |null;
-  color?: string|null;
+  level?: string | null;
+  color?: string | null;
+  status: string | null;
 };
 export interface ChartListDataItem {
   mapId: number;
@@ -56,7 +57,27 @@ export interface ActivityStatusDataPayLoad {
   viewAs: string;
   end: string;
 }
-export interface ActivityStatusDataListPayLoad {
+
+export interface ActivityStatusDataListPayLoad extends ActivityStatusDataPayLoad {
+  status: string;
+}
+
+export interface ActivityStatusData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: ReportChartData[] | null
+}
+export interface ActivityStatusDataList {
+  sEcho: string | null;
+  aaData: ChartListDataItem[] | null;
+  iTotalRecords: number | null;
+  iTotalDisplayRecords: number | null;
+}
+
+
+export interface ComplianceStatusDataListPayLoad {
   username: string;
   password: string;
   start: string;
@@ -71,19 +92,18 @@ export interface ComplianceStatusDataPayLoad {
   viewAs: string;
   end: string;
 }
-export interface ActivityStatusData {
-  title: string | null;
-  subTitle: string | null;
-  xAxisName: string | null;
-  yAxisName: string | null;
-  chartData: ReportChartData[] | null
-}
 export interface ComplianceStatusData {
   title: string | null;
   subTitle: string | null;
   xAxisName: string | null;
   yAxisName: string | null;
   chartData: ReportChartData[] | null
+}
+export interface ComplianceStatusDataList {
+  sEcho: string | null;
+  aaData: ChartListDataItem[] | null;
+  iTotalRecords: number | null;
+  iTotalDisplayRecords: number | null;
 }
 export interface ReportChartData {
   label: string;
@@ -119,17 +139,4 @@ export interface BarChartConfig {
     borderRadius: number;
   };
 }
-export interface ActivityStatusDataListPayLoad {
-  username: string;
-  password: string;
-  start: string;
-  viewAs: string;
-  end: string;
-  status: string;
-}
-export interface ActivityStatusDataList {
-  sEcho: string | null;
-  aaData: ChartListDataItem[] | null;
-  iTotalRecords: number | null;
-  iTotalDisplayRecords: number | null;
-}
+

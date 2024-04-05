@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityStatusData, ActivityStatusDataPayLoad, ReportChartData } from '../types';
 import GetActivityStatusData from '../server/api-functions/get-activity-status-data';
-import { Alert, Pressable, StyleSheet, Text } from 'react-native';
+import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import DropDown from './Dropdown';
 import PieChartData from './PieChart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
-import { Link } from 'expo-router';
+import { router } from 'expo-router';
 import BarChartData from './BarChart';
 import DonatChartData from './DonatChart';
+import { FontAwesome } from '@expo/vector-icons';
+import { styles } from '../style';
+import { Card, Text } from 'react-native-elements';
+import CardSkelton from './skelton/CardSkelton';
+import moment from 'moment';
 
 const ActivityStatusInfo = () => {
   {
@@ -29,15 +34,27 @@ const ActivityStatusInfo = () => {
       { label: 'DONUT', value: 'DONUT' },
     ];
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+    const currentDate: string = moment().format('DD/MM/YYYY');
+    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
-    const handleGetActivityStatusData = async () => {
+    const payLoad: ActivityStatusDataPayLoad = {
+      ...useCredential,
+      start: startDate,
+      viewAs: "COMPANY HEAD",
+      end: currentDate
+    }
 
-      const payLoad: ActivityStatusDataPayLoad = {
-        ...useCredential,
-        start: "01/01/2021",
-        viewAs: "COMPANY HEAD",
-        end: "31/12/2023"
-      }
+    const navigateToChartList = (statusType: string) => {
+      router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType, } }); // Remove the braces in para
+    }
+    const handleGetActivityStatusData = async (payLoad: ActivityStatusDataPayLoad) => {
+
+      // const payLoad: ActivityStatusDataPayLoad = {
+      //   ...useCredential,
+      //   start: startDate,
+      //   viewAs: "COMPANY HEAD",
+      //   end: currentDate
+      // }
       // //console.log("payLoad", payLoad);
 
       const { data, error, status } = await GetActivityStatusData(payLoad);
@@ -54,49 +71,56 @@ const ActivityStatusInfo = () => {
     }
     useEffect(() => {
       // //console.log('filteredchartData')
-      handleGetActivityStatusData();
+      handleGetActivityStatusData(payLoad);
     }, []);
-
 
     return (
       <View style={styles.chartContainer}>
-        <Link href="/(ChartReport)/GetActivityStatusDataListDetailsInfo" asChild>
-          <Pressable>
-            {/* {ChartComponent} */}
-            {/* <ChartComponent ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle}/> */}
-            {/* {items.map((({ Component }) => {
-              return (
-                <Component ChartData={chartData} Title={activityStatusChartData.title} SubTitle={activityStatusChartData.subTitle} />
-              )
-            }))} */}
-            {
-              currentChart === 'PIE' &&
-              <PieChartData
-                ReportData={filteredChartData}
-                Title={activityStatusChartData.title}
-                SubTitle={activityStatusChartData.subTitle}
-              />
-            }
-            {
-              currentChart === 'BAR' &&
-              <BarChartData
-                ReportData={filteredChartData}
-                Title={activityStatusChartData.title}
-                SubTitle={activityStatusChartData.subTitle}
-                yAxisName={activityStatusChartData.yAxisName}
-                xAxisName={activityStatusChartData.xAxisName}
-              />
-            }
-            {
-              currentChart === 'DONUT' &&
-              <DonatChartData
-                ReportData={filteredChartData}
-                Title={activityStatusChartData.title}
-                SubTitle={activityStatusChartData.subTitle}
-              />
-            }
-          </Pressable>
-        </Link>
+        {
+          filteredChartData.length > 0 ?
+            <Card containerStyle={styles.cardContainer}>
+              {
+                currentChart === 'PIE' &&
+                <PieChartData ReportData={filteredChartData} />
+              }
+              {
+                currentChart === 'BAR' &&
+                <BarChartData
+                  ReportData={filteredChartData}
+                  yAxisName={activityStatusChartData.yAxisName}
+                  xAxisName={activityStatusChartData.xAxisName}
+                />
+              }
+              {
+                currentChart === 'DONUT' &&
+                <DonatChartData ReportData={filteredChartData} />
+              }
+
+              <View>
+                {filteredChartData && filteredChartData.map((label: ReportChartData, index) => {
+                  return (
+                    <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
+                      onPress={() => navigateToChartList(label?.link?.type ?? "")}
+                    >
+                      <FontAwesome
+                        name="circle"
+                        size={25}
+                        color={`#${label.color ?? '000'}`}
+                        style={{ marginRight: 15, opacity: 1 }}
+                      />
+                      <Text style={{ color: `#${label.color ?? '000'}` }}>{label.label ?? ''}</Text>
+                    </Pressable>
+                  )
+                })}
+                <View style={{ alignItems: 'flex-start' }}>
+                  <Text style={styles.title}>{activityStatusChartData.title}</Text>
+                  <Text style={styles.title}>{activityStatusChartData.subTitle}</Text>
+                </View>
+              </View>
+
+            </Card>
+            : <CardSkelton />
+        }
         <View style={styles.chartSelctorContainer}>
           <Text>Chart Type</Text>
           <DropDown
@@ -110,19 +134,4 @@ const ActivityStatusInfo = () => {
   }
 }
 
-const styles = StyleSheet.create({
-
-  chartSelctorContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '75%'
-
-  },
-  chartContainer: {
-    width: '100%',
-    alignItems: 'center'
-  },
-
-});
 export default ActivityStatusInfo;

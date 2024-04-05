@@ -47,6 +47,7 @@ export default function TabTwoScreen() {
           backgroundColor: '#F6EEF4', // Change the background color here
         }
       }} />
+      <Stack.Screen name="chartReport" options={{ headerShown: false }} />
   </Stack>;
 };
 

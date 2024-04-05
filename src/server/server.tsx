@@ -12,6 +12,7 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
 
     const baseUrl = await getDataFromAsyncStorage('baseUrl');
     const token = await getDataFromAsyncStorage('token');
+    
     const api = axios.create({
         // baseURL: "https://komrisknxtcont.komrisk.com/"
         baseURL: baseUrl
