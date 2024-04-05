@@ -2,9 +2,21 @@ import { StyleSheet, Dimensions } from "react-native";
 export const screenWidth = Dimensions.get('window').width;
 
 console.log("screenWidth *.82", screenWidth * .82);
+export const smFont = 14;
+const circle1Size =  Math.floor(screenWidth * .076);
 
-
-
+const commonFontStyle = {
+    fontSize: smFont,
+    color: '#58595B',
+    // fontFamily: 'Barlow'
+}
+const cardTextContainer = {
+    paddingHorizontal: 9,
+    paddingVertical: 3,
+}
+const taskCardContainer = {
+    padding: 8
+}
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -52,6 +64,57 @@ export const styles = StyleSheet.create({
     chartContainer: {
         width: '100%',
         alignItems: 'center'
+    },
+    taskCardContainer: {
+        ...taskCardContainer
+    },
+    accodianHeaderContainer: {
+        // width: '100%',
+        ...taskCardContainer,
+        backgroundColor: '#A097DC29',
+        color: '#eee',
+        flex: 1,
+        borderRadius: 5
+    },
+    cardTextContainer: cardTextContainer,
+    titleContainer: {
+        ...cardTextContainer,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        color: '#eee',
+    },
+    accordTitle: {
+        ...commonFontStyle,
+        fontWeight: '600',
+        lineHeight: 24,
+    },
+    shortDescription: {
+        ...commonFontStyle,
+        lineHeight: 16,
+        fontWeight: '400',
+        paddingRight: 60,
+        height: 16,
+        overflow: 'hidden'
+    },
+    bodyInfoText: {
+        ...commonFontStyle,
+        opacity: 0.64
+    },
+    commentInputContainer: {
+        // width: Math.floor(screenWidth * .82)
+        width: '88%'
+    },
+    circle: {
+        width: circle1Size,
+        height: circle1Size,
+        backgroundColor: '#D9D9D9',
+        borderRadius: circle1Size/2,
+    },
+    taskCardBottomRightSection:{
+        alignItems: 'center',
+        rowGap: 6
     },
     dashboardContainer: {
         flex: 1,
