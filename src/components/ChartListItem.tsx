@@ -1,9 +1,10 @@
 import { Image, StyleSheet, Text, Pressable } from "react-native";
-import Colors from "@/src/constants/Colors";
 import { ChartListDataItem } from "@/src/types";
-import { Link, useSegments } from "expo-router";
+import { Link } from "expo-router";
 import { View } from "./Themed";
 import ChartItemSkelton from "./skelton/ChartItemSkelton";
+import TaskCard from "./cards/TaskCard";
+import { useEffect } from "react";
 
 // import { Skeleton } from "moti/skeleton";
 // import ProductDetailsView from "@/src/app/(tabs)/menu/[id]";
@@ -15,6 +16,46 @@ const isObjectEmpty = (objectName: ChartListDataItem) => {
   return Object.keys(objectName).length === 0
 }
 const ChartListItem = ({ data }: ChartItemProps) => {
+  console.log('data', data);
+
+
+  const { taskName, description, dueDate, owner, reviewer } = data
+  const taskCardData = {
+    firstSection: {
+      heading: taskName,
+      description: description
+    },
+    secondSection: {
+      heading: null,
+      description: null
+    },
+    thirdSection: {
+      dateHeading: 'Due date',
+      date: dueDate,
+      sectionRight: [
+        {
+          taskDesg: 'Owner',
+          name: owner,
+          pic: null
+        },
+        {
+          taskDesg: 'Reviewer',
+          name: reviewer,
+          pic: null
+        },
+        // {
+        //   taskDesg: 'Assignee',
+        //   name: 'Owner',
+        //   pic: null
+        // }
+      ]
+    }
+  }
+  // const taskCardData
+  useEffect(() => {
+    console.log('datauser', data);
+
+  }, [data])
 
   return (
     // <Link href={`./menu/${data.id}`} asChild>
@@ -23,16 +64,23 @@ const ChartListItem = ({ data }: ChartItemProps) => {
         <View>
           {
             !isObjectEmpty(data) ?
-              <View>
-                <Text style={styles.title}>Name : {data.taskName}</Text>
-                <Text style={styles.text}>Op Unit : {data.opUnit} </Text>
-                <Text style={styles.text}>Department : {data.department === null ? "NA" : data.department}</Text>
-                <Text style={styles.subtitleContainer}>Description : {data.description === null ? "NA" : data.description}</Text>
-              </View>
+              <TaskCard
+                taskCard={taskCardData}
+              />
               :
               <ChartItemSkelton />
           }
-          {/* <ChartItemSkelton /> */}
+          {/* <ChevronsAccordian title="Native development" descriptions={'string'}>
+            <Text>React Native lets you create truly native apps and
+              doesn't compromise your users' experiences. It provides a core set of platform
+              agnostic native components </Text>
+          </ChevronsAccordian> */}
+          {/* <CommentAccordian title="Native development" descriptions={'string'}>
+            <Text>React Native lets you create truly native apps and
+              doesn't compromise your users' experiences. It provides a core set of platform
+              agnostic native components </Text>
+          </CommentAccordian> */}
+
         </View>
       </Pressable>
     </Link>
