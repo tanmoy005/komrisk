@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import GetActivityStatusDataList from '@/src/server/api-functions/get-activity-status-datalist-details';
 import { ActivityStatusDataList, ActivityStatusDataListPayLoad, ChartListDataItem } from '@/src/types';
 import ChartListItem from '@/src/components/ChartListItem';
+import Accordion from '@/src/components/accordians/ChevronsAccordian';
 
 
 const GetIncidentActivityStatusDataListDetailsInfo = () => {
@@ -14,11 +15,28 @@ const GetIncidentActivityStatusDataListDetailsInfo = () => {
       iTotalRecords: null,
       iTotalDisplayRecords: null,
     });
-    const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
+    const [DataList, setDataList] = useState<ChartListDataItem[]>([{
+      mapId: 0,
+      complianceId: 0,
+      title: null,
+      taskName: null,
+      description: null,
+      nameOfLaw: null,
+      department: null,
+      opUnit: null,
+      owner: null,
+      currOwner: null,
+      reviewer: null,
+      dueDate: null,
+      impact: null,
+      status: 0,
+      taskId: 0,
+      complianceGenId: null
+    }]);
 
     const handleGetActivityStatusDataList = async () => {
       //console.log("handleGetActivityStatusDataList");
-      
+
       const payLoad: ActivityStatusDataListPayLoad = {
         username: " @elogixmail.com",
         password: "An1rban@2023",
@@ -48,10 +66,11 @@ const GetIncidentActivityStatusDataListDetailsInfo = () => {
     return (
       <View style={styles.chartContainer}>
         <FlatList
-            data={DataList}
-            renderItem={({ item }) => <ChartListItem data={item} />}
-            contentContainerStyle={{ gap: 10, padding: 10 }}
+          data={DataList}
+          renderItem={({ item }) => <ChartListItem data={item} />}
+          contentContainerStyle={{ gap: 10, padding: 10 }}
         />
+        
       </View>
     )
   }
