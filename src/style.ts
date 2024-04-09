@@ -5,6 +5,7 @@ export const screenHeight = Dimensions.get('window').height;
 console.log("screenWidth *.82", screenWidth * .82);
 export const smFont = 14;
 const circle1Size = Math.floor(screenWidth * .076);
+export const skeltonwidth =  Math.floor(screenWidth * .82);
 
 const commonFontStyle = {
     fontSize: smFont,
@@ -116,6 +117,14 @@ export const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         padding: 10
+    },
+    taskCard:{
+        
+        // boxShadow: '4px 4px 40px 0px #786ACD1F'
+        borderWidth: 1,
+        borderColor: 'rgba(120, 106, 205, 0.4)',
+        borderRadius: 5,
+
     },
     taskCardContainer: {
         ...taskCardContainer
