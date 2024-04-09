@@ -18,6 +18,7 @@ const cardTextContainer = {
 const taskCardContainer = {
     padding: 8
 }
+const profileImageSize =  Math.floor(screenWidth * .133);
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -57,6 +58,10 @@ export const styles = StyleSheet.create({
         padding: Math.floor(screenWidth * .06),
         // height: Math.floor(screenHeight)
     },
+    cardContainer3: {
+        padding: Math.floor(screenWidth * .044),
+        // height: Math.floor(screenHeight)
+    },
     cardStyle: {
         // width: Math.floor(screenWidth *.82), 
         width: 360,
@@ -87,6 +92,17 @@ export const styles = StyleSheet.create({
     subtitleContainer: {
         flexDirection: 'row',
         gap: 5
+    },
+    profileImageContainer:{
+        // padding: Math.floor(screenWidth * 0.333),
+        padding: 10,
+        borderColor: '#F5F5F5',
+        borderWidth: 2,
+        width: 'fit-content',
+    },
+    profileImage:{
+        width:  profileImageSize,
+        height:  profileImageSize
     },
 
     chartSelctorContainer: {

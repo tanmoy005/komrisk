@@ -18,7 +18,9 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
     //    const {heading:} = firstSection;
 
     return (
-        <View>
+        <View style={styles.taskCard}>
+            <View>
+
             <CardContainer>
                 <CardTextContainer>
                     {
@@ -45,6 +47,8 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
             <CardContainer styles={{
                 backgroundColor: 'rgba(120, 106, 205, 0.08)'
             }}>
+                <CardTextContainer>
+
                 <View style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
@@ -80,7 +84,9 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
                         }
                     </View>
                 </View>
+                </CardTextContainer>
             </CardContainer>
+            </View>
         </View>
     )
 }

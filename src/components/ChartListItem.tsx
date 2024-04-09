@@ -4,6 +4,9 @@ import { Link } from "expo-router";
 import { View } from "./Themed";
 import ChartItemSkelton from "./skelton/ChartItemSkelton";
 import TaskCard from "./cards/TaskCard";
+import { styles } from "../style";
+import CardContainer from "./cards/CardContainer";
+import CardTextContainer from "./cards/CardTextContainer";
 
 // import { Skeleton } from "moti/skeleton";
 // import ProductDetailsView from "@/src/app/(tabs)/menu/[id]";
@@ -55,7 +58,7 @@ const ChartListItem = ({ data }: ChartItemProps) => {
   // const taskCardData
 
   return (
-    <View style={styles.rowContainer}>
+    <View >
       {
         !isObjectEmpty(data) ?
           <Link href={`/chartReport/${data?.complianceId}`} asChild>
@@ -66,7 +69,13 @@ const ChartListItem = ({ data }: ChartItemProps) => {
             </Pressable>
           </Link>
           :
-          <ChartItemSkelton />
+          <View style={styles.taskCard}>
+            <CardContainer>
+              <CardTextContainer>
+                <ChartItemSkelton />
+              </CardTextContainer>
+            </CardContainer>
+          </View>
       }
     </View>
   );
@@ -74,46 +83,46 @@ const ChartListItem = ({ data }: ChartItemProps) => {
 
 export default ChartListItem;
 
-const styles = StyleSheet.create({
-  rowContainer: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    width: '100%',
-    flex: 1,
-    flexDirection: 'column',
-  },
-  text: {
-    fontWeight: '500',
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  subtitleContainer: {
-    flexDirection: 'row',
-    gap: 5,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
+// const styles = StyleSheet.create({
+//   rowContainer: {
+//     padding: 16,
+//     borderBottomWidth: 1,
+//     borderBottomColor: '#ccc',
+//     backgroundColor: 'white',
+//     borderRadius: 10,
+//     width: '100%',
+//     flex: 1,
+//     flexDirection: 'column',
+//   },
+//   text: {
+//     fontWeight: '500',
+//     fontSize: 16,
+//     marginBottom: 5,
+//   },
+//   subtitleContainer: {
+//     flexDirection: 'row',
+//     gap: 5,
+//   },
+//   title: {
+//     fontSize: 18,
+//     fontWeight: 'bold',
+//   },
+// });
 
-const styles2 = StyleSheet.create({
-  shape: {
-    justifyContent: 'center',
-    height: 250,
-    width: 250,
-    borderRadius: 25,
-    marginRight: 10,
-    backgroundColor: 'white',
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  padded: {
-    padding: 16,
-  },
-});
+// const styles2 = StyleSheet.create({
+//   shape: {
+//     justifyContent: 'center',
+//     height: 250,
+//     width: 250,
+//     borderRadius: 25,
+//     marginRight: 10,
+//     backgroundColor: 'white',
+//   },
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//   },
+//   padded: {
+//     padding: 16,
+//   },
+// });
