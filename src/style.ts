@@ -24,6 +24,10 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    // scrollView: {
+    //     // backgroundColor: 'pink',
+    //     // marginHorizontal: 20,
+    //   },
     // cardContainer2:{
     //     // width: Math.floor(screenWidth * .93), // Adjust the width as needed
     //     width: '100%', // Adjust the width as needed

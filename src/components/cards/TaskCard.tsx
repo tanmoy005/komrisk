@@ -28,7 +28,7 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
                     {
                         firstSection &&
                         firstSection.description &&
-                        <Text style={styles.shortDescription}>{firstSection.description}</Text>
+                        <Text style={styles.shortDescription}>{firstSection.description?.trim()}</Text>
                     }
                     <SmSectionSeperator />
                     {
@@ -38,7 +38,7 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
                     }
                     {
                         secondSection && secondSection.description &&
-                        <Text style={styles.shortDescription}>{secondSection.description}</Text>
+                        <Text style={styles.shortDescription}>{secondSection.description?.trim()}</Text>
                     }
                 </CardTextContainer>
             </CardContainer>

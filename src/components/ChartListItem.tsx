@@ -22,22 +22,23 @@ interface NavigateChartList {
 }
 const ChartListItem = ({ data }: ChartItemProps) => {
   console.log('data22223', data.complianceGenId);
-  
-  const dataToSttring = JSON.stringify(data);
-  console.log('data45345345', dataToSttring);
-  
-  const navigateToChartList = () => {
-    router.push({ pathname: `/chartReport/ShowDetailsReport`, params: { data: hasValue(data)?  JSON.stringify(data): ""} }); // Remove the braces in para
-  }
+
+  // const dataToSttring = JSON.stringify(data);
+  // console.log('data45345345', dataToSttring);
+
+  // const navigateToTaskDetails = (statusType: string) => {
+  //   router.push({ pathname: `/chartReport/ShowDetailsReport`, params: { statusType } }); // Remove the braces in para
+  // }
+
   const { taskName, description, dueDate, owner, reviewer } = data
   const taskCardData = {
     firstSection: {
-      heading: taskName,
-      description: description
+      heading: "Task Name",
+      description: taskName
     },
     secondSection: {
-      heading: null,
-      description: null
+      heading: 'Description',
+      description: description
     },
     thirdSection: {
       dateHeading: 'Due date',
@@ -62,41 +63,22 @@ const ChartListItem = ({ data }: ChartItemProps) => {
     }
   }
   // const taskCardData
-  useEffect(() => {
-    console.log('datauser', data);
-
-  }, [data])
-  console.log('data.complianceId', data.complianceId);
 
   return (
-    // <Link href={`./menu/${data.id}`} asChild>
-    // <Link href={`./chartReport/GetActivityStatusDataListDetailsInfo`} asChild>
-    <Link href={`./${data.complianceId}`} asChild>
-      <Pressable style={styles.rowContainer}>
-        <View>
-          {
-            !isObjectEmpty(data) ?
-              <Pressable onPress={navigateToChartList}>
-                <TaskCard
-                  taskCard={taskCardData}
-                />
-              </Pressable>
-              :
-              <ChartItemSkelton />
-          }
-          {/* <ChevronsAccordian title="Native development" descriptions={'string'}>
-            <Text>React Native lets you create truly native apps and
-              doesn't compromise your users' experiences. It provides a core set of platform
-              agnostic native components </Text>
-          </ChevronsAccordian> */}
-          {/* <CommentAccordian title="Native development" descriptions={'string'}>
-            <Text>React Native lets you create truly native apps and
-              doesn't compromise your users' experiences. It provides a core set of platform
-              agnostic native components </Text>
-          </CommentAccordian> */}
-        </View>
-      </Pressable>
-    </Link>
+    <View style={styles.rowContainer}>
+      {
+        !isObjectEmpty(data) ?
+          <Link href={`/chartReport/${data?.complianceId}`} asChild>
+            <Pressable>
+              <TaskCard
+                taskCard={taskCardData}
+              />
+            </Pressable>
+          </Link>
+          :
+          <ChartItemSkelton />
+      }
+    </View>
   );
 };
 

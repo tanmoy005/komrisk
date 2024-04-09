@@ -47,24 +47,24 @@ export interface ChartListDataItem {
   complianceGenId: string | null;
 }
 export const defaultChartData: ChartListDataItem = {
-  
-    mapId: 0,
-    complianceId: 0,
-    title:  null,
-    taskName:  null,
-    description:  null,
-    nameOfLaw:  null,
-    department:  null,
-    opUnit:  null,
-    owner:  null,
-    currOwner:  null,
-    reviewer:  null,
-    dueDate:  null,
-    impact:  null,
-    status: 0,
-    taskId: 0,
-    complianceGenId:  null
-  }
+
+  mapId: 0,
+  complianceId: 0,
+  title: null,
+  taskName: null,
+  description: null,
+  nameOfLaw: null,
+  department: null,
+  opUnit: null,
+  owner: null,
+  currOwner: null,
+  reviewer: null,
+  dueDate: null,
+  impact: null,
+  status: 0,
+  taskId: 0,
+  complianceGenId: null
+}
 
 export interface UserModel {
   username: string,
@@ -278,36 +278,78 @@ export interface AccordianCommonHeaderProps {
   type?: string;
   setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
   icons: {
-      open: string;
-      close: string;
+    open: string;
+    close: string;
   };
 }
 export interface InputFieldProps {
-  value:  string;
+  value: string;
   setInput: React.Dispatch<React.SetStateAction<any>>,
   placeholder: string;
   type: string;
 }
 export interface CustomComponentProp extends PropsWithChildren {
-  styles?: {[key: string]: any}
+  styles?: { [key: string]: any }
 }
 
 export interface taskCardData {
   firstSection: {
-      heading: string | null;
-      description: string | null;
+    heading: string | null;
+    description: string | null;
   },
   secondSection: {
-      heading: string | null;
-      description: string | null;
+    heading: string | null;
+    description: string | null;
   },
   thirdSection: {
-      dateHeading: string | null;
-      date: string | null;
-      sectionRight: {
-          taskDesg: string | null;
-          name: string | null;
-          pic:  string | null;
-      }[]
+    dateHeading: string | null;
+    date: string | null;
+    sectionRight: {
+      taskDesg: string | null;
+      name: string | null;
+      pic: string | null;
+    }[]
   }
+}
+
+
+export interface CompliancesItemDetailsPayLoad {
+  username: string;
+  password: string;
+  complianceId: string;
+}
+
+export interface CompliancesItemDetailsResponse {
+  info: string | null;
+  complianceId: string | null;
+  title: string | null;
+  section: string | null;
+  lawType: string | null;
+  regulator: string | null;
+  description: string | null;
+  penality: string | null;
+  lawCategory: string | null;
+  complianceNatureId: string | null;
+  isCr: boolean | null;
+  active: boolean | null;
+  crId: number | null;
+  lawName: string | null;
+
+}
+export const CompliancesItemDetails: CompliancesItemDetailsResponse = {
+
+  info: null,
+  complianceId: null,
+  title: null,
+  section: null,
+  lawType: null,
+  regulator: null,
+  description: null,
+  penality: null,
+  lawCategory: null,
+  complianceNatureId: null,
+  isCr: null,
+  active: null,
+  crId: null,
+  lawName: null,
 }
