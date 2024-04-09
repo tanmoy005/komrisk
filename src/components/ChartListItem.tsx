@@ -5,6 +5,7 @@ import { View } from "./Themed";
 import ChartItemSkelton from "./skelton/ChartItemSkelton";
 import TaskCard from "./cards/TaskCard";
 import { useEffect } from "react";
+import { hasValue } from "../utils";
 
 // import { Skeleton } from "moti/skeleton";
 // import ProductDetailsView from "@/src/app/(tabs)/menu/[id]";
@@ -26,7 +27,7 @@ const ChartListItem = ({ data }: ChartItemProps) => {
   console.log('data45345345', dataToSttring);
   
   const navigateToChartList = () => {
-    router.push({ pathname: `/chartReport/ShowDetailsReport`, params: { data: JSON.stringify(data)} }); // Remove the braces in para
+    router.push({ pathname: `/chartReport/ShowDetailsReport`, params: { data: hasValue(data)?  JSON.stringify(data): ""} }); // Remove the braces in para
   }
   const { taskName, description, dueDate, owner, reviewer } = data
   const taskCardData = {
