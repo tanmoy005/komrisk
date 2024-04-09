@@ -46,6 +46,26 @@ export interface ChartListDataItem {
   taskId: number;
   complianceGenId: string | null;
 }
+export const defaultChartData: ChartListDataItem = {
+  
+    mapId: 0,
+    complianceId: 0,
+    title:  null,
+    taskName:  null,
+    description:  null,
+    nameOfLaw:  null,
+    department:  null,
+    opUnit:  null,
+    owner:  null,
+    currOwner:  null,
+    reviewer:  null,
+    dueDate:  null,
+    impact:  null,
+    status: 0,
+    taskId: 0,
+    complianceGenId:  null
+  }
+
 export interface UserModel {
   username: string,
   password: string

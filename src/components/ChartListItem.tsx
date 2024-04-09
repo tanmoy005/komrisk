@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, Pressable } from "react-native";
 import { ChartListDataItem } from "@/src/types";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { View } from "./Themed";
 import ChartItemSkelton from "./skelton/ChartItemSkelton";
 import TaskCard from "./cards/TaskCard";
@@ -15,10 +15,19 @@ type ChartItemProps = {
 const isObjectEmpty = (objectName: ChartListDataItem) => {
   return Object.keys(objectName).length === 0
 }
+interface NavigateChartList {
+  pathname: string;
+  params: ChartItemProps
+}
 const ChartListItem = ({ data }: ChartItemProps) => {
-  console.log('data', data);
-
-
+  console.log('data22223', data.complianceGenId);
+  
+  const dataToSttring = JSON.stringify(data);
+  console.log('data45345345', dataToSttring);
+  
+  const navigateToChartList = () => {
+    router.push({ pathname: `/chartReport/ShowDetailsReport`, params: { data: JSON.stringify(data)} }); // Remove the braces in para
+  }
   const { taskName, description, dueDate, owner, reviewer } = data
   const taskCardData = {
     firstSection: {
@@ -56,17 +65,21 @@ const ChartListItem = ({ data }: ChartItemProps) => {
     console.log('datauser', data);
 
   }, [data])
+  console.log('data.complianceId', data.complianceId);
 
   return (
     // <Link href={`./menu/${data.id}`} asChild>
+    // <Link href={`./chartReport/GetActivityStatusDataListDetailsInfo`} asChild>
     <Link href={`./${data.complianceId}`} asChild>
       <Pressable style={styles.rowContainer}>
         <View>
           {
             !isObjectEmpty(data) ?
-              <TaskCard
-                taskCard={taskCardData}
-              />
+              <Pressable onPress={navigateToChartList}>
+                <TaskCard
+                  taskCard={taskCardData}
+                />
+              </Pressable>
               :
               <ChartItemSkelton />
           }
@@ -80,7 +93,6 @@ const ChartListItem = ({ data }: ChartItemProps) => {
               doesn't compromise your users' experiences. It provides a core set of platform
               agnostic native components </Text>
           </CommentAccordian> */}
-
         </View>
       </Pressable>
     </Link>

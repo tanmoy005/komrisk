@@ -1,9 +1,10 @@
 import { StyleSheet, Dimensions } from "react-native";
 export const screenWidth = Dimensions.get('window').width;
+export const screenHeight = Dimensions.get('window').height;
 
 console.log("screenWidth *.82", screenWidth * .82);
 export const smFont = 14;
-const circle1Size =  Math.floor(screenWidth * .076);
+const circle1Size = Math.floor(screenWidth * .076);
 
 const commonFontStyle = {
     fontSize: smFont,
@@ -23,6 +24,22 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    // cardContainer2:{
+    //     // width: Math.floor(screenWidth * .93), // Adjust the width as needed
+    //     width: '100%', // Adjust the width as needed
+
+    //     margin: 'auto',
+    //     // height: Math.floor(screenHeight * .86),
+    //     // width: '100%', // Adjust the width as needed
+    //     // height: Math.floor(screenHeight * .90),
+    //     height: Math.floor(screenHeight * .90),
+    //     display: 'flex',
+    //     justifyContent: 'space-around',
+    //     backgroundColor: '#fff',
+    //     borderRadius: 10,
+    //     ...taskCardContainer
+    //     // padding: 35,
+    // },
     cardContainer: {
         width: Math.floor(screenWidth * .86), // Adjust the width as needed
         height: Math.floor(screenWidth * .86),
@@ -31,6 +48,10 @@ export const styles = StyleSheet.create({
         backgroundColor: '#F5F5F5',
         borderRadius: 10,
         padding: 35,
+    },
+    cardContainer2: {
+        padding: Math.floor(screenWidth * .06),
+        // height: Math.floor(screenHeight)
     },
     cardStyle: {
         // width: Math.floor(screenWidth *.82), 
@@ -42,6 +63,16 @@ export const styles = StyleSheet.create({
         backgroundColor: '#F5F5F5',
         borderRadius: 10,
         // padding: 9,
+    },
+    cardStyle2:{
+        // width: Math.floor(screenWidth * .86), // Adjust the width as needed
+        // height: Math.floor(screenWidth * .86),
+        // display: 'flex',
+        // justifyContent: 'space-around',
+        // backgroundColor: '#F5F5F5',
+        // padding:8,
+        ...taskCardContainer,
+        borderRadius: 10,
     },
     title: {
         fontWeight: '500',
@@ -63,7 +94,8 @@ export const styles = StyleSheet.create({
     },
     chartContainer: {
         width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 10
     },
     taskCardContainer: {
         ...taskCardContainer
@@ -110,9 +142,9 @@ export const styles = StyleSheet.create({
         width: circle1Size,
         height: circle1Size,
         backgroundColor: '#D9D9D9',
-        borderRadius: circle1Size/2,
+        borderRadius: circle1Size / 2,
     },
-    taskCardBottomRightSection:{
+    taskCardBottomRightSection: {
         alignItems: 'center',
         rowGap: 6
     },
@@ -121,17 +153,17 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 20,
         backgroundColor: 'white'
-      },
-      imageContainer: {
+    },
+    imageContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
         marginBottom: 30
-      },
-      dashboardChartContainer: {
+    },
+    dashboardChartContainer: {
         width: '100%',
         alignItems: 'center',
         marginTop: 75
-      },
-      
+    },
+
 });
