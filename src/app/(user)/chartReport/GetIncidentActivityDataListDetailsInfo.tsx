@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, StyleSheet } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import { View } from 'react-native';
 import {  ChartListDataItem, IncidentActivityDataList, IncidentActivityDataListPayLoad } from '@/src/types';
 import ChartListItem from '@/src/components/ChartListItem';
@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
 import moment from 'moment';
 import { styles } from '@/src/style';
+import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 
 
 
@@ -28,9 +29,7 @@ const GetIncidentActivityDataListDetailsInfo = () => {
 
     const { statusType } = useLocalSearchParams();
     const filterStatus = typeof statusType === 'string' ? statusType : statusType[0];
-    // console.log("handleGetActivityStatusDataList", statusType);
     const handleGetIncidentActivityDataList = async () => {
-      //console.log("handleGetActivityStatusDataList");
 
       const payLoad: IncidentActivityDataListPayLoad = {
         ...useCredential,
@@ -39,7 +38,7 @@ const GetIncidentActivityDataListDetailsInfo = () => {
         end: currentDate,
         status: filterStatus
       }
-      //  console.log("payLoad", payLoad);
+
       const { data, error, status } = await GetIncidentActivityDataList(payLoad);
       if (status === 200) {
         const { aaData } = data;
@@ -50,7 +49,6 @@ const GetIncidentActivityDataListDetailsInfo = () => {
       } else {
         Alert.alert("error4444", error.message);
       }
-      // setDataList([{}]);
     }
     useEffect(() => {
         handleGetIncidentActivityDataList();
@@ -59,6 +57,8 @@ const GetIncidentActivityDataListDetailsInfo = () => {
 
     return (
       <View style={styles.chartContainer}>
+             <HeadImageSection />
+
         <FlatList
           data={DataList}
           renderItem={({ item }) => <ChartListItem data={item} />}

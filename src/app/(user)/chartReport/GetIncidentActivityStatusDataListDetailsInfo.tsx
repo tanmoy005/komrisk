@@ -5,6 +5,7 @@ import GetActivityStatusDataList from '@/src/server/api-functions/get-activity-s
 import { ActivityStatusDataList, ActivityStatusDataListPayLoad, ChartListDataItem } from '@/src/types';
 import ChartListItem from '@/src/components/ChartListItem';
 import Accordion from '@/src/components/accordians/ChevronsAccordian';
+import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 
 
 const GetIncidentActivityStatusDataListDetailsInfo = () => {
@@ -65,6 +66,7 @@ const GetIncidentActivityStatusDataListDetailsInfo = () => {
 
     return (
       <View style={styles.chartContainer}>
+                <HeadImageSection />
         <FlatList
           data={DataList}
           renderItem={({ item }) => <ChartListItem data={item} />}
