@@ -1,4 +1,5 @@
 import ChartDetailsItem from '@/src/components/ChartItemDetails';
+import CardContainer from '@/src/components/cards/CardContainer';
 import CardContainer2 from '@/src/components/cards/CardContainer2';
 import CustomeCard from '@/src/components/cards/CustomeCard';
 import CardSkelton from '@/src/components/skelton/CardSkelton';
@@ -19,9 +20,6 @@ const ShowDetailsReport = () => {
     console.log('====================================complianceId');
     console.log(complianceId);
     console.log('====================================');
-    const [chartItem, setChartItem] = useState<ChartListDataItem>(defaultChartData);
-    // const { data } = useLocalSearchParams();r
-    // const chartDataItem = typeof data === 'string' ? data : data[0];
 
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const [compliancesItemData, setCompliancesItemData] = useState<CompliancesItemDetailsResponse>(CompliancesItemDetails);
@@ -52,14 +50,14 @@ const ShowDetailsReport = () => {
 
     return (
         <ScrollView>
-            <CardContainer2 >
+            <CardContainer>
                 <CustomeCard>
                     {
                         compliancesItemData?.complianceId === null ? <CardSkelton /> :
                             <ChartDetailsItem compliancesItemData={compliancesItemData} itemType='' />
                     }
                 </CustomeCard>
-            </CardContainer2>
+            </CardContainer>
         </ScrollView>
     )
 }

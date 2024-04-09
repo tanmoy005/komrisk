@@ -1,11 +1,9 @@
-import { Image, StyleSheet, Text, Pressable } from "react-native";
+import { StyleSheet, Pressable } from "react-native";
 import { ChartListDataItem } from "@/src/types";
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import { View } from "./Themed";
 import ChartItemSkelton from "./skelton/ChartItemSkelton";
 import TaskCard from "./cards/TaskCard";
-import { useEffect } from "react";
-import { hasValue } from "../utils";
 
 // import { Skeleton } from "moti/skeleton";
 // import ProductDetailsView from "@/src/app/(tabs)/menu/[id]";
@@ -21,14 +19,6 @@ interface NavigateChartList {
   params: ChartItemProps
 }
 const ChartListItem = ({ data }: ChartItemProps) => {
-  console.log('data22223', data.complianceGenId);
-
-  // const dataToSttring = JSON.stringify(data);
-  // console.log('data45345345', dataToSttring);
-
-  // const navigateToTaskDetails = (statusType: string) => {
-  //   router.push({ pathname: `/chartReport/ShowDetailsReport`, params: { statusType } }); // Remove the braces in para
-  // }
 
   const { taskName, description, dueDate, owner, reviewer } = data
   const taskCardData = {
