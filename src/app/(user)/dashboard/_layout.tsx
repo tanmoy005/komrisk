@@ -1,9 +1,125 @@
+// import React from 'react';
+// // import FontAwesome5  from '@expo/vector-icons/FontAwesome';
+// import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'
+
+// import { Link, Tabs } from 'expo-router';
+// import { Image, Pressable } from 'react-native';
+
+// import Colors from '@/src/constants/Colors';
+// import { useColorScheme } from '@/src/components/useColorScheme';
+// import { useClientOnlyValue } from '@/src/components/useClientOnlyValue';
+
+// // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+// function TabBarIcon(props: {
+//   name: React.ComponentProps<typeof FontAwesome5>['name'];
+//   color: string;
+// }) {
+//   return <FontAwesome5 size={20} style={{ marginBottom: -3 }} {...props} />;
+// }
+
+// export default function TabLayout() {
+//   const colorScheme = useColorScheme();
+
+//   return (
+//     <Tabs
+//       screenOptions={{
+//         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+//         tabBarStyle: {
+//           height: 80,
+//           backgroundColor: "#F1F1F1",
+
+//         },
+//         tabBarLabelStyle: {
+//           fontSize: 12,
+//           fontWeight: '400',
+//           lineHeight: 16,
+//           textAlign: 'center',
+//           color: '#000000'
+//         },
+//         // Disable the static render of the header on web
+//         // to prevent a hydration error in React Navigation v6.
+
+//         headerShown: useClientOnlyValue(false, true),
+//       }}>
+//       <Tabs.Screen
+//         name="complianceStatus"
+//         options={{
+//           title: 'Compliance Status',
+//           headerShown: false,
+//           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="checkbox-marked-circle-plus-outline" size={24} color="black" />,
+//           tabBarItemStyle: {
+//             marginBottom: 10,
+//             borderRadius: 6,
+//             margin: 10,
+//             padding: 10,
+//             backgroundColor: "#fff"
+//           },
+//           tabBarIconStyle: {
+//             padding: 1
+//           },
+
+//         }}
+//       />
+//       <Tabs.Screen
+//         name="activityStatus"
+//         options={{
+//           title: 'Activity Status',
+//           headerShown: false,
+//           tabBarIcon: ({ color, size }) => <TabBarIcon name="tasks" color={"#000"} />,
+//           tabBarItemStyle: {
+//             // fontSize: 12,
+
+//             marginBottom: 10,
+//             borderRadius: 6,
+//             margin: 10,
+//             padding: 10,
+//             backgroundColor: "#fff"
+//           },
+//           tabBarIconStyle: {
+//             padding: 1
+//           },
+
+//         }}
+//       />
+
+//       <Tabs.Screen
+//         name="incidentStatus"
+//         options={{
+//           title: 'Incident Activity',
+//           headerShown: false,
+//           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="information" size={24} color="black" />,
+//           tabBarItemStyle: {
+//             // fontSize: 12,
+
+//             marginBottom: 10,
+//             borderRadius: 6,
+//             margin: 10,
+//             padding: 10,
+//             backgroundColor: "#fff"
+//           },
+//           tabBarIconStyle: {
+//             padding: 1
+//           },
+
+//         }}
+//       />
+
+
+//     </Tabs>
+//   );
+// }
+
+
+
+// ============================= New Version 08-04-2024 ====================================== //
+
 import React from 'react';
 // import FontAwesome5  from '@expo/vector-icons/FontAwesome';
-import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'
+import { FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
 
 import { Link, Tabs } from 'expo-router';
 import { Image, Pressable } from 'react-native';
+import { Text, View } from 'react-native';
 
 import Colors from '@/src/constants/Colors';
 import { useColorScheme } from '@/src/components/useColorScheme';
@@ -16,6 +132,31 @@ function TabBarIcon(props: {
 }) {
   return <FontAwesome5 size={20} style={{ marginBottom: -3 }} {...props} />;
 }
+
+
+// // Custom tab label component for Impact Analysis
+// const ImpactAnalysisTabLabel = () => (
+//   <View style={{ alignItems: 'center' }}>
+//     <Text style={{ textAlign: 'center', fontSize: 6, color: '#000000' }}>Impact Analysis</Text>
+//   </View>
+// );
+
+
+
+// // Custom tab label component for Activity Status
+// const ActivityStatusTabLabel = () => (
+//   <View style={{ alignItems: 'center' }}>
+//     <Text style={{ textAlign: 'center', fontSize: 6, color: '#000000' }}>Activity Status</Text>
+//   </View>
+// );
+
+
+const CustomTabLabel = ({ title }: { title: string }) => (
+  <View style={{ alignItems: 'center' }}>
+    <Text style={{ textAlign: 'center', fontSize: 6.5, color: '#000000' }}>{title}</Text>
+  </View>
+);
+
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -34,7 +175,9 @@ export default function TabLayout() {
           fontWeight: '400',
           lineHeight: 16,
           textAlign: 'center',
-          color: '#000000'
+          color: '#000000',
+
+
         },
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
@@ -42,15 +185,18 @@ export default function TabLayout() {
         headerShown: useClientOnlyValue(false, true),
       }}>
       <Tabs.Screen
-        name="complianceStatus"
+        name="impactAnalysis"
         options={{
-          title: 'Compliance Status',
+          title: 'Impact Analysis',
           headerShown: false,
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="checkbox-marked-circle-plus-outline" size={24} color="black" />,
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="gavel" size={24} color="black" />,
+          tabBarLabel: ({ focused, color }) => (
+            <CustomTabLabel title="Impact Analysis" />
+          ),
           tabBarItemStyle: {
-            marginBottom: 10,
+            marginBottom: 5,
             borderRadius: 6,
-            margin: 10,
+            margin: 5,
             padding: 10,
             backgroundColor: "#fff"
           },
@@ -60,18 +206,41 @@ export default function TabLayout() {
 
         }}
       />
+
       <Tabs.Screen
         name="activityStatus"
         options={{
           title: 'Activity Status',
           headerShown: false,
           tabBarIcon: ({ color, size }) => <TabBarIcon name="tasks" color={"#000"} />,
+          tabBarLabel: ({ focused, color }) => (
+            <CustomTabLabel title="Activity Status" />
+          ),
           tabBarItemStyle: {
-            // fontSize: 12,
-
-            marginBottom: 10,
+            marginBottom: 5,
             borderRadius: 6,
-            margin: 10,
+            margin: 5,
+            padding: 10,
+            backgroundColor: "#fff",
+          },
+          tabBarIconStyle: {
+            padding: 1
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="complianceStatus"
+        options={{
+          title: 'Compliance Status',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="checkbox-marked-circle-plus-outline" size={24} color="black" />,
+          tabBarLabel: ({ focused, color }) => (
+            <CustomTabLabel title="Compliance Status" />
+          ),
+          tabBarItemStyle: {
+            marginBottom: 5,
+            borderRadius: 6,
+            margin: 5,
             padding: 10,
             backgroundColor: "#fff"
           },
@@ -82,18 +251,22 @@ export default function TabLayout() {
         }}
       />
 
+
       <Tabs.Screen
-        name="incidentStatus"
+        name="incidentActivity"
         options={{
           title: 'Incident Activity',
           headerShown: false,
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="information" size={24} color="black" />,
+          tabBarIcon: ({ color, size }) => <AntDesign name="exclamationcircle" size={22} color="black" />,
+          tabBarLabel: ({ focused, color }) => (
+            <CustomTabLabel title="Incident Activity" />
+          ),
           tabBarItemStyle: {
             // fontSize: 12,
 
-            marginBottom: 10,
+            marginBottom: 5,
             borderRadius: 6,
-            margin: 10,
+            margin: 5,
             padding: 10,
             backgroundColor: "#fff"
           },
@@ -103,6 +276,65 @@ export default function TabLayout() {
 
         }}
       />
+
+
+      <Tabs.Screen
+        name="incidentComparison"
+        options={{
+          title: 'Incident Comparison',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="alert-circle" size={24} color="black" style={{ marginRight: -8 }} />
+              <Ionicons name="alert-circle-outline" size={24} color="black" style={{ marginLeft: -2 }} />
+            </View>
+          ),
+          tabBarLabel: ({ focused, color }) => (
+            <CustomTabLabel title="Incident Comparison" />
+          ),
+          tabBarItemStyle: {
+            marginBottom: 5,
+            borderRadius: 6,
+            margin: 5,
+            padding: 10,
+            backgroundColor: "#fff"
+          },
+          tabBarIconStyle: {
+            padding: 1
+          },
+        }}
+      />
+
+
+      <Tabs.Screen
+        name="advancedReports"
+        options={{
+          title: 'Advanced Reports',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <View style={{ transform: [{ rotate: '270deg' }] }}>
+              <MaterialCommunityIcons name="text-box-plus-outline" size={24} color="black" />
+            </View>
+          ),
+          tabBarLabel: ({ focused, color }) => (
+            <CustomTabLabel title="Advanced Reports" />
+          ),
+          tabBarItemStyle: {
+            marginBottom: 5,
+            borderRadius: 6,
+            margin: 5,
+            padding: 10,
+            backgroundColor: "#fff",
+
+          },
+          tabBarIconStyle: {
+            padding: 1
+          },
+        }}
+      />
+
+
+
 
 
     </Tabs>

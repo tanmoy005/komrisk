@@ -141,7 +141,110 @@ export interface BarChartConfig {
   };
 }
 
+// ================================ Updated on 08-04-2024 ======================================== //
 
+// For Incident Activity
+export interface IncidentActivityDataPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+}
+
+
+export interface IncidentActivityDataListPayLoad extends IncidentActivityDataPayLoad {
+  status: string;
+}
+
+
+
+export interface IncidentActivityData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: ReportChartData[] | null
+}
+
+
+
+export interface IncidentActivityDataList {
+  sEcho: string | null;
+  aaData: ChartListDataItem[] | null;
+  iTotalRecords: number | null;
+  iTotalDisplayRecords: number | null;
+}
+
+
+
+
+// For Impact Analysis
+export interface ImpactAnalysisDataPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+}
+
+
+export interface ImpactAnalysisDataListPayLoad extends ImpactAnalysisDataPayLoad {
+  status: string;
+}
+
+
+
+export interface ImpactAnalysisData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: ReportChartData[] | null
+}
+
+
+
+export interface ImpactAnalysisDataList {
+  sEcho: string | null;
+  aaData: ChartListDataItem[] | null;
+  iTotalRecords: number | null;
+  iTotalDisplayRecords: number | null;
+}
+
+
+// For Incident Comparison
+export interface IncidentComparisonDataPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+}
+
+
+export interface IncidentComparisonDataListPayLoad extends IncidentComparisonDataPayLoad {
+  status: string;
+}
+
+
+
+export interface IncidentComparisonData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: ReportChartData[] | null
+}
+
+
+
+export interface IncidentComparisonDataList {
+  sEcho: string | null;
+  aaData: ChartListDataItem[] | null;
+  iTotalRecords: number | null;
+  iTotalDisplayRecords: number | null;
+}
 
 export type AccordionItemPros = PropsWithChildren<{
   title: string;

@@ -6,12 +6,12 @@ import { Pressable, useColorScheme } from 'react-native';
 
 export default function TabTwoScreen() {
   const colorScheme = useColorScheme();
-  
+
   return <Stack screenOptions={{
     headerStyle: {
       backgroundColor: '#F6EEF4',
     },
-    title: "Dashboard",
+    title: "dashboard",
     headerLeft: () =>
       <Link href="/(pages)/signin" asChild>
         <Pressable>
@@ -48,7 +48,18 @@ export default function TabTwoScreen() {
         }
       }} />
       <Stack.Screen name="chartReport" options={{ headerShown: false }} />
+      {/* Add another screen below */}
+      {/* <Stack.Screen name='Notification'
+        options={{
+          title: "Notification",
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#F6EEF4', // Change the background color here
+          }
+        }} /> */}
+    
   </Stack>;
+
 };
 
 

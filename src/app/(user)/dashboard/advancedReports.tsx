@@ -5,7 +5,7 @@ import { Text, View } from '@/src/components/Themed';
 export default function NotFoundScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Incident Activity' }} />
+      <Stack.Screen options={{ title: 'Advanced Reports' }} />
       <View style={styles.container}>
         <Text style={styles.title}>This screen is under construction.</Text>
 

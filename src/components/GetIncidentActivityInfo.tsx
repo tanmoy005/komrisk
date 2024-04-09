@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { ActivityStatusData, ActivityStatusDataPayLoad, ReportChartData } from '../types';
-import GetActivityStatusData from '../server/api-functions/get-activity-status-data';
+import { IncidentActivityDataPayLoad, ReportChartData, IncidentActivityData } from '../types';
+import GetIncidentActivityData from '../server/api-functions/get-incident-activity-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import DropDown from './Dropdown';
 import PieChartData from './PieChart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
-import { router } from 'expo-router';
-import BarChartData from './BarChart';
 import DonatChartData from './DonatChart';
-import { FontAwesome } from '@expo/vector-icons';
-import { styles } from '../style';
+import BarChartData from './BarChart';
+import { router } from 'expo-router';
 import { Card, Text } from 'react-native-elements';
+import { styles } from '../style';
+import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from './skelton/CardSkelton';
 import moment from 'moment';
 
-const ActivityStatusInfo = () => {
+const IncidentActivityInfo = () => {
   {
-    const [activityStatusChartData, setActivityStatusChartData] = useState<ActivityStatusData>({
+    const [incidentActivityChartData, setIncidentActivityChartData] = useState<IncidentActivityData>({
       title: null,
       subTitle: null,
       xAxisName: null,
@@ -27,51 +27,42 @@ const ActivityStatusInfo = () => {
     });
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [currentChart, setCurrentChart] = useState<string>('PIE');
+    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+    const currentDate: string = moment().format('DD/MM/YYYY');
+    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
     const chartItems = [
       { label: 'PIE', value: 'PIE' },
       { label: 'BAR', value: 'BAR' },
       { label: 'DONUT', value: 'DONUT' },
     ];
-    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const currentDate: string = moment().format('DD/MM/YYYY');
-    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
-
-    const payLoad: ActivityStatusDataPayLoad = {
-      ...useCredential,
-      start: startDate,
-      viewAs: "COMPANY HEAD",
-      end: currentDate
-    }
-
     const navigateToChartList = (statusType: string) => {
-      router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType} }); // Remove the braces in para
+      router.push({ pathname: `/chartReport/GetIncidentActivityDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
     }
-    const handleGetActivityStatusData = async (payLoad: ActivityStatusDataPayLoad) => {
+    const handleGetIncidentActivityData = async () => {
 
-      // const payLoad: ActivityStatusDataPayLoad = {
-      //   ...useCredential,
-      //   start: startDate,
-      //   viewAs: "COMPANY HEAD",
-      //   end: currentDate
-      // }
-      // //console.log("payLoad", payLoad);
+      const payLoad: IncidentActivityDataPayLoad = {
+        ...useCredential,
+        start: startDate,
+        viewAs: "COMPANY HEAD",
+        end: currentDate
+      }
 
-      const { data, error, status } = await GetActivityStatusData(payLoad);
+      const { data, error, status } = await GetIncidentActivityData(payLoad);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
-        setActivityStatusChartData(data);
+        setIncidentActivityChartData(data);
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
+
       } else {
         Alert.alert("error", error.message);
       }
 
     }
     useEffect(() => {
-      // //console.log('filteredchartData')
-      handleGetActivityStatusData(payLoad);
+        handleGetIncidentActivityData();
     }, []);
 
     return (
@@ -87,8 +78,8 @@ const ActivityStatusInfo = () => {
                 currentChart === 'BAR' &&
                 <BarChartData
                   ReportData={filteredChartData}
-                  yAxisName={activityStatusChartData.yAxisName}
-                  xAxisName={activityStatusChartData.xAxisName}
+                  yAxisName={incidentActivityChartData.yAxisName}
+                  xAxisName={incidentActivityChartData.xAxisName}
                 />
               }
               {
@@ -113,8 +104,8 @@ const ActivityStatusInfo = () => {
                   )
                 })}
                 <View style={{ alignItems: 'flex-start' }}>
-                  <Text style={styles.title}>{activityStatusChartData.title}</Text>
-                  <Text style={styles.title}>{activityStatusChartData.subTitle}</Text>
+                  <Text style={styles.title}>{incidentActivityChartData.title}</Text>
+                  <Text style={styles.title}>{incidentActivityChartData.subTitle}</Text>
                 </View>
               </View>
 
@@ -134,4 +125,5 @@ const ActivityStatusInfo = () => {
   }
 }
 
-export default ActivityStatusInfo;
+
+export default IncidentActivityInfo;

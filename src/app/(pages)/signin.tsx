@@ -22,6 +22,7 @@ let SignIn = () => {
 
     const dispatch = useDispatch();
     const handleSubmitSignIn = async () => {
+//console.log("huihuhuh");
 
         if (username === '' || password === '') {
             Alert.alert("error", 'Username or password cannot be empty');
@@ -38,6 +39,8 @@ let SignIn = () => {
 
             setDataToAsyncStorage('token', data.token);
             router.push("/(user)/dashboard/complianceStatus");
+            console.log("*************")
+            //router.push("/(user)/Notification/PushNotificationExample");
             dispatch(storeAuthUserCred({ username, password }))
         } else {
             Alert.alert("error", "Invalid Credentials");
