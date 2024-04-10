@@ -6,6 +6,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 interface DropDownItem {
   label: string;
   value: string;
+  icon?: () => JSX.Element;
 }
 interface Dropdown {
   dropdownItems: DropDownItem[];
@@ -13,7 +14,7 @@ interface Dropdown {
   selectedValue: any;
 }
 
-const DropDown = ({setSelectedValue, dropdownItems, selectedValue}:Dropdown) => {
+const DropDown = ({ setSelectedValue, dropdownItems, selectedValue }: Dropdown) => {
 
   // const [selectedValue, setSelectedValue] = useState(items[0].value);
   const [open, setOpen] = useState(false);
@@ -28,7 +29,7 @@ const DropDown = ({setSelectedValue, dropdownItems, selectedValue}:Dropdown) => 
         setValue={setSelectedValue}
         // setItems={null}
         style={{ width: 130, alignItems: 'center', alignSelf: 'center' }}
-        // onChangeValue={(value) => //console.log(value)} // Optional callback when the selected value changes
+      // onChangeValue={(value) => //console.log(value)} // Optional callback when the selected value changes
       />
     </View>
   );

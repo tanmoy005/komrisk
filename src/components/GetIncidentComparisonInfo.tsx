@@ -149,6 +149,8 @@ import { styles } from '../style';
 import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from './skelton/CardSkelton';
 import moment from 'moment';
+import calculatePercentage from '../utils/associate/get-percentage';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const IncidentComparisonInfo = () => {
   {
@@ -160,6 +162,7 @@ const IncidentComparisonInfo = () => {
       chartData: null
     });
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
+    const [totalValue, setTotalValue] = useState<number>(0);
     const [currentChart, setCurrentChart] = useState<string>('PIE');
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const currentDate: string = moment().format('DD/MM/YYYY');
@@ -173,15 +176,15 @@ const IncidentComparisonInfo = () => {
     }
 
     const chartItems = [
-      { label: 'PIE', value: 'PIE' },
-      { label: 'BAR', value: 'BAR' },
-      { label: 'DONUT', value: 'DONUT' },
+      { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
+      { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="#900" />},
+      { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="#900" /> },
     ];
     // const navigateToChartList = (statusType: string) => {
     //   router.push({ pathname: `/chartReport/GetIncidentComparisonDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
     // }
 
-    const navigateToChartList = (statusType: string, payLoad: string) => {
+    const navigateToChartList = (statusType: string, payLoad: IncidentComparisonDataPayLoad) => {
       const payloadString = JSON.stringify(payLoad); // Stringify the payload here
       router.push({ pathname: `/chartReport/GetIncidentComparisonDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
@@ -196,14 +199,15 @@ const IncidentComparisonInfo = () => {
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
-
+        const sum: number = filteredchartData.map((x: ReportChartData) => x.value).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        setTotalValue(sum);
       } else {
         Alert.alert("error", error.message);
       }
 
     }
     useEffect(() => {
-        handleGetIncidentComparisonData();
+      handleGetIncidentComparisonData();
     }, []);
 
     return (
@@ -229,7 +233,7 @@ const IncidentComparisonInfo = () => {
               }
 
               <View>
-                {filteredChartData && filteredChartData.map((data:ReportChartData, index) => {
+                {filteredChartData && filteredChartData.map((data: ReportChartData, index) => {
                   return (
                     <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
                       onPress={() => navigateToChartList(data?.comparison ?? "", payLoad)}>
@@ -239,7 +243,7 @@ const IncidentComparisonInfo = () => {
                         color={`#${data.color ?? '000'}`}
                         style={{ marginRight: 15, opacity: 1 }}
                       />
-                      <Text style={{ color: `#${data.color ?? '000'}` }}>{data.label ?? ''}</Text>
+                      <Text style={{ color: `#${data.color ?? '000'}` }}>{`${data.label ?? ''}  ${calculatePercentage(data.value, totalValue)}%`}</Text>
                     </Pressable>
                   )
                 })}
