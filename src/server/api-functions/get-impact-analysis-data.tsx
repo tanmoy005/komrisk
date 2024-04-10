@@ -5,7 +5,7 @@ const GetImpactAnalysisData = async (payLoad: ImpactAnalysisDataPayLoad) => {
     const url = `/complianceReports/impactAnalysisData`;
 
     const response = await Server(payLoad, url, 'POST');
-    //console.log("response***************",response)
+    console.log("response***************",response)
 
     return response
 }

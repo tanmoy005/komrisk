@@ -98,13 +98,22 @@ export interface ActivityStatusDataList {
 }
 
 
+// export interface ComplianceStatusDataListPayLoad {
+//   username: string;
+//   password: string;
+//   start: string;
+//   viewAs: string;
+//   end: string;
+//   status: string;
+// }
+
 export interface ComplianceStatusDataListPayLoad {
   username: string;
   password: string;
   start: string;
   viewAs: string;
   end: string;
-  status: string;
+  comparison: string;
 }
 export interface ComplianceStatusDataPayLoad {
   username: string;
@@ -135,6 +144,8 @@ export interface ReportChartData {
     type: string;
     userFilter: any; // You may want to replace 'any' with a more specific type
   };
+  comparison:string | null;
+  status:string | null;
 }
 export interface PieChartType {
   name: string;
@@ -210,7 +221,7 @@ export interface ImpactAnalysisDataPayLoad {
 
 
 export interface ImpactAnalysisDataListPayLoad extends ImpactAnalysisDataPayLoad {
-  status: string;
+  impact: string;
 }
 
 
@@ -244,7 +255,7 @@ export interface IncidentComparisonDataPayLoad {
 
 
 export interface IncidentComparisonDataListPayLoad extends IncidentComparisonDataPayLoad {
-  status: string;
+  comparison: string;
 }
 
 

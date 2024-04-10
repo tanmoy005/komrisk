@@ -5,7 +5,7 @@ const GetIncidentActivityData = async (payLoad: IncidentActivityDataPayLoad) => 
     const url = `/incidentReports/activityStatusData`;
 
     const response = await Server(payLoad, url, 'POST');
-    //console.log("response***************",response)
+    console.log("response1***************",response)
 
     return response
 }
