@@ -8,6 +8,16 @@ export default {
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
+    primary: '#A097DC29',
+    secondary:'#94287B14',
+    btnPrimary: {
+      backgroundColor: '#A097DC',
+      paddingVertical: 20,
+      paddingHorizontal: 48,
+      fontWeight: '400',
+      fontSize: 16,
+      borderRadius: 5
+    }
   },
   dark: {
     text: '#fff',

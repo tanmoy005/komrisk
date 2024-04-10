@@ -58,7 +58,7 @@ function RootLayoutNav() {
           <Stack.Screen name="(pages)" options={{ headerShown: false }} />
           <Stack.Screen name="(user)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          <Stack.Screen name="(ChartReport)" options={{ headerShown: false }} />
+          {/* <Stack.Screen name="(ChartReport)" options={{ headerShown: false }} /> */}
           {/* <Stack.Screen name="Notification" options={{ headerShown: false }} /> */}
         </Stack>
       </ThemeProvider>

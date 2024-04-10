@@ -18,7 +18,9 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
     //    const {heading:} = firstSection;
 
     return (
-        <View>
+        <View style={styles.taskCard}>
+            <View>
+
             <CardContainer>
                 <CardTextContainer>
                     {
@@ -28,7 +30,7 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
                     {
                         firstSection &&
                         firstSection.description &&
-                        <Text style={styles.shortDescription}>{firstSection.description}</Text>
+                        <Text style={styles.shortDescription}>{firstSection.description?.trim()}</Text>
                     }
                     <SmSectionSeperator />
                     {
@@ -38,13 +40,15 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
                     }
                     {
                         secondSection && secondSection.description &&
-                        <Text style={styles.shortDescription}>{secondSection.description}</Text>
+                        <Text style={styles.shortDescription}>{secondSection.description?.trim()}</Text>
                     }
                 </CardTextContainer>
             </CardContainer>
             <CardContainer styles={{
                 backgroundColor: 'rgba(120, 106, 205, 0.08)'
             }}>
+                <CardTextContainer>
+
                 <View style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
@@ -80,7 +84,9 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
                         }
                     </View>
                 </View>
+                </CardTextContainer>
             </CardContainer>
+            </View>
         </View>
     )
 }

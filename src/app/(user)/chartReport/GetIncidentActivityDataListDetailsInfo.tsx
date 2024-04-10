@@ -78,7 +78,7 @@
 // ========================= Updated on 09-04-2024 =============================== //
 
 import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, StyleSheet } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import { View } from 'react-native';
 import {  ChartListDataItem, IncidentActivityDataList, IncidentActivityDataListPayLoad } from '@/src/types';
 import ChartListItem from '@/src/components/ChartListItem';
@@ -88,6 +88,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
 import moment from 'moment';
 import { styles } from '@/src/style';
+import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 
 
 
@@ -145,7 +146,6 @@ const GetIncidentActivityDataListDetailsInfo = () => {
       } else {
         Alert.alert("error4444", error.message);
       }
-      // setDataList([{}]);
     }
     useEffect(() => {
         handleGetIncidentActivityDataList();
@@ -154,6 +154,8 @@ const GetIncidentActivityDataListDetailsInfo = () => {
 
     return (
       <View style={styles.chartContainer}>
+             <HeadImageSection />
+
         <FlatList
           data={DataList}
           renderItem={({ item }) => <ChartListItem data={item} />}

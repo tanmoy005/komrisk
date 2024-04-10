@@ -79,7 +79,7 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, FlatList, StyleSheet } from 'react-native';
 import { View } from 'react-native';
-import {  ChartListDataItem, IncidentComparisonDataList, IncidentComparisonDataListPayLoad } from '@/src/types';
+import { ChartListDataItem, IncidentComparisonDataList, IncidentComparisonDataListPayLoad } from '@/src/types';
 import ChartListItem from '@/src/components/ChartListItem';
 import { useLocalSearchParams } from 'expo-router';
 import GetIncidentComparisonDataList from '@/src/server/api-functions/get-incident-comparison-datalist-details';
@@ -87,6 +87,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
 import moment from 'moment';
 import { styles } from '@/src/style';
+import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 
 
 
@@ -148,12 +149,13 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
       // setDataList([{}]);
     }
     useEffect(() => {
-        handleGetIncidentComparisonDataList();
+      handleGetIncidentComparisonDataList();
     }, []);
 
 
     return (
       <View style={styles.chartContainer}>
+        <HeadImageSection />
         <FlatList
           data={DataList}
           renderItem={({ item }) => <ChartListItem data={item} />}

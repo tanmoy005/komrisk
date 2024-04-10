@@ -80,7 +80,7 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, FlatList, StyleSheet } from 'react-native';
 import { View } from 'react-native';
-import {  ChartListDataItem, ImpactAnalysisDataList, ImpactAnalysisDataListPayLoad } from '@/src/types';
+import { ChartListDataItem, ImpactAnalysisDataList, ImpactAnalysisDataListPayLoad } from '@/src/types';
 import ChartListItem from '@/src/components/ChartListItem';
 import { useLocalSearchParams } from 'expo-router';
 import GetImpactAnalysisDataList from '@/src/server/api-functions/get-impact-analysis-datalist-details';
@@ -88,6 +88,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
 import moment from 'moment';
 import { styles } from '@/src/style';
+import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 
 
 
@@ -150,12 +151,13 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
       // setDataList([{}]);
     }
     useEffect(() => {
-        handleGetImpactAnalysisDataList();
+      handleGetImpactAnalysisDataList();
     }, []);
 
 
     return (
       <View style={styles.chartContainer}>
+        <HeadImageSection />
         <FlatList
           data={DataList}
           renderItem={({ item }) => <ChartListItem data={item} />}

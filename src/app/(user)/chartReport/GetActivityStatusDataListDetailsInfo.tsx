@@ -80,6 +80,7 @@ import { RootState } from '@/src/store/rootReducer';
 import moment from 'moment';
 import ChartListItem from '@/src/components/ChartListItem';
 import { styles } from '@/src/style';
+import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 
 const GetActivityStatusDataListDetailsInfo = () => {
   {
@@ -154,6 +155,8 @@ const GetActivityStatusDataListDetailsInfo = () => {
 
     return (
       <View style={styles.chartContainer}>
+                <HeadImageSection />
+
         <FlatList
           data={DataList}
           renderItem={({ item }) => <ChartListItem data={item} />}

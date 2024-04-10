@@ -87,6 +87,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
 import moment from 'moment';
 import { styles } from '@/src/style';
+import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 
 
 
@@ -169,6 +170,7 @@ const GetComplianceStatusDataListDetailsInfo = () => {
 
     return (
       <View style={styles.chartContainer}>
+        <HeadImageSection />
         <FlatList
           data={DataList}
           renderItem={({ item }) => <ChartListItem data={item} />}
