@@ -1,23 +1,49 @@
 import { StatusBar } from 'expo-status-bar';
-import { Image, Platform, StyleSheet } from 'react-native';
+import { Image, Platform, Pressable, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '@/src/components/EditScreenInfo';
 import { Text, View } from '@/src/components/Themed';
 import Button from '../components/Button';
+import { router } from 'expo-router';
+interface RedirectionButton {
+  btnName: string;
+  pathName: string;
+}
 
 export default function ModalScreen() {
+
+  // const buttonList:RedirectionButton[] = [
+  //   {
+  //     btnName: 'My Pending Tasks',
+  //     pathName: '/(user)/dashboard/complianceStatus'
+  //   },
+  //   {
+  //     btnName: 'Dashboard',
+  //     pathName: '/(user)/dashboard/complianceStatus'
+  //   },
+  //   {
+  //     btnName: 'Notifications',
+  //     pathName: '/(user)/dashboard/complianceStatus'
+  //   }
+  // ]
+  const navigateToProfile =()=>{
+    router.push('/(pages)/profilePage');
+  }
+
   return (
     <View style={styles.container}>
       {/* <Text style={styles.title}>Modal</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="app/modal.tsx" />
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} /> */}
-      <View style={{ ...styles.profileImageContainer, height: "50%" }}>
-        <Image style={{ width: 120, height: 120 }} source={require('@/assets/images/User.png')} />
-        <Text style={styles.userTitle}>Alicia Lockheed</Text>
-        <View style={styles.separator}></View>
-        <Text style={styles.designation}>Senior Manager</Text>
-      </View>
+      <Pressable onPress={navigateToProfile}>
+        <View  style={{ ...styles.profileImageContainer, height: "50%" }}>
+          <Image style={{ width: 120, height: 120 }} source={require('@/assets/images/User.png')} />
+          <Text style={styles.userTitle}>Alicia Lockheed</Text>
+          <View style={styles.separator}></View>
+          <Text style={styles.designation}>Senior Manager</Text>
+        </View>
+      </Pressable>
       <View
         style={{
           backgroundColor: "#red",
@@ -27,40 +53,63 @@ export default function ModalScreen() {
           rowGap: 20
         }}
       >
-          <Button
-            text='My Pending Tasks'
-            btnColor='#5645C0'
-            type='outline'
-            style={{
-              paddingVertical: 20,
-              paddingHorizontal: 48,
-              fontWeight: '400',
-              fontSize: 16
-            }}
-          />
-          <Button
-            text='Dashboard'
-            btnColor='#5645C0'
-            type='outline'
-            style={{
-              paddingVertical: 20,
-              paddingHorizontal: 48,
-              fontWeight: '400',
-              fontSize: 16
-            }}
-          />
-          <Button
-            text='Notifications'
-            btnColor='#5645C0'
-            type='outline'
-            style={{
-              paddingVertical: 20,
-              paddingHorizontal: 48,
-              fontWeight: '400',
-              fontSize: 16,
-              borderRadius: 3
-            }}
-          />
+        {/* {
+            buttonList.map(({btnName, pathName}: RedirectionButton)=>{
+              return (
+
+                <Button
+                  text={btnName}
+                  btnColor='#5645C0'
+                  type='outline'
+                  onPress={()=> router.push({pathName: pathName})}
+                  style={{
+                    paddingVertical: 20,
+                    paddingHorizontal: 48,
+                    fontWeight: '400',
+                    fontSize: 16
+                  }}
+                />
+              )
+            })
+          } */}
+        <Button
+          text='My Pending Tasks'
+          btnColor='#5645C0'
+          type='outline'
+          onPress={() => router.push('/(user)/dashboard/complianceStatus')}
+          style={{
+            paddingVertical: 20,
+            paddingHorizontal: 48,
+            fontWeight: '400',
+            fontSize: 16
+          }}
+        />
+        <Button
+          text='Dashboard'
+          btnColor='#5645C0'
+          type='outline'
+          onPress={() => router.push('/(user)/dashboard/complianceStatus')}
+          style={{
+            paddingVertical: 20,
+            paddingHorizontal: 48,
+            fontWeight: '400',
+            fontSize: 16
+          }}
+        />
+
+        <Button
+          text='Notifications'
+          btnColor='#5645C0'
+          type='outline'
+          onPress={() => router.push('/(user)/dashboard/complianceStatus')}
+          style={{
+            paddingVertical: 20,
+            paddingHorizontal: 48,
+            fontWeight: '400',
+            fontSize: 16,
+            borderRadius: 3
+          }}
+        />
         {/* <View style={{ marginVertical: 10 }}>
         </View> */}
         {/* <View style={{ marginVertical: 10 }}>
