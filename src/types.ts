@@ -464,3 +464,6 @@ export interface FilterProps {
 export interface ChartProp{
   currentChart : string;
 }
+export interface CustomeDatePickerProps {
+  setDate: React.Dispatch<React.SetStateAction<Date>>
+}

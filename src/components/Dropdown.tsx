@@ -13,15 +13,16 @@ interface Dropdown {
   dropdownItems: DropDownItem[];
   setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
   selectedValue: any;
+  minWidth?: number;
 }
 
-const DropDown = ({ setSelectedValue, dropdownItems, selectedValue }: Dropdown) => {
+const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth }: Dropdown) => {
 
   // const [selectedValue, setSelectedValue] = useState(items[0].value);
   const [open, setOpen] = useState(false);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View>
       <DropDownPicker
         open={open}
         value={selectedValue}
@@ -29,7 +30,8 @@ const DropDown = ({ setSelectedValue, dropdownItems, selectedValue }: Dropdown) 
         setOpen={setOpen}
         setValue={setSelectedValue}
         // setItems={null}
-        style={styles.dropdownPicker}
+        style={{...styles.dropdownPicker, minWidth: minWidth}}
+        
       // onChangeValue={(value) => //console.log(value)} // Optional callback when the selected value changes
       />
     </View>

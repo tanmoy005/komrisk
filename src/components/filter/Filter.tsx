@@ -13,7 +13,7 @@ const Filter = ({ currentChart, setCurrentChart }: FilterProps): JSX.Element => 
         {
             iconName: 'filter',
             Icon: MuiIcon,
-            handlePress: () => { router.push('/filterModel') }
+            handlePress: () => { router.push('/filterModal') }
         },
         {
             iconName: 'share',

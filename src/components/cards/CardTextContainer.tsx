@@ -1,12 +1,13 @@
 import { styles } from '@/src/style'
+import { CustomComponentProp } from '@/src/types'
 import React, { PropsWithChildren } from 'react'
 import { View } from 'react-native'
 
 
-const CardTextContainer = ({ children }: PropsWithChildren): JSX.Element => {
+const CardTextContainer = ({ children, styles: customStyle }: CustomComponentProp): JSX.Element => {
     return (
         <View
-            style={styles.cardTextContainer}
+            style={{...styles.cardTextContainer, ...customStyle}}
         >
             {children}
         </View>
