@@ -4,14 +4,14 @@ import { styles } from '@/src/style';
 import React from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { Divider } from 'react-native-elements';
-import { CompliancesItemDetailsResponse } from '../types';
+import { CompliancesItemDetailsResponse } from '../../types';
 
 type Props = {
     compliancesItemData: CompliancesItemDetailsResponse;
     itemType: string
 };
 
-export default function ChartItemDetails({ compliancesItemData, itemType }: Props) {
+export default function TaskItemDetails({ compliancesItemData, itemType }: Props) {
 
 
     return (

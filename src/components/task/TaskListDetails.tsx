@@ -1,12 +1,12 @@
 import { StyleSheet, Pressable } from "react-native";
 import { ChartListDataItem } from "@/src/types";
 import { Link } from "expo-router";
-import { View } from "./Themed";
-import ChartItemSkelton from "./skelton/ChartItemSkelton";
-import TaskCard from "./cards/TaskCard";
-import { styles } from "../style";
-import CardContainer from "./cards/CardContainer";
-import CardTextContainer from "./cards/CardTextContainer";
+import { View } from "../Themed";
+import ChartItemSkelton from "../skelton/ChartItemSkelton";
+import TaskCard from "../cards/TaskCard";
+import { styles } from "../../style";
+import CardContainer from "../cards/CardContainer";
+import CardTextContainer from "../cards/CardTextContainer";
 
 // import { Skeleton } from "moti/skeleton";
 // import ProductDetailsView from "@/src/app/(tabs)/menu/[id]";
@@ -21,7 +21,7 @@ interface NavigateChartList {
   pathname: string;
   params: ChartItemProps
 }
-const ChartListItem = ({ data }: ChartItemProps) => {
+const TaskListDetails = ({ data }: ChartItemProps) => {
 
   const { taskName, description, dueDate, owner, reviewer } = data
   const taskCardData = {
@@ -81,7 +81,7 @@ const ChartListItem = ({ data }: ChartItemProps) => {
   );
 };
 
-export default ChartListItem;
+export default TaskListDetails;
 
 // const styles = StyleSheet.create({
 //   rowContainer: {

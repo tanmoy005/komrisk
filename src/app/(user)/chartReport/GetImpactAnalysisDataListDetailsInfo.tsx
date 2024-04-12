@@ -81,7 +81,7 @@ import React, { useEffect, useState } from 'react'
 import { Alert, FlatList, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { ChartListDataItem, ImpactAnalysisDataList, ImpactAnalysisDataListPayLoad } from '@/src/types';
-import ChartListItem from '@/src/components/ChartListItem';
+import TaskListDetails from '@/src/components/task/TaskListDetails';
 import { useLocalSearchParams } from 'expo-router';
 import GetImpactAnalysisDataList from '@/src/server/api-functions/get-impact-analysis-datalist-details';
 import { useSelector } from 'react-redux';
@@ -160,7 +160,7 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
         <HeadImageSection />
         <FlatList
           data={DataList}
-          renderItem={({ item }) => <ChartListItem data={item} />}
+          renderItem={({ item }) => <TaskListDetails data={item} />}
           contentContainerStyle={{ gap: 10, padding: 10 }}
         />
       </View>

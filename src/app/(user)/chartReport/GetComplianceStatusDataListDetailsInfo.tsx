@@ -80,7 +80,6 @@ import React, { useEffect, useState } from 'react'
 import { Alert, FlatList, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { ChartListDataItem, ComplianceStatusDataList, ComplianceStatusDataListPayLoad } from '@/src/types';
-import ChartListItem from '@/src/components/ChartListItem';
 import { useLocalSearchParams } from 'expo-router';
 import GetComplianceStatusDataList from '@/src/server/api-functions/get-compliance-status-datalist-details';
 import { useSelector } from 'react-redux';
@@ -88,6 +87,7 @@ import { RootState } from '@/src/store/rootReducer';
 import moment from 'moment';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
+import TaskListDetails from '@/src/components/task/TaskListDetails';
 
 
 
@@ -173,7 +173,7 @@ const GetComplianceStatusDataListDetailsInfo = () => {
         <HeadImageSection />
         <FlatList
           data={DataList}
-          renderItem={({ item }) => <ChartListItem data={item} />}
+          renderItem={({ item }) => <TaskListDetails data={item} />}
           contentContainerStyle={{ gap: 10, padding: 10 }}
         />
       </View>

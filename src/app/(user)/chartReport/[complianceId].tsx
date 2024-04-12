@@ -1,4 +1,4 @@
-import ChartDetailsItem from '@/src/components/ChartItemDetails';
+import TaskItemDetails from '@/src/components/task/TaskItemDetails';
 import CardContainer from '@/src/components/cards/CardContainer';
 import CardContainer2 from '@/src/components/cards/CardContainer2';
 import CustomeCard from '@/src/components/cards/CustomeCard';
@@ -54,7 +54,7 @@ const ShowDetailsReport = () => {
                 <CustomeCard>
                     {
                         compliancesItemData?.complianceId === null ? <CardSkelton /> :
-                            <ChartDetailsItem compliancesItemData={compliancesItemData} itemType='' />
+                            <TaskItemDetails compliancesItemData={compliancesItemData} itemType='' />
                     }
                 </CustomeCard>
             </CardContainer>

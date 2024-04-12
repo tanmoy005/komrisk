@@ -71,16 +71,15 @@
 // ============================= Updated on 09-04-2024 ================================== //
 
 import { useEffect, useState } from 'react'
-import { Alert, FlatList, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, View } from 'react-native';
 import GetActivityStatusDataList from '@/src/server/api-functions/get-activity-status-datalist-details';
 import { ActivityStatusDataList, ActivityStatusDataListPayLoad, ChartListDataItem } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
-import moment from 'moment';
-import ChartListItem from '@/src/components/ChartListItem';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
+import TaskListDetails from '@/src/components/task/TaskListDetails';
 
 const GetActivityStatusDataListDetailsInfo = () => {
   {
@@ -158,7 +157,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
         <HeadImageSection />
         <FlatList
           data={DataList}
-          renderItem={({ item }) => <ChartListItem data={item} />}
+          renderItem={({ item }) => <TaskListDetails data={item} />}
           contentContainerStyle={{ gap: 10, padding: 10 }}
         />
       </View>
