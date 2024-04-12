@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from 'react'
-// import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData } from '../types';
-// import GetImpactAnalysisData from '../server/api-functions/get-impact-analysis-data';
+// import { IncidentActivityDataPayLoad, ReportChartData, IncidentActivityData } from '../types';
+// import GetIncidentActivityData from '../server/api-functions/get-incident-activity-data';
 // import { Alert, Pressable } from 'react-native';
 // import { View } from 'react-native';
 // import DropDown from './Dropdown';
@@ -16,9 +16,9 @@
 // import CardSkelton from './skelton/CardSkelton';
 // import moment from 'moment';
 
-// const ImpactAnalysisInfo = () => {
+// const IncidentActivityInfo = () => {
 //   {
-//     const [impactAnalysisChartData, setImpactAnalysisChartData] = useState<ImpactAnalysisData>({
+//     const [incidentActivityChartData, setIncidentActivityChartData] = useState<IncidentActivityData>({
 //       title: null,
 //       subTitle: null,
 //       xAxisName: null,
@@ -37,21 +37,22 @@
 //       { label: 'DONUT', value: 'DONUT' },
 //     ];
 //     const navigateToChartList = (statusType: string) => {
-//       router.push({ pathname: `/chartReport/GetImpactAnalysisDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
+//       console.log("statusType old",statusType)
+//       router.push({ pathname: `/chartReport/GetIncidentActivityDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
 //     }
-//     const handleGetImpactAnalysisData = async () => {
+//     const handleGetIncidentActivityData = async () => {
 
-//       const payLoad: ImpactAnalysisDataPayLoad = {
+//       const payLoad: IncidentActivityDataPayLoad = {
 //         ...useCredential,
 //         start: startDate,
 //         viewAs: "COMPANY HEAD",
 //         end: currentDate
 //       }
 
-//       const { data, error, status } = await GetImpactAnalysisData(payLoad);
+//       const { data, error, status } = await GetIncidentActivityData(payLoad);
 //       if (status === 200) {
 //         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
-//         setImpactAnalysisChartData(data);
+//         setIncidentActivityChartData(data);
 
 //         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
 //         setFilteredChartData(filteredchartData);
@@ -62,7 +63,7 @@
 
 //     }
 //     useEffect(() => {
-//         handleGetImpactAnalysisData();
+//         handleGetIncidentActivityData();
 //     }, []);
 
 //     return (
@@ -78,8 +79,8 @@
 //                 currentChart === 'BAR' &&
 //                 <BarChartData
 //                   ReportData={filteredChartData}
-//                   yAxisName={impactAnalysisChartData.yAxisName}
-//                   xAxisName={impactAnalysisChartData.xAxisName}
+//                   yAxisName={incidentActivityChartData.yAxisName}
+//                   xAxisName={incidentActivityChartData.xAxisName}
 //                 />
 //               }
 //               {
@@ -104,8 +105,8 @@
 //                   )
 //                 })}
 //                 <View style={{ alignItems: 'flex-start' }}>
-//                   <Text style={styles.title}>{impactAnalysisChartData.title}</Text>
-//                   <Text style={styles.title}>{impactAnalysisChartData.subTitle}</Text>
+//                   <Text style={styles.title}>{incidentActivityChartData.title}</Text>
+//                   <Text style={styles.title}>{incidentActivityChartData.subTitle}</Text>
 //                 </View>
 //               </View>
 
@@ -126,76 +127,75 @@
 // }
 
 
-// export default ImpactAnalysisInfo;
+// export default IncidentActivityInfo;
 
 
 
-// ================================== Updated on 09-04-2024 ================================== //
+// ==================== Updated on 09-04-2024 ================================= //
 
 import React, { useEffect, useState } from 'react'
-import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData, ChartProp } from '../types';
-import GetImpactAnalysisData from '../server/api-functions/get-impact-analysis-data';
+import { IncidentActivityDataPayLoad, ReportChartData, IncidentActivityData, ChartProp } from '../../types';
+import GetIncidentActivityData from '../../server/api-functions/get-incident-activity-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
-import DropDown from './Dropdown';
-import PieChartData from './PieChart';
+import DropDown from '../Dropdown';
+import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store/rootReducer';
-import DonatChartData from './DonatChart';
-import BarChartData from './BarChart';
+import { RootState } from '../../store/rootReducer';
+import DonatChartData from '../charts/DonatChart';
+import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
 import { Card, Text } from 'react-native-elements';
-import { styles } from '../style';
+import { styles } from '../../style';
 import { FontAwesome } from '@expo/vector-icons';
-import CardSkelton from './skelton/CardSkelton';
+import CardSkelton from '../skelton/CardSkelton';
 import moment from 'moment';
-import calculatePercentage from '../utils/associate/get-percentage';
+import calculatePercentage from '../../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ImpactAnalysisInfo = ({currentChart}: ChartProp) => {
+const IncidentActivityInfo = ({currentChart}: ChartProp) => {
   {
-    const [impactAnalysisChartData, setImpactAnalysisChartData] = useState<ImpactAnalysisData>({
+    const [incidentActivityChartData, setIncidentActivityChartData] = useState<IncidentActivityData>({
       title: null,
       subTitle: null,
       xAxisName: null,
       yAxisName: null,
       chartData: null
     });
-    const [totalValue, setTotalValue] = useState<number>(0);
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
+    const [totalValue, setTotalValue] = useState<number>(0);
     // const [currentChart, setCurrentChart] = useState<string>('PIE');
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const currentDate: string = moment().format('DD/MM/YYYY');
     const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
-    const payLoad: ImpactAnalysisDataPayLoad = {
+
+    const payLoad: IncidentActivityDataPayLoad = {
       ...useCredential,
       start: startDate,
       viewAs: "COMPANY HEAD",
       end: currentDate
     }
 
-   
-    const chartItems = [
-      { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
-      { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="#900" />},
-      { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="#900" /> },
-    ];
+    
+    // const chartItems = [
+    //   { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
+    //   { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="#900" />},
+    //   { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="#900" /> },
+    // ];
 
-
-    const navigateToChartList = (statusType: string, payLoad: ImpactAnalysisDataPayLoad) => {
+    const navigateToChartList = (statusType: string, payLoad: IncidentActivityDataPayLoad) => {
       const payloadString = JSON.stringify(payLoad); // Stringify the payload here
-      router.push({ pathname: `/chartReport/GetImpactAnalysisDataListDetailsInfo`, params: { statusType, payload: payloadString } });
+      router.push({ pathname: `/chartReport/GetIncidentActivityDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
-
-    const handleGetImpactAnalysisData = async () => {
-
+    const handleGetIncidentActivityData = async () => {
 
 
-      const { data, error, status } = await GetImpactAnalysisData(payLoad);
+
+      const { data, error, status } = await GetIncidentActivityData(payLoad);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
-        setImpactAnalysisChartData(data);
+        setIncidentActivityChartData(data);
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
@@ -207,7 +207,7 @@ const ImpactAnalysisInfo = ({currentChart}: ChartProp) => {
 
     }
     useEffect(() => {
-      handleGetImpactAnalysisData();
+      handleGetIncidentActivityData();
     }, []);
 
     return (
@@ -223,8 +223,8 @@ const ImpactAnalysisInfo = ({currentChart}: ChartProp) => {
                 currentChart === 'BAR' &&
                 <BarChartData
                   ReportData={filteredChartData}
-                  yAxisName={impactAnalysisChartData.yAxisName}
-                  xAxisName={impactAnalysisChartData.xAxisName}
+                  yAxisName={incidentActivityChartData.yAxisName}
+                  xAxisName={incidentActivityChartData.xAxisName}
                 />
               }
               {
@@ -232,7 +232,33 @@ const ImpactAnalysisInfo = ({currentChart}: ChartProp) => {
                 <DonatChartData ReportData={filteredChartData} />
               }
 
+
+
+
               <View>
+                {filteredChartData && filteredChartData.map((data: ReportChartData, index) => {
+                  return (
+                    <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
+                      onPress={() => navigateToChartList(data?.status ?? "", payLoad)}>
+                      <FontAwesome
+                        name="circle"
+                        size={25}
+                        color={`#${data.color ?? '000'}`}
+                        style={{ marginRight: 15, opacity: 1 }}
+                      />
+                      <Text style={{ color: `#${data.color ?? '000'}` }}>{`${data.label ?? ''}  ${calculatePercentage(data.value, totalValue)}%`}</Text>
+
+                    </Pressable>
+                  )
+                })}
+                <View style={{ alignItems: 'flex-start' }}>
+                  <Text style={styles.title}>{incidentActivityChartData.title}</Text>
+                  <Text style={styles.title}>{incidentActivityChartData.subTitle}</Text>
+                </View>
+              </View>
+
+
+              {/* <View>
                 {filteredChartData && filteredChartData.map((label: ReportChartData, index) => {
                   return (
                     <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
@@ -244,20 +270,21 @@ const ImpactAnalysisInfo = ({currentChart}: ChartProp) => {
                         color={`#${label.color ?? '000'}`}
                         style={{ marginRight: 15, opacity: 1 }}
                       />
-                      <Text style={{ color: `#${label.color ?? '000'}` }}>{`${label.label ?? ''}  ${calculatePercentage(label.value, totalValue)}%`}</Text>
+                      <Text style={{ color: `#${label.color ?? '000'}` }}>{label.label ?? ''}</Text>
                     </Pressable>
                   )
                 })}
                 <View style={{ alignItems: 'flex-start' }}>
-                  <Text style={styles.title}>{impactAnalysisChartData.title}</Text>
-                  <Text style={styles.title}>{impactAnalysisChartData.subTitle}</Text>
+                  <Text style={styles.title}>{incidentActivityChartData.title}</Text>
+                  <Text style={styles.title}>{incidentActivityChartData.subTitle}</Text>
                 </View>
-              </View>
+              </View> */}
 
             </Card>
             : <CardSkelton />
         }
         {/* <View style={styles.chartSelctorContainer}>
+          <Text>Chart Type</Text>
           <DropDown
             selectedValue={currentChart}
             dropdownItems={chartItems}
@@ -270,4 +297,4 @@ const ImpactAnalysisInfo = ({currentChart}: ChartProp) => {
 }
 
 
-export default ImpactAnalysisInfo;
+export default IncidentActivityInfo;

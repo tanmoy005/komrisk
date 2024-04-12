@@ -132,23 +132,23 @@
 // ========================== Updated on 09-04-2024 ==================================== //
 
 import React, { useEffect, useState } from 'react'
-import { ComplianceStatusDataPayLoad, ReportChartData, ComplianceStatusData, ChartProp } from '../types';
-import GetComplianceStatusData from '../server/api-functions/get-compliance-status-data';
+import { ComplianceStatusDataPayLoad, ReportChartData, ComplianceStatusData, ChartProp } from '../../types';
+import GetComplianceStatusData from '../../server/api-functions/get-compliance-status-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
-import DropDown from './Dropdown';
-import PieChartData from './PieChart';
+import DropDown from '../Dropdown';
+import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store/rootReducer';
-import DonatChartData from './DonatChart';
-import BarChartData from './BarChart';
+import { RootState } from '../../store/rootReducer';
+import DonatChartData from '../charts/DonatChart';
+import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
 import { Card, Text } from 'react-native-elements';
-import { styles } from '../style';
+import { styles } from '../../style';
 import { FontAwesome } from '@expo/vector-icons';
-import CardSkelton from './skelton/CardSkelton';
+import CardSkelton from '../skelton/CardSkelton';
 import moment from 'moment';
-import calculatePercentage from '../utils/associate/get-percentage';
+import calculatePercentage from '../../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 

@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from 'react'
-// import { IncidentActivityDataPayLoad, ReportChartData, IncidentActivityData } from '../types';
-// import GetIncidentActivityData from '../server/api-functions/get-incident-activity-data';
+// import { IncidentComparisonDataPayLoad, ReportChartData, IncidentComparisonData } from '../types';
+// import GetIncidentComparisonData from '../server/api-functions/get-incident-comparison-data';
 // import { Alert, Pressable } from 'react-native';
 // import { View } from 'react-native';
 // import DropDown from './Dropdown';
@@ -16,9 +16,9 @@
 // import CardSkelton from './skelton/CardSkelton';
 // import moment from 'moment';
 
-// const IncidentActivityInfo = () => {
+// const IncidentComparisonInfo = () => {
 //   {
-//     const [incidentActivityChartData, setIncidentActivityChartData] = useState<IncidentActivityData>({
+//     const [incidentComparisonChartData, setIncidentComparisonChartData] = useState<IncidentComparisonData>({
 //       title: null,
 //       subTitle: null,
 //       xAxisName: null,
@@ -37,22 +37,21 @@
 //       { label: 'DONUT', value: 'DONUT' },
 //     ];
 //     const navigateToChartList = (statusType: string) => {
-//       console.log("statusType old",statusType)
-//       router.push({ pathname: `/chartReport/GetIncidentActivityDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
+//       router.push({ pathname: `/chartReport/GetIncidentComparisonDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
 //     }
-//     const handleGetIncidentActivityData = async () => {
+//     const handleGetIncidentComparisonData = async () => {
 
-//       const payLoad: IncidentActivityDataPayLoad = {
+//       const payLoad: IncidentComparisonDataPayLoad = {
 //         ...useCredential,
 //         start: startDate,
 //         viewAs: "COMPANY HEAD",
 //         end: currentDate
 //       }
 
-//       const { data, error, status } = await GetIncidentActivityData(payLoad);
+//       const { data, error, status } = await GetIncidentComparisonData(payLoad);
 //       if (status === 200) {
 //         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
-//         setIncidentActivityChartData(data);
+//         setIncidentComparisonChartData(data);
 
 //         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
 //         setFilteredChartData(filteredchartData);
@@ -63,7 +62,7 @@
 
 //     }
 //     useEffect(() => {
-//         handleGetIncidentActivityData();
+//         handleGetIncidentComparisonData();
 //     }, []);
 
 //     return (
@@ -79,8 +78,8 @@
 //                 currentChart === 'BAR' &&
 //                 <BarChartData
 //                   ReportData={filteredChartData}
-//                   yAxisName={incidentActivityChartData.yAxisName}
-//                   xAxisName={incidentActivityChartData.xAxisName}
+//                   yAxisName={incidentComparisonChartData.yAxisName}
+//                   xAxisName={incidentComparisonChartData.xAxisName}
 //                 />
 //               }
 //               {
@@ -105,8 +104,8 @@
 //                   )
 //                 })}
 //                 <View style={{ alignItems: 'flex-start' }}>
-//                   <Text style={styles.title}>{incidentActivityChartData.title}</Text>
-//                   <Text style={styles.title}>{incidentActivityChartData.subTitle}</Text>
+//                   <Text style={styles.title}>{incidentComparisonChartData.title}</Text>
+//                   <Text style={styles.title}>{incidentComparisonChartData.subTitle}</Text>
 //                 </View>
 //               </View>
 
@@ -127,35 +126,36 @@
 // }
 
 
-// export default IncidentActivityInfo;
+// export default IncidentComparisonInfo;
 
 
 
-// ==================== Updated on 09-04-2024 ================================= //
+// ========================== Updated on 09-04-2024 ============================ //
 
 import React, { useEffect, useState } from 'react'
-import { IncidentActivityDataPayLoad, ReportChartData, IncidentActivityData, ChartProp } from '../types';
-import GetIncidentActivityData from '../server/api-functions/get-incident-activity-data';
+import { IncidentComparisonDataPayLoad, ReportChartData, IncidentComparisonData, ChartProp } from '../../types';
+import GetIncidentComparisonData from '../../server/api-functions/get-incident-comparison-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
-import DropDown from './Dropdown';
-import PieChartData from './PieChart';
+import DropDown from '../Dropdown';
+import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store/rootReducer';
-import DonatChartData from './DonatChart';
-import BarChartData from './BarChart';
+import { RootState } from '../../store/rootReducer';
+import DonatChartData from '../charts/DonatChart';
+import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
 import { Card, Text } from 'react-native-elements';
-import { styles } from '../style';
+import { styles } from '../../style';
 import { FontAwesome } from '@expo/vector-icons';
-import CardSkelton from './skelton/CardSkelton';
+import CardSkelton from '../skelton/CardSkelton';
 import moment from 'moment';
-import calculatePercentage from '../utils/associate/get-percentage';
+import calculatePercentage from '../../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const IncidentActivityInfo = ({currentChart}: ChartProp) => {
+
+const IncidentComparisonInfo = ({currentChart}: ChartProp) => {
   {
-    const [incidentActivityChartData, setIncidentActivityChartData] = useState<IncidentActivityData>({
+    const [incidentComparisonChartData, setIncidentComparisonChartData] = useState<IncidentComparisonData>({
       title: null,
       subTitle: null,
       xAxisName: null,
@@ -164,38 +164,38 @@ const IncidentActivityInfo = ({currentChart}: ChartProp) => {
     });
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
-    // const [currentChart, setCurrentChart] = useState<string>('PIE');
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const currentDate: string = moment().format('DD/MM/YYYY');
     const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
-
-    const payLoad: IncidentActivityDataPayLoad = {
+    const payLoad: IncidentComparisonDataPayLoad = {
       ...useCredential,
       start: startDate,
       viewAs: "COMPANY HEAD",
       end: currentDate
     }
 
-    
     // const chartItems = [
     //   { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
     //   { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="#900" />},
     //   { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="#900" /> },
     // ];
+    // const navigateToChartList = (statusType: string) => {
+    //   router.push({ pathname: `/chartReport/GetIncidentComparisonDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
+    // }
 
-    const navigateToChartList = (statusType: string, payLoad: IncidentActivityDataPayLoad) => {
+    const navigateToChartList = (statusType: string, payLoad: IncidentComparisonDataPayLoad) => {
       const payloadString = JSON.stringify(payLoad); // Stringify the payload here
-      router.push({ pathname: `/chartReport/GetIncidentActivityDataListDetailsInfo`, params: { statusType, payload: payloadString } });
+      router.push({ pathname: `/chartReport/GetIncidentComparisonDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
-    const handleGetIncidentActivityData = async () => {
+    const handleGetIncidentComparisonData = async () => {
 
 
 
-      const { data, error, status } = await GetIncidentActivityData(payLoad);
+      const { data, error, status } = await GetIncidentComparisonData(payLoad);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
-        setIncidentActivityChartData(data);
+        setIncidentComparisonChartData(data);
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
@@ -207,8 +207,9 @@ const IncidentActivityInfo = ({currentChart}: ChartProp) => {
 
     }
     useEffect(() => {
-      handleGetIncidentActivityData();
+      handleGetIncidentComparisonData();
     }, []);
+console.log('currentChart2333', currentChart);
 
     return (
       <View style={styles.chartContainer}>
@@ -223,8 +224,8 @@ const IncidentActivityInfo = ({currentChart}: ChartProp) => {
                 currentChart === 'BAR' &&
                 <BarChartData
                   ReportData={filteredChartData}
-                  yAxisName={incidentActivityChartData.yAxisName}
-                  xAxisName={incidentActivityChartData.xAxisName}
+                  yAxisName={incidentComparisonChartData.yAxisName}
+                  xAxisName={incidentComparisonChartData.xAxisName}
                 />
               }
               {
@@ -232,14 +233,11 @@ const IncidentActivityInfo = ({currentChart}: ChartProp) => {
                 <DonatChartData ReportData={filteredChartData} />
               }
 
-
-
-
               <View>
                 {filteredChartData && filteredChartData.map((data: ReportChartData, index) => {
                   return (
                     <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
-                      onPress={() => navigateToChartList(data?.status ?? "", payLoad)}>
+                      onPress={() => navigateToChartList(data?.comparison ?? "", payLoad)}>
                       <FontAwesome
                         name="circle"
                         size={25}
@@ -247,22 +245,20 @@ const IncidentActivityInfo = ({currentChart}: ChartProp) => {
                         style={{ marginRight: 15, opacity: 1 }}
                       />
                       <Text style={{ color: `#${data.color ?? '000'}` }}>{`${data.label ?? ''}  ${calculatePercentage(data.value, totalValue)}%`}</Text>
-
                     </Pressable>
                   )
                 })}
                 <View style={{ alignItems: 'flex-start' }}>
-                  <Text style={styles.title}>{incidentActivityChartData.title}</Text>
-                  <Text style={styles.title}>{incidentActivityChartData.subTitle}</Text>
+                  <Text style={styles.title}>{incidentComparisonChartData.title}</Text>
+                  <Text style={styles.title}>{incidentComparisonChartData.subTitle}</Text>
                 </View>
               </View>
-
 
               {/* <View>
                 {filteredChartData && filteredChartData.map((label: ReportChartData, index) => {
                   return (
                     <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
-                      onPress={() => navigateToChartList(label?.link?.type ?? "", payLoad)}
+                    onPress={() => navigateToChartList(label?.link?.type ?? "", payLoad)}
                     >
                       <FontAwesome
                         name="circle"
@@ -275,8 +271,8 @@ const IncidentActivityInfo = ({currentChart}: ChartProp) => {
                   )
                 })}
                 <View style={{ alignItems: 'flex-start' }}>
-                  <Text style={styles.title}>{incidentActivityChartData.title}</Text>
-                  <Text style={styles.title}>{incidentActivityChartData.subTitle}</Text>
+                  <Text style={styles.title}>{incidentComparisonChartData.title}</Text>
+                  <Text style={styles.title}>{incidentComparisonChartData.subTitle}</Text>
                 </View>
               </View> */}
 
@@ -297,4 +293,4 @@ const IncidentActivityInfo = ({currentChart}: ChartProp) => {
 }
 
 
-export default IncidentActivityInfo;
+export default IncidentComparisonInfo;

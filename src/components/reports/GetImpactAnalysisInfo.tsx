@@ -1,24 +1,24 @@
 // import React, { useEffect, useState } from 'react'
-// import { ActivityStatusData, ActivityStatusDataPayLoad, ReportChartData } from '../types';
-// import GetActivityStatusData from '../server/api-functions/get-activity-status-data';
+// import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData } from '../types';
+// import GetImpactAnalysisData from '../server/api-functions/get-impact-analysis-data';
 // import { Alert, Pressable } from 'react-native';
 // import { View } from 'react-native';
 // import DropDown from './Dropdown';
 // import PieChartData from './PieChart';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '../store/rootReducer';
-// import { router } from 'expo-router';
-// import BarChartData from './BarChart';
 // import DonatChartData from './DonatChart';
-// import { FontAwesome } from '@expo/vector-icons';
-// import { styles } from '../style';
+// import BarChartData from './BarChart';
+// import { router } from 'expo-router';
 // import { Card, Text } from 'react-native-elements';
+// import { styles } from '../style';
+// import { FontAwesome } from '@expo/vector-icons';
 // import CardSkelton from './skelton/CardSkelton';
 // import moment from 'moment';
 
-// const ActivityStatusInfo = () => {
+// const ImpactAnalysisInfo = () => {
 //   {
-//     const [activityStatusChartData, setActivityStatusChartData] = useState<ActivityStatusData>({
+//     const [impactAnalysisChartData, setImpactAnalysisChartData] = useState<ImpactAnalysisData>({
 //       title: null,
 //       subTitle: null,
 //       xAxisName: null,
@@ -27,51 +27,42 @@
 //     });
 //     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
 //     const [currentChart, setCurrentChart] = useState<string>('PIE');
+//     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+//     const currentDate: string = moment().format('DD/MM/YYYY');
+//     const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
 //     const chartItems = [
 //       { label: 'PIE', value: 'PIE' },
 //       { label: 'BAR', value: 'BAR' },
 //       { label: 'DONUT', value: 'DONUT' },
 //     ];
-//     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-//     const currentDate: string = moment().format('DD/MM/YYYY');
-//     const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
-
-//     const payLoad: ActivityStatusDataPayLoad = {
-//       ...useCredential,
-//       start: startDate,
-//       viewAs: "COMPANY HEAD",
-//       end: currentDate
-//     }
-
 //     const navigateToChartList = (statusType: string) => {
-//       router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType} }); // Remove the braces in para
+//       router.push({ pathname: `/chartReport/GetImpactAnalysisDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
 //     }
-//     const handleGetActivityStatusData = async (payLoad: ActivityStatusDataPayLoad) => {
+//     const handleGetImpactAnalysisData = async () => {
 
-//       // const payLoad: ActivityStatusDataPayLoad = {
-//       //   ...useCredential,
-//       //   start: startDate,
-//       //   viewAs: "COMPANY HEAD",
-//       //   end: currentDate
-//       // }
-//       // //console.log("payLoad", payLoad);
+//       const payLoad: ImpactAnalysisDataPayLoad = {
+//         ...useCredential,
+//         start: startDate,
+//         viewAs: "COMPANY HEAD",
+//         end: currentDate
+//       }
 
-//       const { data, error, status } = await GetActivityStatusData(payLoad);
+//       const { data, error, status } = await GetImpactAnalysisData(payLoad);
 //       if (status === 200) {
 //         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
-//         setActivityStatusChartData(data);
+//         setImpactAnalysisChartData(data);
 
 //         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
 //         setFilteredChartData(filteredchartData);
+
 //       } else {
 //         Alert.alert("error", error.message);
 //       }
 
 //     }
 //     useEffect(() => {
-//       // //console.log('filteredchartData')
-//       handleGetActivityStatusData(payLoad);
+//         handleGetImpactAnalysisData();
 //     }, []);
 
 //     return (
@@ -87,8 +78,8 @@
 //                 currentChart === 'BAR' &&
 //                 <BarChartData
 //                   ReportData={filteredChartData}
-//                   yAxisName={activityStatusChartData.yAxisName}
-//                   xAxisName={activityStatusChartData.xAxisName}
+//                   yAxisName={impactAnalysisChartData.yAxisName}
+//                   xAxisName={impactAnalysisChartData.xAxisName}
 //                 />
 //               }
 //               {
@@ -113,8 +104,8 @@
 //                   )
 //                 })}
 //                 <View style={{ alignItems: 'flex-start' }}>
-//                   <Text style={styles.title}>{activityStatusChartData.title}</Text>
-//                   <Text style={styles.title}>{activityStatusChartData.subTitle}</Text>
+//                   <Text style={styles.title}>{impactAnalysisChartData.title}</Text>
+//                   <Text style={styles.title}>{impactAnalysisChartData.subTitle}</Text>
 //                 </View>
 //               </View>
 
@@ -134,91 +125,77 @@
 //   }
 // }
 
-// export default ActivityStatusInfo;
+
+// export default ImpactAnalysisInfo;
 
 
 
-// ============================= Updated on 09-04-2024 ======================================== //
+// ================================== Updated on 09-04-2024 ================================== //
 
 import React, { useEffect, useState } from 'react'
-import { ActivityStatusData, ActivityStatusDataPayLoad, ChartProp, ReportChartData } from '../types';
-import GetActivityStatusData from '../server/api-functions/get-activity-status-data';
+import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData, ChartProp } from '../../types';
+import GetImpactAnalysisData from '../../server/api-functions/get-impact-analysis-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
-import DropDown from './Dropdown';
-import PieChartData from './PieChart';
+import DropDown from '../Dropdown';
+import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store/rootReducer';
+import { RootState } from '../../store/rootReducer';
+import DonatChartData from '../charts/DonatChart';
+import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
-import BarChartData from './BarChart';
-import DonatChartData from './DonatChart';
-import { FontAwesome } from '@expo/vector-icons';
-import { styles } from '../style';
 import { Card, Text } from 'react-native-elements';
-import CardSkelton from './skelton/CardSkelton';
+import { styles } from '../../style';
+import { FontAwesome } from '@expo/vector-icons';
+import CardSkelton from '../skelton/CardSkelton';
 import moment from 'moment';
-import calculatePercentage from '../utils/associate/get-percentage';
+import calculatePercentage from '../../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ActivityStatusInfo = ({currentChart}:ChartProp) => {
+const ImpactAnalysisInfo = ({currentChart}: ChartProp) => {
   {
-    const [activityStatusChartData, setActivityStatusChartData] = useState<ActivityStatusData>({
+    const [impactAnalysisChartData, setImpactAnalysisChartData] = useState<ImpactAnalysisData>({
       title: null,
       subTitle: null,
       xAxisName: null,
       yAxisName: null,
       chartData: null
     });
-    const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
+    const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     // const [currentChart, setCurrentChart] = useState<string>('PIE');
-
-    const chartItems = [
-      { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
-      { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="#900" />},
-      { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="#900" /> },
-    ];
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const currentDate: string = moment().format('DD/MM/YYYY');
     const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
-    console.log("*********2")
-
-    const payLoad: ActivityStatusDataPayLoad = {
+    const payLoad: ImpactAnalysisDataPayLoad = {
       ...useCredential,
       start: startDate,
       viewAs: "COMPANY HEAD",
       end: currentDate
     }
 
-    console.log("payload up*****", payLoad)
+   
+    const chartItems = [
+      { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
+      { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="#900" />},
+      { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="#900" /> },
+    ];
 
 
-    const navigateToChartList = (statusType: string, payLoad: ActivityStatusDataPayLoad) => {
+    const navigateToChartList = (statusType: string, payLoad: ImpactAnalysisDataPayLoad) => {
       const payloadString = JSON.stringify(payLoad); // Stringify the payload here
-      router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType, payload: payloadString } });
+      router.push({ pathname: `/chartReport/GetImpactAnalysisDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
 
+    const handleGetImpactAnalysisData = async () => {
 
 
 
-    // const navigateToChartList = (statusType: string, payLoad: ActivityStatusDataPayLoad) => {
-    //   router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType, payLoad } });
-    // }
-    const handleGetActivityStatusData = async (payLoad: ActivityStatusDataPayLoad) => {
-
-      // const payLoad: ActivityStatusDataPayLoad = {
-      //   ...useCredential,
-      //   start: startDate,
-      //   viewAs: "COMPANY HEAD",
-      //   end: currentDate
-      // }
-      // //console.log("payLoad", payLoad);
-
-      const { data, error, status } = await GetActivityStatusData(payLoad);
+      const { data, error, status } = await GetImpactAnalysisData(payLoad);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
-        setActivityStatusChartData(data);
+        setImpactAnalysisChartData(data);
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
@@ -230,8 +207,7 @@ const ActivityStatusInfo = ({currentChart}:ChartProp) => {
 
     }
     useEffect(() => {
-      // //console.log('filteredchartData')
-      handleGetActivityStatusData(payLoad);
+      handleGetImpactAnalysisData();
     }, []);
 
     return (
@@ -247,8 +223,8 @@ const ActivityStatusInfo = ({currentChart}:ChartProp) => {
                 currentChart === 'BAR' &&
                 <BarChartData
                   ReportData={filteredChartData}
-                  yAxisName={activityStatusChartData.yAxisName}
-                  xAxisName={activityStatusChartData.xAxisName}
+                  yAxisName={impactAnalysisChartData.yAxisName}
+                  xAxisName={impactAnalysisChartData.xAxisName}
                 />
               }
               {
@@ -273,8 +249,8 @@ const ActivityStatusInfo = ({currentChart}:ChartProp) => {
                   )
                 })}
                 <View style={{ alignItems: 'flex-start' }}>
-                  <Text style={styles.title}>{activityStatusChartData.title}</Text>
-                  <Text style={styles.title}>{activityStatusChartData.subTitle}</Text>
+                  <Text style={styles.title}>{impactAnalysisChartData.title}</Text>
+                  <Text style={styles.title}>{impactAnalysisChartData.subTitle}</Text>
                 </View>
               </View>
 
@@ -282,7 +258,6 @@ const ActivityStatusInfo = ({currentChart}:ChartProp) => {
             : <CardSkelton />
         }
         {/* <View style={styles.chartSelctorContainer}>
-          <Text>Chart Type</Text>
           <DropDown
             selectedValue={currentChart}
             dropdownItems={chartItems}
@@ -294,4 +269,5 @@ const ActivityStatusInfo = ({currentChart}:ChartProp) => {
   }
 }
 
-export default ActivityStatusInfo;
+
+export default ImpactAnalysisInfo;

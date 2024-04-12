@@ -1,5 +1,5 @@
 import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
-import ActivityStatusInfo from "@/src/components/GetActivityStatusInfo";
+import ActivityStatusInfo from "@/src/components/reports/GetActivityStatusInfo";
 import { styles } from "@/src/style";
 import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import Filter from "@/src/components/filter/Filter";

@@ -1,6 +1,6 @@
 import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
 
-import IncidentComparisonInfo from "@/src/components/GetIncidentComparisonInfo";
+import IncidentComparisonInfo from "@/src/components/reports/GetIncidentComparisonInfo";
 import { styles } from "@/src/style";
 import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import Filter from "@/src/components/filter/Filter";

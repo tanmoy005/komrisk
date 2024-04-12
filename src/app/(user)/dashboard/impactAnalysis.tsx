@@ -1,6 +1,6 @@
 import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
 
-import ImpactAnalysisInfo from "@/src/components/GetImpactAnalysisInfo";
+import ImpactAnalysisInfo from "@/src/components/reports/GetImpactAnalysisInfo";
 import { styles } from "@/src/style";
 import Filter from "@/src/components/filter/Filter";
 import { useState } from "react";

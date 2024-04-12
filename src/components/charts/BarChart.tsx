@@ -1,10 +1,10 @@
 import { View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { ReportChartData } from '../types';
+import { ReportChartData } from '../../types';
 import { BarChart } from 'react-native-chart-kit';
 import { ChartData } from 'react-native-chart-kit/dist/HelperTypes';
-import CardSkelton from './skelton/CardSkelton';
-import { screenWidth } from '../style';
+import CardSkelton from '../skelton/CardSkelton';
+import { screenWidth } from '../../style';
 
 
 export type ChartItemProps = {

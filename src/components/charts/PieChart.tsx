@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ReportChartData } from '../../types';
+import CardSkelton from '../skelton/CardSkelton';
 import PieChart from 'react-native-pie-chart';
-import { ReportChartData } from '../types';
-import { screenWidth } from '../style';
-import CardSkelton from './skelton/CardSkelton';
+import { screenWidth } from '../../style';
 
-export type dChartItemProps = {
+type ChartItemProps = {
   ReportData: ReportChartData[];
 };
 
 
-const DonatChartData = ({ ReportData }: dChartItemProps) => {
+const PieChartData = ({ ReportData }: ChartItemProps) => {
   const [colors, setColors] = useState<string[]>([]);
   const [dataValue, setDataValue] = useState<number[]>([]);
 
@@ -27,6 +27,7 @@ const DonatChartData = ({ ReportData }: dChartItemProps) => {
   }, [ReportData]);
 
 
+
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       {
@@ -35,7 +36,6 @@ const DonatChartData = ({ ReportData }: dChartItemProps) => {
             series={dataValue}
             widthAndHeight={screenWidth * .48}
             sliceColor={colors}
-            coverRadius={0.45}
             coverFill={'#FFF'}
           />
           :
@@ -45,4 +45,6 @@ const DonatChartData = ({ ReportData }: dChartItemProps) => {
   );
 };
 
-export default DonatChartData;
+
+
+export default PieChartData;
