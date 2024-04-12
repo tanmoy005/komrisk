@@ -11,8 +11,9 @@ import Button from '../components/Button';
 import DropDown from '../components/Dropdown';
 import CustomeDatePicker from '../components/CustomeDatePicker';
 
-
-export default function ModalScreen() {
+const ModalScreen = ({props}) => {
+// export default function ModalScreen({filterType : string}) {
+    
     const handleApplyFilters = () => {
 
     }
@@ -115,6 +116,9 @@ export default function ModalScreen() {
         </View>
     )
 }
+
+export default ModalScreen;
+
 // const styles = StyleSheet.create({
 //     container: {
 //         flex: 1,

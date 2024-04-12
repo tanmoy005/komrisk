@@ -153,7 +153,7 @@ import calculatePercentage from '../../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-const IncidentComparisonInfo = ({currentChart}: ChartProp) => {
+const IncidentComparisonInfo = ({ currentChart }: ChartProp) => {
   {
     const [incidentComparisonChartData, setIncidentComparisonChartData] = useState<IncidentComparisonData>({
       title: null,
@@ -174,15 +174,6 @@ const IncidentComparisonInfo = ({currentChart}: ChartProp) => {
       viewAs: "COMPANY HEAD",
       end: currentDate
     }
-
-    // const chartItems = [
-    //   { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
-    //   { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="#900" />},
-    //   { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="#900" /> },
-    // ];
-    // const navigateToChartList = (statusType: string) => {
-    //   router.push({ pathname: `/chartReport/GetIncidentComparisonDataListDetailsInfo`, params: { statusType } }); // Remove the braces in para
-    // }
 
     const navigateToChartList = (statusType: string, payLoad: IncidentComparisonDataPayLoad) => {
       const payloadString = JSON.stringify(payLoad); // Stringify the payload here
@@ -209,7 +200,7 @@ const IncidentComparisonInfo = ({currentChart}: ChartProp) => {
     useEffect(() => {
       handleGetIncidentComparisonData();
     }, []);
-console.log('currentChart2333', currentChart);
+    console.log('currentChart2333', currentChart);
 
     return (
       <View style={styles.chartContainer}>
@@ -253,40 +244,9 @@ console.log('currentChart2333', currentChart);
                   <Text style={styles.title}>{incidentComparisonChartData.subTitle}</Text>
                 </View>
               </View>
-
-              {/* <View>
-                {filteredChartData && filteredChartData.map((label: ReportChartData, index) => {
-                  return (
-                    <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
-                    onPress={() => navigateToChartList(label?.link?.type ?? "", payLoad)}
-                    >
-                      <FontAwesome
-                        name="circle"
-                        size={25}
-                        color={`#${label.color ?? '000'}`}
-                        style={{ marginRight: 15, opacity: 1 }}
-                      />
-                      <Text style={{ color: `#${label.color ?? '000'}` }}>{label.label ?? ''}</Text>
-                    </Pressable>
-                  )
-                })}
-                <View style={{ alignItems: 'flex-start' }}>
-                  <Text style={styles.title}>{incidentComparisonChartData.title}</Text>
-                  <Text style={styles.title}>{incidentComparisonChartData.subTitle}</Text>
-                </View>
-              </View> */}
-
             </Card>
             : <CardSkelton />
         }
-        {/* <View style={styles.chartSelctorContainer}>
-          <Text>Chart Type</Text>
-          <DropDown
-            selectedValue={currentChart}
-            dropdownItems={chartItems}
-            setSelectedValue={setCurrentChart}
-          />
-        </View> */}
       </View>
     )
   }
