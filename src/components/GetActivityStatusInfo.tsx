@@ -141,7 +141,7 @@
 // ============================= Updated on 09-04-2024 ======================================== //
 
 import React, { useEffect, useState } from 'react'
-import { ActivityStatusData, ActivityStatusDataPayLoad, ReportChartData } from '../types';
+import { ActivityStatusData, ActivityStatusDataPayLoad, ChartProp, ReportChartData } from '../types';
 import GetActivityStatusData from '../server/api-functions/get-activity-status-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
@@ -160,7 +160,7 @@ import moment from 'moment';
 import calculatePercentage from '../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ActivityStatusInfo = () => {
+const ActivityStatusInfo = ({currentChart}:ChartProp) => {
   {
     const [activityStatusChartData, setActivityStatusChartData] = useState<ActivityStatusData>({
       title: null,
@@ -171,7 +171,7 @@ const ActivityStatusInfo = () => {
     });
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
-    const [currentChart, setCurrentChart] = useState<string>('PIE');
+    // const [currentChart, setCurrentChart] = useState<string>('PIE');
 
     const chartItems = [
       { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
@@ -281,14 +281,14 @@ const ActivityStatusInfo = () => {
             </Card>
             : <CardSkelton />
         }
-        <View style={styles.chartSelctorContainer}>
+        {/* <View style={styles.chartSelctorContainer}>
           <Text>Chart Type</Text>
           <DropDown
             selectedValue={currentChart}
             dropdownItems={chartItems}
             setSelectedValue={setCurrentChart}
           />
-        </View>
+        </View> */}
       </View>
     )
   }

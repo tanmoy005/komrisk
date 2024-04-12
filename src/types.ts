@@ -364,3 +364,11 @@ export const CompliancesItemDetails: CompliancesItemDetailsResponse = {
   crId: null,
   lawName: null,
 }
+export interface FilterProps {
+  currentChart: string;
+  setCurrentChart: React.Dispatch<React.SetStateAction<string>>
+}
+
+export interface ChartProp{
+  currentChart : string;
+}

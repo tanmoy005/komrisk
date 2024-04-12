@@ -132,7 +132,7 @@
 // ========================== Updated on 09-04-2024 ==================================== //
 
 import React, { useEffect, useState } from 'react'
-import { ComplianceStatusDataPayLoad, ReportChartData, ComplianceStatusData } from '../types';
+import { ComplianceStatusDataPayLoad, ReportChartData, ComplianceStatusData, ChartProp } from '../types';
 import GetComplianceStatusData from '../server/api-functions/get-compliance-status-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
@@ -152,7 +152,7 @@ import calculatePercentage from '../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-const ComplianceStatusInfo = () => {
+const ComplianceStatusInfo = ({currentChart}:ChartProp) => {
   const [activityStatusChartData, setActivityStatusChartData] = useState<ComplianceStatusData>({
     title: null,
     subTitle: null,
@@ -162,7 +162,7 @@ const ComplianceStatusInfo = () => {
   });
   const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
   const [totalValue, setTotalValue] = useState<number>(0);
-  const [currentChart, setCurrentChart] = useState<string>('PIE');
+  // const [currentChart, setCurrentChart] = useState<string>('PIE');
   const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
   const currentDate: string = moment().format('DD/MM/YYYY');
   const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
@@ -175,11 +175,11 @@ const ComplianceStatusInfo = () => {
   }
 
  
-  const chartItems = [
-    { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="#900" />  },
-    { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="#900" />},
-    { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="#900" /> },
-  ];
+  // const chartItems = [
+  //   { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="rgba(120, 106, 205, 1)" />  },
+  //   { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="rgba(120, 106, 205, 1)" />},
+  //   { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="rgba(120, 106, 205, 1)" /> },
+  // ];
 
 
   const navigateToChartList = (statusType: string, payLoad: ComplianceStatusDataPayLoad) => {
@@ -256,14 +256,13 @@ const ComplianceStatusInfo = () => {
           </Card>
           : <CardSkelton />
       }
-      <View style={styles.chartSelctorContainer}>
-        <Text>Chart Type</Text>
+      {/* <View style={styles.chartSelctorContainer}>
         <DropDown
           selectedValue={currentChart}
           dropdownItems={chartItems}
           setSelectedValue={setCurrentChart}
         />
-      </View>
+      </View> */}
     </View>
   )
 }

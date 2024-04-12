@@ -2,17 +2,24 @@ import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
 
 import IncidentActivityInfo from "@/src/components/GetIncidentActivityInfo";
 import { styles } from "@/src/style";
+import { useState } from "react";
+import HeadImageSection from "@/src/components/headSection/HeadImageSection";
+import Filter from "@/src/components/filter/Filter";
 // const Product = products[3];
 
 const IncidentActivity = () => {
+  const [filterType, setFilterType] = useState<string>('PIE');
   return (
     <SafeAreaView style={styles.dashboardContainer}>
-      <View style={styles.imageContainer}>
-        <Image style={{ width: 30 }} source={require('@/assets/images/Icons_Mo.png')} />
-        <Image style={{ width: 100 }} source={require('@/assets/images/Komrisk-Logo-small.png')} />
-      </View>
+      <HeadImageSection />
+      <Filter
+        currentChart={filterType}
+        setCurrentChart={setFilterType}
+      />
       <View style={styles.dashboardChartContainer}>
-        <IncidentActivityInfo />
+        <IncidentActivityInfo
+         currentChart={filterType}
+        />
       </View>
     </SafeAreaView>
   );

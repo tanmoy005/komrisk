@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import Colors from '@/src/constants/Colors';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link, Stack } from 'expo-router';
@@ -48,6 +48,7 @@ export default function TabTwoScreen() {
         }
       }} />
       <Stack.Screen name="chartReport" options={{ headerShown: false }} />
+
       {/* Add another screen below */}
       {/* <Stack.Screen name='Notification'
         options={{

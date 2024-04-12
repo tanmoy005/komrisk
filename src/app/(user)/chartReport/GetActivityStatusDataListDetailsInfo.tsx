@@ -104,7 +104,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
 
     const getpayload = typeof payload === 'string' ? payload : payload[0];
 
-    console.log("payload got",getpayload)
+    console.log("payload got", getpayload)
 
 
     let parsedPayload;
@@ -135,7 +135,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
       //console.log("handleGetActivityStatusDataList");
 
 
-      
+
       const { data, error, status } = await GetActivityStatusDataList(payLoad);
       if (status === 200) {
         const { aaData } = data;
@@ -155,8 +155,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
 
     return (
       <View style={styles.chartContainer}>
-                <HeadImageSection />
-
+        <HeadImageSection />
         <FlatList
           data={DataList}
           renderItem={({ item }) => <ChartListItem data={item} />}

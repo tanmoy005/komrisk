@@ -2,6 +2,7 @@ import { Dispatch } from '@reduxjs/toolkit';
 import React, { SetStateAction, useState } from 'react';
 import { View, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { size32, styles } from '../style';
 
 interface DropDownItem {
   label: string;
@@ -28,7 +29,7 @@ const DropDown = ({ setSelectedValue, dropdownItems, selectedValue }: Dropdown) 
         setOpen={setOpen}
         setValue={setSelectedValue}
         // setItems={null}
-        style={{ width: 130, alignItems: 'center', alignSelf: 'center' }}
+        style={styles.dropdownPicker}
       // onChangeValue={(value) => //console.log(value)} // Optional callback when the selected value changes
       />
     </View>

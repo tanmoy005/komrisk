@@ -133,7 +133,7 @@
 // ================================== Updated on 09-04-2024 ================================== //
 
 import React, { useEffect, useState } from 'react'
-import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData } from '../types';
+import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData, ChartProp } from '../types';
 import GetImpactAnalysisData from '../server/api-functions/get-impact-analysis-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
@@ -152,7 +152,7 @@ import moment from 'moment';
 import calculatePercentage from '../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ImpactAnalysisInfo = () => {
+const ImpactAnalysisInfo = ({currentChart}: ChartProp) => {
   {
     const [impactAnalysisChartData, setImpactAnalysisChartData] = useState<ImpactAnalysisData>({
       title: null,
@@ -163,7 +163,7 @@ const ImpactAnalysisInfo = () => {
     });
     const [totalValue, setTotalValue] = useState<number>(0);
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
-    const [currentChart, setCurrentChart] = useState<string>('PIE');
+    // const [currentChart, setCurrentChart] = useState<string>('PIE');
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const currentDate: string = moment().format('DD/MM/YYYY');
     const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
@@ -257,14 +257,13 @@ const ImpactAnalysisInfo = () => {
             </Card>
             : <CardSkelton />
         }
-        <View style={styles.chartSelctorContainer}>
-          <Text>Chart Type</Text>
+        {/* <View style={styles.chartSelctorContainer}>
           <DropDown
             selectedValue={currentChart}
             dropdownItems={chartItems}
             setSelectedValue={setCurrentChart}
           />
-        </View>
+        </View> */}
       </View>
     )
   }
