@@ -23,7 +23,7 @@ export default function ModalScreen() {
                 <View style={{ ...styles.taskCard, justifyContent: 'space-between', width: '100%' }}>
                     <CardContainer>
                         <CardTextContainer>
-                            <View>
+                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                 <Text style={{ textAlign: 'left' }}>Country </Text>
                                 <Text style={{ textAlign: 'left' }}>fsdf </Text>
                             </View>
