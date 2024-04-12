@@ -164,6 +164,14 @@ const ComplianceStatusInfo = ({currentChart}:ChartProp) => {
   const [totalValue, setTotalValue] = useState<number>(0);
   // const [currentChart, setCurrentChart] = useState<string>('PIE');
   const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+  const useDetails = useSelector((state: RootState) => state.authUserDetails.payload);
+  const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
+  const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
+  console.log('====================================');
+  console.log("useDetails", useDetails);
+  console.log("useAccessDetails", useAccessDetails);
+  console.log("useAvailableViews", useAvailableViews);
+  console.log('====================================');
   const currentDate: string = moment().format('DD/MM/YYYY');
   const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
@@ -174,10 +182,10 @@ const ComplianceStatusInfo = ({currentChart}:ChartProp) => {
     end: currentDate
   }
 
- 
+
   // const chartItems = [
-  //   { label: 'PIE', value: 'PIE' , icon: () => <Icon name="chart-pie" size={20} color="rgba(120, 106, 205, 1)" />  },
-  //   { label: 'BAR', value: 'BAR' , icon: () => <Icon name="chart-bar" size={20} color="rgba(120, 106, 205, 1)" />},
+  //   { label: 'PIE', value: 'PIE', icon: () => <Icon name="chart-pie" size={20} color="rgba(120, 106, 205, 1)" /> },
+  //   { label: 'BAR', value: 'BAR', icon: () => <Icon name="chart-bar" size={20} color="rgba(120, 106, 205, 1)" /> },
   //   { label: 'DONUT', value: 'DONUT', icon: () => <Icon name="chart-donut" size={20} color="rgba(120, 106, 205, 1)" /> },
   // ];
 
@@ -186,7 +194,7 @@ const ComplianceStatusInfo = ({currentChart}:ChartProp) => {
     const payloadString = JSON.stringify(payLoad); // Stringify the payload here
     router.push({ pathname: `/chartReport/GetComplianceStatusDataListDetailsInfo`, params: { statusType, payload: payloadString } });
   }
-  
+
 
   const handleGetComplianceStatusData = async () => {
     const { data, error, status } = await GetComplianceStatusData(payLoad);
@@ -234,7 +242,7 @@ const ComplianceStatusInfo = ({currentChart}:ChartProp) => {
               {filteredChartData && filteredChartData.map((label: ReportChartData, index) => {
                 return (
                   <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
-                  onPress={() => navigateToChartList(label?.link?.type ?? "", payLoad)}
+                    onPress={() => navigateToChartList(label?.link?.type ?? "", payLoad)}
                   >
                     <FontAwesome
                       name="circle"
@@ -242,7 +250,7 @@ const ComplianceStatusInfo = ({currentChart}:ChartProp) => {
                       color={`#${label.color ?? '000'}`}
                       style={{ marginRight: 15, opacity: 1 }}
                     />
-                                         <Text style={{ color: `#${label.color ?? '000'}` }}>{`${label.label ?? ''}  ${calculatePercentage(label.value, totalValue)}%`}</Text>
+                    <Text style={{ color: `#${label.color ?? '000'}` }}>{`${label.label ?? ''}  ${calculatePercentage(label.value, totalValue)}%`}</Text>
 
                   </Pressable>
                 )

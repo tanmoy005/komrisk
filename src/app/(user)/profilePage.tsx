@@ -1,5 +1,5 @@
 import Button from '@/src/components/Button'
-import Profile from '@/src/components/Profile'
+// import Profile from '@/src/components/Profile'
 import { View } from '@/src/components/Themed'
 import CardContainer from '@/src/components/cards/CardContainer'
 import CardContainer2 from '@/src/components/cards/CardContainer2'
@@ -10,7 +10,7 @@ import Text1 from '@/src/components/headings/Label1'
 import InputField from '@/src/components/input-fields/InputField'
 import SmSectionSeperator from '@/src/components/seperators/SmSectionSeperator'
 import Colors from '@/src/constants/Colors'
-import { screenWidth, styles } from '@/src/style'
+import { screenHeight, screenWidth, styles } from '@/src/style'
 import { FontAwesome } from '@expo/vector-icons'
 import { Link, Stack } from 'expo-router'
 import React, { useState } from 'react'
@@ -23,45 +23,15 @@ const ProfilePage = () => {
   return (
     <CardContainer3 styles={{
       backgroundColor: '#FFFFFF',
+      height: screenHeight
     }}>
-      <Stack screenOptions={{
-        headerStyle: {
-          backgroundColor: '#F6EEF4',
-        },
-        title: "dashboard",
-        headerLeft: () =>
-          <Link href="/(pages)/signin" asChild>
-            <Pressable>
-              {({ pressed }) => (
-                <FontAwesome
-                  name="sign-out"
-                  size={25}
-                  color={Colors[colorScheme ?? 'light'].text}
-                  style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                />
-              )}
-            </Pressable>
-          </Link>,
-        headerRight: () =>
-          <Link href="/modal" asChild>
-            <Pressable>
-              {({ pressed }) => (
-                <FontAwesome
-                  name="bars"
-                  size={25}
-                  color={Colors[colorScheme ?? 'light'].text}
-                  style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                />
-              )}
-            </Pressable>
-          </Link>
-      }}></Stack>
+
       <HeadImageSection />
       <View style={styles.profileImageContainer}>
         <Image style={styles.profileImage} source={require('@/assets/images/User.png')} />
       </View>
       <Divider style={{ ...styles.divider1, marginTop: Math.floor(screenWidth * 0.066) }} />
-      <View style={{ marginTop: Math.floor(screenWidth * 0.066) }}>
+      <View style={{ marginTop: Math.floor(screenWidth * 0.066), height:'auto',alignItems:'stretch' }}>
         <CardTextContainer>
           <View style={styles.profileFormContainer}>
             <View style={styles.profileInputFiledRowContainer}>
@@ -114,24 +84,22 @@ const ProfilePage = () => {
             </View>
           </View>
         </CardTextContainer>
-        <View style={{
-          marginTop: Math.floor(screenWidth * 0.32)
-        }}>
+        <View >
 
-        <Button
-          text='Logout'
-          btnColor='#5645C0'
-          type='outline'
-          // onPress={() => router.push('/(user)/dashboard/complianceStatus')}
-          style={{
-            // paddingVertical: 20,
-            paddingVertical: Math.floor(screenWidth * 0.05),
-            paddingHorizontal: Math.floor(screenWidth * 0.01),
-            fontWeight: '400',
-            fontSize: 16,
-            borderRadius: 3,
-            width: Math.floor(screenWidth * 0.35)
-          }} />
+          <Button
+            text='Logout'
+            btnColor='#5645C0'
+            type='outline'
+            // onPress={() => router.push('/(user)/dashboard/complianceStatus')}
+            style={{
+              // paddingVertical: 20,
+              paddingVertical: Math.floor(screenWidth * 0.05),
+              paddingHorizontal: Math.floor(screenWidth * 0.01),
+              fontWeight: '400',
+              fontSize: 16,
+              borderRadius: 3,
+              width: Math.floor(screenWidth * 0.35)
+            }} />
         </View>
       </View>
       {/* <View>
@@ -143,7 +111,7 @@ const ProfilePage = () => {
         <Text>This is testasdddddddddddddddddddddddddddddddd Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem cumque doloremque sunt atque delectus quam distinctio deleniti. Perferendis ut totam vitae, molestiae iste repudiandae unde. Eaque illum atque eius praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eos eum placeat consequuntur minima quo voluptates doloribus cupiditate reprehenderit quas laborum accusantium cum molestiae, assumenda nulla ratione distinctio, cumque necessitatibus!</Text>
         <Text>This is testasdddddddddddddddddddddddddddddddd Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem cumque doloremque sunt atque delectus quam distinctio deleniti. Perferendis ut totam vitae, molestiae iste repudiandae unde. Eaque illum atque eius praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eos eum placeat consequuntur minima quo voluptates doloribus cupiditate reprehenderit quas laborum accusantium cum molestiae, assumenda nulla ratione distinctio, cumque necessitatibus!</Text>
       </View> */}
-      <Profile />
+      {/* <Profile /> */}
     </CardContainer3>
     // <View>
     //   <Text>

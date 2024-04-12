@@ -9,6 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/src/store/rootReducer';
 import { storeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice';
 import Button from '@/src/components/Button';
+import GetUserAccessDetails from '@/src/server/api-functions/user-access-details';
+import { storeAuthUserAccessDetails } from '@/src/store/slices/auth-user-access-details-slice';
+import { storeAuthUserDetails } from '@/src/store/slices/auth-user-details-slice';
+import GetIncidentAvailableViews from '@/src/server/api-functions/get-incident-available-views';
+import { storeIncidentAvailableViews } from '@/src/store/slices/incident-available-views-slice';
 // import { useDispatch } from 'react-redux';
 // import { storeLoginData } from '@/src/store/slices/login-data-slice';
 
@@ -18,11 +23,10 @@ let SignIn = () => {
     const [password, setPassword] = useState<string>('');
 
     const workspaceName = useSelector((state: RootState) => state.baseUrl.payload.workSpaceName);
-    // //console.log("workspaceName", workspaceName);
 
     const dispatch = useDispatch();
+
     const handleSubmitSignIn = async () => {
-//console.log("huihuhuh");
 
         if (username === '' || password === '') {
             Alert.alert("error", 'Username or password cannot be empty');
@@ -36,12 +40,15 @@ let SignIn = () => {
         // //console.log('data', data, status);
 
         if (status === 200) {
-
-            setDataToAsyncStorage('token', data.token);
+            const { token, userDetails, countryEnabled } = data
+            setDataToAsyncStorage('token', token);
             router.push("/(user)/dashboard/complianceStatus");
             console.log("*************")
-            //router.push("/(user)/Notification/PushNotificationExample");
             dispatch(storeAuthUserCred({ username, password }))
+            dispatch(storeAuthUserDetails({ userDetails, countryEnabled }))
+            GetUserAccessData();
+            GetIncidentAvaliableViews();
+
         } else {
             Alert.alert("error", "Invalid Credentials");
             return;
@@ -50,6 +57,38 @@ let SignIn = () => {
         setPassword('');
     }
 
+    const GetUserAccessData = async () => {
+        const payLoad: UserModel = {
+            username,
+            password
+        }
+        const { data, error, status } = await GetUserAccessDetails(payLoad);
+        if (status === 200) {
+            // console.log("--------------*************-----------------")
+            const { countryEnabled, countryList, complianceViewAs, entityView } = data;
+            // console.log("**  countryEnabled   *", countryEnabled, countryList, complianceViewAs, entityView)
+            dispatch(storeAuthUserAccessDetails({ countryEnabled, countryList, complianceViewAs, entityView }))
+        } else {
+            Alert.alert("error", "Invalid User Credentials");
+            return;
+        }
+    }
+    const GetIncidentAvaliableViews = async () => {
+        const payLoad: UserModel = {
+            username,
+            password
+        }
+        const { data, error, status } = await GetIncidentAvailableViews(payLoad);
+        if (status === 200) {
+            console.log("--------------*************-----------------")
+            // const { countryEnabled, countryList, complianceViewAs, entityView } = data;
+            console.log("**  countryEnabled   *", data)
+            dispatch(storeIncidentAvailableViews(data))
+        } else {
+            Alert.alert("error", "Invalid User Credentials");
+            return;
+        }
+    }
 
 
     return (
@@ -114,12 +153,6 @@ let SignIn = () => {
                     }}
                     onPress={handleSubmitSignIn}
                 />
-                {/* <Button
-                    //   style={styles.submitBtn}
-                    title="Login"
-                    color="#A097DC"
-                    onPress={handleSubmitSignIn}
-                /> */}
             </View>
         </View>
     );

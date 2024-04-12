@@ -12,6 +12,7 @@ export default function TabTwoScreen() {
       backgroundColor: '#F6EEF4',
     },
     title: "dashboard",
+    headerTitleAlign:'center',
     headerLeft: () =>
       <Link href="/(pages)/signin" asChild>
         <Pressable>
@@ -48,6 +49,7 @@ export default function TabTwoScreen() {
         }
       }} />
       <Stack.Screen name="chartReport" options={{ headerShown: false }} />
+      <Stack.Screen name="profilePage" options={{ title:"Profile", headerShown: true, headerTitleAlign:'center' }} />
 
       {/* Add another screen below */}
       {/* <Stack.Screen name='Notification'

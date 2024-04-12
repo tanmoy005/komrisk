@@ -27,7 +27,7 @@ export default function ModalScreen() {
   //   }
   // ]
   const navigateToProfile =()=>{
-    router.push('/(pages)/profilePage');
+    router.push('/profilePage');
   }
 
   return (

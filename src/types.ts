@@ -144,8 +144,8 @@ export interface ReportChartData {
     type: string;
     userFilter: any; // You may want to replace 'any' with a more specific type
   };
-  comparison:string | null;
-  status:string | null;
+  comparison: string | null;
+  status: string | null;
 }
 export interface PieChartType {
   name: string;
@@ -363,6 +363,98 @@ export const CompliancesItemDetails: CompliancesItemDetailsResponse = {
   active: null,
   crId: null,
   lawName: null,
+}
+
+
+export interface Country {
+  countryEnabled: boolean | null;
+  countryList: [number, string][] | null;
+}
+
+export interface ComplianceView {
+  key: string | null;
+  value: string | null;
+}
+// export const DefaultComplianceView: ComplianceView =
+// {
+//   key: null,
+//   value: null,
+// }
+
+
+export interface EntityView {
+  options: any[]; // You might want to replace `any[]` with a more specific type if you have information about the possible options.
+  entityName: string;
+  entityEnabled: boolean;
+}
+
+export interface AccessDetails extends Country {
+  complianceViewAs: ComplianceView[] | null;
+  entityView: EntityView | null;
+
+}
+
+export const DefaultAccessDetails: AccessDetails = {
+
+  countryEnabled: null,
+  countryList: null,
+  complianceViewAs: null,
+  entityView: null,
+}
+
+export interface userDetails {
+  userId: number | null;
+  username: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  displayName: string | null;
+  phone: string | null;
+  mobile: string | null;
+  role: string | null;
+  company: string | null;
+  operatingUnit: string | null;
+  department: string | null;
+  wipEnabled: boolean | null;
+  actualDateCompletionAllowed: boolean | null;
+  requestReassignmentAllowed: boolean | null;
+  uploadLink: boolean | null;
+  dateTimePicker: boolean | null;
+}
+export const DefaultUserDetails: userDetails = {
+  userId: null,
+  username: null,
+  firstName: null,
+  lastName: null,
+  displayName: null,
+  phone: null,
+  mobile: null,
+  role: null,
+  company: null,
+  operatingUnit: null,
+  department: null,
+  wipEnabled: null,
+  actualDateCompletionAllowed: null,
+  requestReassignmentAllowed: null,
+  uploadLink: null,
+  dateTimePicker: null,
+}
+export interface userAuthDetails {
+  userDetails: userDetails
+  countryEnabled: boolean | null;
+}
+export const DefaultAuthUserDetails: userAuthDetails = {
+  userDetails: DefaultUserDetails,
+  countryEnabled: null,
+}
+
+export interface availableViews {
+  key: string | null;
+  value: string | null;
+}
+
+export const defaultAvailableViews: availableViews = {
+  key: null,
+  value: null,
 }
 export interface FilterProps {
   currentChart: string;
