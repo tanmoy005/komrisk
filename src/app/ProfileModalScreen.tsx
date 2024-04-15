@@ -10,7 +10,7 @@ interface RedirectionButton {
   pathName: string;
 }
 
-export default function ModalScreen() {
+export default function ProfileModalScreen() {
 
   // const buttonList:RedirectionButton[] = [
   //   {

@@ -31,12 +31,11 @@ const ComplianceStatusInfo = ({ currentChart }: ChartProp) => {
   // const [currentChart, setCurrentChart] = useState<string>('PIE');
   const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
   const useDetails = useSelector((state: RootState) => state.authUserDetails.payload);
-  const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
-  const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
+
   console.log('====================================');
   console.log("useDetails", useDetails);
-  console.log("useAccessDetails", useAccessDetails);
-  console.log("useAvailableViews", useAvailableViews);
+  // console.log("useAccessDetails", useAccessDetails);
+  // console.log("useAvailableViews", useAvailableViews);
   console.log('====================================');
   const currentDate: string = moment().format('DD/MM/YYYY');
   const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');

@@ -4,7 +4,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { CustomeDatePickerProps } from '../types';
 
 
-const CustomeDatePicker = ({setDate}:CustomeDatePickerProps): JSX.Element => {
+const CustomDatePicker = ({ setDate }: CustomeDatePickerProps): JSX.Element => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -34,4 +34,4 @@ const CustomeDatePicker = ({setDate}:CustomeDatePickerProps): JSX.Element => {
   );
 };
 
-export default CustomeDatePicker;
+export default CustomDatePicker;

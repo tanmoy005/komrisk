@@ -1,19 +1,25 @@
 import { size12, size24, styles } from '@/src/style'
-import React from 'react'
+import React, { useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import DropDown from '../Dropdown';
 import { FilterProps } from '@/src/types';
 import { router } from 'expo-router';
+import CustomModal from '../CustomModal';
+import FilterScreen from '@/src/app/filterScreen';
+import FilterModal from '../FilterModal';
+import ChartFilter from '@/src/app/chartFilterModal';
 
 
-const Filter = ({ currentChart, setCurrentChart }: FilterProps): JSX.Element => {
+const Filter = ({ currentChart, setCurrentChart, reportType, setFilterPayload }: FilterProps): JSX.Element => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [filterModalVisible, setFilterModalVisible] = useState(false);
     const filterList = [
         {
             iconName: 'filter',
             Icon: MuiIcon,
-            handlePress: () => { router.push('/filterModal') }
+            handlePress: () => { setModalVisible(true); }
         },
         {
             iconName: 'share',
@@ -41,7 +47,7 @@ const Filter = ({ currentChart, setCurrentChart }: FilterProps): JSX.Element => 
                 filterList.map(({ iconName, Icon, handlePress }) => {
                     return (
                         <View style={styles.filterIconContainer}>
-                            <Pressable onPress={handlePress}> 
+                            <Pressable onPress={handlePress}>
                                 <View style={styles.filterIconBoxContainer}>
                                     <Icon name={iconName}
                                         size={size24}
@@ -58,6 +64,32 @@ const Filter = ({ currentChart, setCurrentChart }: FilterProps): JSX.Element => 
                     )
                 })
             }
+            {/* { setFilterPayload,reportType }: chartFilterProps */}
+            <FilterModal
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                component={
+                    <FilterScreen
+                        setModalVisible={setModalVisible}
+                        setFilterModalVisible={setFilterModalVisible}
+                        setFilterPayload={setFilterPayload}
+                        reportType={reportType}
+                        filterType={''}
+                    />}
+            />
+            <CustomModal
+                setModalVisible={setFilterModalVisible}
+                modalVisible={filterModalVisible}
+                component={
+                    <ChartFilter
+                        setModalVisible={setFilterModalVisible}
+                        setFilterModalVisible={setFilterModalVisible}
+                        setFilterPayload={setFilterPayload}
+                        reportType={reportType}
+                        filterType={''}
+                    />
+                }
+            />
             <View style={styles.chartSelctorContainer}>
                 <DropDown
                     selectedValue={currentChart}

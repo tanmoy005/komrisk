@@ -5,10 +5,19 @@ import EditScreenInfo from '@/src/components/EditScreenInfo';
 import { Text, View } from '@/src/components/Themed';
 import Button from '../components/Button';
 import { router } from 'expo-router';
+import CustomModal from '../components/CustomModal';
+import ChartFilter from './chartFilterModal';
+import { chartFilterProps } from '../types';
+import { useState } from 'react';
 
-export default function ModalScreen() {
+export default function FilterScreen({ setFilterPayload, setFilterModalVisible, reportType,filterType, setModalVisible }: chartFilterProps) {
 
 
+    const handlefilterVisibilyty = () => {
+        setModalVisible(false);
+        setFilterModalVisible(true)
+        // filterType
+    }
 
     return (
         <View style={styles.container}>
@@ -25,7 +34,9 @@ export default function ModalScreen() {
                     text='Chart Filter'
                     btnColor='#5645C0'
                     type='outline'
-                    onPress={() => router.push('/chartFilterModal')}
+                    onPress={() =>
+                        handlefilterVisibilyty()
+                    }
                     style={{
                         paddingVertical: 20,
                         paddingHorizontal: 48,
@@ -60,6 +71,7 @@ export default function ModalScreen() {
                     }}
                 />
             </View>
+
         </View >
     );
 }

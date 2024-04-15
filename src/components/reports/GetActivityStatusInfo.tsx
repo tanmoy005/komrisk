@@ -16,7 +16,7 @@ import CardSkelton from '../skelton/CardSkelton';
 import moment from 'moment';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
-const ActivityStatusInfo = ({ currentChart }: ChartProp) => {
+const ActivityStatusInfo = ({ currentChart, filterPayload }: ChartProp) => {
   {
     const [activityStatusChartData, setActivityStatusChartData] = useState<ActivityStatusData>({
       title: null,
@@ -28,24 +28,14 @@ const ActivityStatusInfo = ({ currentChart }: ChartProp) => {
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
 
-    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const currentDate: string = moment().format('DD/MM/YYYY');
-    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
-    console.log("*********2")
+    // const getpayload = typeof payload === 'string' ? payload : payload[0];
 
-    const payLoad: ActivityStatusDataPayLoad = {
-      ...useCredential,
-      start: startDate,
-      viewAs: "COMPANY HEAD",
-      end: currentDate
-    }
+    // console.log("payload got", getpayload)
+  
 
-    console.log("payload up*****", payLoad)
-
-
-    const navigateToChartList = (statusType: string, payLoad: ActivityStatusDataPayLoad) => {
-      const payloadString = JSON.stringify(payLoad); // Stringify the payload here
+    const navigateToChartList = (statusType: string, parsedPayload: ActivityStatusDataPayLoad) => {
+      const payloadString = JSON.stringify(parsedPayload); // Stringify the payload here
       router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
 
@@ -55,7 +45,7 @@ const ActivityStatusInfo = ({ currentChart }: ChartProp) => {
     // const navigateToChartList = (statusType: string, payLoad: ActivityStatusDataPayLoad) => {
     //   router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType, payLoad } });
     // }
-    const handleGetActivityStatusData = async (payLoad: ActivityStatusDataPayLoad) => {
+    const handleGetActivityStatusData = async (filterPayload: ActivityStatusDataPayLoad) => {
 
       // const payLoad: ActivityStatusDataPayLoad = {
       //   ...useCredential,
@@ -65,7 +55,7 @@ const ActivityStatusInfo = ({ currentChart }: ChartProp) => {
       // }
       // //console.log("payLoad", payLoad);
 
-      const { data, error, status } = await GetActivityStatusData(payLoad);
+      const { data, error, status } = await GetActivityStatusData(filterPayload);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;
         setActivityStatusChartData(data);
@@ -81,7 +71,7 @@ const ActivityStatusInfo = ({ currentChart }: ChartProp) => {
     }
     useEffect(() => {
       // //console.log('filteredchartData')
-      handleGetActivityStatusData(payLoad);
+      handleGetActivityStatusData(filterPayload);
     }, []);
 
     return (
@@ -110,7 +100,7 @@ const ActivityStatusInfo = ({ currentChart }: ChartProp) => {
                 {filteredChartData && filteredChartData.map((label: ReportChartData, index) => {
                   return (
                     <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
-                      onPress={() => navigateToChartList(label?.link?.type ?? "", payLoad)}
+                      onPress={() => navigateToChartList(label?.link?.type ?? "", filterPayload)}
                     >
                       <FontAwesome
                         name="circle"

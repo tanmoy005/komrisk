@@ -9,11 +9,21 @@ import CardContainer from '../components/cards/CardContainer';
 import CardTextContainer from '../components/cards/CardTextContainer';
 import Button from '../components/Button';
 import DropDown from '../components/Dropdown';
-import CustomeDatePicker from '../components/CustomeDatePicker';
+import CustomDatePicker from '../components/CustomDatePicker';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/rootReducer';
+import { ActivityStatusDataPayLoad, chartFilterProps } from '../types';
 
-const ModalScreen = ({props}) => {
-// export default function ModalScreen({filterType : string}) {
-    
+// interface chartFilterProps {
+//     setFilterPayload: React.Dispatch<React.SetStateAction<ActivityStatusDataPayLoad>>
+//     reportType: string
+// }
+
+
+const ChartFilter = ({ setFilterPayload,reportType ,filterType,setFilterModalVisible}: chartFilterProps) => {
+    // export default function ModalScreen({filterType : string}) {
+    const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
+    const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
     const handleApplyFilters = () => {
 
     }
@@ -40,7 +50,7 @@ const ModalScreen = ({props}) => {
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [endDate, setEndDate] = useState<Date>(new Date());
     return (
-        <View style={styles.dashboardContainer}>
+        <View style={{...styles.dashboardContainer, width: (screenWidth*0.75)}}>
 
 
             <View style={styles.chartContainer}>
@@ -69,13 +79,13 @@ const ModalScreen = ({props}) => {
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 141, zIndex: 1, right: 0 }}>
                                 <Text style={{ textAlign: 'left' }}>Start Date </Text>
-                                <CustomeDatePicker
+                                <CustomDatePicker
                                     setDate={setStartDate}
                                 />
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 191, zIndex: 1, right: 0 }}>
                                 <Text style={{ textAlign: 'left' }}>End Date </Text>
-                                <CustomeDatePicker
+                                <CustomDatePicker
                                     setDate={setEndDate}
                                 />
                             </View>
@@ -117,7 +127,7 @@ const ModalScreen = ({props}) => {
     )
 }
 
-export default ModalScreen;
+export default ChartFilter;
 
 // const styles = StyleSheet.create({
 //     container: {

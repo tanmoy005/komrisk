@@ -458,12 +458,22 @@ export const defaultAvailableViews: availableViews = {
 }
 export interface FilterProps {
   currentChart: string;
-  setCurrentChart: React.Dispatch<React.SetStateAction<string>>
+  setCurrentChart: React.Dispatch<React.SetStateAction<string>>;
+  setFilterPayload: React.Dispatch<React.SetStateAction<ActivityStatusDataPayLoad>>;
+  reportType: string
 }
 
-export interface ChartProp{
-  currentChart : string;
+export interface ChartProp {
+  currentChart: string;
+  filterPayload: ActivityStatusDataPayLoad ;
 }
 export interface CustomeDatePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Date>>
+}
+export interface chartFilterProps {
+  setFilterPayload: React.Dispatch<React.SetStateAction<ActivityStatusDataPayLoad>>
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  reportType: string
+  filterType: string
 }
