@@ -4,7 +4,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { CustomeDatePickerProps } from '../types';
 
 
-const CustomDatePicker = ({ setDate }: CustomeDatePickerProps): JSX.Element => {
+const CustomDatePicker = ({ setDate, date }: CustomeDatePickerProps): JSX.Element => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -27,6 +27,7 @@ const CustomDatePicker = ({ setDate }: CustomeDatePickerProps): JSX.Element => {
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
+        date={date || new Date()} //default set it current date
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />

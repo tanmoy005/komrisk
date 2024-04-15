@@ -12,7 +12,7 @@ import DropDown from '../components/Dropdown';
 import CustomDatePicker from '../components/CustomDatePicker';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
-import { ActivityStatusDataPayLoad, chartFilterProps } from '../types';
+import { ActivityStatusDataPayLoad, ChartFilterDataPayLoad, chartFilterProps } from '../types';
 
 // interface chartFilterProps {
 //     setFilterPayload: React.Dispatch<React.SetStateAction<ActivityStatusDataPayLoad>>
@@ -20,26 +20,38 @@ import { ActivityStatusDataPayLoad, chartFilterProps } from '../types';
 // }
 
 
-const ChartFilter = ({ setFilterPayload,reportType ,filterType,setFilterModalVisible}: chartFilterProps) => {
+const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, setFilterModalVisible }: chartFilterProps) => {
     // export default function ModalScreen({filterType : string}) {
+    const [selectedCountry, setSelectedCountry] = useState<string>('');
+    const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload.viewAs);
+    const [startDate, setStartDate] = useState<Date>(new Date());
+    const [endDate, setEndDate] = useState<Date>(new Date());
     const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
     const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
+    
     const handleApplyFilters = () => {
-
+       
+        
+        chartFilterPayload.viewAs = selectedViewAs;
+        chartFilterPayload.start = startDate.toDateString();
+        chartFilterPayload.end = endDate.toDateString();
+        setChartFilterPayload(chartFilterPayload);
+        console.log("1",chartFilterPayload);
+        setFilterModalVisible(false)
     }
+    
     const countryList = [
         { label: 'United Kingdom', value: 'United Kingdom', },
         { label: 'Antigua and Barbuda', value: 'Antigua and Barbuda', },
         { label: 'Saint Vincent and the Grenadines', value: 'Saint Vincent and the Grenadines', }
     ];
+   
     const viewAsList = [
         { label: 'United Kingdom', value: 'United Kingdom', },
         { label: 'Antigua and Barbuda', value: 'Antigua and Barbuda', },
         { label: 'Saint Vincent and the Grenadines', value: 'Saint Vincent and the Grenadines', }
     ];
 
-    const [selectedCountry, setSelectedCountry] = useState<string>('');
-    const [selectedViewAs, setSelectedViewAs] = useState<string>('');
     const [height, setHeight] = useState('');
     const handleLayout = (event: any) => {
         const { height } = event.nativeEvent.layout;
@@ -47,10 +59,9 @@ const ChartFilter = ({ setFilterPayload,reportType ,filterType,setFilterModalVis
         console.log('height', height);
 
     }
-    const [startDate, setStartDate] = useState<Date>(new Date());
-    const [endDate, setEndDate] = useState<Date>(new Date());
+
     return (
-        <View style={{...styles.dashboardContainer, width: (screenWidth*0.75)}}>
+        <View style={{ ...styles.dashboardContainer, width: (screenWidth * 0.75) }}>
 
 
             <View style={styles.chartContainer}>
@@ -81,30 +92,16 @@ const ChartFilter = ({ setFilterPayload,reportType ,filterType,setFilterModalVis
                                 <Text style={{ textAlign: 'left' }}>Start Date </Text>
                                 <CustomDatePicker
                                     setDate={setStartDate}
+                                    date={startDate}
                                 />
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 191, zIndex: 1, right: 0 }}>
                                 <Text style={{ textAlign: 'left' }}>End Date </Text>
                                 <CustomDatePicker
                                     setDate={setEndDate}
+                                    date={endDate}
                                 />
                             </View>
-                            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ textAlign: 'left' }}>Country </Text>
-                                <DropDown
-                                    dropdownItems={countryList}
-                                    selectedValue={selectedCountry}
-                                    setSelectedValue={setSelectedCountry}
-                                />
-                            </View> */}
-                            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ textAlign: 'left' }}>Country </Text>
-                                <Text style={{ textAlign: 'left' }}>fsdf </Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ textAlign: 'left' }}>Country </Text>
-                                <Text style={{ textAlign: 'left' }}>fsdf </Text>
-                            </View> */}
                         </CardTextContainer>
                     </CardContainer>
                     <View style={styles.submitBtnContainer}>

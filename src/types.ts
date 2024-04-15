@@ -71,14 +71,18 @@ export interface UserModel {
   password: string
 }
 
-export interface ActivityStatusDataPayLoad {
+export interface ActivityStatusDataPayLoad extends ChartFilterDataPayLoad {
   username: string;
   password: string;
+  // start: string;
+  // viewAs: string;
+  // end: string;
+}
+export interface ChartFilterDataPayLoad {
   start: string;
   viewAs: string;
   end: string;
 }
-
 export interface ActivityStatusDataListPayLoad extends ActivityStatusDataPayLoad {
   status: string;
 }
@@ -459,21 +463,27 @@ export const defaultAvailableViews: availableViews = {
 export interface FilterProps {
   currentChart: string;
   setCurrentChart: React.Dispatch<React.SetStateAction<string>>;
-  setFilterPayload: React.Dispatch<React.SetStateAction<ActivityStatusDataPayLoad>>;
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
+  chartFilterPayload: ChartFilterDataPayLoad;
   reportType: string
 }
 
 export interface ChartProp {
   currentChart: string;
-  filterPayload: ActivityStatusDataPayLoad ;
+  chartFilterPayload: ChartFilterDataPayLoad;
 }
 export interface CustomeDatePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Date>>
+  date: Date | null
 }
 export interface chartFilterProps {
-  setFilterPayload: React.Dispatch<React.SetStateAction<ActivityStatusDataPayLoad>>
+  chartFilterPayload: ChartFilterDataPayLoad
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   reportType: string
-  filterType: string
+}
+export interface filterSelectProps {
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 }

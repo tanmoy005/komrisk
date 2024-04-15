@@ -16,7 +16,7 @@ import CardSkelton from '../skelton/CardSkelton';
 import moment from 'moment';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
-const ActivityStatusInfo = ({ currentChart, filterPayload }: ChartProp) => {
+const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
   {
     const [activityStatusChartData, setActivityStatusChartData] = useState<ActivityStatusData>({
       title: null,
@@ -27,12 +27,17 @@ const ActivityStatusInfo = ({ currentChart, filterPayload }: ChartProp) => {
     });
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
-
+    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+    const filterPayload: ActivityStatusDataPayLoad = {
+      ...useCredential,
+      ...chartFilterPayload
+    }
+    console.log("chartFilterPayload", chartFilterPayload);
 
     // const getpayload = typeof payload === 'string' ? payload : payload[0];
 
     // console.log("payload got", getpayload)
-  
+
 
     const navigateToChartList = (statusType: string, parsedPayload: ActivityStatusDataPayLoad) => {
       const payloadString = JSON.stringify(parsedPayload); // Stringify the payload here
@@ -70,9 +75,13 @@ const ActivityStatusInfo = ({ currentChart, filterPayload }: ChartProp) => {
 
     }
     useEffect(() => {
-      // //console.log('filteredchartData')
-      handleGetActivityStatusData(filterPayload);
-    }, []);
+      const newfilterPayload: ActivityStatusDataPayLoad = {
+        ...useCredential,
+        ...chartFilterPayload
+      }
+
+      handleGetActivityStatusData(newfilterPayload);
+    }, [chartFilterPayload]);
 
     return (
       <View style={styles.chartContainer}>
