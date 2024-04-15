@@ -18,7 +18,7 @@ import moment from 'moment';
 import calculatePercentage from '../../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ImpactAnalysisInfo = ({ currentChart }: ChartProp) => {
+const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
   {
     const [impactAnalysisChartData, setImpactAnalysisChartData] = useState<ImpactAnalysisData>({
       title: null,
@@ -29,16 +29,11 @@ const ImpactAnalysisInfo = ({ currentChart }: ChartProp) => {
     });
     const [totalValue, setTotalValue] = useState<number>(0);
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
-    // const [currentChart, setCurrentChart] = useState<string>('PIE');
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const currentDate: string = moment().format('DD/MM/YYYY');
-    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
-    const payLoad: ImpactAnalysisDataPayLoad = {
+    let payLoad: ImpactAnalysisDataPayLoad = {
       ...useCredential,
-      start: startDate,
-      viewAs: "COMPANY HEAD",
-      end: currentDate
+      ...chartFilterPayload
     }
 
 
@@ -66,8 +61,12 @@ const ImpactAnalysisInfo = ({ currentChart }: ChartProp) => {
 
     }
     useEffect(() => {
+      payLoad = {
+        ...useCredential,
+        ...chartFilterPayload,
+      }
       handleGetImpactAnalysisData();
-    }, []);
+    }, [chartFilterPayload]);
 
     return (
       <View style={styles.chartContainer}>

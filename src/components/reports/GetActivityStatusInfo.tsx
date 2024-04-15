@@ -34,17 +34,12 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
     }
     console.log("chartFilterPayload", chartFilterPayload);
 
-    // const getpayload = typeof payload === 'string' ? payload : payload[0];
-
-    // console.log("payload got", getpayload)
-
-
     const navigateToChartList = (statusType: string, parsedPayload: ActivityStatusDataPayLoad) => {
+      // console.log("parsedPayload",parsedPayload);
+      
       const payloadString = JSON.stringify(parsedPayload); // Stringify the payload here
       router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
-
-
 
 
     // const navigateToChartList = (statusType: string, payLoad: ActivityStatusDataPayLoad) => {
