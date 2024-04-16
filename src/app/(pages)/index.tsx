@@ -38,7 +38,7 @@ const Workspace = () => {
     }
 
   }
-
+ 
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>

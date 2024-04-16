@@ -98,7 +98,7 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
                 <View style={{ ...styles.taskCard, borderWidth: 0, justifyContent: 'space-between', width: (screenWidth * 0.85), height: '100%', position: 'relative' }}>
                     <CardContainer styles={{ position: 'relative', width: '100%' }}>
                         <CardTextContainer styles={{ position: 'relative', width: '100%' }}>
-                            <View onLayout={handlefirstFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 2, right: 0 }}>
+                            <View onLayout={handlefirstFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 4, right: 0 }}>
                                 <Text style={styles.chartFilterFieldLabelContainer}>Country </Text>
                                 <DropDown
                                     dropdownItems={filterCountrylist}
@@ -108,7 +108,7 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
                                 />
                             </View>
                             <Divider onLayout={divider1Layout} style={{ ...styles.divider1, position: 'absolute', top: firstFieldBottom + 22, width: (screenWidth * 0.80) }} />
-                            <View onLayout={handlesecondFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: (firstFieldBottom + diverHeight + 22 * 2), zIndex: 2, right: 0 }}>
+                            <View onLayout={handlesecondFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: (firstFieldBottom + diverHeight + 22 * 2), zIndex: 9, right: 0 }}>
                                 <Text style={styles.chartFilterFieldLabelContainer}>View as </Text>
                                 <DropDown
                                     dropdownItems={filterViewedAslist}

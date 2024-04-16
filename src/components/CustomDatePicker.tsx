@@ -28,7 +28,6 @@ const CustomDatePicker = ({ setDate, date }: CustomeDatePickerProps): JSX.Elemen
     <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
       {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
       <Pressable onPress={showDatePicker}>
-
         <TextInput
           style={{ ...styles.input, ...styles['inputType' + '3'] }}
           value={DateFormatDDMMYYYY(date && date.toString())}
