@@ -148,12 +148,28 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
         { label: 'Saint Vincent and the Grenadines', value: 'Saint Vincent and the Grenadines', }
     ];
 
-    const [height, setHeight] = useState('');
-    const handleLayout = (event: any) => {
-        const { height } = event.nativeEvent.layout;
-        setHeight(height);
-        console.log('height', height);
 
+    const [firstFieldBottom, setFirstFieldBottom] = useState<number>(0);
+    const [secondFieldBottom, setSecondFieldBottom] = useState('');
+    const [diverHeight, setDiverHeight] = useState<number>(0);
+    console.log('firstFieldBottom', firstFieldBottom);
+
+    const handlefirstFieldLayout = (event: any) => {
+        const { height, y } = event.nativeEvent.layout;
+        setFirstFieldBottom(height + y);
+        // console.log('height', height);
+    }
+    const divider1Layout = (event: any) => {
+
+        const { height: divider1, y } = event.nativeEvent.layout;
+        console.log('yjjjjjjjjjjjjjjjjjjjj', y);
+
+        setDiverHeight(divider1);
+    }
+    const handlesecondFieldLayout = (event: any) => {
+        const { height, y } = event.nativeEvent.layout;
+        // setSecondFieldBottom(height + y);
+        // console.log('height', height);
     }
 
     return (
@@ -162,11 +178,11 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
 
             <View style={styles.chartContainer}>
 
-                <View style={{ ...styles.taskCard, justifyContent: 'space-between', width: '100%', height: '100%', position: 'relative' }}>
+                <View style={{ ...styles.taskCard, borderWidth: 0, justifyContent: 'space-between', width: (screenWidth * 0.85), height: '100%', position: 'relative' }}>
                     <CardContainer styles={{ position: 'relative', width: '100%' }}>
                         <CardTextContainer styles={{ position: 'relative', width: '100%' }}>
-                            <View onLayout={handleLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 2, right: 0 }}>
-                                <Text style={{ textAlign: 'left' }}>Country </Text>
+                            <View onLayout={handlefirstFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 2, right: 0 }}>
+                                <Text style={styles.chartFilterFieldLabelContainer}>Country </Text>
                                 <DropDown
                                     dropdownItems={filterCountrylist}
                                     selectedValue={selectedCountry}
@@ -174,9 +190,9 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
                                     minWidth={150}
                                 />
                             </View>
-                            {/* <Divider style={{ ...styles.divider1, position:'absolute', top: height+ 22, width:'100%' }} /> */}
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 71, zIndex: 1, right: 0 }}>
-                                <Text style={{ textAlign: 'left' }}>View as </Text>
+                            <Divider onLayout={divider1Layout} style={{ ...styles.divider1, position: 'absolute', top: firstFieldBottom + 22, width: (screenWidth * 0.80) }} />
+                            <View onLayout={handlesecondFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: (firstFieldBottom + diverHeight + 22 * 2), zIndex: 2, right: 0 }}>
+                                <Text style={styles.chartFilterFieldLabelContainer}>View as </Text>
                                 <DropDown
                                     dropdownItems={filterViewedAslist}
                                     selectedValue={selectedViewAs}
@@ -184,15 +200,18 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
                                     minWidth={150}
                                 />
                             </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 141, zIndex: 1, right: 0 }}>
-                                <Text style={{ textAlign: 'left' }}>Start Date </Text>
+                            <Divider style={{ ...styles.divider1, position: 'absolute', top: ((firstFieldBottom * 2) + diverHeight + 22 * 3), width: (screenWidth * 0.80) }} />
+                            <View onLayout={handlesecondFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: (firstFieldBottom + diverHeight)*2 + 22*4, zIndex: 1, right: 0 }}>
+                                <Text style={styles.chartFilterFieldLabelContainer}>Start Date </Text>
                                 <CustomDatePicker
                                     setDate={setStartDate}
                                     date={startDate}
                                 />
                             </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 191, zIndex: 1, right: 0 }}>
-                                <Text style={{ textAlign: 'left' }}>End Date </Text>
+                            <Divider style={{ ...styles.divider1, position: 'absolute', top: (firstFieldBottom * 3 + diverHeight + 22 * 4), width: (screenWidth * 0.80) }} />
+
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: firstFieldBottom * 3 + diverHeight * 2 + 22 * 5, zIndex: 1, right: 0 }}>
+                                <Text style={styles.chartFilterFieldLabelContainer}>End Date </Text>
                                 <CustomDatePicker
                                     setDate={setEndDate}
                                     date={endDate}
@@ -200,7 +219,7 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
                             </View>
                         </CardTextContainer>
                     </CardContainer>
-                    <View style={styles.submitBtnContainer}>
+                    <View>
                         <Button
                             btnColor={'#A097DC'}
                             text='APPLY FILTERS'

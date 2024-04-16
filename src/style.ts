@@ -193,7 +193,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     divider1: {
         // borderColor:'rgba(38, 38, 44, 0.24)'
         borderColor: 'rgba(38, 38, 44, 0.24)',
-        borderWidth: 1
+        borderWidth: .5
     },
     profileInputFiledRowContainer: {
         flexDirection: 'row',
@@ -229,6 +229,16 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         color: '#B6B6B9',
         backgroundColor: '#fff'
     },
+    inputType3: {
+        // width: '60%',
+        width: 150,
+        paddingHorizontal: 14,
+        paddingVertical: 7,
+        backgroundColor: '#fff',
+        borderWidth: 0.9,
+        borderColor: '#000000',
+        color: '#000000'
+    },
     profileInputFieldContainer: {
         width: '75%'
     },
@@ -257,9 +267,21 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     filterIcon: {
         color: 'rgba(151, 151, 154, 1)'
     },
-    dropdownPicker:{
-         width: size136, 
-         alignItems: 'center'
+    dropdownPicker: {
+        width: size136,
+        alignItems: 'center'
+    },
+    chartfilterFieldStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        position: 'absolute',
+        right: 0
+    },
+    chartFilterFieldLabelContainer: {
+        textAlign: 'left',
+        alignSelf: 'center'
     }
 
 });

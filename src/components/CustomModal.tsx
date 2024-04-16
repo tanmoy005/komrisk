@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 22,
-    width: screenWidth,
+    width: screenWidth
+    // height: screenWidth,
   },
   container: {
     flex: 1,
@@ -57,7 +58,8 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
+    paddingVertical: 0,
+    paddingHorizontal: 35,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
