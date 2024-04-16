@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { View } from '../components/Themed'
-import { StyleSheet } from 'react-native';
 import { Text } from 'react-native';
 import { screenWidth, styles } from '../style';
-import { Card, Divider } from 'react-native-elements';
-import CardContainer3 from '../components/cards/CardContainer3';
+import { Divider } from 'react-native-elements';
 import CardContainer from '../components/cards/CardContainer';
 import CardTextContainer from '../components/cards/CardTextContainer';
 import Button from '../components/Button';
@@ -12,38 +10,26 @@ import DropDown from '../components/Dropdown';
 import CustomDatePicker from '../components/CustomDatePicker';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
-import { chartFilterProps, ComplianceView, Country, DefaultDropDownItem, DropDownItem, UserModel } from '../types';
-import { Alert, Pressable } from 'react-native';
-import GetUserAccessDetails from '../server/api-functions/user-access-details';
-import moment from 'moment';
-// interface chartFilterProps {
-//     setFilterPayload: React.Dispatch<React.SetStateAction<ActivityStatusDataPayLoad>>
-//     reportType: string
-// }
+import { availableViews, chartFilterProps, ComplianceView, Country, DefaultDropDownItem, DropDownItem } from '../types';
+import { DateFormatDDMMYYYY } from '../utils';
 
 
-const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, setFilterModalVisible,setModalVisible }: chartFilterProps) => {
-    const [countryData, setCountryChartData] = useState<Country>({
-        countryEnabled: null,
-        countryList: null,
+const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, setFilterModalVisible, setModalVisible }: chartFilterProps) => {
 
-    });
     let filterCountrylist: DropDownItem[] = [DefaultDropDownItem];
     let filterViewedAslist: DropDownItem[] = [DefaultDropDownItem];
     // export default function ModalScreen({filterType : string}) {
     const [selectedCountry, setSelectedCountry] = useState<string>('');
     const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload.viewAs);
     const [startDate, setStartDate] = useState<Date>(new Date());
+    const [endDate, setEndDate] = useState<Date>(new Date());
+
     //const [startDate, setStartDate] = useState<string>(moment().subtract(1, 'months').format('DD/MM/YYYY'));
     //const [endDate, setEndDate] = useState<string>(moment().subtract(1, 'months').format('DD/MM/YYYY'));
-    
-    const [endDate, setEndDate] = useState<Date>(new Date());
+
     const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
     const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    // const [getcountrylist, setGetCountryList] = useState<DropDownItem[]>([
-    //     DefaultDropDownItem
-    // ]);
 
     console.log("useAccessDetails", useAccessDetails);
     console.log("useAvailableViews", useAvailableViews);
@@ -58,12 +44,19 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
         }) : [DefaultDropDownItem];
         // setGetCountryList(filterCountrylist);
     }
-    
-    if (reportType = "COMPLIANCE") {
+
+    if (reportType === "COMPLIANCE") {
         const filteredViewedAsData: ComplianceView[] | null = complianceViewAs && complianceViewAs.filter((x: ComplianceView) => x.key !== null || x.value !== null);
 
         filterViewedAslist = filteredViewedAsData && filteredViewedAsData.length > 0 ? filteredViewedAsData?.map((subList: ComplianceView) => {
             return { value: subList.value, label: subList.key };
+        }) : [DefaultDropDownItem];
+    }
+    if (reportType === "INCIDENT") {
+        const filteredViewedAsDataIncident: availableViews[] | null = useAvailableViews && useAvailableViews.filter((x: availableViews) => x.key !== null || x.value !== null);
+
+        filterViewedAslist = filteredViewedAsDataIncident && filteredViewedAsDataIncident.length > 0 ? filteredViewedAsDataIncident?.map((subList: availableViews) => {
+            return { value: subList?.value ?? "", label: subList?.key ?? "" };
         }) : [DefaultDropDownItem];
     }
 
@@ -71,88 +64,16 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
 
 
         chartFilterPayload.viewAs = selectedViewAs;
-        chartFilterPayload.start = startDate.toString();
-        chartFilterPayload.end = endDate.toString();
+        chartFilterPayload.start = DateFormatDDMMYYYY(startDate && startDate.toString()) ?? "";
+        chartFilterPayload.end = DateFormatDDMMYYYY(endDate.toString()) ?? "";
         setChartFilterPayload(chartFilterPayload);
         console.log("1", chartFilterPayload);
         setFilterModalVisible(false)
     }
 
-    // const handleGetCountryListData = async (userPayload:UserModel) => {
-
-
-    //     const { data, error, status } = await GetUserAccessDetails(userPayload);
-    //     if (status === 200) {
-    //       const { countryEnabled, countryList } = data;
-    //       setCountryChartData(data);
-    //     } else {
-    //       Alert.alert("error", error.message);
-    //     }
-
-    // }
-
-    // console.log("countryData*****",countryData);
-
-    // useEffect(() => {
-
-
-    //     handleGetCountryListData(userPayload);
-    //   }, [chartFilterPayload]);
-
-
-    // const handleGetCountryListData = async (userPayload:UserModel) => {
-    //     const { data, error, status } = await GetUserAccessDetails(userPayload);
-    //     if (status === 200) {
-    //         const { countryEnabled, countryList,complianceViewAs } = data;
-    //         if (countryEnabled) {
-    //             //const rearrangedCountryList = countryList.map(([value, label]) => ({ value, label }));
-    //             let dictionaries = countryList.map(subList => {
-    //                 return { value: subList[0], label: subList[1] };
-    //             });
-
-    //             console.log(dictionaries);
-    //             let countrylist = [...dictionaries];
-    //             setGetCountryList(countrylist)
-    //             // console.log("rearrangedCountryList------------",rearrangedCountryList)
-    //             // setCountryChartData({ ...data, countryList: rearrangedCountryList });
-    //         } 
-
-
-
-    //         else {
-    //             setCountryChartData(data);
-    //         }
-    //     } else {
-    //         Alert.alert("error", error.message);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     handleGetCountryListData(userPayload);
-    // }, [chartFilterPayload]);
-
-
-    // console.log("getcountrylist*********", getcountrylist)
-
-
-
-    // const countryList = [
-    //     { label: 'United Kingdom', value: 'United Kingdom', },
-    //     { label: 'Antigua and Barbuda', value: 'Antigua and Barbuda', },
-    //     { label: 'Saint Vincent and the Grenadines', value: 'Saint Vincent and the Grenadines', }
-    // ];
-
-    const viewAsList = [
-        { label: 'United Kingdom', value: 'United Kingdom', },
-        { label: 'Antigua and Barbuda', value: 'Antigua and Barbuda', },
-        { label: 'Saint Vincent and the Grenadines', value: 'Saint Vincent and the Grenadines', }
-    ];
-
-
     const [firstFieldBottom, setFirstFieldBottom] = useState<number>(0);
     const [secondFieldBottom, setSecondFieldBottom] = useState('');
     const [diverHeight, setDiverHeight] = useState<number>(0);
-    console.log('firstFieldBottom', firstFieldBottom);
 
     const handlefirstFieldLayout = (event: any) => {
         const { height, y } = event.nativeEvent.layout;
@@ -162,14 +83,10 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
     const divider1Layout = (event: any) => {
 
         const { height: divider1, y } = event.nativeEvent.layout;
-        console.log('yjjjjjjjjjjjjjjjjjjjj', y);
-
         setDiverHeight(divider1);
     }
     const handlesecondFieldLayout = (event: any) => {
         const { height, y } = event.nativeEvent.layout;
-        // setSecondFieldBottom(height + y);
-        // console.log('height', height);
     }
 
     return (
@@ -201,7 +118,7 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
                                 />
                             </View>
                             <Divider style={{ ...styles.divider1, position: 'absolute', top: ((firstFieldBottom * 2) + diverHeight + 22 * 3), width: (screenWidth * 0.80) }} />
-                            <View onLayout={handlesecondFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: (firstFieldBottom + diverHeight)*2 + 22*4, zIndex: 1, right: 0 }}>
+                            <View onLayout={handlesecondFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: (firstFieldBottom + diverHeight) * 2 + 22 * 4, zIndex: 1, right: 0 }}>
                                 <Text style={styles.chartFilterFieldLabelContainer}>Start Date </Text>
                                 <CustomDatePicker
                                     setDate={setStartDate}
