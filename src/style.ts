@@ -1,6 +1,15 @@
-import { StyleSheet, Dimensions } from "react-native";
-export const screenWidth = Dimensions.get('window').width;
-export const screenHeight = Dimensions.get('window').height;
+import { StyleSheet, Dimensions, PixelRatio } from "react-native";
+
+export const screenWidth = Math.floor(Dimensions.get('window').width);
+export const screenHeight = Math.floor(Dimensions.get('window').height);
+
+const SCALE = 375;
+const scaleFontSize = (fontSize: any) => {
+    const ratio = fontSize / SCALE;
+    const newSize = Math.round((screenWidth * ratio));
+    return newSize;
+};
+
 
 console.log("screenWidth", screenWidth);
 export const smFont = 14;
@@ -16,6 +25,8 @@ export const filterIconBoxheight = Math.floor(screenWidth * 0.118);
 const filterIconBoxWidth = Math.floor(screenWidth * 0.125);
 export const size24 = Math.floor(screenWidth * 0.06);
 export const size136 = Math.floor(screenWidth * 0.314814814815);
+
+
 
 const commonFontStyle = {
     fontSize: smFont,
@@ -43,7 +54,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         justifyContent: 'space-around',
         backgroundColor: '#F5F5F5',
         borderRadius: 10,
-        padding: 35,
+        padding: 30,
     },
     cardContainer2: {
         padding: Math.floor(screenWidth * .06),
@@ -76,9 +87,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     title: {
         fontWeight: '500',
-        fontSize: 16,
+        fontSize: scaleFontSize(14),
         marginBottom: 5,
-        textAlign: 'center',
     },
     subtitleContainer: {
         flexDirection: 'row',
@@ -109,6 +119,9 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         padding: 10
+    },
+    chartLabel: {
+        fontSize: scaleFontSize(12)
     },
     taskCard: {
 
@@ -244,25 +257,23 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     dashboardFilterContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
-        width: '100%'
+        width: '100%',
+        // rowGap: 4
     },
     filterIconContainer: {
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight: 10
     },
     filterIconBoxContainer: {
 
-        // paddingHorizontal: size8,
-        // paddingHorizontal: size8,
         justifyContent: 'center',
         alignItems: 'center',
         height: filterIconBoxheight,
         width: filterIconBoxWidth,
         backgroundColor: 'rgba(235, 246, 251, 1)',
-        // width: '100%',
         borderRadius: 3,
-        // fontSize: size24
     },
     filterIcon: {
         color: 'rgba(151, 151, 154, 1)'
@@ -282,6 +293,59 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     chartFilterFieldLabelContainer: {
         textAlign: 'left',
         alignSelf: 'center'
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+        width: screenWidth,
+    },
+    modalContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 60
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        // padding: 35,
+        paddingHorizontal: 25,
+        paddingTop: 25,
+        paddingBottom: 25,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        borderRadius: 25,
+        width: 50,
+        height: 50,
+        elevation: 2,
+        justifyContent: 'center'
+    },
+    buttonOpen: {
+        backgroundColor: '#F194FF',
+    },
+    buttonClose: {
+        backgroundColor: 'rgba(201, 196, 235, 1)',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+    },
 
 });
