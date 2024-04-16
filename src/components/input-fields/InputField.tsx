@@ -16,9 +16,10 @@ console.log('type', type);
         <TextInput
             style={{...styles.input, ...styles['inputType'+type]}}
             // style={styles}
-            onChangeText={(value: string) => setInput(value)}
+            onChangeText={(value: string) => setInput && setInput(value)}
             value={value}
             placeholder={placeholder}
+            // right={<TextInput.Icon name="eye" />}
         />
     )
 }
