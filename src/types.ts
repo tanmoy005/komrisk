@@ -295,7 +295,7 @@ export interface AccordianCommonHeaderProps {
 }
 export interface InputFieldProps {
   value: string;
-  setInput: React.Dispatch<React.SetStateAction<any>>,
+  setInput?: React.Dispatch<React.SetStateAction<any>>,
   placeholder: string;
   type: string;
 }
