@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Pressable, StyleSheet,Text, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { screenWidth } from '../style';
 
 interface ModelProps {
@@ -22,15 +22,15 @@ const FilterModal = ({ component, modalVisible, setModalVisible }: ModelProps) =
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.centeredView}>
-          
+
           <View style={styles.modalView}>
-          <Pressable
+            <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>Hide Modal</Text>
             </Pressable>
             {component}
-            
+
           </View>
         </View>
       </Modal>
