@@ -44,6 +44,9 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
         filterCountrylist = filteredCountryData && filteredCountryData.length > 0 ? filteredCountryData?.map((subList: [number, string]) => {
             return { value: subList[0].toString(), label: subList[1] };
         }) : [DefaultDropDownItem];
+
+
+        console.log("filterCountrylist",filterCountrylist)
         // setGetCountryList(filterCountrylist);
     }
 

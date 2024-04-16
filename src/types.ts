@@ -514,4 +514,77 @@ export interface chartFilterProps {
 export interface filterSelectProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  
 }
+
+
+
+// ========================= Updated on 16-04-2024 ================================== //
+
+
+
+export interface userchartFilterProps {
+  chartFilterPayload: ChartFilterDataPayLoad
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  reportType: string
+}
+
+
+// For Activity Status
+export interface ActivityStatusUserFilterDataPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+}
+
+export interface ActivityStatusUserFilterData {
+  title: string | null;
+  subTitle: string | null;
+  chartData: UserFilterReportChartData[] | null
+}
+
+
+
+
+export interface UserFilterReportChartData {
+  displayValue: string;
+  filterLevel: number;
+  filterType: string;
+  label: string;
+  value: number;
+  userFilter: any
+}
+
+
+export interface userchartFilterLevelProps {
+  filterLevel: number
+  chartuserfilterPayload: ActivityStatusUserFilterDataPayLoad 
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+  setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setUserFilterLevelModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  reportType: string
+  
+}
+
+
+export interface ActivityStatusUserFilterLevelDataPayLoad extends ActivityStatusUserFilterDataPayLoad {
+  filterLevel: number | null;
+}
+
+
+export interface ActivityStatusUserFilterLevelData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: UserFilterReportChartData[] | null
+}
+
+
+
+
