@@ -9,6 +9,7 @@ import CustomModal from '../components/CustomModal';
 import ChartFilter from './chartFilterModal';
 import { filterSelectProps } from '../types';
 import { useState } from 'react';
+import { screenWidth } from '../style';
 
 export default function FilterScreen({ setFilterModalVisible, setModalVisible }: filterSelectProps) {
 
@@ -18,7 +19,7 @@ export default function FilterScreen({ setFilterModalVisible, setModalVisible }:
         setFilterModalVisible(true)
         // filterType
     }
-
+    const buttnWidth = screenWidth*0.59;
     return (
         <View style={styles.container}>
             <View
@@ -30,9 +31,10 @@ export default function FilterScreen({ setFilterModalVisible, setModalVisible }:
                     rowGap: 20
                 }}
             >
+
                 <Button
                     text='Chart Filter'
-                    btnColor='#5645C0'
+                    btnColor='rgba(120, 106, 205, 0.9)'
                     type='outline'
                     onPress={() =>
                         handlefilterVisibilyty()
@@ -41,25 +43,13 @@ export default function FilterScreen({ setFilterModalVisible, setModalVisible }:
                         paddingVertical: 20,
                         paddingHorizontal: 48,
                         fontWeight: '400',
-                        fontSize: 16
+                        fontSize: 16,
+                        width: buttnWidth
                     }}
                 />
                 <Button
                     text='Filter 2'
-                    btnColor='#5645C0'
-                    type='outline'
-                    onPress={() => router.push('/(user)/dashboard/complianceStatus')}
-                    style={{
-                        paddingVertical: 20,
-                        paddingHorizontal: 48,
-                        fontWeight: '400',
-                        fontSize: 16
-                    }}
-                />
-
-                <Button
-                    text='Filter 3'
-                    btnColor='#5645C0'
+                    btnColor='rgba(120, 106, 205, 0.9)'
                     type='outline'
                     onPress={() => router.push('/(user)/dashboard/complianceStatus')}
                     style={{
@@ -67,11 +57,24 @@ export default function FilterScreen({ setFilterModalVisible, setModalVisible }:
                         paddingHorizontal: 48,
                         fontWeight: '400',
                         fontSize: 16,
+                        width: buttnWidth
+                    }}
+                />
+                <Button
+                    text='Filter 3'
+                    btnColor='rgba(120, 106, 205, 0.9)'
+                    type='outline'
+                    onPress={() => router.push('/(user)/dashboard/complianceStatus')}
+                    style={{
+                        paddingVertical: 20,
+                        paddingHorizontal: 48,
+                        fontWeight: '400',
+                        fontSize: 16,
+                        width: buttnWidth,
                         borderRadius: 3
                     }}
                 />
             </View>
-
         </View >
     );
 }
@@ -81,7 +84,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 60
+        padding: 35
     },
     title: {
         fontSize: 20,

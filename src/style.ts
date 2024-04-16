@@ -76,14 +76,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         // padding: 9,
     },
     cardStyle2: {
-        // width: Math.floor(screenWidth * .86), // Adjust the width as needed
-        // height: Math.floor(screenWidth * .86),
-        // display: 'flex',
-        // justifyContent: 'space-around',
-        // backgroundColor: '#F5F5F5',
-        // padding:8,
         ...taskCardContainer,
-        borderRadius: 10,
+        borderRadius: 10
     },
     title: {
         fontWeight: '500',
