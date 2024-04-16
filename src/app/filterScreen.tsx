@@ -7,10 +7,10 @@ import Button from '../components/Button';
 import { router } from 'expo-router';
 import CustomModal from '../components/CustomModal';
 import ChartFilter from './chartFilterModal';
-import { chartFilterProps } from '../types';
+import { filterSelectProps } from '../types';
 import { useState } from 'react';
 
-export default function FilterScreen({ setFilterPayload, setFilterModalVisible, reportType,filterType, setModalVisible }: chartFilterProps) {
+export default function FilterScreen({ setFilterModalVisible, setModalVisible }: filterSelectProps) {
 
 
     const handlefilterVisibilyty = () => {

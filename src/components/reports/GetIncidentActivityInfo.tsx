@@ -18,7 +18,7 @@ import moment from 'moment';
 import calculatePercentage from '../../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const IncidentActivityInfo = ({ currentChart }: ChartProp) => {
+const IncidentActivityInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
   {
     const [incidentActivityChartData, setIncidentActivityChartData] = useState<IncidentActivityData>({
       title: null,
@@ -31,15 +31,10 @@ const IncidentActivityInfo = ({ currentChart }: ChartProp) => {
     const [totalValue, setTotalValue] = useState<number>(0);
     // const [currentChart, setCurrentChart] = useState<string>('PIE');
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const currentDate: string = moment().format('DD/MM/YYYY');
-    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
-
-    const payLoad: IncidentActivityDataPayLoad = {
+    let payLoad: IncidentActivityDataPayLoad = {
       ...useCredential,
-      start: startDate,
-      viewAs: "COMPANY HEAD",
-      end: currentDate
+      ...chartFilterPayload
     }
 
     const navigateToChartList = (statusType: string, payLoad: IncidentActivityDataPayLoad) => {
@@ -65,8 +60,14 @@ const IncidentActivityInfo = ({ currentChart }: ChartProp) => {
 
     }
     useEffect(() => {
+
+      payLoad = {
+        ...useCredential,
+        ...chartFilterPayload
+      }
+
       handleGetIncidentActivityData();
-    }, []);
+    }, [chartFilterPayload]);
 
     return (
       <View style={styles.chartContainer}>

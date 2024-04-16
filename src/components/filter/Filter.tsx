@@ -4,7 +4,7 @@ import { Pressable, Text, View } from 'react-native'
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import DropDown from '../Dropdown';
-import { FilterProps } from '@/src/types';
+import { ChartFilterDataPayLoad, FilterProps } from '@/src/types';
 import { router } from 'expo-router';
 import CustomModal from '../CustomModal';
 import FilterScreen from '@/src/app/filterScreen';
@@ -12,9 +12,13 @@ import FilterModal from '../FilterModal';
 import ChartFilter from '@/src/app/chartFilterModal';
 
 
-const Filter = ({ currentChart, setCurrentChart, reportType, setFilterPayload }: FilterProps): JSX.Element => {
+const Filter = ({ currentChart, setCurrentChart, reportType, setChartFilterPayload, chartFilterPayload }: FilterProps): JSX.Element => {
     const [modalVisible, setModalVisible] = useState(false);
     const [filterModalVisible, setFilterModalVisible] = useState(false);
+    // const [cchartFilterPayload, setCchartFilterPayload] = useState<ChartFilterDataPayLoad>({});
+    // setChartFilterPayload(cchartFilterPayload)
+    //console.log("2", cchartFilterPayload);
+    console.log("3", chartFilterPayload);
     const filterList = [
         {
             iconName: 'filter',
@@ -72,9 +76,6 @@ const Filter = ({ currentChart, setCurrentChart, reportType, setFilterPayload }:
                     <FilterScreen
                         setModalVisible={setModalVisible}
                         setFilterModalVisible={setFilterModalVisible}
-                        setFilterPayload={setFilterPayload}
-                        reportType={reportType}
-                        filterType={''}
                     />}
             />
             <CustomModal
@@ -84,9 +85,9 @@ const Filter = ({ currentChart, setCurrentChart, reportType, setFilterPayload }:
                     <ChartFilter
                         setModalVisible={setFilterModalVisible}
                         setFilterModalVisible={setFilterModalVisible}
-                        setFilterPayload={setFilterPayload}
+                        setChartFilterPayload={setChartFilterPayload}
+                        chartFilterPayload={chartFilterPayload}
                         reportType={reportType}
-                        filterType={''}
                     />
                 }
             />

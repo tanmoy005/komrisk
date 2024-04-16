@@ -153,7 +153,7 @@ import calculatePercentage from '../../utils/associate/get-percentage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-const IncidentComparisonInfo = ({ currentChart }: ChartProp) => {
+const IncidentComparisonInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
   {
     const [incidentComparisonChartData, setIncidentComparisonChartData] = useState<IncidentComparisonData>({
       title: null,
@@ -165,14 +165,10 @@ const IncidentComparisonInfo = ({ currentChart }: ChartProp) => {
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const currentDate: string = moment().format('DD/MM/YYYY');
-    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
-    const payLoad: IncidentComparisonDataPayLoad = {
+    let payLoad: IncidentComparisonDataPayLoad = {
       ...useCredential,
-      start: startDate,
-      viewAs: "COMPANY HEAD",
-      end: currentDate
+      ...chartFilterPayload
     }
 
     const navigateToChartList = (statusType: string, payLoad: IncidentComparisonDataPayLoad) => {
@@ -198,8 +194,12 @@ const IncidentComparisonInfo = ({ currentChart }: ChartProp) => {
 
     }
     useEffect(() => {
+      payLoad = {
+        ...useCredential,
+        ...chartFilterPayload
+      }
       handleGetIncidentComparisonData();
-    }, []);
+    }, [chartFilterPayload]);
     console.log('currentChart2333', currentChart);
 
     return (

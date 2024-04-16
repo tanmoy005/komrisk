@@ -18,7 +18,7 @@ import moment from 'moment';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
 
-const ComplianceStatusInfo = ({ currentChart }: ChartProp) => {
+const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
   const [activityStatusChartData, setActivityStatusChartData] = useState<ComplianceStatusData>({
     title: null,
     subTitle: null,
@@ -28,28 +28,22 @@ const ComplianceStatusInfo = ({ currentChart }: ChartProp) => {
   });
   const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
   const [totalValue, setTotalValue] = useState<number>(0);
-  // const [currentChart, setCurrentChart] = useState<string>('PIE');
+  // const [payLoad, setPayload] = useState<ComplianceStatusDataPayLoad>({
+  //   ...useCredential,
+  //   ...chartFilterPayload,
+  // });
+
   const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-  const useDetails = useSelector((state: RootState) => state.authUserDetails.payload);
 
-  console.log('====================================');
-  console.log("useDetails", useDetails);
-  // console.log("useAccessDetails", useAccessDetails);
-  // console.log("useAvailableViews", useAvailableViews);
-  console.log('====================================');
-  const currentDate: string = moment().format('DD/MM/YYYY');
-  const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
-
-  const payLoad: ComplianceStatusDataPayLoad = {
+  let payLoad: ComplianceStatusDataPayLoad = {
     ...useCredential,
-    start: startDate,
-    viewAs: "COMPANY HEAD",
-    end: currentDate
+    ...chartFilterPayload,
   }
 
 
   const navigateToChartList = (statusType: string, payLoad: ComplianceStatusDataPayLoad) => {
     const payloadString = JSON.stringify(payLoad); // Stringify the payload here
+    console.log("parsedPayload",payloadString);
     router.push({ pathname: `/chartReport/GetComplianceStatusDataListDetailsInfo`, params: { statusType, payload: payloadString } });
   }
 
@@ -70,10 +64,16 @@ const ComplianceStatusInfo = ({ currentChart }: ChartProp) => {
     }
   }
 
+  // useEffect(() => {
+  //   handleGetComplianceStatusData();
+  // }, []);
   useEffect(() => {
+    payLoad = {
+      ...useCredential,
+      ...chartFilterPayload,
+    }
     handleGetComplianceStatusData();
-  }, []);
-
+  }, [chartFilterPayload]);
   return (
     <View style={styles.chartContainer}>
       {
