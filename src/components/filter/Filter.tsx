@@ -66,28 +66,34 @@ const Filter = ({ currentChart, setCurrentChart, reportType, setChartFilterPaylo
                 })
             }
             {/* { setFilterPayload,reportType }: chartFilterProps */}
-            <FilterModal
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                component={
-                    <FilterScreen
-                        setModalVisible={setModalVisible}
-                        setFilterModalVisible={setFilterModalVisible}
-                    />}
-            />
-            <CustomModal
-                setModalVisible={setFilterModalVisible}
-                modalVisible={filterModalVisible}
-                component={
-                    <ChartFilter
-                        setModalVisible={setFilterModalVisible}
-                        setFilterModalVisible={setFilterModalVisible}
-                        setChartFilterPayload={setChartFilterPayload}
-                        chartFilterPayload={chartFilterPayload}
-                        reportType={reportType}
-                    />
-                }
-            />
+            {
+                modalVisible &&
+                <FilterModal
+                    modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
+                    component={
+                        <FilterScreen
+                            setModalVisible={setModalVisible}
+                            setFilterModalVisible={setFilterModalVisible}
+                        />}
+                />
+            }
+            {
+                filterModalVisible &&
+                <CustomModal
+                    setModalVisible={setFilterModalVisible}
+                    modalVisible={filterModalVisible}
+                    component={
+                        <ChartFilter
+                            setModalVisible={setFilterModalVisible}
+                            setFilterModalVisible={setFilterModalVisible}
+                            setChartFilterPayload={setChartFilterPayload}
+                            chartFilterPayload={chartFilterPayload}
+                            reportType={reportType}
+                        />
+                    }
+                />
+            }
             <View style={styles.chartSelctorContainer}>
                 <DropDown
                     selectedValue={currentChart}
