@@ -3,15 +3,10 @@ import React, { SetStateAction, useState } from 'react';
 import { View, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { styles } from '../style';
-import { DropDownItem } from '../types';
+import { DropDownItem, Dropdown } from '../types';
 
 
-interface Dropdown {
-  dropdownItems: DropDownItem[];
-  setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
-  selectedValue: any;
-  minWidth?: number;
-}
+
 
 const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth }: Dropdown) => {
 

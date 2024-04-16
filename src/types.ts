@@ -458,9 +458,60 @@ export const defaultAvailableViews: availableViews = {
 }
 export interface FilterProps {
   currentChart: string;
+  reportType: string;
+  chartFilterPayload: ChartFilterDataPayLoad;
   setCurrentChart: React.Dispatch<React.SetStateAction<string>>
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+}
+export interface ChartFilterDataPayLoad {
+  start: string;
+  end: string;
+  viewAs: string;
 }
 
-export interface ChartProp{
-  currentChart : string;
+
+export interface DropDownItem {
+  label: string;
+  value: string
+
+
+}
+
+export interface Dropdown {
+  dropdownItems: DropDownItem[];
+  setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
+  selectedValue: any;
+  minWidth?: number;
+}
+
+export const DefaultDropDownItem: DropDownItem = {
+  label: "",
+  value: ""
+}
+export interface FilterProps {
+  currentChart: string;
+  setCurrentChart: React.Dispatch<React.SetStateAction<string>>;
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
+  chartFilterPayload: ChartFilterDataPayLoad;
+  reportType: string
+}
+
+export interface ChartProp {
+  currentChart: string;
+  chartFilterPayload: ChartFilterDataPayLoad;
+}
+export interface CustomeDatePickerProps {
+  setDate: React.Dispatch<React.SetStateAction<Date>>
+  date: Date | null
+}
+export interface chartFilterProps {
+  chartFilterPayload: ChartFilterDataPayLoad
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  reportType: string
+}
+export interface filterSelectProps {
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
