@@ -26,7 +26,14 @@ const PieChartData = ({ ReportData }: ChartItemProps) => {
     setDataValue(ChartValue);
   }, [ReportData]);
 
-
+  console.log('screenWidth', Math.floor(screenWidth));
+  let chartWidth = screenWidth * .48;
+  if (screenWidth > 411) {
+    chartWidth = screenWidth * .48;
+  }
+  if (screenWidth <= 411) {
+    chartWidth = screenWidth * .38;
+  }
 
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -34,7 +41,7 @@ const PieChartData = ({ ReportData }: ChartItemProps) => {
         dataValue.length > 0 ?
           <PieChart
             series={dataValue}
-            widthAndHeight={screenWidth * .48}
+            widthAndHeight={chartWidth}
             sliceColor={colors}
             coverFill={'#FFF'}
           />
