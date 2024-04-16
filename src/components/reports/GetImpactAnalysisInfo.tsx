@@ -3,7 +3,6 @@ import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData, ChartPr
 import GetImpactAnalysisData from '../../server/api-functions/get-impact-analysis-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
-import DropDown from '../Dropdown';
 import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
@@ -14,9 +13,7 @@ import { Card, Text } from 'react-native-elements';
 import { styles } from '../../style';
 import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from '../skelton/CardSkelton';
-import moment from 'moment';
 import calculatePercentage from '../../utils/associate/get-percentage';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
   {
@@ -28,6 +25,7 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
       chartData: null
     });
     const [totalValue, setTotalValue] = useState<number>(0);
+    const [noDataAvailable, setNoDataAvailable] = useState<boolean>(false);
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
 
@@ -53,6 +51,9 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
+        if (filteredchartData.length <= 0) {
+          setNoDataAvailable(true);
+        }
         const sum: number = filteredchartData.map((x: ReportChartData) => x.value).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         setTotalValue(sum);
       } else {
@@ -113,7 +114,13 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
               </View>
 
             </Card>
-            : <CardSkelton />
+            : (noDataAvailable) ?
+              <Card containerStyle={styles.cardContainer}>
+                <View>
+                  <Text style={styles.title}>{"No Data Available"}</Text>
+                </View>
+              </Card>
+              : <CardSkelton />
         }
       </View>
     )

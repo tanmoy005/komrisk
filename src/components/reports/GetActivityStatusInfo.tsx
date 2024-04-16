@@ -13,7 +13,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import { styles } from '../../style';
 import { Card, Text } from 'react-native-elements';
 import CardSkelton from '../skelton/CardSkelton';
-import moment from 'moment';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
 const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
@@ -27,6 +26,7 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
     });
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
+    const [noDataAvailable, setNoDataAvailable] = useState<boolean>(false);
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const filterPayload: ActivityStatusDataPayLoad = {
       ...useCredential,
@@ -35,25 +35,12 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
     console.log("chartFilterPayload", chartFilterPayload);
 
     const navigateToChartList = (statusType: string, parsedPayload: ActivityStatusDataPayLoad) => {
-      // console.log("parsedPayload",parsedPayload);
-      
+
       const payloadString = JSON.stringify(parsedPayload); // Stringify the payload here
       router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
 
-
-    // const navigateToChartList = (statusType: string, payLoad: ActivityStatusDataPayLoad) => {
-    //   router.push({ pathname: `/chartReport/GetActivityStatusDataListDetailsInfo`, params: { statusType, payLoad } });
-    // }
     const handleGetActivityStatusData = async (filterPayload: ActivityStatusDataPayLoad) => {
-
-      // const payLoad: ActivityStatusDataPayLoad = {
-      //   ...useCredential,
-      //   start: startDate,
-      //   viewAs: "COMPANY HEAD",
-      //   end: currentDate
-      // }
-      // //console.log("payLoad", payLoad);
 
       const { data, error, status } = await GetActivityStatusData(filterPayload);
       if (status === 200) {
@@ -62,6 +49,9 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
+        if (filteredchartData.length <= 0) {
+          setNoDataAvailable(true);
+        }
         const sum: number = filteredchartData.map((x: ReportChartData) => x.value).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         setTotalValue(sum);
       } else {
@@ -123,7 +113,13 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
               </View>
 
             </Card>
-            : <CardSkelton />
+            : (noDataAvailable) ?
+              <Card containerStyle={styles.cardContainer}>
+                <View>
+                  <Text style={styles.title}>{"No Data Available"}</Text>
+                </View>
+              </Card>
+              : <CardSkelton />
         }
 
       </View>

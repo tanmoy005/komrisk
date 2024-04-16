@@ -14,7 +14,6 @@ import { Card, Text } from 'react-native-elements';
 import { styles } from '../../style';
 import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from '../skelton/CardSkelton';
-import moment from 'moment';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
 
@@ -28,11 +27,7 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
   });
   const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
   const [totalValue, setTotalValue] = useState<number>(0);
-  // const [payLoad, setPayload] = useState<ComplianceStatusDataPayLoad>({
-  //   ...useCredential,
-  //   ...chartFilterPayload,
-  // });
-
+  const [noDataAvailable, setNoDataAvailable] = useState<boolean>(false);
   const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
 
   let payLoad: ComplianceStatusDataPayLoad = {
@@ -43,7 +38,7 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
 
   const navigateToChartList = (statusType: string, payLoad: ComplianceStatusDataPayLoad) => {
     const payloadString = JSON.stringify(payLoad); // Stringify the payload here
-    console.log("parsedPayload",payloadString);
+    console.log("parsedPayload", payloadString);
     router.push({ pathname: `/chartReport/GetComplianceStatusDataListDetailsInfo`, params: { statusType, payload: payloadString } });
   }
 
@@ -55,6 +50,9 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
       setActivityStatusChartData(data);
 
       const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
+      if (filteredchartData.length <= 0) {
+        setNoDataAvailable(true);
+      }
       setFilteredChartData(filteredchartData);
       const sum: number = filteredchartData.map((x: ReportChartData) => x.value).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       setTotalValue(sum);
@@ -64,9 +62,6 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
     }
   }
 
-  // useEffect(() => {
-  //   handleGetComplianceStatusData();
-  // }, []);
   useEffect(() => {
     payLoad = {
       ...useCredential,
@@ -120,7 +115,13 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
             </View>
 
           </Card>
-          : <CardSkelton />
+          : (noDataAvailable) ?
+            <Card containerStyle={styles.cardContainer}>
+              <View>
+                <Text style={styles.title}>{"No Data Available"}</Text>
+              </View>
+            </Card>
+            : <CardSkelton />
       }
 
     </View>
