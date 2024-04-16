@@ -372,8 +372,8 @@ export interface Country {
 }
 
 export interface ComplianceView {
-  key: string | null;
-  value: string | null;
+  key: string;
+  value: string;
 }
 // export const DefaultComplianceView: ComplianceView =
 // {
