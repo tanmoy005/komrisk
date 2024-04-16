@@ -15,9 +15,6 @@ import ChartFilter from '@/src/app/chartFilterModal';
 const Filter = ({ currentChart, setCurrentChart, reportType, setChartFilterPayload, chartFilterPayload }: FilterProps): JSX.Element => {
     const [modalVisible, setModalVisible] = useState(false);
     const [filterModalVisible, setFilterModalVisible] = useState(false);
-    // const [cchartFilterPayload, setCchartFilterPayload] = useState<ChartFilterDataPayLoad>({});
-    // setChartFilterPayload(cchartFilterPayload)
-    //console.log("2", cchartFilterPayload);
     console.log("3", chartFilterPayload);
     const filterList = [
         {

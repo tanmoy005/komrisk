@@ -1,9 +1,6 @@
-import { router } from 'expo-router';
-import React, { useState } from 'react';
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import React from 'react';
+import { Modal, Pressable, StyleSheet,Text, View } from 'react-native';
 import { screenWidth } from '../style';
-import FilterScreen from '../app/filterScreen';
 
 interface ModelProps {
   component: JSX.Element,
@@ -21,12 +18,19 @@ const FilterModal = ({ component, modalVisible, setModalVisible }: ModelProps) =
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
+          // Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.centeredView}>
+          
           <View style={styles.modalView}>
+          <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
             {component}
+            
           </View>
         </View>
       </Modal>

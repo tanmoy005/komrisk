@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, Pressable, TextInput, View } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { CustomeDatePickerProps } from '../types';
-import InputField from './input-fields/InputField';
 import { styles } from '../style';
 import { DateFormatDDMMYYYY } from '../utils';
 
@@ -19,7 +18,7 @@ const CustomDatePicker = ({ setDate, date }: CustomeDatePickerProps): JSX.Elemen
   };
 
   const handleConfirm = (date: Date) => {
-    console.warn("A date has been picked: ", date);
+    // console.warn("A date has been picked: ", date);
     setDate(date);
     hideDatePicker();
   };

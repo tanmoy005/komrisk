@@ -42,8 +42,7 @@ let SignIn = () => {
         if (status === 200) {
             const { token, userDetails, countryEnabled } = data
             setDataToAsyncStorage('token', token);
-            router.push("/(user)/dashboard/activityStatus");
-            console.log("*************")
+            router.push("/(user)/dashboard/complianceStatus");
             dispatch(storeAuthUserCred({ username, password }))
             dispatch(storeAuthUserDetails({ userDetails, countryEnabled }))
             GetUserAccessData();

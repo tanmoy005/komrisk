@@ -11,7 +11,7 @@ import CustomDatePicker from '../components/CustomDatePicker';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
 import { availableViews, chartFilterProps, ComplianceView, Country, DefaultDropDownItem, DropDownItem } from '../types';
-import { DateFormatDDMMYYYY } from '../utils';
+import { DateFormatDDMMYYYY, StringToDate } from '../utils';
 
 
 const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, setFilterModalVisible, setModalVisible }: chartFilterProps) => {
@@ -23,6 +23,8 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
     const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload.viewAs);
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [endDate, setEndDate] = useState<Date>(new Date());
+    // const [startDate, setStartDate] = useState<Date>(StringToDate(chartFilterPayload.start));
+    //  const [endDate, setEndDate] = useState<Date>(StringToDate("16/04/2024"));
 
     //const [startDate, setStartDate] = useState<string>(moment().subtract(1, 'months').format('DD/MM/YYYY'));
     //const [endDate, setEndDate] = useState<string>(moment().subtract(1, 'months').format('DD/MM/YYYY'));
@@ -66,7 +68,7 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
         chartFilterPayload.viewAs = selectedViewAs;
         chartFilterPayload.start = DateFormatDDMMYYYY(startDate && startDate.toString()) ?? "";
         chartFilterPayload.end = DateFormatDDMMYYYY(endDate.toString()) ?? "";
-        setChartFilterPayload(chartFilterPayload);
+        setChartFilterPayload({ ...chartFilterPayload });
         console.log("1", chartFilterPayload);
         setFilterModalVisible(false)
     }
