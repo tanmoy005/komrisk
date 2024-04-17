@@ -103,7 +103,7 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
                       color={`#${label.color ?? '000'}`}
                       style={{ marginRight: 15, opacity: 1 }}
                     />
-                    <Text style={{ color: `#${label.color ?? '000'}` }}>{`${label.label ?? ''}  ${calculatePercentage(label.value, totalValue)}%`}</Text>
+                    <Text style={{ color: `#${label.color ?? '000'}`, ...styles.chartLabel }}>{`${label.label ?? ''}  ${calculatePercentage(label.value, totalValue)}%`}</Text>
 
                   </Pressable>
                 )
@@ -118,7 +118,7 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
           : (noDataAvailable) ?
             <Card containerStyle={styles.cardContainer}>
               <View>
-                <Text style={styles.title}>{"No Data Available"}</Text>
+                <Text style={styles.title1}>{"No Data Available"}</Text>
               </View>
             </Card>
             : <CardSkelton />
