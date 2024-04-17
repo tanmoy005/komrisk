@@ -10,34 +10,15 @@ interface RedirectionButton {
   pathName: string;
 }
 
-export default function ProfileModalScreen() {
-
-  // const buttonList:RedirectionButton[] = [
-  //   {
-  //     btnName: 'My Pending Tasks',
-  //     pathName: '/(user)/dashboard/complianceStatus'
-  //   },
-  //   {
-  //     btnName: 'Dashboard',
-  //     pathName: '/(user)/dashboard/complianceStatus'
-  //   },
-  //   {
-  //     btnName: 'Notifications',
-  //     pathName: '/(user)/dashboard/complianceStatus'
-  //   }
-  // ]
-  const navigateToProfile =()=>{
+export default function Menu() {
+  const navigateToProfile = () => {
     router.push('/profilePage');
   }
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/modal.tsx" />
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} /> */}
       <Pressable onPress={navigateToProfile}>
-        <View  style={{ ...styles.profileImageContainer, height: "50%" }}>
+        <View style={{ ...styles.profileImageContainer, height: "50%" }}>
           <Image style={{ width: 120, height: 120 }} source={require('@/assets/images/User.png')} />
           <Text style={styles.userTitle}>Alicia Lockheed</Text>
           <View style={styles.separator}></View>
@@ -53,25 +34,6 @@ export default function ProfileModalScreen() {
           rowGap: 20
         }}
       >
-        {/* {
-            buttonList.map(({btnName, pathName}: RedirectionButton)=>{
-              return (
-
-                <Button
-                  text={btnName}
-                  btnColor='#5645C0'
-                  type='outline'
-                  onPress={()=> router.push({pathName: pathName})}
-                  style={{
-                    paddingVertical: 20,
-                    paddingHorizontal: 48,
-                    fontWeight: '400',
-                    fontSize: 16
-                  }}
-                />
-              )
-            })
-          } */}
         <Button
           text='My Pending Tasks'
           btnColor='#5645C0'
@@ -110,32 +72,7 @@ export default function ProfileModalScreen() {
             borderRadius: 3
           }}
         />
-        {/* <View style={{ marginVertical: 10 }}>
-        </View> */}
-        {/* <View style={{ marginVertical: 10 }}>
-          <Button
-            text='My Pending Tasks'
-            btnColor='#5645C0'
-            type='outline'
-            style={{
-              paddingVertical: 5,
-              paddingHorizontal: 16,
-              fontWeight: '400',
-              fontSize: 16
-            }}
-          />
-        </View> */}
       </View>
-
-      {/* <View style={styles.submitBtnContainer}> */}
-      {/* <Button
-                    //   style={styles.submitBtn}
-                    title="My Pending Tasks"
-                    color="#A097DC"
-                    // onPress={handleSubmitSignIn}
-                /> */}
-      {/* </View> */}
-
     </View >
   );
 }
