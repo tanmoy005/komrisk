@@ -105,7 +105,7 @@ const IncidentActivityInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
                         color={`#${data.color ?? '000'}`}
                         style={{ marginRight: 15, opacity: 1 }}
                       />
-                      <Text style={{ color: `#${data.color ?? '000'}` }}>{`${data.label ?? ''}  ${calculatePercentage(data.value, totalValue)}%`}</Text>
+                      <Text style={{ color: `#${data.color ?? '000'}`, ...styles.chartLabel }}>{`${data.label ?? ''}  ${calculatePercentage(data.value, totalValue)}%`}</Text>
 
                     </Pressable>
                   )
@@ -119,7 +119,7 @@ const IncidentActivityInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
            : (noDataAvailable) ?
            <Card containerStyle={styles.cardContainer}>
              <View>
-               <Text style={styles.title}>{"No Data Available"}</Text>
+               <Text style={styles.title1}>{"No Data Available"}</Text>
              </View>
            </Card>
            : <CardSkelton />
