@@ -118,6 +118,7 @@ import { userchartFilterProps, chartFilterProps, ComplianceView, DefaultDropDown
 import GetActivityStatusUserFilterData from '../server/api-functions/get-activity-status-userfilter-data';
 import { ActivityStatusUserFilterData, ChartProp, UserFilterReportChartData, ActivityStatusUserFilterDataPayLoad } from '../types';
 import UserChartFilterLevel from './userchartFilterLevelModal';
+import FilterOptionCard from '../components/cards/FilterOptionCard';
 
 
 const UserChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, setUserFilterModalVisible }: userchartFilterProps) => {
@@ -166,31 +167,36 @@ const UserChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType
 
 
     const renderItem = ({ item }: { item: UserFilterReportChartData }) => (
-        <Pressable onPress={() => handleItemPress(item.filterLevel)}>
-            <Text style={{ fontSize: 22, marginBottom: 10 }}>{item.displayValue}</Text>
-        </Pressable>
-
+        <FilterOptionCard value={item.value}
+            label={item.label} />
     );
-
+    const gap = 5
     return (
         <View style={{ ...styles.dashboardContainer, width: (screenWidth * 0.75) }}>
             <View style={styles.chartContainer}>
-                <View style={{ ...styles.taskCard, justifyContent: 'space-between', width: '100%', height: '100%', position: 'relative' }}>
-                    <CardContainer styles={{ position: 'relative', width: '100%' }}>
-                        <CardTextContainer styles={{ position: 'relative', width: '100%' }}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 2, right: 0 }}>
-                                <FlatList
-                                    data={filteredChartData}
-                                    renderItem={renderItem}
-                                    keyExtractor={item => item.displayValue}
+                {/* <View style={{ ...styles.taskCard, justifyContent: 'space-between', width: '100%', height: '100%', position: 'relative' }}>
+                    <CardContainer styles={{ position: 'relative', width: '100%' }}> */}
+                {/* <CardTextContainer styles={{ position: 'relative', width: '100%' }}> */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 2, right: 0 }}>
+                    <FlatList
+                        data={filteredChartData}
+                        ItemSeparatorComponent={
+                            (() => (
+                                <View
+                                    style={{ marginVertical: 6 }}
                                 />
-                            </View>
-                        </CardTextContainer>
-                    </CardContainer>
-                </View>
-            </View>
-            {selectedFilterLevel !== null && <UserChartFilterLevel filterLevel={selectedFilterLevel} chartuserfilterPayload={chartuserfilterPayload}/>}
+                            ))
+                        }
+                        renderItem={renderItem}
+                        keyExtractor={item => item.label}
+                    />
 
+                </View>
+                {/* </CardTextContainer> */}
+                {/* </CardContainer>
+                </View> */}
+            </View>
+            {selectedFilterLevel !== null && <UserChartFilterLevel filterLevel={selectedFilterLevel} chartuserfilterPayload={chartuserfilterPayload} />}
         </View>
     );
 };

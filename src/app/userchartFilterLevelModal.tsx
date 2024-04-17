@@ -12,12 +12,14 @@ import { RootState } from '../store/rootReducer';
 import { userchartFilterLevelProps, chartFilterProps, ComplianceView, DefaultDropDownItem, DropDownItem } from '../types';
 import GetActivityStatusUserFilterLevelData from '../server/api-functions/get-activity-status-userfilter-filterlevel-data';
 import { ActivityStatusUserFilterLevelData, ChartProp, UserFilterReportChartData, ActivityStatusUserFilterLevelDataPayLoad } from '../types';
+import TaskCard from '../components/cards/TaskCard';
+import FilterOptionCard from '../components/cards/FilterOptionCard';
 
-const UserChartFilterLevel = ({ filterLevel,chartuserfilterPayload, reportType, setUserFilterLevelModalVisible }: userchartFilterLevelProps) => {
+const UserChartFilterLevel = ({ filterLevel, chartuserfilterPayload, reportType, setUserFilterLevelModalVisible }: userchartFilterLevelProps) => {
     const [activityStatusUserFilterLevelChartData, setActivityStatusUserFilterLevelChartData] = useState<ActivityStatusUserFilterLevelData>({
         title: null,
         subTitle: null,
-        xAxisName: null ,
+        xAxisName: null,
         yAxisName: null,
         chartData: null
     });
@@ -60,36 +62,51 @@ const UserChartFilterLevel = ({ filterLevel,chartuserfilterPayload, reportType, 
 
 
 
-    const handleItemPress = (userFilter : any) => {
+    const handleItemPress = (userFilter: any) => {
         console.log("userFilter", userFilter);
         setSelectedUserFilterLevel(userFilter); // Set the selected filter level in state
     };
 
 
-    const renderItem = ({ item }: { item: UserFilterReportChartData }) => (
-        <Pressable onPress={() => handleItemPress(item.userFilter)}>
-            <Text style={{ fontSize: 22, marginBottom: 10 }}>{item.label}</Text>
-        </Pressable>
+    // const renderItem = ({ item }: { item: UserFilterReportChartData }) => (
+    //     <Pressable onPress={() => handleItemPress(item.userFilter)}>
+    //         <Text style={{ fontSize: 22, marginBottom: 10 }}>{item.label}</Text>
+    //     </Pressable>
 
-    );
+    // );
+
+    const renderItem = ({ item }: { item: UserFilterReportChartData }) => {
+ 
+        return (
+            <Pressable onPress={() => handleItemPress(item.userFilter)}>
+                <FilterOptionCard
+                    value={item.value}
+                    label={item.label}
+                />
+            </Pressable>
+        )
+
+    };
 
     return (
-        <View style={{ ...styles.dashboardContainer, width: (screenWidth * 0.75) }}>
-            <View style={styles.chartContainer}>
-                <View style={{ ...styles.taskCard, justifyContent: 'space-between', width: '100%', height: '100%', position: 'relative' }}>
-                    <CardContainer styles={{ position: 'relative', width: '100%' }}>
-                        <CardTextContainer styles={{ position: 'relative', width: '100%' }}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 2, right: 0 }}>
+        <View >
+            {/* <View style={styles.chartContainer}> */}
+                {/* <View style={{ ...styles.taskCard, justifyContent: 'space-between', width: '100%', height: '100%', position: 'relative' }}> */}
+                    {/* <CardContainer styles={{ position: 'relative', width: '100%' }}> */}
+                        {/* <CardTextContainer styles={{ position: 'relative', width: '100%' }}> */}
+                            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 2, right: 0 }}> */}
                                 <FlatList
                                     data={filteredLevelChartData}
-                                    renderItem={renderItem}
-                                    keyExtractor={item => item.label }
+                                 renderItem={({ item }) => <FilterOptionCard  value={item.value}
+                                 label={item.label} />}
+                                    // renderItem={renderItem}
+                                    keyExtractor={item => item.label}
                                 />
-                            </View>
-                        </CardTextContainer>
-                    </CardContainer>
-                </View>
-            </View>
+                            {/* </View> */}
+                        {/* </CardTextContainer> */}
+                    {/* </CardContainer> */}
+                {/* </View> */}
+            {/* </View> */}
         </View>
     );
 };
