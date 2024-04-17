@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ReportChartData } from '../../types';
 import CardSkelton from '../skelton/CardSkelton';
 import PieChart from 'react-native-pie-chart';
-import { screenWidth } from '../../style';
+import { scaleCardSize, screenWidth } from '../../style';
 
 type ChartItemProps = {
   ReportData: ReportChartData[];
@@ -27,13 +27,18 @@ const PieChartData = ({ ReportData }: ChartItemProps) => {
   }, [ReportData]);
 
   console.log('screenWidth', Math.floor(screenWidth));
-  let chartWidth = screenWidth * .48;
-  if (screenWidth > 411) {
-    chartWidth = screenWidth * .48;
-  }
-  if (screenWidth <= 411) {
-    chartWidth = screenWidth * .38;
-  }
+
+  // let chartWidth =scaleCardSize(screenWidth)* screenWidth * .48;
+  // let chartWidth =scaleCardSize(screenWidth)* screenWidth * .48;
+  // let chartWidth = scaleCardSize(screenWidth);
+  
+ 
+  // if (screenWidth > 411) {
+  //   chartWidth = screenWidth * .48;
+  // }
+  // if (screenWidth <= 411) {
+  //   chartWidth = screenWidth * .38;
+  // }
 
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -41,7 +46,7 @@ const PieChartData = ({ ReportData }: ChartItemProps) => {
         dataValue.length > 0 ?
           <PieChart
             series={dataValue}
-            widthAndHeight={chartWidth}
+            widthAndHeight={scaleCardSize(180)}
             sliceColor={colors}
             coverFill={'#FFF'}
           />

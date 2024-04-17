@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 import { ReportChartData } from '../../types';
-import { screenWidth } from '../../style';
+import { scaleCardSize, screenWidth } from '../../style';
 import CardSkelton from '../skelton/CardSkelton';
 
 export type dChartItemProps = {
@@ -33,7 +33,7 @@ const DonatChartData = ({ ReportData }: dChartItemProps) => {
         dataValue.length > 0 ?
           <PieChart
             series={dataValue}
-            widthAndHeight={screenWidth * .48}
+            widthAndHeight={scaleCardSize(180)}
             sliceColor={colors}
             coverRadius={0.45}
             coverFill={'#FFF'}
