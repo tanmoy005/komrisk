@@ -115,17 +115,11 @@
 
 // ========================== Updated on 16-04-2024 ================================== //
 
-import { StatusBar } from 'expo-status-bar';
-import { Image, Platform, Pressable, StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/src/components/EditScreenInfo';
-import { Text, View } from '@/src/components/Themed';
+import { StyleSheet } from 'react-native';
+import { View } from '@/src/components/Themed';
 import Button from '../components/Button';
 import { router } from 'expo-router';
-import CustomModal from '../components/CustomModal';
-import ChartFilter from './chartFilterModal';
 import { filterSelectProps } from '../types';
-import { useState } from 'react';
 import { screenWidth } from '../style';
 
 export default function FilterScreen({ setFilterModalVisible, setUserFilterModalVisible, setModalVisible }: filterSelectProps) {
@@ -137,13 +131,13 @@ export default function FilterScreen({ setFilterModalVisible, setUserFilterModal
         // filterType
     }
 
-    
+
     const handleuserfilterVisibilyty = () => {
         setModalVisible(false);
         setUserFilterModalVisible(true)
         // filterType
     }
-    const buttnWidth = screenWidth*0.59;
+    const buttnWidth = screenWidth * 0.59;
     return (
         <View style={styles.container}>
             <View
@@ -175,7 +169,7 @@ export default function FilterScreen({ setFilterModalVisible, setUserFilterModal
                     btnColor='rgba(120, 106, 205, 0.9)'
                     text='Chart User Filter'
                     type='outline'
-                    onPress={() => 
+                    onPress={() =>
                         handleuserfilterVisibilyty()
                     }
                     style={{

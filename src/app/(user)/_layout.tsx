@@ -27,7 +27,7 @@ export default function TabTwoScreen() {
         </Pressable>
       </Link>,
     headerRight: () =>
-      <Link href="/ProfileModalScreen" asChild>
+      <Link href="/menu" asChild>
         <Pressable>
           {({ pressed }) => (
             <FontAwesome

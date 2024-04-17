@@ -56,11 +56,7 @@ function RootLayoutNav() {
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(pages)" options={{ headerShown: false }} />
           <Stack.Screen name="(user)" options={{ headerShown: false }} />
-          {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
-          {/* <Stack.Screen name="filterModal" options={{ presentation: 'modal', title: 'Filter' }} /> */}
-          {/* <Stack.Screen name="chartFilter" options={{ presentation: 'modal', title: 'chartFilter'  }} /> */}
-          {/* <Stack.Screen name="(ChartReport)" options={{ headerShown: false }} /> */}
-          {/* <Stack.Screen name="profilePage" options={{ headerShown: false }} /> */}
+          <Stack.Screen name="profilePage" options={{ headerShown: false }} />
           {/* <Stack.Screen name="Notification" options={{ headerShown: false }} /> */}
         </Stack>
       </ThemeProvider>

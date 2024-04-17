@@ -4,22 +4,24 @@ import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 
 
-const InputField = ({ value, setInput, placeholder, type}: InputFieldProps) => {
+const InputField = ({ value, setInput, placeholder, type, editable = true }: InputFieldProps) => {
 
     const type1 = {
-        ...styles.input,...styles.inputType1
+        ...styles.input, ...styles.inputType1
     }
-console.log('type', type);
+    console.log('type', type);
 
 
     return (
         <TextInput
-            style={{...styles.input, ...styles['inputType'+type]}}
+            style={{ ...styles.input, ...styles['inputType' + type] }}
             // style={styles}
             onChangeText={(value: string) => setInput && setInput(value)}
             value={value}
             placeholder={placeholder}
-            // right={<TextInput.Icon name="eye" />}
+            editable={editable}
+        // aria-disabled={true}
+        // right={<TextInput.Icon name="eye" />}
         />
     )
 }
@@ -35,7 +37,7 @@ console.log('type', type);
 //         padding: 13,
 //         height: 33,
 //         color: '#99A3A4',
-        
+
 //     },
 //     inputType2:{
 //         paddingHorizontal: 14,

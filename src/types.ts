@@ -298,6 +298,7 @@ export interface InputFieldProps {
   setInput?: React.Dispatch<React.SetStateAction<any>>,
   placeholder: string;
   type: string;
+  editable?: boolean;
 }
 export interface CustomComponentProp extends PropsWithChildren {
   styles?: { [key: string]: any }
@@ -469,6 +470,7 @@ export interface ChartFilterDataPayLoad {
   start: string;
   end: string;
   viewAs: string;
+  // country: string;
 }
 
 
@@ -564,12 +566,12 @@ export interface UserFilterReportChartData {
 
 
 export interface userchartFilterLevelProps {
-  filterLevel: number
-  chartuserfilterPayload: ActivityStatusUserFilterDataPayLoad 
-  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
-  setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
-  setUserFilterLevelModalVisible: React.Dispatch<React.SetStateAction<boolean>>
-  reportType: string
+  filterLevel?: number
+  chartuserfilterPayload?: ActivityStatusUserFilterDataPayLoad 
+  setChartFilterPayload?: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+  setUserFilterModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
+  setUserFilterLevelModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
+  reportType?: string
   
 }
 
