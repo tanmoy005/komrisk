@@ -3,13 +3,17 @@ import { StyleSheet, Dimensions, PixelRatio } from "react-native";
 export const screenWidth = Math.floor(Dimensions.get('window').width);
 export const screenHeight = Math.floor(Dimensions.get('window').height);
 
-const SCALE = 375;
+const SCALE = 350;
 const scaleFontSize = (fontSize: any) => {
     const ratio = fontSize / SCALE;
     const newSize = Math.round((screenWidth * ratio));
     return newSize;
 };
-
+export const scaleCardSize = (size: number) => {
+    // const scaleFactor = .38; 
+    const scaleFactor = .9;
+    return Math.round(size * scaleFactor);
+};
 
 console.log("screenWidth", screenWidth);
 export const smFont = 14;
@@ -84,6 +88,12 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         fontSize: scaleFontSize(14),
         marginBottom: 5,
     },
+    title1: {
+        fontWeight: '500',
+        fontSize: scaleFontSize(14),
+        marginBottom: 5,
+        textAlign: 'center'
+    },
     subtitleContainer: {
         flexDirection: 'row',
         gap: 5
@@ -101,13 +111,6 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     profileImage: {
         width: profileImageSize,
         height: profileImageSize
-    },
-    chartSelctorContainer: {
-        // flexDirection: 'row',
-        // justifyContent: 'space-between',
-        alignItems: 'center',
-        // width: '75%',
-        // marginTop: 72
     },
     chartContainer: {
         width: '100%',
@@ -251,14 +254,13 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     dashboardFilterContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        // rowGap: 4
+        columnGap: 30
     },
-    filterIconContainer: {
-        alignItems: 'center',
-        marginRight: 10
+    filterBoxContainer: {
+        alignItems: 'flex-start'
     },
     filterIconBoxContainer: {
 
@@ -274,7 +276,22 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     dropdownPicker: {
         width: size136,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'rgba(235, 246, 251, 1)',
+        borderColor: 'rgba(235, 246, 251, 1)'
+    },
+    dropdownListContainer: {
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: 'rgba(186, 186, 186, 1)'
+    },
+    dropdownItemContainer: {
+        flexDirection: 'row',
+        paddingHorizontal: 16,
+        paddingVertical: 9
+    },
+    dropdownItem: {
+        flexDirection: 'row'
     },
     chartfilterFieldStyle: {
         flexDirection: 'row',
