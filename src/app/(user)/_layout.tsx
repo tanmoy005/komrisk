@@ -27,7 +27,7 @@ export default function TabTwoScreen() {
         </Pressable>
       </Link>,
     headerRight: () =>
-      <Link href="/modal" asChild>
+      <Link href="/ProfileModalScreen" asChild>
         <Pressable>
           {({ pressed }) => (
             <FontAwesome
@@ -64,21 +64,3 @@ export default function TabTwoScreen() {
   </Stack>;
 
 };
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
