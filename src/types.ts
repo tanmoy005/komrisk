@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 
 export type ChartDisplayData = {
   label: number;
@@ -458,9 +458,11 @@ export const defaultAvailableViews: availableViews = {
 }
 export interface FilterProps {
   currentChart: string;
+  filterType: string;
   reportType: string;
   chartFilterPayload: ChartFilterDataPayLoad;
   setCurrentChart: React.Dispatch<React.SetStateAction<string>>
+  setFilterType: React.Dispatch<React.SetStateAction<string>>
   setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
 }
 export interface ChartFilterDataPayLoad {
@@ -585,6 +587,13 @@ export interface ActivityStatusUserFilterLevelData {
   chartData: UserFilterReportChartData[] | null
 }
 
+
+export interface DropDownListProps {
+  value: string;
+  label: string;
+  // IconComponent?: JSX.Element | null | (() => JSX.Element) | React.ComponentType<any> | false | ReactNode;
+  IconComponent?: any;
+}
 
 
 

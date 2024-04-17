@@ -25,7 +25,7 @@ const DropDownList = ({ value, label, IconComponent }: DropDownListProps) => {
 const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth }: Dropdown) => {
 
   const [open, setOpen] = useState(false);
-
+  
   return (
     <View>
       <DropDownPicker
@@ -39,10 +39,9 @@ const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth }: 
         style={{ ...styles.dropdownPicker, minWidth: minWidth }}
         renderListItem={
           ({ label, value, IconComponent }) => {
-            console.log('propssfsdf', label, value, IconComponent);
             return (
               <Pressable onPress={()=>setSelectedValue(value)}>
-                <DropDownList IconComponent={<IconComponent />} value={value} label={label} />
+                <DropDownList IconComponent = {IconComponent} value={value} label={label} />
               </Pressable>
             )
 

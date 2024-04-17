@@ -12,7 +12,8 @@ import { ChartFilterDataPayLoad } from "@/src/types";
 const ImpactAnalysis = () => {
   const currentDate: string = moment().format('DD/MM/YYYY');
   const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
-  const [filterType, setFilterType] = useState<string>('PIE');
+  const [currentChart, setCurrentChart] = useState<string>('PIE');
+  const [filterType, setFilterType] = useState<string>('Chart Data');
   const [chartFilterPayload, setChartFilterPayload] = useState<ChartFilterDataPayLoad>({
     start: startDate,
     viewAs: "COMPANY HEAD",
@@ -24,15 +25,17 @@ const ImpactAnalysis = () => {
     <SafeAreaView style={styles.dashboardContainer}>
       <HeadImageSection />
       <Filter
-        currentChart={filterType}
-        setCurrentChart={setFilterType}
+        currentChart={currentChart}
+        setCurrentChart={setCurrentChart}
+        filterType={filterType}
+        setFilterType={setFilterType}
         reportType="COMPLIANCE"
         setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}
       />
       <View style={styles.dashboardChartContainer}>
         <ImpactAnalysisInfo
-          currentChart={filterType}
+          currentChart={currentChart}
           chartFilterPayload={chartFilterPayload}
 
         />

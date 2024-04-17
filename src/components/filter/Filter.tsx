@@ -127,7 +127,11 @@ import ChartFilter from '@/src/app/chartFilterModal';
 import UserChartFilter from '@/src/app/userchartFilterModal';
 
 
-const Filter = ({ currentChart, setCurrentChart, reportType, setChartFilterPayload, chartFilterPayload }: FilterProps): JSX.Element => {
+const Filter = (
+    {
+        currentChart, setCurrentChart, reportType,
+        setChartFilterPayload, chartFilterPayload, filterType, setFilterType
+    }: FilterProps): JSX.Element => {
     const [modalVisible, setModalVisible] = useState(false);
     const [filterModalVisible, setFilterModalVisible] = useState(false);
     const [userfilterModalVisible, setUserFilterModalVisible] = useState(false);
@@ -156,15 +160,39 @@ const Filter = ({ currentChart, setCurrentChart, reportType, setChartFilterPaylo
         { label: 'BAR', value: 'BAR', icon: () => <MuiIcon name="chart-bar" size={size24} color="rgba(120, 106, 205, 1)" /> },
         { label: 'DONUT', value: 'DONUT', icon: () => <MuiIcon name="chart-donut" size={size24} color="rgba(120, 106, 205, 1)" /> }
     ];
+    const filterTypes = [
+        { label: 'Chart Data', value: 'Chart Data' },
+        { label: 'Chart User', value: 'Chart User' },
+        { label: 'Chart Filter', value: 'Chart Filter' }
+    ];
+
     console.log('currentChart', currentChart);
+    console.log('setFilterType', setFilterType);
+    console.log('setCurrentChart', setCurrentChart);
 
     return (
         <View style={styles.dashboardFilterContainer}>
 
+            <View style={styles.filterBoxContainer}>
+                <DropDown
+                    selectedValue={filterType}
+                    dropdownItems={filterTypes}
+                    setSelectedValue={setFilterType}
+                />
+                <Text style={{ marginTop: size12 }}>Filter</Text>
+            </View>
+            <View style={styles.filterBoxContainer}>
+                <DropDown
+                    selectedValue={currentChart}
+                    dropdownItems={chartItems}
+                    setSelectedValue={setCurrentChart}
+                />
+                <Text style={{ marginTop: size12 }}>Chart Type</Text>
+            </View>
             {
-                filterList.map(({ iconName, Icon, handlePress }) => {
+                filterList.map(({ iconName, Icon, handlePress }, index) => {
                     return (
-                        <View style={styles.filterIconContainer}>
+                        <View key={index} style={styles.filterBoxContainer}>
                             <Pressable onPress={handlePress}>
                                 <View style={styles.filterIconBoxContainer}>
                                     <Icon name={iconName}
@@ -194,7 +222,7 @@ const Filter = ({ currentChart, setCurrentChart, reportType, setChartFilterPaylo
                             setFilterModalVisible={setFilterModalVisible}
                             setUserFilterModalVisible={setUserFilterModalVisible}
 
-                    />}
+                        />}
                 />
             }
             {
@@ -213,28 +241,22 @@ const Filter = ({ currentChart, setCurrentChart, reportType, setChartFilterPaylo
                     }
                 />
             }
-
-            <CustomModal
-                setModalVisible={setUserFilterModalVisible}
-                modalVisible={userfilterModalVisible}
-                component={
-                    <UserChartFilter
-                        setModalVisible={setUserFilterModalVisible}
-                        setUserFilterModalVisible={setUserFilterModalVisible}
-                        setChartFilterPayload={setChartFilterPayload}
-                        chartFilterPayload={chartFilterPayload}
-                        reportType={reportType}
-                    />
-                }
-            />
-            <View style={styles.chartSelctorContainer}>
-                <DropDown
-                    selectedValue={currentChart}
-                    dropdownItems={chartItems}
-                    setSelectedValue={setCurrentChart}
+            {
+                userfilterModalVisible &&
+                <CustomModal
+                    setModalVisible={setUserFilterModalVisible}
+                    modalVisible={userfilterModalVisible}
+                    component={
+                        <UserChartFilter
+                            setModalVisible={setUserFilterModalVisible}
+                            setUserFilterModalVisible={setUserFilterModalVisible}
+                            setChartFilterPayload={setChartFilterPayload}
+                            chartFilterPayload={chartFilterPayload}
+                            reportType={reportType}
+                        />
+                    }
                 />
-                <Text style={{ marginTop: size12 }}>Chart Type</Text>
-            </View>
+            }
         </View>
     )
 }
