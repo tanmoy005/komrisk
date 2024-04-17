@@ -1,16 +1,29 @@
-import { Dispatch } from '@reduxjs/toolkit';
-import React, { SetStateAction, useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Pressable } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { styles } from '../style';
-import { DropDownItem, Dropdown } from '../types';
+import { DropDownListProps, Dropdown } from '../types';
+import { Divider } from 'react-native-elements';
 
 
-
+const DropDownList = ({ value, label, IconComponent }: DropDownListProps) => {
+  return (
+    <View style={styles.dropdownItemContainer}>
+      <View style={{width: '100%'}}>
+        <View style={{
+          flexDirection: 'row'
+        }}>
+          {IconComponent !== null && IconComponent}
+          <Text>{value}</Text>
+        </View>
+        <Divider style={{ ...styles.divider1, marginTop: 1 }} />
+      </View>
+    </View>
+  )
+}
 
 const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth }: Dropdown) => {
 
-  // const [selectedValue, setSelectedValue] = useState(items[0].value);
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,10 +36,19 @@ const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth }: 
         setValue={setSelectedValue}
         autoScroll={true}
         maxHeight={200}
-        // setItems={null}
         style={{ ...styles.dropdownPicker, minWidth: minWidth }}
+        renderListItem={
+          ({ label, value, IconComponent }) => {
+            console.log('propssfsdf', label, value, IconComponent);
+            return (
+              <Pressable onPress={()=>setSelectedValue(value)}>
+                <DropDownList IconComponent={<IconComponent />} value={value} label={label} />
+              </Pressable>
+            )
 
-      // onChangeValue={(value) => //console.log(value)} // Optional callback when the selected value changes
+          }
+        }
+        dropDownContainerStyle={styles.dropdownListContainer}
       />
     </View>
   );
