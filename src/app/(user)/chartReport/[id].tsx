@@ -7,29 +7,27 @@ import GetIncidentDetails from '@/src/components/reports/reportDetails/GetIncide
 
 const ShowDetailsReport = () => {
 
-    const { id: typeString } = useLocalSearchParams();
-    const paramArray = typeof typeString === 'string' ? typeString.split(',') : typeString[0];
-    const taskTypeData = paramArray && paramArray[0];
+    const { type, id, taskId } = useLocalSearchParams();
+    console.log("typeString", type);
+    console.log("typeString", id);
 
-    const [taskType, setTaskType] = useState<string>(taskTypeData);
+    // const({typeString})=item
+    const paramType = typeof type === 'string' ? type : type[0];
+    const paramId = typeof id === 'string' ? id : id[0];
+    const paramTaskId = typeof taskId === 'string' ? taskId : taskId[0];
+    const [taskType, setTaskType] = useState<string>(paramType);
     const [complianceId, setComplianceId] = useState<string>('');
     const [incidentId, setIncidentId] = useState<string>('');
-    const [taskId, setTaskId] = useState<number>(0);
-
-    console.log('====================================');
-    console.log("param", typeString);
-    console.log('====================================');
-
-    console.log('================================', paramArray);
+    const [incedentTaskId, setIncedentTaskId] = useState<number>(0);
 
     useEffect(() => {
-        if (taskType === 'COMPLIANCE') {
-            setComplianceId(paramArray[1])
-            console.log("complianceId", complianceId);
+        if (taskType?.trim() == 'COMPLIANCE') {
+            setComplianceId(paramId)
         }
-        if (taskType === 'INCIDENT') {
-            setIncidentId(paramArray[1]);
-            setTaskId(parseFloat(paramArray[2]));
+
+        if (taskType == 'INCIDENT') {
+            setIncidentId(paramId);
+            setIncedentTaskId(parseFloat(paramTaskId));
         }
     }, [taskType]);
 
@@ -41,10 +39,10 @@ const ShowDetailsReport = () => {
             <CardContainer>
                 <View>
                     {
-                        taskTypeData == "COMPLIANCE" ?
+                        taskType == 'COMPLIANCE' ?
                             <GetComplianceDetails complianceId={complianceId} />
-                            : taskType == "INCIDENT" ?
-                                <GetIncidentDetails taskId={taskId} incidentId={incidentId} /> : null
+                            : taskType === "INCIDENT" ?
+                                <GetIncidentDetails taskId={incedentTaskId} incidentId={incidentId} /> : null
                     }
 
                 </View>

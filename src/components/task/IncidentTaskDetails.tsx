@@ -1,6 +1,6 @@
 import { StyleSheet, Pressable } from "react-native";
 import { IncidentChartListDataItem } from "@/src/types";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { View } from "../Themed";
 import ChartItemSkelton from "../skelton/ChartItemSkelton";
 import TaskCard from "../cards/TaskCard";
@@ -54,14 +54,23 @@ const IncidentTaskDetails = ({ data }: ChartItemProps) => {
       {
         !isObjectEmpty(data) ?
 
-          <Link
-            href={`/chartReport/${id}`} asChild>
-            <Pressable>
+          // <Link
+            // href={`/chartReport/${id}`} asChild>
+            <Pressable
+              onPress={() => router.push({
+                pathname: `/chartReport/[id]`,
+                params: {
+                  type: "INCIDENT",
+                  id: data?.incidentId,
+                  taskId: data?.taskId
+                }
+              } as never)}
+            >
               <TaskCard
                 taskCard={taskCardData}
               />
             </Pressable>
-          </Link>
+          // </Link>
           :
           <View style={styles.taskCard}>
             <CardContainer>
