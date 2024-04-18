@@ -717,9 +717,9 @@ export interface UserFilterReportChartData {
 export interface userchartFilterLevelProps {
   filterLevel?: number
   chartuserfilterPayload?: UserFilterDataPayLoad
-  setChartFilterPayload??: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
-  setUserFilterModalVisible??: React.Dispatch<React.SetStateAction<boolean>>
-  setUserFilterLevelModalVisible??: React.Dispatch<React.SetStateAction<boolean>>
+  setChartFilterPayload?: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+  setUserFilterModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
+  setUserFilterLevelModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
   reportType?: string
   selectedTab:string
 
