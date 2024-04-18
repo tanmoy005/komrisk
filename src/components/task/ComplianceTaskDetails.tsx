@@ -54,21 +54,23 @@ const ComplianceTaskDetails = ({ data }: ChartItemProps) => {
     <View >
       {
         !isObjectEmpty(data) ?
-          <Link href={`/chartReport/${id}`} asChild>
+          // <Link href={`/chartReport/id`} asChild>
 
-            <Pressable
-            // onPress={() => router.push({
-            //   pathname: "/chartReport/[id]",
-            //   params: {
-            //     id: "chartReport"
-            //   }
-            // })}
-            >
-              <TaskCard
-                taskCard={taskCardData}
-              />
-            </Pressable>
-          </Link>
+          <Pressable
+            onPress={() => router.push({
+              pathname: `/chartReport/[id]`,
+              params: {
+                type: "COMPLIANCE",
+                id: data?.complianceId,
+                taskId: 0,
+              }
+            } as never)}
+          >
+            <TaskCard
+              taskCard={taskCardData}
+            />
+          </Pressable>
+          // </Link>
           :
           <View style={styles.taskCard}>
             <CardContainer>
