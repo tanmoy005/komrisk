@@ -547,9 +547,10 @@ export interface FilterProps {
   filterType: string;
   reportType: string;
   chartFilterPayload: ChartFilterDataPayLoad;
-  setCurrentChart: React.Dispatch<React.SetStateAction<string>>
-  setFilterType: React.Dispatch<React.SetStateAction<string>>
-  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+  setCurrentChart: React.Dispatch<React.SetStateAction<string>>;
+  setFilterType: React.Dispatch<React.SetStateAction<string>>;
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
+
 }
 export interface ChartFilterDataPayLoad {
   start: string;
@@ -570,7 +571,10 @@ export interface Dropdown {
   dropdownItems: DropDownItem[];
   setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
   selectedValue: any;
-  minWidth?: number;
+  minWidth?: number | string;
+  open?: boolean;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  onpress?: ()=>void; 
 }
 
 export const DefaultDropDownItem: DropDownItem = {
@@ -732,6 +736,29 @@ export interface DropDownListProps {
   // IconComponent?: JSX.Element | null | (() => JSX.Element) | React.ComponentType<any> | false | ReactNode;
   IconComponent?: any;
 }
+
+export interface FilterDropdownProps {
+  filterType: string;
+  setFilterType: React.Dispatch<React.SetStateAction<string>>
+  filterTypes: {
+    label: string;
+    value: string;
+    icon: () => JSX.Element;
+  }[];
+  filterTypemModalIsOpen: boolean;
+  setFilterTypeModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  labelPosition?: string;
+  handleOnpressFilterItem?: () => void;
+}
+
+export interface FilterTypeModalProps extends FilterDropdownProps {
+  chartFilterPayload: ChartFilterDataPayLoad;
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  reportType: string;
+}
+
 
 
 
