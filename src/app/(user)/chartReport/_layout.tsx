@@ -9,7 +9,7 @@ const ChartReportLayout = () => {
       <Stack.Screen name="GetIncidentActivityDataListDetailsInfo" options={{ title: 'Incident Activity List', headerShown: true, headerTitleAlign:'center' }} />
       <Stack.Screen name="GetImpactAnalysisDataListDetailsInfo" options={{ title: 'Impact Analysis List', headerShown: true, headerTitleAlign:'center' }} />
       <Stack.Screen name="GetIncidentComparisonDataListDetailsInfo" options={{ title: 'Incident Comparison List', headerShown: true, headerTitleAlign:'center' }} />
-      <Stack.Screen name="[complianceId]" options={{ title: 'Task Details', headerShown: true, headerTitleAlign:'center' }} />
+      <Stack.Screen name="[id]" options={{ title: 'Task Details', headerShown: true, headerTitleAlign:'center' }} />
     </Stack>
   )
 }

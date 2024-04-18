@@ -65,6 +65,36 @@ export const defaultChartData: ChartListDataItem = {
   taskId: 0,
   complianceGenId: null
 }
+export interface IncidentChartListDataItem {
+  mapId: number;
+  incidentId: number;
+  incidentTitle: string | null;
+  taskName: string | null;
+  description: string | null;
+  department: string | null;
+  opUnit: string | null;
+  owner: string | null;
+  reviewer: string | null;
+  completionDate: string | null;
+  resposeDate: string | null;
+  taskId: number;
+}
+
+export const defaultIncidentChartData: IncidentChartListDataItem = {
+
+  mapId: 0,
+  incidentId: 0,
+  incidentTitle: null,
+  taskName: null,
+  description: null,
+  department: null,
+  opUnit: null,
+  owner: null,
+  reviewer: null,
+  completionDate: null,
+  resposeDate: null,
+  taskId: 0,
+}
 
 export interface UserModel {
   username: string,
@@ -366,6 +396,61 @@ export const CompliancesItemDetails: CompliancesItemDetailsResponse = {
   lawName: null,
 }
 
+export interface IncidentItemDetailsPayLoad {
+  username: string;
+  password: string;
+  incidentMapId: string;
+  taskId: number;
+}
+
+export interface IncidentItemDetailsResponse {
+  mapId: number | null;
+  approverId: number | null;
+  approverName: string | null;
+  ownerId: number | null;
+  ownerName: string | null;
+  name: string | null;
+  mapDesc: string | null;
+  taskSource: string | null;
+  taskComments: string | null;
+  taskType: string | null;
+  reassignmentRequested: boolean | null;
+  response: string | null;
+  startDate: string | null;
+  completedOn: string | null;
+  requiresProof: boolean | null;
+  info: string | null;
+  mapStarted: string | null;
+  taskStatus: string | null;
+  loggedUserTaskAuthority: string | null;
+  taskName: string | null;
+
+}
+export const DefaultIncidentItemDetailsResponse: IncidentItemDetailsResponse = {
+
+  mapId: null,
+  approverId: null,
+  approverName: null,
+  ownerId: null,
+  ownerName: null,
+  name: null,
+  mapDesc: null,
+  taskSource: null,
+  taskComments: null,
+  taskType: null,
+  reassignmentRequested: null,
+  response: null,
+  startDate: null,
+  completedOn: null,
+  requiresProof: null,
+  info: null,
+  mapStarted: null,
+  taskStatus: null,
+  loggedUserTaskAuthority: null,
+  taskName: null,
+
+}
+
 
 export interface Country {
   countryEnabled: boolean | null;
@@ -519,7 +604,7 @@ export interface filterSelectProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
-  
+
 }
 
 
@@ -567,12 +652,12 @@ export interface UserFilterReportChartData {
 
 export interface userchartFilterLevelProps {
   filterLevel?: number
-  chartuserfilterPayload?: ActivityStatusUserFilterDataPayLoad 
+  chartuserfilterPayload?: ActivityStatusUserFilterDataPayLoad
   setChartFilterPayload?: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
   setUserFilterModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
   setUserFilterLevelModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
   reportType?: string
-  
+
 }
 
 

@@ -4,19 +4,19 @@ import { styles } from '@/src/style';
 import React from 'react'
 import { Text, View } from 'react-native'
 import { Divider } from 'react-native-elements';
-import { CompliancesItemDetailsResponse } from '../../types';
+import {  IncidentItemDetailsResponse } from '../../types';
 
 type Props = {
-    compliancesItemData: CompliancesItemDetailsResponse;
+    incidentItemData: IncidentItemDetailsResponse;
     itemType: string
 };
 
-export default function TaskItemDetails({ compliancesItemData, itemType }: Props) {
+export default function IncidentTaskItemDetails({ incidentItemData, itemType }: Props) {
     return (
         <CardTextContainer>
             <View>
                 <SmallHeading>{'Title'}</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.title ?? "NA"}</Text>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.name ?? "NA"}</Text>
                 <Divider
                     color='#A097DC'
                     style={{
@@ -24,8 +24,8 @@ export default function TaskItemDetails({ compliancesItemData, itemType }: Props
                         marginVertical: 8,
                         borderWidth: 1,
                     }} />
-                <SmallHeading>{'Complliance Id'}:</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.complianceId ?? 'NA'}</Text>
+                <SmallHeading>{'Task Name'}:</SmallHeading>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.taskName ?? 'NA'}</Text>
                 <Divider
                     color='transparent'
                     style={{
@@ -33,8 +33,8 @@ export default function TaskItemDetails({ compliancesItemData, itemType }: Props
                         marginVertical: 8,
                         borderWidth: 0,
                     }} />
-                <SmallHeading>{'Section'}:</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.section ?? 'NA'}</Text>
+                <SmallHeading>{'Task Type'}:</SmallHeading>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.taskType ?? 'NA'}</Text>
                 <Divider
                     color='transparent'
                     style={{
@@ -43,7 +43,7 @@ export default function TaskItemDetails({ compliancesItemData, itemType }: Props
                         borderWidth: 0,
                     }} />
                 <SmallHeading>{'Task Description'}:</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.description ?? 'NA'}</Text>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.mapDesc ?? 'NA'}</Text>
                 <Divider
                     color='transparent'
                     style={{
@@ -51,8 +51,8 @@ export default function TaskItemDetails({ compliancesItemData, itemType }: Props
                         marginVertical: 8,
                         borderWidth: 0,
                     }} />
-                <SmallHeading>{'Law Name'}:</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.lawName ?? 'NA'}</Text>
+                <SmallHeading>{'Owner Name'}:</SmallHeading>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.ownerName ?? 'NA'}</Text>
                 <Divider
                     color='transparent'
                     style={{
@@ -60,8 +60,8 @@ export default function TaskItemDetails({ compliancesItemData, itemType }: Props
                         marginVertical: 8,
                         borderWidth: 0,
                     }} />
-                <SmallHeading>{'Law Type'}:</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.lawType ?? 'NA'}</Text>
+                <SmallHeading>{'Approver Name'}:</SmallHeading>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.approverName ?? 'NA'}</Text>
                 <Divider
                     color='transparent'
                     style={{
@@ -69,16 +69,16 @@ export default function TaskItemDetails({ compliancesItemData, itemType }: Props
                         marginVertical: 8,
                         borderWidth: 0,
                     }} />
-                <SmallHeading>{'Regulator'}:</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.regulator ?? 'NA'}</Text>
+                <SmallHeading>{'Status'}:</SmallHeading>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.taskStatus ?? 'NA'}</Text>
                 <Divider
                     color='transparent'
                     style={{
                         marginVertical: 8,
                         borderWidth: 0,
                     }} />
-                <SmallHeading>{'Penalty'}:</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.penality ?? 'NA'}</Text>
+                {/* <SmallHeading>{'Penalty'}:</SmallHeading>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.approverName ?? 'NA'}</Text>
                 <Divider
                     color='transparent'
                     style={{
@@ -86,14 +86,14 @@ export default function TaskItemDetails({ compliancesItemData, itemType }: Props
                         borderWidth: 0,
                     }} />
                 <SmallHeading>{'Law Category'}:</SmallHeading>
-                <Text style={styles.bodyInfoText}>{compliancesItemData?.lawCategory ?? 'NA'}</Text>
+                <Text style={styles.bodyInfoText}>{incidentItemData?.approverName ?? 'NA'}</Text>
                 <Divider
                     color='transparent'
                     style={{
                         // height: 10,
                         marginVertical: 8,
                         borderWidth: 0,
-                    }} />
+                    }} /> */}
             </View>
         </CardTextContainer>
 
