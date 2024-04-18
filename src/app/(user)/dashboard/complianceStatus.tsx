@@ -29,6 +29,7 @@ const ComplianceStatus = () => {
         setCurrentChart={setCurrentChart}
         filterType={filterType}
         setFilterType={setFilterType}
+        selectedTab = "compliance_status"
         reportType="COMPLIANCE"
         setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}

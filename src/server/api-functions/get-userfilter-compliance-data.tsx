@@ -1,7 +1,7 @@
-import { ActivityStatusUserFilterDataPayLoad } from '@/src/types';
+import { UserFilterDataPayLoad } from '@/src/types';
 import Server from '@/src/server/server'
 
-const GetActivityStatusUserFilterData = async (payLoad: ActivityStatusUserFilterDataPayLoad) => {
+const GetComplianceUserFilterData = async (payLoad: UserFilterDataPayLoad) => {
     const url = `/complianceReports/userFilterType`;
 
     const response = await Server(payLoad, url, 'POST');
@@ -11,4 +11,4 @@ const GetActivityStatusUserFilterData = async (payLoad: ActivityStatusUserFilter
     return response
 }
 
-export default GetActivityStatusUserFilterData
+export default GetComplianceUserFilterData

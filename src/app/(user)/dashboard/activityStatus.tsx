@@ -33,6 +33,7 @@ const ActivityStatus = () => {
         filterType={filterType}
         setFilterType={setFilterType}
         reportType="COMPLIANCE"
+        selectedTab = "activity_status"
         setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}
       />

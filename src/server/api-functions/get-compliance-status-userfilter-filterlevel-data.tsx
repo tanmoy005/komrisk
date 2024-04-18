@@ -1,8 +1,8 @@
 import { UserFilterLevelDataPayLoad } from '@/src/types';
 import Server from '@/src/server/server'
 
-const GetActivityStatusUserFilterLevelData = async (payLoad: UserFilterLevelDataPayLoad) => {
-    const url = `/complianceReports/activityStatusUserFilter`;
+const GetComplianceStatusUserFilterLevelData = async (payLoad: UserFilterLevelDataPayLoad) => {
+    const url = `/complianceReports/comparisonUserFilter`;
 
     const response = await Server(payLoad, url, 'POST');
 
@@ -11,4 +11,4 @@ const GetActivityStatusUserFilterLevelData = async (payLoad: UserFilterLevelData
     return response
 }
 
-export default GetActivityStatusUserFilterLevelData
+export default GetComplianceStatusUserFilterLevelData

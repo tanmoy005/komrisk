@@ -17,12 +17,13 @@ import UserChartFilter from '@/src/app/userchartFilterModal';
 
 const Filter = (
     {
-        currentChart, setCurrentChart, reportType,
+        selectedTab,currentChart, setCurrentChart, reportType,
         setChartFilterPayload, chartFilterPayload, filterType, setFilterType
     }: FilterProps): JSX.Element => {
     const [modalVisible, setModalVisible] = useState(false);
     const [filterModalVisible, setFilterModalVisible] = useState(false);
     const [userfilterModalVisible, setUserFilterModalVisible] = useState(false);
+    const [userfilterlevelModalVisible, setUserFilterLevelModalVisible] = useState(false);
 
     console.log("3", chartFilterPayload);
     const filterList = [
@@ -57,6 +58,7 @@ const Filter = (
     console.log('currentChart', currentChart);
     console.log('setFilterType', setFilterType);
     console.log('setCurrentChart', setCurrentChart);
+    
 
     return (
         <View style={styles.dashboardFilterContainer}>
@@ -125,6 +127,7 @@ const Filter = (
                             setChartFilterPayload={setChartFilterPayload}
                             chartFilterPayload={chartFilterPayload}
                             reportType={reportType}
+                           
                         />
                     }
                 />
@@ -138,10 +141,12 @@ const Filter = (
                         <UserChartFilter
                             setModalVisible={setUserFilterModalVisible}
                             setUserFilterModalVisible={setUserFilterModalVisible}
-                            setChartFilterPayload={setChartFilterPayload}
+                            setUserFilterLevelModalVisible={setUserFilterLevelModalVisible}
+                        setChartFilterPayload={setChartFilterPayload}
                             chartFilterPayload={chartFilterPayload}
                             reportType={reportType}
-                        />
+                            selectedTab={selectedTab}
+                    />
                     }
                 />
             }

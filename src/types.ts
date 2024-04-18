@@ -583,6 +583,7 @@ export interface FilterProps {
   setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
   chartFilterPayload: ChartFilterDataPayLoad;
   reportType: string
+  selectedTab: string
 }
 
 export interface ChartProp {
@@ -599,6 +600,7 @@ export interface chartFilterProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   reportType: string
+  
 }
 export interface filterSelectProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -618,12 +620,14 @@ export interface userchartFilterProps {
   setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setUserFilterLevelModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   reportType: string
+  selectedTab: string
 }
 
 
 // For Activity Status
-export interface ActivityStatusUserFilterDataPayLoad {
+export interface UserFilterDataPayLoad {
   username: string;
   password: string;
   start: string;
@@ -631,9 +635,65 @@ export interface ActivityStatusUserFilterDataPayLoad {
   end: string;
 }
 
-export interface ActivityStatusUserFilterData {
+
+
+export interface ComplianceUserFilterData {
   title: string | null;
   subTitle: string | null;
+  chartData: UserFilterReportChartData[] | null
+}
+
+export interface IncidentUserFilterData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: UserFilterReportChartData[] | null
+}
+
+
+
+export interface ActivityStatusUserFilterLevelData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: UserFilterReportChartData[] | null
+}
+
+
+export interface ComplianceStatusUserFilterLevelData {
+  title: string | null;
+  
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: UserFilterReportChartData[] | null
+}
+
+
+
+export interface ImpactAnalysisUserFilterLevelData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: UserFilterReportChartData[] | null
+}
+
+
+export interface IncidentActivityUserFilterLevelData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: UserFilterReportChartData[] | null
+}
+
+export interface IncidentComparisonUserFilterLevelData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
   chartData: UserFilterReportChartData[] | null
 }
 
@@ -652,28 +712,19 @@ export interface UserFilterReportChartData {
 
 export interface userchartFilterLevelProps {
   filterLevel?: number
-  chartuserfilterPayload?: ActivityStatusUserFilterDataPayLoad
-  setChartFilterPayload?: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
-  setUserFilterModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
-  setUserFilterLevelModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
+  chartuserfilterPayload?: UserFilterDataPayLoad
+  setChartFilterPayload??: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+  setUserFilterModalVisible??: React.Dispatch<React.SetStateAction<boolean>>
+  setUserFilterLevelModalVisible??: React.Dispatch<React.SetStateAction<boolean>>
   reportType?: string
+  selectedTab:string
 
 }
 
 
-export interface ActivityStatusUserFilterLevelDataPayLoad extends ActivityStatusUserFilterDataPayLoad {
-  filterLevel: number | null;
+export interface UserFilterLevelDataPayLoad extends UserFilterDataPayLoad {
+  filterLevel: string | null ;
 }
-
-
-export interface ActivityStatusUserFilterLevelData {
-  title: string | null;
-  subTitle: string | null;
-  xAxisName: string | null;
-  yAxisName: string | null;
-  chartData: UserFilterReportChartData[] | null
-}
-
 
 export interface DropDownListProps {
   value: string;

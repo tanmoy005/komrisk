@@ -30,6 +30,7 @@ const ImpactAnalysis = () => {
         filterType={filterType}
         setFilterType={setFilterType}
         reportType="COMPLIANCE"
+        selectedTab = "impact_analysis"
         setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}
       />
