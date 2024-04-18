@@ -561,10 +561,8 @@ export interface ChartFilterDataPayLoad {
 
 
 export interface DropDownItem {
-  label: string;
-  value: string
-
-
+  label: string | null | undefined;
+  value: string | number | null | undefined;
 }
 
 export interface Dropdown {
@@ -753,10 +751,10 @@ export interface FilterDropdownProps {
 
 export interface FilterTypeModalProps extends FilterDropdownProps {
   chartFilterPayload: ChartFilterDataPayLoad;
-  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   reportType: string;
+  // setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
+  // setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  // setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
