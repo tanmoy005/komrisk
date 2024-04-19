@@ -174,11 +174,14 @@ const Filter = (
                             setFilterType={setFilterType}
                             filterTypemModalIsOpen={filterTypemModalIsOpen}
                             setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
+                            chartFilterPayload={chartFilterPayload}
+                            reportType={reportType}
+                            selectedTab={selectedTab}
                         />
                     }
                 />
             }
-            {
+            {/* {
                 filterTypemModal &&
                 <CustomModal
                     setModalVisible={setFilterTypeModal}
@@ -193,7 +196,7 @@ const Filter = (
                         />
                     }
                 />
-            }
+            } */}
         </View>
     )
 }
