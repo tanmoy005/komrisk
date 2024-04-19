@@ -10,7 +10,6 @@ const scaleFontSize = (fontSize: any) => {
     return newSize;
 };
 export const scaleCardSize = (size: number) => {
-    // const scaleFactor = .38; 
     const scaleFactor = .9;
     return Math.round(size * scaleFactor);
 };
@@ -259,7 +258,12 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         width: '100%',
         columnGap: 30
     },
-    filterBoxContainer: {
+    filterBoxContainerHorizontal: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    filterBoxContainerVertical: {
         alignItems: 'flex-start'
     },
     filterIconBoxContainer: {
@@ -326,7 +330,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         paddingHorizontal: 25,
         paddingTop: 25,
         paddingBottom: 25,
-        alignItems: 'center',
+        alignItems: 'flex-end',
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -336,23 +340,13 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-    button: {
-        borderRadius: 25,
-        width: 50,
-        height: 50,
-        elevation: 2,
-        justifyContent: 'center'
-    },
     buttonOpen: {
         backgroundColor: '#F194FF',
     },
-    buttonClose: {
-        backgroundColor: 'rgba(201, 196, 235, 1)',
-    },
     textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
+        color: 'rgba(38, 38, 44, 1)',
+        textAlign: 'right',
+        fontSize: scaleFontSize(14)
     },
     modalText: {
         marginBottom: 15,
