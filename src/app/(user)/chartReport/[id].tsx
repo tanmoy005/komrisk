@@ -7,8 +7,10 @@ import GetIncidentDetails from '@/src/components/reports/reportDetails/GetIncide
 
 const ShowDetailsReport = () => {
 
-    const { type, id, taskId } = useLocalSearchParams();
-    console.log("typeString", type);
+    const data=useLocalSearchParams();
+    const { type, id, taskId } = data;
+    console.log("typeString", data);
+    console.log("typeString1", type);
     console.log("typeString", id);
 
     // const({typeString})=item
@@ -41,7 +43,7 @@ const ShowDetailsReport = () => {
                     {
                         taskType == 'COMPLIANCE' ?
                             <GetComplianceDetails complianceId={complianceId} />
-                            : taskType === "INCIDENT" ?
+                            : taskType == 'INCIDENT' ?
                                 <GetIncidentDetails taskId={incedentTaskId} incidentId={incidentId} /> : null
                     }
 
