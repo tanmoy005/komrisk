@@ -3,7 +3,7 @@ import { screenWidth, styles } from '../style'
 import { Text, View } from 'react-native'
 import CardTextContainer from '../components/cards/CardTextContainer'
 import CardContainer from '../components/cards/CardContainer'
-import { ComplianceUserFilterData, FilterTypeModalProps, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterReportChartData } from '../types'
+import { ComplianceUserFilterData, DropDownItem, FilterTypeModalProps, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterReportChartData } from '../types'
 import FilterDropdown from '../components/filter/FilterDropdown'
 import { Divider } from 'react-native-elements'
 import DropDown from '../components/Dropdown'
@@ -30,10 +30,11 @@ const FilterTypeModal = ({
     const [complianceUserFilterChartData, setComplianceUserFilterChartData] = useState<ComplianceUserFilterData>({
         title: null,
         subTitle: null,
-        chartData: [
-            { label: '', value: 0 }
-        ]
+        chartData: null
     });
+    const [complianceUserDropdown, setComplianceUserDropdown] = useState<DropDownItem[]>();
+    const [incidentUserDropdown, setIncidentUserDropdown] = useState<DropDownItem[]>();
+  
     const [incidentUserFilterChartData, setIncidentUserFilterChartData] = useState<IncidentUserFilterData>({
         title: null,
         subTitle: null,
@@ -61,12 +62,15 @@ const FilterTypeModal = ({
     const handleGetUserFilterData = async (chartuserfilterPayload: UserFilterDataPayLoad) => {
         let apiFunction;
         let setDataFunction;
+        let setDropDown;
         if (reportType === 'COMPLIANCE') {
             apiFunction = GetComplianceUserFilterData;
             setDataFunction = setComplianceUserFilterChartData;
+            setDropDown = setComplianceUserDropdown;
         } else if (reportType === 'INCIDENT') {
             apiFunction = GetIncidentUserFilterData;
             setDataFunction = setIncidentUserFilterChartData;
+            setDropDown = setIncidentUserDropdown;
         } else {
             // Handle other report types or set a default API function
             return;
@@ -83,18 +87,17 @@ const FilterTypeModal = ({
                 console.log('userfilteredchartData', userfilteredchartData);
  
 
-            const filterDropdown = userfilteredchartData.map(({label, displayValue, filterLevel, filterType, value, userFilter})=>{
+            const filterDropdown = userfilteredchartData.map(({displayValue, filterLevel})=>{
 
                 return {
-                    label: label,
-                    value: filterLevel,
-                    displayValue: displayValue,
-                    filterLevel: filterLevel,
-                    filterType: filterType,
-                    userFilter: userFilter
+                    label: displayValue,
+                    value: filterLevel
                 }
             })
-            setFilteredChartData(filterDropdown);
+            setFilteredChartData(userfilteredchartData);
+            console.log('filterDropdown', filterDropdown);
+            
+            setDropDown(filterDropdown);
         } else {
             // Alert.alert("error", error.message);
         }
@@ -137,13 +140,13 @@ const FilterTypeModal = ({
                             </View>
                             <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110 }}>
                                 <View style={{ zIndex: 2110 }}>
-                                    <DropDown
+                                    {/* <DropDown
                                         dropdownItems={complianceUserFilterChartData.chartData}
                                         setSelectedValue={setSelectedField1Value}
                                         selectedValue={selectedField1Value}
                                         // minWidth={screenWidth * 0.00822222222}
                                         minWidth={'100%'}
-                                    />
+                                    /> */}
                                 </View>
                                 <View style={{ zIndex: 2108 }}>
                                     <DropDown
