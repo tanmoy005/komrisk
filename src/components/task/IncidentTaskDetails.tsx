@@ -47,6 +47,11 @@ const IncidentTaskDetails = ({ data }: ChartItemProps) => {
       ]
     }
   }
+  const paramdata= {
+    type: "INCIDENT",
+    id: data?.incidentId,
+    taskId: data?.taskId
+  }
   const id = ['INCIDENT', data?.incidentId, data?.taskId]
 
   return (
@@ -59,11 +64,7 @@ const IncidentTaskDetails = ({ data }: ChartItemProps) => {
             <Pressable
               onPress={() => router.push({
                 pathname: `/chartReport/[id]`,
-                params: {
-                  type: "INCIDENT",
-                  id: data?.incidentId,
-                  taskId: data?.taskId
-                }
+                params: paramdata
               } as never)}
             >
               <TaskCard
