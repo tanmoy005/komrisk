@@ -232,7 +232,7 @@ const UserChartFilter = ({ selectedTab,chartFilterPayload, setChartFilterPayload
                 {/* </CardContainer>
                 </View> */}
             </View>
-            {selectedFilterLevel  && 
+            {/* {selectedFilterLevel  && 
             <UserChartFilterLevel 
                 filterLevel={selectedFilterLevel} 
                 chartuserfilterPayload={chartuserfilterPayload}  
@@ -241,7 +241,7 @@ const UserChartFilter = ({ selectedTab,chartFilterPayload, setChartFilterPayload
                 setUserFilterModalVisible={setUserFilterModalVisible}
                 setUserFilterLevelModalVisible={setUserFilterLevelModalVisible}
                 
-                />}
+                />} */}
         </View>
     );
 };

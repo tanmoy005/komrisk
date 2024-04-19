@@ -572,7 +572,7 @@ export interface Dropdown {
   minWidth?: number | string;
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-  onpress?: ()=>void; 
+  onpress?: () => void;
 }
 
 export const DefaultDropDownItem: DropDownItem = {
@@ -602,7 +602,7 @@ export interface chartFilterProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   reportType: string
-  
+
 }
 export interface filterSelectProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -624,7 +624,7 @@ export interface userchartFilterProps {
   setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setUserFilterLevelModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   reportType: string
-    selectedTab: string
+  selectedTab: string
 }
 
 
@@ -666,7 +666,7 @@ export interface ActivityStatusUserFilterLevelData {
 
 export interface ComplianceStatusUserFilterLevelData {
   title: string | null;
-  
+
   xAxisName: string | null;
   yAxisName: string | null;
   chartData: UserFilterReportChartData[] | null
@@ -719,13 +719,13 @@ export interface userchartFilterLevelProps {
   setUserFilterModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
   setUserFilterLevelModalVisible?: React.Dispatch<React.SetStateAction<boolean>>
   reportType?: string
-  selectedTab:string
+  selectedTab: string
 
 }
 
 
 export interface UserFilterLevelDataPayLoad extends UserFilterDataPayLoad {
-  filterLevel: string | null ;
+  filterLevel: string | null;
 }
 
 export interface DropDownListProps {
@@ -753,11 +753,21 @@ export interface FilterTypeModalProps extends FilterDropdownProps {
   chartFilterPayload: ChartFilterDataPayLoad;
   reportType: string;
   selectedTab: string;
+  //modalVisible: boolean;
   // setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
-  // setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  //setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   // setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface FilterModalProps extends FilterDropdownProps {
+  chartFilterPayload: ChartFilterDataPayLoad;
+  reportType: string;
+  selectedTab: string;
+  modalVisible: boolean;
+  // setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  // setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 
 

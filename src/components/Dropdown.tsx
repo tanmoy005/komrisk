@@ -33,6 +33,7 @@ const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth, op
   const handleOnpress =(value: string)=>{
     setSelectedValue(value);
     onpress && onpress();
+    _setOpen(false);
   }
 
   return (

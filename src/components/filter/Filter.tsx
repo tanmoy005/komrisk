@@ -10,23 +10,24 @@ import { ChartFilterDataPayLoad, FilterProps } from '@/src/types';
 import { router } from 'expo-router';
 import CustomModal from '../CustomModal';
 import FilterScreen from '@/src/app/filterScreen';
-import FilterModal from '../FilterModal';
 import ChartFilter from '@/src/app/chartFilterModal';
 import UserChartFilter from '@/src/app/userchartFilterModal';
-import FilterTypeModal from '@/src/app/filterTypeModal';
 import { hasValue } from '@/src/utils';
+import ChartUserFilter from './ChartUserFilter';
+import FilterTypeModal from '@/src/app/filterTypeModal';
+import FilterModal from './FilterModal';
 import FilterDropdown from './FilterDropdown';
 
 
 const Filter = (
     {
-        selectedTab,currentChart, setCurrentChart, reportType,
+        selectedTab, currentChart, setCurrentChart, reportType,
         setChartFilterPayload, chartFilterPayload, filterType, setFilterType
     }: FilterProps): JSX.Element => {
     const [modalVisible, setModalVisible] = useState(false);
     const [filterModalVisible, setFilterModalVisible] = useState(false);
-    const [userfilterModalVisible, setUserFilterModalVisible] = useState(false);
-    const [userfilterlevelModalVisible, setUserFilterLevelModalVisible] = useState(false);
+    // const [userfilterModalVisible, setUserFilterModalVisible] = useState(false);
+    // const [userfilterlevelModalVisible, setUserFilterLevelModalVisible] = useState(false);
     const [filterTypemModal, setFilterTypeModal] = useState(false);
     const [filterTypemModalIsOpen, setFilterTypeModalIsOpen] = useState(false);
 
@@ -68,7 +69,7 @@ const Filter = (
     //         setFilterTypeModal(true);
     //     }
     // }, [filterType])
-    const handleOnpressFilterItem = ()=>{
+    const handleOnpressFilterItem = () => {
         setFilterTypeModal(true);
     }
 
@@ -113,7 +114,7 @@ const Filter = (
                 })
             }
             {/* { setFilterPayload,reportType }: chartFilterProps */}
-            {
+            {/* {
                 modalVisible &&
                 <FilterModal
                     modalVisible={modalVisible}
@@ -126,8 +127,8 @@ const Filter = (
 
                         />}
                 />
-            }
-            {
+            } */}
+            {/* {
                 filterModalVisible &&
                 <CustomModal
                     setModalVisible={setFilterModalVisible}
@@ -143,8 +144,8 @@ const Filter = (
                         />
                     }
                 />
-            }
-            {
+            } */}
+            {/* {
                 userfilterModalVisible &&
                 <CustomModal
                     setModalVisible={setUserFilterModalVisible}
@@ -161,25 +162,23 @@ const Filter = (
                     />
                     }
                 />
-            }
+            } */}
             {
-                filterTypemModal &&
-                <CustomModal
-                    setModalVisible={setFilterTypeModal}
-                    modalVisible={filterTypemModal}
-                    component={
-                        <FilterTypeModal
-                            filterType={filterType}
-                            filterTypes={filterTypes}
-                            setFilterType={setFilterType}
-                            filterTypemModalIsOpen={filterTypemModalIsOpen}
-                            setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
-                            chartFilterPayload={chartFilterPayload}
-                            reportType={reportType}
-                            selectedTab={selectedTab}
-                        />
-                    }
-                />
+                filterTypemModal && hasValue(filterType) ?
+
+                    <FilterModal
+                        setModalVisible={setFilterTypeModal}
+                        modalVisible={filterTypemModal}
+                        filterType={filterType}
+                        filterTypes={filterTypes}
+                        setFilterType={setFilterType}
+                        filterTypemModalIsOpen={filterTypemModalIsOpen}
+                        setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
+                        chartFilterPayload={chartFilterPayload}
+                        reportType={reportType}
+                        selectedTab={selectedTab}
+                    />
+                    : null
             }
             {/* {
                 filterTypemModal &&
