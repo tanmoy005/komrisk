@@ -624,7 +624,7 @@ export interface userchartFilterProps {
   setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setUserFilterLevelModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   reportType: string
-  selectedTab: string
+    selectedTab: string
 }
 
 
@@ -752,6 +752,7 @@ export interface FilterDropdownProps {
 export interface FilterTypeModalProps extends FilterDropdownProps {
   chartFilterPayload: ChartFilterDataPayLoad;
   reportType: string;
+  selectedTab: string;
   // setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
   // setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   // setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;

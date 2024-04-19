@@ -287,7 +287,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     dropdownListContainer: {
         borderWidth: 1,
         borderRadius: 5,
-        borderColor: 'rgba(186, 186, 186, 1)'
+        borderColor: 'rgba(186, 186, 186, 1)',
+        maxHeight: 'auto'
     },
     dropdownItemContainer: {
         flexDirection: 'row',

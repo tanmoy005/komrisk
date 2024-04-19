@@ -28,7 +28,7 @@ const IncidentComparison = () => {
         setCurrentChart={setCurrentChart}
         filterType={filterType}
         setFilterType={setFilterType}
-        reportType="COMPLIANCE"
+        reportType="INCIDENT"
         selectedTab = "incident_comparison"
         setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}

@@ -28,7 +28,7 @@ const IncidentActivity = () => {
         setCurrentChart={setCurrentChart}
         filterType={filterType}
         setFilterType={setFilterType}
-        reportType="COMPLIANCE"
+        reportType="INCIDENT"
         selectedTab = "incident_activity"
         setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}

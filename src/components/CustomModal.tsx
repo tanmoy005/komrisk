@@ -18,12 +18,11 @@ const CustomModal = ({ component, modalVisible, setModalVisible }: ModelProps) =
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalVisible(false);
         }}>
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>X</Text>
             </Pressable>

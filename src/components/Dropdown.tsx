@@ -4,9 +4,12 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { styles } from '../style';
 import { DropDownListProps, Dropdown } from '../types';
 import { Divider } from 'react-native-elements';
+import { hasValue } from '../utils';
 
 
 const DropDownList = ({ value, label, IconComponent }: DropDownListProps) => {
+  console.log('value333333333333333', value);
+  
   return (
     <View style={styles.dropdownItemContainer}>
       <View style={{width: '100%'}}>
@@ -14,7 +17,7 @@ const DropDownList = ({ value, label, IconComponent }: DropDownListProps) => {
           flexDirection: 'row'
         }}>
           {IconComponent !== null && IconComponent}
-          <Text>{value}</Text>
+          <Text style={styles.chartLabel}>{label}</Text>
         </View>
         <Divider style={{ ...styles.divider1, marginTop: 1 }} />
       </View>
@@ -22,31 +25,43 @@ const DropDownList = ({ value, label, IconComponent }: DropDownListProps) => {
   )
 }
 
-const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth }: Dropdown) => {
+const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth, open, setOpen, onpress  }: Dropdown) => {
 
-  const [open, setOpen] = useState(false);
+  const [_open, _setOpen] = useState(false);
+  console.log('selectedValue', selectedValue);
   
+  const handleOnpress =(value: string)=>{
+    setSelectedValue(value);
+    onpress && onpress();
+  }
+
   return (
     <View>
       <DropDownPicker
-        open={open}
+        open={ open!==undefined? open : _open}
         value={selectedValue}
         items={dropdownItems}
-        setOpen={setOpen}
+        setOpen={setOpen!==undefined? setOpen : _setOpen}
         setValue={setSelectedValue}
-        autoScroll={true}
+        autoScroll={false}
+        closeAfterSelecting={true}
+        scrollViewProps={{
+          scrollEnabled: true,
+          persistentScrollbar: false,
+        }}
         maxHeight={200}
-        style={{ ...styles.dropdownPicker, minWidth: minWidth }}
+        style={{ ...styles.dropdownPicker, minWidth: minWidth}}
         renderListItem={
-          ({ label, value, IconComponent }) => {
+          ({ label, value, IconComponent,  }) => {
             return (
-              <Pressable onPress={()=>setSelectedValue(value)}>
+              <Pressable onPress={()=>handleOnpress(value)}>
                 <DropDownList IconComponent = {IconComponent} value={value} label={label} />
               </Pressable>
             )
 
           }
         }
+        labelStyle={styles.chartLabel}
         dropDownContainerStyle={styles.dropdownListContainer}
       />
     </View>

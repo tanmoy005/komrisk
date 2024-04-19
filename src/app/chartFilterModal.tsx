@@ -103,7 +103,11 @@ const ChartFilter = ({ chartFilterPayload, setChartFilterPayload, reportType, se
                 <View style={{ ...styles.taskCard, borderWidth: 0, justifyContent: 'space-between', width: (screenWidth * 0.85), height: '100%', position: 'relative' }}>
                     <CardContainer styles={{ position: 'relative', width: '100%' }}>
                         <CardTextContainer styles={{ position: 'relative', width: '100%' }}>
-                            <View onLayout={handlefirstFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', position: 'absolute', top: 11, zIndex: 3, right: 0 }}>
+                            <View onLayout={handlefirstFieldLayout}
+                                style={{
+                                    flexDirection: 'row', justifyContent: 'space-between', width: '100%',
+                                    position: 'absolute', top: 11, zIndex: 3, right: 0
+                                }}>
                                 <Text style={styles.chartFilterFieldLabelContainer}>Country </Text>
                                 <DropDown
                                     dropdownItems={filterCountrylist}
