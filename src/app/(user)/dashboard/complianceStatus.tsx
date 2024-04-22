@@ -6,7 +6,7 @@ import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import Filter from "@/src/components/filter/Filter";
 import { useState } from "react";
 import moment from "moment";
-import { ChartFilterDataPayLoad } from "@/src/types";
+import { ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
 // const Product = products[3];
 
 const ComplianceStatus = () => {
@@ -20,6 +20,8 @@ const ComplianceStatus = () => {
     end: currentDate
 
   });
+  const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
+  const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
 
   return (
     <SafeAreaView style={styles.dashboardContainer}>
@@ -29,15 +31,21 @@ const ComplianceStatus = () => {
         setCurrentChart={setCurrentChart}
         filterType={filterType}
         setFilterType={setFilterType}
-        selectedTab = "compliance_status"
+        selectedTab="compliance_status"
         reportType="COMPLIANCE"
         setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}
+        chartUserFilterPayload={chartUserFilterPayload}
+        setChartUserFilterPayload={setChartUserFilterPayload} 
+        chartDataFilterPayload={chartDataFilterPayload}
+        setChartDataFilterPayload={setChartDataFilterPayload}
       />
       <View style={styles.dashboardChartContainer}>
         <ComplianceStatusInfo
           currentChart={currentChart}
           chartFilterPayload={chartFilterPayload}
+          chartUserFilterPayload={chartUserFilterPayload}
+          chartDataFilterPayload={chartDataFilterPayload}
         />
       </View>
     </SafeAreaView>

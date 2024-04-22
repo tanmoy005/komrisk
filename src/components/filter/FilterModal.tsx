@@ -7,8 +7,8 @@ import { FilterModalProps } from '@/src/types';
 import ChartUserFilter from './ChartUserFilter';
 import { screenWidth, styles } from '@/src/style';
 import ChartDataFilter from './ChartDataFilter';
-import ChartFilter from './ChartFilter';
 import Button from '../Button';
+import ChartFilter from './ChartFilter';
 
 
 const FilterModal = ({ setModalVisible,
@@ -21,7 +21,12 @@ const FilterModal = ({ setModalVisible,
   chartFilterPayload,
   reportType,
   setChartFilterPayload,
-  selectedTab }: FilterModalProps) => {
+  selectedTab,
+  setChartUserFilterPayload,
+  chartUserFilterPayload,
+  setChartDataFilterPayload,
+  chartDataFilterPayload
+}: FilterModalProps) => {
 
 
   console.log("Filter Type", filterType)
@@ -61,29 +66,25 @@ const FilterModal = ({ setModalVisible,
                       {
                         modalVisible && filterType === 'Chart User' ?
                           <ChartUserFilter
-                            filterType={filterType}
-                            filterTypes={filterTypes}
-                            setFilterType={setFilterType}
-                            filterTypemModalIsOpen={filterTypemModalIsOpen}
-                            setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
+                            setModalVisible={setModalVisible}
                             chartFilterPayload={chartFilterPayload}
                             reportType={reportType}
                             selectedTab={selectedTab}
+                            setUserFilterPayload={setChartUserFilterPayload}
+                            chartUserFilterPayload={chartUserFilterPayload}
                           />
                           : null
                       }
 
                       {
-                        modalVisible && filterType === 'Chart Data' ?
+                        modalVisible && filterType === 'Chart Data' && reportType === "COMPLIANCE" ?
                           <ChartDataFilter
-                            filterType={filterType}
-                            filterTypes={filterTypes}
-                            setFilterType={setFilterType}
-                            filterTypemModalIsOpen={filterTypemModalIsOpen}
-                            setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
-                            chartFilterPayload={chartFilterPayload}
-                            reportType={reportType}
-                            selectedTab={selectedTab}
+                          setModalVisible={setModalVisible}
+                          chartFilterPayload={chartFilterPayload}
+                          reportType={reportType}
+                          selectedTab={selectedTab}
+                          setDataFilterPayload={setChartDataFilterPayload}
+                          chartDataFilterPayload={chartDataFilterPayload}
                           />
                           : null
                       }
@@ -104,7 +105,7 @@ const FilterModal = ({ setModalVisible,
                           : null
                       }
                     </CardTextContainer>
-                   
+
                   </CardContainer>
                 </View>
               </View>

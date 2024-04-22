@@ -8,7 +8,6 @@ import { hasValue } from '../utils';
 
 
 const DropDownList = ({ value, label, IconComponent }: DropDownListProps) => {
-  console.log('value333333333333333', value);
   
   return (
     <View style={styles.dropdownItemContainer}>
@@ -28,11 +27,10 @@ const DropDownList = ({ value, label, IconComponent }: DropDownListProps) => {
 const DropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWidth, open, setOpen, onpress  }: Dropdown) => {
 
   const [_open, _setOpen] = useState(false);
-  console.log('selectedValue', selectedValue);
-  
   const handleOnpress =(value: string)=>{
     setSelectedValue(value);
     onpress && onpress();
+    setOpen && setOpen(false);
     _setOpen(false);
   }
 

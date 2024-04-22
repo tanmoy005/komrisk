@@ -17,7 +17,7 @@ import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
 
-const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
+const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload }: ChartProp) => {
   const [activityStatusChartData, setActivityStatusChartData] = useState<ComplianceStatusData>({
     title: null,
     subTitle: null,
@@ -29,12 +29,11 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
   const [totalValue, setTotalValue] = useState<number>(0);
   const [noDataAvailable, setNoDataAvailable] = useState<boolean>(false);
   const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-
-  let payLoad: ComplianceStatusDataPayLoad = {
+  const [payLoad, setPayLoad] = useState<ComplianceStatusDataPayLoad>({
     ...useCredential,
     ...chartFilterPayload,
-  }
 
+  });
 
   const navigateToChartList = (statusType: string, payLoad: ComplianceStatusDataPayLoad) => {
     const payloadString = JSON.stringify(payLoad); // Stringify the payload here
@@ -43,7 +42,9 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
   }
 
 
-  const handleGetComplianceStatusData = async () => {
+  const handleGetComplianceStatusData = async (payLoad: ComplianceStatusDataPayLoad) => {
+    console.log("payload", payLoad);
+
     const { data, error, status } = await GetComplianceStatusData(payLoad);
     if (status === 200) {
       const { chartData, title, subTitle, yAxisName, xAxisName } = data;
@@ -63,12 +64,25 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
   }
 
   useEffect(() => {
-    payLoad = {
+    const updatedPayLoad = {
       ...useCredential,
       ...chartFilterPayload,
+      ...chartUserFilterPayload,
+
     }
-    handleGetComplianceStatusData();
-  }, [chartFilterPayload]);
+    setPayLoad(updatedPayLoad)
+    handleGetComplianceStatusData(updatedPayLoad);
+  }, [chartFilterPayload, chartUserFilterPayload]);
+
+  useEffect(() => {
+    const updatedPayLoad = {
+      ...useCredential,
+      ...chartFilterPayload,
+      ...chartDataFilterPayload
+    }
+    setPayLoad(updatedPayLoad)
+    handleGetComplianceStatusData(updatedPayLoad);
+  }, [chartDataFilterPayload]);
   return (
     <View style={styles.chartContainer}>
       {

@@ -1,25 +1,3 @@
-// import React, { useEffect, useState } from 'react'
-// import { screenWidth, styles } from '../style'
-// import { Text, View } from 'react-native'
-// import CardTextContainer from '../components/cards/CardTextContainer'
-// import CardContainer from '../components/cards/CardContainer'
-// import { ComplianceUserFilterData, DropDownItem, FilterTypeModalProps, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from '../types'
-// import FilterDropdown from '../components/filter/FilterDropdown'
-// import { Divider } from 'react-native-elements'
-// import DropDown from '../components/Dropdown'
-// import Button from '../components/Button'
-// // import GetActivityStatusUserFilterData from '../server/api-functions/get-activity-status-userfilter-data'
-// import { RootState } from '../store/rootReducer'
-// import { useSelector } from 'react-redux'
-// import GetComplianceUserFilterData from '../server/api-functions/get-userfilter-compliance-data'
-// import GetIncidentUserFilterData from '../server/api-functions/get-userfilter-incident-data'
-// import { hasValue } from '../utils'
-// import GetActivityStatusUserFilterLevelData from '../server/api-functions/get-activity-status-userfilter-filterlevel-data'
-// import GetComplianceStatusUserFilterLevelData from '../server/api-functions/get-compliance-status-userfilter-filterlevel-data'
-// import GetImpactAnalysisUserFilterLevelData from '../server/api-functions/get-impact-analysis-userfilter-filterlevel-data'
-// import GetIncidentActivityUserFilterLevelData from '../server/api-functions/get-incident-activity-userfilter-filterlevel-data'
-// import GetIncidentComparisonUserFilterLevelData from '../server/api-functions/get-incident-comparison-userfilter-filterlevel-data'
-
 import GetActivityStatusUserFilterLevelData from "@/src/server/api-functions/get-activity-status-userfilter-filterlevel-data";
 import GetComplianceStatusUserFilterLevelData from "@/src/server/api-functions/get-compliance-status-userfilter-filterlevel-data";
 import GetImpactAnalysisUserFilterLevelData from "@/src/server/api-functions/get-impact-analysis-userfilter-filterlevel-data";
@@ -28,31 +6,25 @@ import GetIncidentComparisonUserFilterLevelData from "@/src/server/api-functions
 import GetComplianceUserFilterData from "@/src/server/api-functions/get-userfilter-compliance-data";
 import GetIncidentUserFilterData from "@/src/server/api-functions/get-userfilter-incident-data";
 import { RootState } from "@/src/store/rootReducer";
-import { screenWidth, styles } from "@/src/style";
-import { ActivityStatusUserFilterLevelData, ComplianceStatusUserFilterLevelData, ComplianceUserFilterData, DropDownItem, FilterTypeModalProps, ImpactAnalysisUserFilterLevelData, IncidentActivityUserFilterLevelData, IncidentComparisonUserFilterLevelData, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from "@/src/types";
+import { ActivityStatusUserFilterLevelData, ChartUserFilterModalProps, ComplianceStatusUserFilterLevelData, ComplianceUserFilterData, DropDownItem, FilterTypeModalProps, ImpactAnalysisUserFilterLevelData, IncidentActivityUserFilterLevelData, IncidentComparisonUserFilterLevelData, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from "@/src/types";
 import { hasValue } from "@/src/utils";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Alert } from "react-native";
 import { useSelector } from "react-redux";
-import CardContainer from "../cards/CardContainer";
-import CardTextContainer from "../cards/CardTextContainer";
-import FilterDropdown from "./FilterDropdown";
 import DropDown from "../Dropdown";
 import Button from "../Button";
 
 
 
 const ChartUserFilter = ({
-    filterType,
-    filterTypes,
-    setFilterType,
-    filterTypemModalIsOpen,
-    setFilterTypeModalIsOpen,
+    setModalVisible,
     chartFilterPayload,
     reportType,
-    selectedTab
-}: FilterTypeModalProps) => {
+    selectedTab,
+    chartUserFilterPayload,
+    setUserFilterPayload
+}: ChartUserFilterModalProps) => {
 
     const [selectedFilterType1, setSelectedFilterType1] = useState('');
     const [selectedFilterType2, setSelectedFilterType2] = useState('');
@@ -62,7 +34,6 @@ const ChartUserFilter = ({
         chartData: null
     });
     const [firstFilterDropdown, setFirstFilterDropdown] = useState<DropDownItem[]>([{ label: '', value: '' }]);
-    // const [incidentUserDropdown, setIncidentUserDropdown] = useState<DropDownItem[]>();
 
     const [incidentUserFilterChartData, setIncidentUserFilterChartData] = useState<IncidentUserFilterData>({
         title: null,
@@ -74,6 +45,7 @@ const ChartUserFilter = ({
     const [filteredChartData, setFilteredChartData] = useState<UserFilterReportChartData[]>([]);
 
     const [filteredLevelChartData, setFilteredLevelChartData] = useState<UserFilterReportChartData[]>([]);
+
     const [activityStatusUserFilterLevelChartData, setActivityStatusUserFilterLevelChartData] = useState<ActivityStatusUserFilterLevelData>({
         title: null,
         subTitle: null,
@@ -82,15 +54,12 @@ const ChartUserFilter = ({
         chartData: null
     });
 
-
     const [complianceStatusUserFilterLevelChartData, setComplianceStatusUserFilterLevelChartData] = useState<ComplianceStatusUserFilterLevelData>({
         title: null,
         xAxisName: null,
         yAxisName: null,
         chartData: null
     });
-
-
 
     const [impactAnalysisUserFilterLevelChartData, setImpactAnalysisUserFilterLevelChartData] = useState<ImpactAnalysisUserFilterLevelData>({
         title: null,
@@ -116,21 +85,15 @@ const ChartUserFilter = ({
         yAxisName: null,
         chartData: null
     });
-    // const [filteredData, setFilteredData] = useState<>([]);
 
-    // console.log('selectedField1Value', selectedField1Value);
 
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const chartuserfilterPayload: UserFilterDataPayLoad = {
+    const userfilterPayload: UserFilterDataPayLoad = {
         ...useCredential,
         ...chartFilterPayload
     };
-    // const [ selectedValue, setSelectedValue] = useState();
-    // const [ selectedValue, setSelectedValue] = useState();
-    // setSelectedValue, dropdownItems, selectedValue, minWidth
 
-
-    const handleGetUserFilterData = async (chartuserfilterPayload: UserFilterDataPayLoad) => {
+    const handleGetUserFilterData = async (userfilterPayload: UserFilterDataPayLoad) => {
         let apiFunction;
         let setDataFunction;
         if (reportType === 'COMPLIANCE') {
@@ -146,16 +109,13 @@ const ChartUserFilter = ({
             return;
         }
 
-        const { data, error, status } = await apiFunction(chartuserfilterPayload);
+        const { data, error, status } = await apiFunction(userfilterPayload);
         if (status === 200) {
             const { chartData, title, subTitle } = data;
-            console.log('data343434', data);
 
             setDataFunction(data);
             const userfilteredchartData: UserFilterReportChartData[] = chartData &&
-                chartData.filter((x: UserFilterReportChartData) => x.label !== "NULL");
-            console.log('userfilteredchartData', userfilteredchartData);
-
+                chartData.filter((x: UserFilterReportChartData) => x.label !== null && x.userFilter !== null);
 
             const filterDropdown = userfilteredchartData.map(({ displayValue, filterLevel }) => {
 
@@ -165,22 +125,20 @@ const ChartUserFilter = ({
                 }
             })
             setFilteredChartData(userfilteredchartData);
-            console.log('filterDropdown', filterDropdown);
-
             setFirstFilterDropdown(filterDropdown);
         } else {
-            // Alert.alert("error", error.message);
+            Alert.alert("error", error.message);
         }
     };
 
     useEffect(() => {
-        handleGetUserFilterData(chartuserfilterPayload);
+        handleGetUserFilterData(userfilterPayload);
     }, []); // This will call the function when the component mounts
+
     const handleGetUserFilterLevelData = async (chartuserfilterlevelPayload: UserFilterLevelDataPayLoad) => {
         let apiFunction;
         let setLevelDataFunction;
         if (reportType === "COMPLIANCE" && selectedTab === "activity_status") {
-            console.log("yesss")
             apiFunction = GetActivityStatusUserFilterLevelData;
             setLevelDataFunction = setActivityStatusUserFilterLevelChartData;
         }
@@ -209,29 +167,30 @@ const ChartUserFilter = ({
         if (status === 200) {
             const { chartData, title, subTitle } = data;
             setLevelDataFunction(data);
-            console.log('data5434534534534', data);
 
-            //console.log("response filterlevel api",activityStatusUserFilterLevelChartData)
+            const userfilteredleveltData: UserFilterReportChartData[] = chartData && chartData.filter((x: UserFilterReportChartData) => x.label !== "NULL");
 
-            const userfilteredlevelchartData: UserFilterReportChartData[] = chartData && chartData.filter((x: UserFilterReportChartData) => x.label !== "NULL");
-            console.log('userfilteredlevelchartData', userfilteredlevelchartData);
+            const userfilteredlevelchartData = userfilteredleveltData && userfilteredleveltData.length > 0 ? userfilteredleveltData?.map((data) => {
+                return { value: data?.userFilter?.toString(), label: data.label, userFilter: data?.userFilter };
+            }) : [];
 
             setFilteredLevelChartData(userfilteredlevelchartData);
-            // setUserFilterLevelModalVisible(false)
-            // setUserFilterLevelModalVisible(true)
         } else {
             Alert.alert("error", error.message);
         }
     };
+
     const chartuserfilterlevelPayload: UserFilterLevelDataPayLoad = {
-        ...chartuserfilterPayload,
+        ...userfilterPayload,
         filterLevel: selectedFilterType1.toString()
     };
+
     useEffect(() => {
         if (hasValue(selectedFilterType1)) {
             handleGetUserFilterLevelData(chartuserfilterlevelPayload);
         }
     }, [selectedFilterType1]); //
+
     useEffect(() => {
         let chartDataToLog;
         if (reportType === 'COMPLIANCE') {
@@ -239,13 +198,17 @@ const ChartUserFilter = ({
         } else if (reportType === 'INCIDENT') {
             chartDataToLog = incidentUserFilterChartData;
         }
-        console.log('complianceUserFilterChartData', complianceUserFilterChartData);
-
 
     }, [complianceUserFilterChartData, incidentUserFilterChartData, filteredChartData]);
 
     const handleApplyFilters = () => {
+        const filtrLevelArray = selectedFilterType2?.toString()?.split(':');
+        const filterLevel = filtrLevelArray.length > 1 ? filtrLevelArray[1] : filtrLevelArray[0];
+        chartUserFilterPayload.filterType = selectedFilterType1?.toString();
+        chartUserFilterPayload.filterLevel = `${selectedFilterType1?.toString()}:${filterLevel}`;
 
+        setUserFilterPayload({ ...chartUserFilterPayload });
+        setModalVisible(false)
     }
 
     return (
@@ -255,7 +218,6 @@ const ChartUserFilter = ({
                     dropdownItems={firstFilterDropdown}
                     setSelectedValue={setSelectedFilterType1}
                     selectedValue={selectedFilterType1}
-                    // minWidth={screenWidth * 0.00822222222}
                     minWidth={'100%'}
                 />
             </View>
@@ -266,7 +228,6 @@ const ChartUserFilter = ({
                         dropdownItems={filteredLevelChartData}
                         setSelectedValue={setSelectedFilterType2}
                         selectedValue={selectedFilterType2}
-                        // minWidth={screenWidth * 0.00822222222}
                         minWidth={'100%'}
                     />
                 </View>

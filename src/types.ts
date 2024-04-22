@@ -154,6 +154,8 @@ export interface ComplianceStatusDataPayLoad {
   start: string;
   viewAs: string;
   end: string;
+  filterLevel?: string;
+  filterType?: string;
 }
 export interface ComplianceStatusData {
   title: string | null;
@@ -549,11 +551,14 @@ export interface FilterProps {
   currentChart: string;
   filterType: string;
   reportType: string;
-  chartFilterPayload: ChartFilterDataPayLoad;
   setCurrentChart: React.Dispatch<React.SetStateAction<string>>;
   setFilterType: React.Dispatch<React.SetStateAction<string>>;
+  chartFilterPayload: ChartFilterDataPayLoad;
   setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
-
+  chartUserFilterPayload: ChartUserFilterDataPayLoad
+  setChartUserFilterPayload: React.Dispatch<React.SetStateAction<ChartUserFilterDataPayLoad>>;
+  chartDataFilterPayload: ChartDataFilterDataPayLoad
+  setChartDataFilterPayload: React.Dispatch<React.SetStateAction<ChartDataFilterDataPayLoad>>;
 }
 export interface ChartFilterDataPayLoad {
   start: string;
@@ -561,12 +566,18 @@ export interface ChartFilterDataPayLoad {
   viewAs: string;
   countryName?: string;
 }
-
+export interface ChartUserFilterDataPayLoad {
+  filterLevel: string;
+  filterType: string;
+}
+export interface ChartDataFilterDataPayLoad {
+  filterType: string;
+}
 
 export interface DropDownItem {
   label: string | null | undefined;
   value: string | number | null | undefined;
-  icon?: ()=> JSX.Element
+  icon?: () => JSX.Element
 }
 
 export interface Dropdown {
@@ -597,6 +608,8 @@ export interface FilterProps {
 export interface ChartProp {
   currentChart: string;
   chartFilterPayload: ChartFilterDataPayLoad;
+  chartUserFilterPayload: ChartUserFilterDataPayLoad;
+  chartDataFilterPayload: ChartDataFilterDataPayLoad;
 }
 export interface CustomeDatePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Date>>
@@ -707,12 +720,12 @@ export interface IncidentComparisonUserFilterLevelData {
 
 
 export interface UserFilterReportChartData {
-  displayValue: string;
-  filterLevel: number;
-  filterType: string;
+  displayValue?: string;
+  filterLevel?: number;
+  filterType?: string;
   label: string;
   value: number;
-  userFilter: any
+  userFilter?: any
 }
 
 
@@ -749,25 +762,42 @@ export interface FilterDropdownProps {
   handleOnpressFilterItem?: () => void;
 }
 
-export interface FilterTypeModalProps extends FilterDropdownProps {
+export interface FilterTypeModalProps {
   chartFilterPayload: ChartFilterDataPayLoad;
   reportType: string;
   selectedTab: string;
   //modalVisible: boolean;
   // setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
-  //setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   // setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+export interface ChartUserFilterModalProps {
+  chartFilterPayload: ChartFilterDataPayLoad;
+  reportType: string;
+  selectedTab: string;
+  chartUserFilterPayload: ChartUserFilterDataPayLoad;
+  setUserFilterPayload: React.Dispatch<React.SetStateAction<ChartUserFilterDataPayLoad>>;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export interface ChartDataFilterModalProps {
+  chartFilterPayload: ChartFilterDataPayLoad;
+  reportType: string;
+  selectedTab: string;
+  chartDataFilterPayload: ChartDataFilterDataPayLoad;
+  setDataFilterPayload: React.Dispatch<React.SetStateAction<ChartDataFilterDataPayLoad>>;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
 export interface FilterModalProps extends FilterDropdownProps {
   chartFilterPayload: ChartFilterDataPayLoad;
-  setChartFilterPayload:  React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
   reportType: string;
   selectedTab: string;
   modalVisible: boolean;
-  // setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  // setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setChartUserFilterPayload: React.Dispatch<React.SetStateAction<ChartUserFilterDataPayLoad>>;
+  chartUserFilterPayload: ChartUserFilterDataPayLoad;
+  setChartDataFilterPayload: React.Dispatch<React.SetStateAction<ChartDataFilterDataPayLoad>>;
+  chartDataFilterPayload: ChartDataFilterDataPayLoad;
 }
 
 
@@ -783,7 +813,7 @@ export interface DataFilterDataPayLoad {
 
 
 export interface DataFilterLevelDataPayLoad extends DataFilterDataPayLoad {
-  filterType: string | null ;
+  filterType: string | null;
 }
 
 
