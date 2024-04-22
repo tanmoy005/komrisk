@@ -47,8 +47,6 @@ const GetIncidentActivityDataListDetailsInfo = () => {
       status: filterStatus
     };
 
-    // console.log("Payload for list", payLoad);
-
 
     const handleGetIncidentActivityDataList = async () => {
 

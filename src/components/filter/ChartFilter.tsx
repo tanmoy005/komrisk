@@ -28,8 +28,6 @@ const ChartFilter = ({
     let filterViewedAslist: DropDownItem[] = [viewAsDropdownLabel];
 
     const [selectedCountry, setSelectedCountry] = useState<string>('');
-    console.log('chartFilterPayload.viewAs', chartFilterPayload.viewAs);
-    
     const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload.viewAs);
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [endDate, setEndDate] = useState<Date>(new Date());
@@ -44,8 +42,6 @@ const ChartFilter = ({
             return { value: subList[0].toString(), label: subList[1] };
         })] : [...filterCountrylist];
 
-
-        console.log("filterCountrylist", filterCountrylist)
     }
 
     if (reportType === "COMPLIANCE") {
@@ -73,16 +69,14 @@ const ChartFilter = ({
         if (!hasValue(endDate)) {
             return;
         }
-        if (!hasValue(selectedCountry)) {
-            return;
-        }
+        // if (!hasValue(selectedCountry)) {
+        //     return setSelectedCountry("India");
+        // }
         chartFilterPayload.viewAs = selectedViewAs;
         chartFilterPayload.start = DateFormatDDMMYYYY(startDate && startDate.toString()) ?? "";
         chartFilterPayload.end = DateFormatDDMMYYYY(endDate.toString()) ?? "";
-        const { label: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
-        chartFilterPayload.countryName = selectedCountry;
-        console.log('chartFilterPayload', chartFilterPayload);
-        
+        // const { label: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
+        // chartFilterPayload.countryName = selectedCountry;
         setChartFilterPayload({ ...chartFilterPayload });
         setModalVisible(false);
     }
@@ -93,7 +87,7 @@ const ChartFilter = ({
         <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110, position: 'absolute', left: scaleCardSize(8), justifyContent: 'space-between', height: '100%' }}>
 
             <View style={{ zIndex: 2118, marginTop: 64 }}>
-                <View  style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
                     <CustomDatePicker
                         setDate={setStartDate}
                         date={startDate}
@@ -119,7 +113,7 @@ const ChartFilter = ({
                         selectedValue={selectedViewAs}
                         setSelectedValue={setSelectedViewAs}
                         minWidth={160}
-                        
+
                     />
                 </View>
             </View>

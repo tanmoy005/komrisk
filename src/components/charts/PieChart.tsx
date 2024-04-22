@@ -26,20 +26,6 @@ const PieChartData = ({ ReportData }: ChartItemProps) => {
     setDataValue(ChartValue);
   }, [ReportData]);
 
-  console.log('screenWidth', Math.floor(screenWidth));
-
-  // let chartWidth =scaleCardSize(screenWidth)* screenWidth * .48;
-  // let chartWidth =scaleCardSize(screenWidth)* screenWidth * .48;
-  // let chartWidth = scaleCardSize(screenWidth);
-  
- 
-  // if (screenWidth > 411) {
-  //   chartWidth = screenWidth * .48;
-  // }
-  // if (screenWidth <= 411) {
-  //   chartWidth = screenWidth * .38;
-  // }
-
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       {

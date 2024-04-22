@@ -21,18 +21,11 @@ const GetActivityStatusDataListDetailsInfo = () => {
 
     const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
 
-    //console.log("***************1")
-
     // Get the payload from the navigation params
     const { payload, statusType } = useLocalSearchParams();
     const filterStatus = typeof statusType === 'string' ? statusType : statusType[0];
-    //console.log("filterStatus",filterStatus)
-    //const payLoad: ActivityStatusDataListPayLoad = params;
 
     const getpayload = typeof payload === 'string' ? payload : payload[0];
-
-    console.log("payload got", getpayload)
-
 
     let parsedPayload;
     try {

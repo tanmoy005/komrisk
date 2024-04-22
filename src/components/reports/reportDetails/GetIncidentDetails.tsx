@@ -16,7 +16,6 @@ interface IncidentDetailsProps {
 const GetIncidentDetails = ({ incidentId, taskId }: IncidentDetailsProps) => {
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const [incidentItemData, setIncidentItemData] = useState<IncidentItemDetailsResponse>(DefaultIncidentItemDetailsResponse);
-console.log("incidentItemData",incidentId,taskId);
     const handleGetIncidentTaskDetailsData = async () => {
 
         const payLoad: IncidentItemDetailsPayLoad = {

@@ -4,7 +4,7 @@ import { styles } from "@/src/style";
 import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import Filter from "@/src/components/filter/Filter";
 import { useEffect, useState } from "react";
-import { ActivityStatusDataPayLoad, ChartFilterDataPayLoad } from "@/src/types";
+import { ActivityStatusDataPayLoad, ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
 import { useSelector } from "react-redux";
 import { RootState } from "@/src/store/rootReducer";
 import moment from "moment";
@@ -23,7 +23,8 @@ const ActivityStatus = () => {
     end: currentDate
 
   });
-
+  const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
+  const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
   return (
     <SafeAreaView style={styles.dashboardContainer}>
       <HeadImageSection />
@@ -33,14 +34,20 @@ const ActivityStatus = () => {
         filterType={filterType}
         setFilterType={setFilterType}
         reportType="COMPLIANCE"
-        selectedTab = "activity_status"
+        selectedTab="activity_status"
         setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}
+        chartUserFilterPayload={chartUserFilterPayload}
+        setChartUserFilterPayload={setChartUserFilterPayload}
+        chartDataFilterPayload={chartDataFilterPayload}
+        setChartDataFilterPayload={setChartDataFilterPayload}
       />
       <View style={styles.dashboardChartContainer}>
         <ActivityStatusInfo
           currentChart={currentChart}
           chartFilterPayload={chartFilterPayload}
+          chartUserFilterPayload={chartUserFilterPayload}
+          chartDataFilterPayload={chartDataFilterPayload}
         />
       </View>
     </SafeAreaView>

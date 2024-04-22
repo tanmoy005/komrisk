@@ -6,7 +6,7 @@ import GetIncidentComparisonUserFilterLevelData from "@/src/server/api-functions
 import GetComplianceUserFilterData from "@/src/server/api-functions/get-userfilter-compliance-data";
 import GetIncidentUserFilterData from "@/src/server/api-functions/get-userfilter-incident-data";
 import { RootState } from "@/src/store/rootReducer";
-import { ActivityStatusUserFilterLevelData, ChartUserFilterModalProps, ComplianceStatusUserFilterLevelData, ComplianceUserFilterData, DropDownItem, FilterTypeModalProps, ImpactAnalysisUserFilterLevelData, IncidentActivityUserFilterLevelData, IncidentComparisonUserFilterLevelData, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from "@/src/types";
+import { ActivityStatusUserFilterLevelData, ChartUserFilterModalProps, ComplianceStatusUserFilterLevelData, ComplianceUserFilterData, DropDownItem, ImpactAnalysisUserFilterLevelData, IncidentActivityUserFilterLevelData, IncidentComparisonUserFilterLevelData, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from "@/src/types";
 import { hasValue } from "@/src/utils";
 import { useEffect, useState } from "react";
 import { View } from "react-native";

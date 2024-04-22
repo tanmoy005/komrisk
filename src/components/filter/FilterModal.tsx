@@ -29,8 +29,6 @@ const FilterModal = ({ setModalVisible,
 }: FilterModalProps) => {
 
 
-  console.log("Filter Type", filterType)
-
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -79,23 +77,18 @@ const FilterModal = ({ setModalVisible,
                       {
                         modalVisible && filterType === 'Chart Data' && reportType === "COMPLIANCE" ?
                           <ChartDataFilter
-                          setModalVisible={setModalVisible}
-                          chartFilterPayload={chartFilterPayload}
-                          reportType={reportType}
-                          selectedTab={selectedTab}
-                          setDataFilterPayload={setChartDataFilterPayload}
-                          chartDataFilterPayload={chartDataFilterPayload}
+                            setModalVisible={setModalVisible}
+                            chartFilterPayload={chartFilterPayload}
+                            reportType={reportType}
+                            selectedTab={selectedTab}
+                            setDataFilterPayload={setChartDataFilterPayload}
+                            chartDataFilterPayload={chartDataFilterPayload}
                           />
                           : null
                       }
                       {
                         modalVisible && filterType === 'Chart Filter' ?
                           <ChartFilter
-                            filterType={filterType}
-                            filterTypes={filterTypes}
-                            setFilterType={setFilterType}
-                            filterTypemModalIsOpen={filterTypemModalIsOpen}
-                            setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
                             chartFilterPayload={chartFilterPayload}
                             reportType={reportType}
                             selectedTab={selectedTab}

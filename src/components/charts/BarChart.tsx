@@ -54,9 +54,7 @@ const BarChartData = ({ ReportData, yAxisName, xAxisName }: ChartItemProps) => {
       ],
     };
     setBarChartData(chartDataFormatted);
-    // console.log("chartDataFormatted", chartDataFormatted);
-    // console.log("dataValue", dataValue);
-    // console.log("colors", colors);
+   
   }, [ReportData]);
 
   return (

@@ -15,7 +15,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
-const IncidentActivityInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
+const IncidentActivityInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload }: ChartProp) => {
   {
     const [incidentActivityChartData, setIncidentActivityChartData] = useState<IncidentActivityData>({
       title: null,
@@ -28,17 +28,18 @@ const IncidentActivityInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
     const [totalValue, setTotalValue] = useState<number>(0);
     const [noDataAvailable, setNoDataAvailable] = useState<boolean>(false);
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-
-    let payLoad: IncidentActivityDataPayLoad = {
+    const [payLoad, setPayLoad] = useState<IncidentActivityDataPayLoad>({
       ...useCredential,
-      ...chartFilterPayload
-    }
+      ...chartFilterPayload,
+
+    });
+
 
     const navigateToChartList = (statusType: string, payLoad: IncidentActivityDataPayLoad) => {
       const payloadString = JSON.stringify(payLoad); // Stringify the payload here
       router.push({ pathname: `/chartReport/GetIncidentActivityDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
-    const handleGetIncidentActivityData = async () => {
+    const handleGetIncidentActivityData = async (payLoad: IncidentActivityDataPayLoad) => {
 
 
 
@@ -59,15 +60,17 @@ const IncidentActivityInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
       }
 
     }
+
     useEffect(() => {
-
-      payLoad = {
+      const updatedPayLoad = {
         ...useCredential,
-        ...chartFilterPayload
-      }
+        ...chartFilterPayload,
+        ...chartUserFilterPayload,
 
-      handleGetIncidentActivityData();
-    }, [chartFilterPayload]);
+      }
+      setPayLoad(updatedPayLoad)
+      handleGetIncidentActivityData(updatedPayLoad);
+    }, [chartFilterPayload, chartUserFilterPayload]);
 
     return (
       <View style={styles.chartContainer}>
@@ -116,13 +119,13 @@ const IncidentActivityInfo = ({ currentChart, chartFilterPayload }: ChartProp) =
                 </View>
               </View>
             </Card>
-           : (noDataAvailable) ?
-           <Card containerStyle={styles.cardContainer}>
-             <View>
-               <Text style={styles.title1}>{"No Data Available"}</Text>
-             </View>
-           </Card>
-           : <CardSkelton />
+            : (noDataAvailable) ?
+              <Card containerStyle={styles.cardContainer}>
+                <View>
+                  <Text style={styles.title1}>{"No Data Available"}</Text>
+                </View>
+              </Card>
+              : <CardSkelton />
         }
       </View>
     )

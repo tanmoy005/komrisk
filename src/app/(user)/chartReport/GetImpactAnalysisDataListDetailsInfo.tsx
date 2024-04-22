@@ -31,19 +31,13 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
     // Get the payload from the navigation params
     const { payload, statusType } = useLocalSearchParams();
     const filterStatus = typeof statusType === 'string' ? statusType : statusType[0];
-    //console.log("filterStatus",filterStatus)
-    //const payLoad: ActivityStatusDataListPayLoad = params;
-
     const getpayload = typeof payload === 'string' ? payload : payload[0];
-
-    console.log("payload got",getpayload)
 
 
     let parsedPayload;
     try {
       parsedPayload = JSON.parse(getpayload);
     } catch (error) {
-      console.error('Error parsing payload:', error);
       // Handle the error, e.g., set parsedPayload to an empty object or a default value
       parsedPayload = {};
     }
@@ -53,9 +47,6 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
       ...parsedPayload,
       impact: filterStatus
     };
-
-    console.log("Payload for list", payLoad);
-
 
     const handleGetImpactAnalysisDataList = async () => {
 

@@ -7,9 +7,6 @@ interface Response { data: any, error: any, status: number | null };
 
 const Server = async (payLoad: object, url: string, method: string, hasToken: boolean = true) => {
 
-    // const loginDataSlice = useSelector( (state) => state.loginDataSlice);
-    // //console.log("loginDataSlice", loginDataSlice);
-
     const baseUrl = await getDataFromAsyncStorage('baseUrl');
     const token = await getDataFromAsyncStorage('token');
     
@@ -17,7 +14,6 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
         // baseURL: "https://komrisknxtcont.komrisk.com/"
         baseURL: baseUrl
     });
-    // //console.log("url", url,baseUrl);
 
     const commonHeader = {
         "API-KEY": "1d339a8918bfd92522267f0dd76415f8",

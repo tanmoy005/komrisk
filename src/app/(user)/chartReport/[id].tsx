@@ -7,13 +7,8 @@ import GetIncidentDetails from '@/src/components/reports/reportDetails/GetIncide
 
 const ShowDetailsReport = () => {
 
-    const data=useLocalSearchParams();
+    const data = useLocalSearchParams();
     const { type, id, taskId } = data;
-    console.log("typeString", data);
-    console.log("typeString1", type);
-    console.log("typeString", id);
-
-    // const({typeString})=item
     const paramType = typeof type === 'string' ? type : type[0];
     const paramId = typeof id === 'string' ? id : id[0];
     const paramTaskId = typeof taskId === 'string' ? taskId : taskId[0];

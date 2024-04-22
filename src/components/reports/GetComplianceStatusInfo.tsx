@@ -37,14 +37,12 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilte
 
   const navigateToChartList = (statusType: string, payLoad: ComplianceStatusDataPayLoad) => {
     const payloadString = JSON.stringify(payLoad); // Stringify the payload here
-    console.log("parsedPayload", payloadString);
     router.push({ pathname: `/chartReport/GetComplianceStatusDataListDetailsInfo`, params: { statusType, payload: payloadString } });
   }
 
 
   const handleGetComplianceStatusData = async (payLoad: ComplianceStatusDataPayLoad) => {
-    console.log("payload", payLoad);
-
+    console.log('GetComplianceStatusData', payLoad);
     const { data, error, status } = await GetComplianceStatusData(payLoad);
     if (status === 200) {
       const { chartData, title, subTitle, yAxisName, xAxisName } = data;

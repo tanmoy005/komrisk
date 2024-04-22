@@ -15,7 +15,7 @@ import { Card, Text } from 'react-native-elements';
 import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
-const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
+const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload }: ChartProp) => {
   {
     const [activityStatusChartData, setActivityStatusChartData] = useState<ActivityStatusData>({
       title: null,
@@ -28,12 +28,12 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
     const [totalValue, setTotalValue] = useState<number>(0);
     const [noDataAvailable, setNoDataAvailable] = useState<boolean>(false);
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const filterPayload: ActivityStatusDataPayLoad = {
-      ...useCredential,
-      ...chartFilterPayload
-    }
-    console.log("chartFilterPayload", chartFilterPayload);
 
+    const [payLoad, setPayLoad] = useState<ActivityStatusDataPayLoad>({
+      ...useCredential,
+      ...chartFilterPayload,
+
+    });
     const navigateToChartList = (statusType: string, parsedPayload: ActivityStatusDataPayLoad) => {
 
       const payloadString = JSON.stringify(parsedPayload); // Stringify the payload here
@@ -60,14 +60,26 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
 
     }
     useEffect(() => {
-      const newfilterPayload: ActivityStatusDataPayLoad = {
+      const updatedPayLoad = {
         ...useCredential,
-        ...chartFilterPayload
+        ...chartFilterPayload,
+        ...chartUserFilterPayload,
+
       }
+      setPayLoad(updatedPayLoad)
+      handleGetActivityStatusData(updatedPayLoad);
+    }, [chartFilterPayload, chartUserFilterPayload]);
 
-      handleGetActivityStatusData(newfilterPayload);
-    }, [chartFilterPayload]);
+    useEffect(() => {
+      const updatedPayLoad = {
+        ...useCredential,
+        ...chartFilterPayload,
+        ...chartDataFilterPayload
 
+      }
+      setPayLoad(updatedPayLoad)
+      handleGetActivityStatusData(updatedPayLoad);
+    }, [chartDataFilterPayload]);
     return (
       <View style={styles.chartContainer}>
         {
@@ -94,7 +106,7 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
                 {filteredChartData && filteredChartData.map((label: ReportChartData, index) => {
                   return (
                     <Pressable key={index} style={{ flexDirection: 'row', alignItems: 'center' }}
-                      onPress={() => navigateToChartList(label?.link?.type ?? "", filterPayload)}
+                      onPress={() => navigateToChartList(label?.link?.type ?? "", payLoad)}
                     >
                       <FontAwesome
                         name="circle"

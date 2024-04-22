@@ -14,7 +14,6 @@ export const scaleCardSize = (size: number) => {
     return Math.round(size * scaleFactor);
 };
 
-console.log("screenWidth", screenWidth);
 export const smFont = 14;
 const circle1Size = Math.floor(screenWidth * .076);
 export const skeltonwidth = Math.floor(screenWidth * .82);

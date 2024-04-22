@@ -15,7 +15,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
-const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => {
+const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload }: ChartProp) => {
   {
     const [impactAnalysisChartData, setImpactAnalysisChartData] = useState<ImpactAnalysisData>({
       title: null,
@@ -28,11 +28,11 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
     const [noDataAvailable, setNoDataAvailable] = useState<boolean>(false);
     const [filteredChartData, setFilteredChartData] = useState<ReportChartData[]>([]);
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-
-    let payLoad: ImpactAnalysisDataPayLoad = {
+    const [payLoad, setPayLoad] = useState<ImpactAnalysisDataPayLoad>({
       ...useCredential,
-      ...chartFilterPayload
-    }
+      ...chartFilterPayload,
+
+    });
 
 
     const navigateToChartList = (statusType: string, payLoad: ImpactAnalysisDataPayLoad) => {
@@ -40,7 +40,7 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
       router.push({ pathname: `/chartReport/GetImpactAnalysisDataListDetailsInfo`, params: { statusType, payload: payloadString } });
     }
 
-    const handleGetImpactAnalysisData = async () => {
+    const handleGetImpactAnalysisData = async (payLoad: ImpactAnalysisDataPayLoad) => {
 
 
 
@@ -61,14 +61,27 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload }: ChartProp) => 
       }
 
     }
+
     useEffect(() => {
-      payLoad = {
+      const updatedPayLoad = {
         ...useCredential,
         ...chartFilterPayload,
-      }
-      handleGetImpactAnalysisData();
-    }, [chartFilterPayload]);
+        ...chartUserFilterPayload,
 
+      }
+      setPayLoad(updatedPayLoad)
+      handleGetImpactAnalysisData(updatedPayLoad);
+    }, [chartFilterPayload, chartUserFilterPayload]);
+
+    useEffect(() => {
+      const updatedPayLoad = {
+        ...useCredential,
+        ...chartFilterPayload,
+        ...chartDataFilterPayload
+      }
+      setPayLoad(updatedPayLoad)
+      handleGetImpactAnalysisData(updatedPayLoad);
+    }, [chartDataFilterPayload]);
     return (
       <View style={styles.chartContainer}>
         {

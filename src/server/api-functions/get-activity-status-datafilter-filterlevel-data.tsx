@@ -6,7 +6,6 @@ const GetActivityStatusDataFilterLevelData = async (payLoad: DataFilterLevelData
 
     const response = await Server(payLoad, url, 'POST');
 
-    //console.log("response**********",response)
 
     return response
 }

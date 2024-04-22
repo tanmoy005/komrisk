@@ -6,7 +6,7 @@ import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import Filter from "@/src/components/filter/Filter";
 import { useState } from "react";
 import moment from "moment";
-import { ChartFilterDataPayLoad } from "@/src/types";
+import { ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
 // const Product = products[3];
 
 const IncidentComparison = () => {
@@ -20,6 +20,10 @@ const IncidentComparison = () => {
     end: currentDate
 
   });
+  const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
+  const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
+
+
   return (
     <SafeAreaView style={styles.dashboardContainer}>
       <HeadImageSection />
@@ -30,13 +34,20 @@ const IncidentComparison = () => {
         setFilterType={setFilterType}
         reportType="INCIDENT"
         selectedTab = "incident_comparison"
-        setChartFilterPayload={setChartFilterPayload}
         chartFilterPayload={chartFilterPayload}
+        setChartFilterPayload={setChartFilterPayload}
+        chartUserFilterPayload={chartUserFilterPayload}
+        setChartUserFilterPayload={setChartUserFilterPayload}
+        chartDataFilterPayload={chartDataFilterPayload}
+        setChartDataFilterPayload={setChartDataFilterPayload}
       />
       <View style={styles.dashboardChartContainer}>
         <IncidentComparisonInfo
           currentChart={currentChart}
           chartFilterPayload={chartFilterPayload}
+          chartUserFilterPayload={chartUserFilterPayload}
+          chartDataFilterPayload={chartDataFilterPayload}
+
         />
       </View>
     </SafeAreaView>

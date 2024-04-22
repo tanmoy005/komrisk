@@ -33,9 +33,6 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
 
     const getpayload = typeof payload === 'string' ? payload : payload[0];
 
-    console.log("payload got",getpayload)
-
-
     let parsedPayload;
     try {
       parsedPayload = JSON.parse(getpayload);

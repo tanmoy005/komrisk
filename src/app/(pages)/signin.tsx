@@ -37,7 +37,6 @@ let SignIn = () => {
             password
         }
         const { data, error, status } = await AuthenticateUser(payLoad);
-        // //console.log('data', data, status);
 
         if (status === 200) {
             const { token, userDetails, countryEnabled } = data
@@ -63,9 +62,7 @@ let SignIn = () => {
         }
         const { data, error, status } = await GetUserAccessDetails(payLoad);
         if (status === 200) {
-            // console.log("--------------*************-----------------")
             const { countryEnabled, countryList, complianceViewAs, entityView } = data;
-            // console.log("**  countryEnabled   *", countryEnabled, countryList, complianceViewAs, entityView)
             dispatch(storeAuthUserAccessDetails({ countryEnabled, countryList, complianceViewAs, entityView }))
         } else {
             Alert.alert("error", "Invalid User Credentials");
@@ -79,9 +76,6 @@ let SignIn = () => {
         }
         const { data, error, status } = await GetIncidentAvailableViews(payLoad);
         if (status === 200) {
-            console.log("--------------*************-----------------")
-            // const { countryEnabled, countryList, complianceViewAs, entityView } = data;
-            console.log("**  countryEnabled   *", data)
             dispatch(storeIncidentAvailableViews(data))
         } else {
             Alert.alert("error", "Invalid User Credentials");

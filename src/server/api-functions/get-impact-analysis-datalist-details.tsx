@@ -6,8 +6,6 @@ const GetImpactAnalysisDataList = async (payLoad: ImpactAnalysisDataListPayLoad)
 
     const response = await Server(payLoad, url, 'POST');
 
-    console.log("response***************",response)
-
     return response
 }
 

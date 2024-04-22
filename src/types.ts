@@ -564,7 +564,7 @@ export interface ChartFilterDataPayLoad {
   start: string;
   end: string;
   viewAs: string;
-  countryName?: string;
+  // countryName?: string;
 }
 export interface ChartUserFilterDataPayLoad {
   filterLevel: string;
@@ -616,11 +616,7 @@ export interface CustomeDatePickerProps {
   date: Date | null
   label: string
 }
-export interface ChartFilterProps extends FilterTypeModalProps {
-  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 
-}
 export interface filterSelectProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -762,31 +758,29 @@ export interface FilterDropdownProps {
   handleOnpressFilterItem?: () => void;
 }
 
-export interface FilterTypeModalProps {
+
+interface BaseFilterModalProps {
   chartFilterPayload: ChartFilterDataPayLoad;
   reportType: string;
   selectedTab: string;
-  //modalVisible: boolean;
-  // setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  // setUserFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export interface ChartUserFilterModalProps {
-  chartFilterPayload: ChartFilterDataPayLoad;
-  reportType: string;
-  selectedTab: string;
+export interface ChartUserFilterModalProps extends BaseFilterModalProps {
+
   chartUserFilterPayload: ChartUserFilterDataPayLoad;
   setUserFilterPayload: React.Dispatch<React.SetStateAction<ChartUserFilterDataPayLoad>>;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export interface ChartDataFilterModalProps {
-  chartFilterPayload: ChartFilterDataPayLoad;
-  reportType: string;
-  selectedTab: string;
+export interface ChartDataFilterModalProps extends BaseFilterModalProps {
+
   chartDataFilterPayload: ChartDataFilterDataPayLoad;
   setDataFilterPayload: React.Dispatch<React.SetStateAction<ChartDataFilterDataPayLoad>>;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+
 }
+
+export interface ChartFilterProps extends BaseFilterModalProps {
+  setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
+}
+
 export interface FilterModalProps extends FilterDropdownProps {
   chartFilterPayload: ChartFilterDataPayLoad;
   setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
