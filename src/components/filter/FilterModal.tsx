@@ -20,6 +20,7 @@ const FilterModal = ({ setModalVisible,
   setFilterTypeModalIsOpen,
   chartFilterPayload,
   reportType,
+  setChartFilterPayload,
   selectedTab }: FilterModalProps) => {
 
 
@@ -97,6 +98,8 @@ const FilterModal = ({ setModalVisible,
                             chartFilterPayload={chartFilterPayload}
                             reportType={reportType}
                             selectedTab={selectedTab}
+                            setChartFilterPayload={setChartFilterPayload}
+                            setModalVisible={setModalVisible}
                           />
                           : null
                       }
