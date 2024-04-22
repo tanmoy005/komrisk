@@ -1,4 +1,7 @@
 import { PropsWithChildren, ReactNode } from "react";
+import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
 
 export type ChartDisplayData = {
   label: number;
@@ -563,6 +566,7 @@ export interface ChartFilterDataPayLoad {
 export interface DropDownItem {
   label: string | null | undefined;
   value: string | number | null | undefined;
+  icon?: ()=> JSX.Element
 }
 
 export interface Dropdown {
@@ -579,6 +583,8 @@ export const DefaultDropDownItem: DropDownItem = {
   label: "",
   value: ""
 }
+
+
 export interface FilterProps {
   currentChart: string;
   setCurrentChart: React.Dispatch<React.SetStateAction<string>>;
@@ -595,13 +601,12 @@ export interface ChartProp {
 export interface CustomeDatePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Date>>
   date: Date | null
+  label: string
 }
-export interface chartFilterProps {
-  chartFilterPayload: ChartFilterDataPayLoad
+export interface ChartFilterProps extends FilterTypeModalProps {
   setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
-  reportType: string
 
 }
 export interface filterSelectProps {
@@ -738,11 +743,7 @@ export interface DropDownListProps {
 export interface FilterDropdownProps {
   filterType: string;
   setFilterType: React.Dispatch<React.SetStateAction<string>>
-  filterTypes: {
-    label: string;
-    value: string;
-    icon: () => JSX.Element;
-  }[];
+  filterTypes: DropDownItem[];
   filterTypemModalIsOpen: boolean;
   setFilterTypeModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   labelPosition?: string;

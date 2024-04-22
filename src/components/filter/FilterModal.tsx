@@ -7,6 +7,7 @@ import { FilterModalProps } from '@/src/types';
 import ChartUserFilter from './ChartUserFilter';
 import { screenWidth, styles } from '@/src/style';
 import ChartDataFilter from './ChartDataFilter';
+import ChartFilter from './ChartFilter';
 
 
 const FilterModal = ({ setModalVisible,
@@ -74,6 +75,20 @@ const FilterModal = ({ setModalVisible,
 {
                         modalVisible && filterType === 'Chart Data' ?
                           <ChartDataFilter
+                            filterType={filterType}
+                            filterTypes={filterTypes}
+                            setFilterType={setFilterType}
+                            filterTypemModalIsOpen={filterTypemModalIsOpen}
+                            setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
+                            chartFilterPayload={chartFilterPayload}
+                            reportType={reportType}
+                            selectedTab={selectedTab}
+                          />
+                          : null
+                      }
+                      {
+                        modalVisible && filterType === 'Chart Filter' ?
+                          <ChartFilter
                             filterType={filterType}
                             filterTypes={filterTypes}
                             setFilterType={setFilterType}
