@@ -43,7 +43,9 @@ const FilterModal = ({ setModalVisible,
           <View style={styles.modalView}>
             <Pressable
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>X</Text>
+              <View style={styles.closeButton}>
+                <Text style={styles.textStyle}>X</Text>
+              </View>
             </Pressable>
             <View style={{ ...styles.dashboardContainer, marginTop: 23, width: (screenWidth * 0.75) }}>
               <View style={styles.chartContainer}>

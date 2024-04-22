@@ -351,6 +351,11 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     buttonOpen: {
         backgroundColor: '#F194FF',
     },
+    closeButton:{
+        height: scaleCardSize(44),
+        width: scaleCardSize(44),
+        // backgroundColor: 'red'
+    },
     textStyle: {
         color: 'rgba(38, 38, 44, 1)',
         textAlign: 'right',
