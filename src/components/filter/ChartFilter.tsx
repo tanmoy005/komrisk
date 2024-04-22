@@ -116,7 +116,7 @@ const ChartFilter = ({
     }
 
     return (
-        <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110, position: 'relative', justifyContent: 'space-between', backgroundColor: '#000'}}>
+        <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110, position: 'relative', justifyContent: 'space-between', backgroundColor: 'red', height: '100%'}}>
 
             <View style={{ zIndex: 2118, marginTop: 64 }}>
                 <View onLayout={handlesecondFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
