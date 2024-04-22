@@ -25,7 +25,7 @@ const Filter = (
         setChartFilterPayload, chartFilterPayload, filterType, setFilterType
     }: FilterProps): JSX.Element => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [filterModalVisible, setFilterModalVisible] = useState(false);
+    // const [filterModalVisible, setFilterModalVisible] = useState(false);
     // const [userfilterModalVisible, setUserFilterModalVisible] = useState(false);
     // const [userfilterlevelModalVisible, setUserFilterLevelModalVisible] = useState(false);
     const [filterTypemModal, setFilterTypeModal] = useState(false);
@@ -177,6 +177,7 @@ const Filter = (
                         chartFilterPayload={chartFilterPayload}
                         reportType={reportType}
                         selectedTab={selectedTab}
+                        setChartFilterPayload={setChartFilterPayload}
                     />
                     : null
             }
