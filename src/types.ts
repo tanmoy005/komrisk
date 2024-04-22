@@ -559,7 +559,7 @@ export interface ChartFilterDataPayLoad {
   start: string;
   end: string;
   viewAs: string;
-  // country: string;
+  countryName?: string;
 }
 
 
@@ -606,7 +606,6 @@ export interface CustomeDatePickerProps {
 export interface ChartFilterProps extends FilterTypeModalProps {
   setChartFilterPayload: React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
-  setFilterModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 
 }
 export interface filterSelectProps {
@@ -762,6 +761,7 @@ export interface FilterTypeModalProps extends FilterDropdownProps {
 
 export interface FilterModalProps extends FilterDropdownProps {
   chartFilterPayload: ChartFilterDataPayLoad;
+  setChartFilterPayload:  React.Dispatch<React.SetStateAction<ChartFilterDataPayLoad>>;
   reportType: string;
   selectedTab: string;
   modalVisible: boolean;
