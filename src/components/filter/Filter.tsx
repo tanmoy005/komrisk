@@ -1,20 +1,12 @@
 // ====================================== Updated on 16-04-2024 ======================================= //
 
 import { size12, size24, styles } from '@/src/style'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import DropDown from '../Dropdown';
-import { ChartFilterDataPayLoad, FilterProps } from '@/src/types';
-import { router } from 'expo-router';
-import CustomModal from '../CustomModal';
-import FilterScreen from '@/src/app/filterScreen';
-import ChartFilter from '@/src/app/chartFilterModal';
-import UserChartFilter from '@/src/app/userchartFilterModal';
+import { FilterProps } from '@/src/types';
 import { hasValue } from '@/src/utils';
-import ChartUserFilter from './ChartUserFilter';
-import FilterTypeModal from '@/src/app/filterTypeModal';
 import FilterModal from './FilterModal';
 import FilterDropdown from './FilterDropdown';
 
@@ -24,20 +16,12 @@ const Filter = (
         selectedTab, currentChart, setCurrentChart, reportType,
         setChartFilterPayload, chartFilterPayload, filterType, setFilterType
     }: FilterProps): JSX.Element => {
-    const [modalVisible, setModalVisible] = useState(false);
-    // const [filterModalVisible, setFilterModalVisible] = useState(false);
-    // const [userfilterModalVisible, setUserFilterModalVisible] = useState(false);
-    // const [userfilterlevelModalVisible, setUserFilterLevelModalVisible] = useState(false);
+ 
     const [filterTypemModal, setFilterTypeModal] = useState(false);
     const [filterTypemModalIsOpen, setFilterTypeModalIsOpen] = useState(false);
 
     console.log("3", chartFilterPayload);
     const filterList = [
-        {
-            iconName: 'filter',
-            Icon: MuiIcon,
-            handlePress: () => { setModalVisible(true); }
-        },
         {
             iconName: 'share',
             Icon: MuiIcon,
@@ -61,14 +45,6 @@ const Filter = (
         { label: 'Chart Filter', value: 'Chart Filter', icon: () => <MuiIcon name="filter" size={size24} color="rgba(160, 151, 220, 1)" /> }
     ];
 
-
-    // useEffect(() => {
-    //     console.log('filterType', filterType);
-
-    //     if (hasValue(filterType) && !filterTypemModal && filterTypemModalIsOpen) {
-    //         setFilterTypeModal(true);
-    //     }
-    // }, [filterType])
     const handleOnpressFilterItem = () => {
         setFilterTypeModal(true);
     }
@@ -113,56 +89,6 @@ const Filter = (
                     )
                 })
             }
-            {/* { setFilterPayload,reportType }: chartFilterProps */}
-            {/* {
-                modalVisible &&
-                <FilterModal
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                    component={
-                        <FilterScreen
-                            setModalVisible={setModalVisible}
-                            setFilterModalVisible={setFilterModalVisible}
-                            setUserFilterModalVisible={setUserFilterModalVisible}
-
-                        />}
-                />
-            } */}
-            {/* {
-                filterModalVisible &&
-                <CustomModal
-                    setModalVisible={setFilterModalVisible}
-                    modalVisible={filterModalVisible}
-                    component={
-                        <ChartFilter
-                            setModalVisible={setFilterModalVisible}
-                            setFilterModalVisible={setFilterModalVisible}
-                            setChartFilterPayload={setChartFilterPayload}
-                            chartFilterPayload={chartFilterPayload}
-                            reportType={reportType}
-                           
-                        />
-                    }
-                />
-            } */}
-            {/* {
-                userfilterModalVisible &&
-                <CustomModal
-                    setModalVisible={setUserFilterModalVisible}
-                    modalVisible={userfilterModalVisible}
-                    component={
-                        <UserChartFilter
-                            setModalVisible={setUserFilterModalVisible}
-                            setUserFilterModalVisible={setUserFilterModalVisible}
-                            setUserFilterLevelModalVisible={setUserFilterLevelModalVisible}
-                        setChartFilterPayload={setChartFilterPayload}
-                            chartFilterPayload={chartFilterPayload}
-                            reportType={reportType}
-                            selectedTab={selectedTab}
-                    />
-                    }
-                />
-            } */}
             {
                 filterTypemModal && hasValue(filterType) ?
 
@@ -181,22 +107,6 @@ const Filter = (
                     />
                     : null
             }
-            {/* {
-                filterTypemModal &&
-                <CustomModal
-                    setModalVisible={setFilterTypeModal}
-                    modalVisible={filterTypemModal}
-                    component={
-                        <FilterTypeModal
-                            filterType={filterType}
-                            filterTypes={filterTypes}
-                            setFilterType={setFilterType}
-                            filterTypemModalIsOpen={filterTypemModalIsOpen}
-                            setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
-                        />
-                    }
-                />
-            } */}
         </View>
     )
 }
