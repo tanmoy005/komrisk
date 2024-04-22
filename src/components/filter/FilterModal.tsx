@@ -6,6 +6,7 @@ import FilterDropdown from './FilterDropdown';
 import { FilterModalProps } from '@/src/types';
 import ChartUserFilter from './ChartUserFilter';
 import { screenWidth, styles } from '@/src/style';
+import ChartDataFilter from './ChartDataFilter';
 
 
 const FilterModal = ({ setModalVisible,
@@ -18,6 +19,9 @@ const FilterModal = ({ setModalVisible,
   chartFilterPayload,
   reportType,
   selectedTab }: FilterModalProps) => {
+
+
+    console.log("Filter Type",filterType)
 
   return (
     <View style={styles.centeredView}>
@@ -54,6 +58,22 @@ const FilterModal = ({ setModalVisible,
                       {
                         modalVisible && filterType === 'Chart User' ?
                           <ChartUserFilter
+                            filterType={filterType}
+                            filterTypes={filterTypes}
+                            setFilterType={setFilterType}
+                            filterTypemModalIsOpen={filterTypemModalIsOpen}
+                            setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
+                            chartFilterPayload={chartFilterPayload}
+                            reportType={reportType}
+                            selectedTab={selectedTab}
+                          />
+                          : null
+                      }
+
+
+{
+                        modalVisible && filterType === 'Chart Data' ?
+                          <ChartDataFilter
                             filterType={filterType}
                             filterTypes={filterTypes}
                             setFilterType={setFilterType}

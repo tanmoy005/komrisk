@@ -771,3 +771,52 @@ export interface FilterModalProps extends FilterDropdownProps {
 
 
 
+export interface DataFilterDataPayLoad {
+  username: string;
+  password: string;
+  start: string;
+  viewAs: string;
+  end: string;
+}
+
+
+
+export interface DataFilterLevelDataPayLoad extends DataFilterDataPayLoad {
+  filterType: string | null ;
+}
+
+
+
+export interface ActivityStatusDataFilterLevelData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: DataFilterReportChartData[] | null
+}
+
+
+export interface ComplianceStatusDataFilterLevelData {
+  title: string | null;
+
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: DataFilterReportChartData[] | null
+}
+
+
+
+export interface ImpactAnalysisDataFilterLevelData {
+  title: string | null;
+  subTitle: string | null;
+  xAxisName: string | null;
+  yAxisName: string | null;
+  chartData: DataFilterReportChartData[] | null
+}
+
+
+export interface DataFilterReportChartData {
+  label: string;
+  value: number;
+  dataFilter: any
+}
