@@ -86,7 +86,7 @@ const Filter = (
             {
                 filterList.map(({ iconName, Icon, handlePress }, index) => {
                     return (
-                        <View key={iconName} style={styles.filterIconContainer}>
+                        <View key={index} style={styles.filterIconContainer}>
                             <Pressable onPress={handlePress}>
                                 <View style={styles.filterIconBoxContainer}>
                                     <Icon name={iconName}
