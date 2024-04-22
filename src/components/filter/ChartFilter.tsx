@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ChartFilterProps, ComplianceView, DropDownItem, availableViews } from '@/src/types';
-import { screenWidth, size24, styles } from '@/src/style';
+import { scaleCardSize, screenWidth, size24, styles } from '@/src/style';
 import { RootState } from '@/src/store/rootReducer';
 import { DateFormatDDMMYYYY } from '@/src/utils';
 import { View } from 'react-native';
@@ -116,7 +116,7 @@ const ChartFilter = ({
     }
 
     return (
-        <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110, position: 'relative', justifyContent: 'space-between', backgroundColor: 'red', height: '100%'}}>
+        <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110, position: 'absolute', left: scaleCardSize(8), justifyContent: 'space-between', height: '100%'}}>
 
             <View style={{ zIndex: 2118, marginTop: 64 }}>
                 <View onLayout={handlesecondFieldLayout} style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>

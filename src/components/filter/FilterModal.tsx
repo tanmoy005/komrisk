@@ -8,6 +8,7 @@ import ChartUserFilter from './ChartUserFilter';
 import { screenWidth, styles } from '@/src/style';
 import ChartDataFilter from './ChartDataFilter';
 import ChartFilter from './ChartFilter';
+import Button from '../Button';
 
 
 const FilterModal = ({ setModalVisible,
@@ -22,7 +23,7 @@ const FilterModal = ({ setModalVisible,
   selectedTab }: FilterModalProps) => {
 
 
-    console.log("Filter Type",filterType)
+  console.log("Filter Type", filterType)
 
   return (
     <View style={styles.centeredView}>
@@ -42,9 +43,9 @@ const FilterModal = ({ setModalVisible,
             </Pressable>
             <View style={{ ...styles.dashboardContainer, marginTop: 23, width: (screenWidth * 0.75) }}>
               <View style={styles.chartContainer}>
-                <View style={{ ...styles.taskCard, borderWidth: 0, width: (screenWidth * 0.85), height: '100%', alignItems: 'stretch' }}>
-                  <CardContainer>
-                    <CardTextContainer styles={{ position: 'relative' }}>
+                <View style={{ ...styles.taskCard, position: 'relative', borderWidth: 0, width: (screenWidth * 0.85), height: '100%', alignItems: 'stretch' }}>
+                  <CardContainer >
+                    <CardTextContainer styles={{ position: 'relative', height: '100%' }}>
                       <View style={{ zIndex: 2119 }}>
                         <FilterDropdown
                           filterType={filterType}
@@ -71,8 +72,7 @@ const FilterModal = ({ setModalVisible,
                           : null
                       }
 
-
-{
+                      {
                         modalVisible && filterType === 'Chart Data' ?
                           <ChartDataFilter
                             filterType={filterType}
@@ -101,7 +101,7 @@ const FilterModal = ({ setModalVisible,
                           : null
                       }
                     </CardTextContainer>
-
+                   
                   </CardContainer>
                 </View>
               </View>
