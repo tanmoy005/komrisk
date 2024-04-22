@@ -247,6 +247,14 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         borderColor: '#000000',
         color: '#000000'
     },
+    datePickerLabelContainer:{
+        flexDirection: 'row',
+        paddingVertical: 0,
+        paddingHorizontal: 8,
+        backgroundColor: 'rgba(235, 246, 251, 1)',
+        height: 49.90,
+        alignItems: 'center',
+    },
     profileInputFieldContainer: {
         width: '75%'
     },
@@ -347,6 +355,12 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         color: 'rgba(38, 38, 44, 1)',
         textAlign: 'right',
         fontSize: scaleFontSize(14)
+    },
+    textStyle2:{
+       color:  'rgba(38, 38, 44, 1)',
+       fontSize: scaleFontSize(12),
+       fontWeight: '400',
+       lineHeight: 14
     },
     modalText: {
         marginBottom: 15,
