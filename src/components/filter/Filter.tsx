@@ -2,7 +2,7 @@
 
 import { size12, size24, styles } from '@/src/style'
 import React, { useState } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { Pressable, ScrollView, Text, View } from 'react-native'
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import { DefaultDropDownItem, DropDownItem, FilterProps } from '@/src/types';
@@ -110,69 +110,72 @@ const Filter = (
     }
 
     return (
-        <View style={styles.dashboardFilterContainer}>
-            <FilterDropdown
-                filterType={filterType}
-                filterTypes={filterTypes}
-                setFilterType={setFilterType}
-                filterTypemModalIsOpen={filterTypemModalIsOpen}
-                setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
-                handleOnpressFilterItem={handleOnpressFilterItem}
-            />
-            <View style={styles.filterBoxContainer}>
-                <CustomeDropDown
-                    selectedValue={currentChart}
-                    dropdownItems={chartItems}
-                    setSelectedValue={setCurrentChart}
-                    minWidth={75}
+        <ScrollView
+            horizontal>
+            <View style={styles.dashboardFilterContainer}>
+                <FilterDropdown
+                    filterType={filterType}
+                    filterTypes={filterTypes}
+                    setFilterType={setFilterType}
+                    filterTypemModalIsOpen={filterTypemModalIsOpen}
+                    setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
+                    handleOnpressFilterItem={handleOnpressFilterItem}
                 />
-                <Text style={{ marginTop: size12 }}>Chart Type</Text>
-            </View>
-            {
-                filterList.map(({ iconName, Icon, handlePress }, index) => {
-                    return (
-                        <View key={index} style={styles.filterIconContainer}>
-                            <Pressable onPress={handlePress}>
-                                <View style={styles.filterIconBoxContainer}>
-                                    <Icon name={iconName}
-                                        size={size24}
-                                        style={styles.filterIcon}
-                                    />
-                                </View>
-                            </Pressable>
-                            <Text
-                                style={{ marginTop: size12 }}
-                            >
-                                {iconName.charAt(0).toUpperCase() + iconName.slice(1).toLowerCase()}
-                            </Text>
-                        </View>
-                    )
-                })
-            }
-            {
-                filterTypemModal && hasValue(filterType) ?
-
-                    <FilterModal
-                        setModalVisible={setFilterTypeModal}
-                        modalVisible={filterTypemModal}
-                        filterType={filterType}
-                        filterTypes={filterTypes}
-                        setFilterType={setFilterType}
-                        filterTypemModalIsOpen={filterTypemModalIsOpen}
-                        setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
-                        reportType={reportType}
-                        selectedTab={selectedTab}
-                        handleOnpressFilterItem={handleOnpressFilterItem}
-                        setChartUserFilterPayload={setChartUserFilterPayload}
-                        chartUserFilterPayload={chartUserFilterPayload}
-                        setChartDataFilterPayload={setChartDataFilterPayload}
-                        chartDataFilterPayload={chartDataFilterPayload}
-                        setChartFilterPayload={setChartFilterPayload}
-                        chartFilterPayload={chartFilterPayload}
+                <View style={styles.filterBoxContainer}>
+                    <CustomeDropDown
+                        selectedValue={currentChart}
+                        dropdownItems={chartItems}
+                        setSelectedValue={setCurrentChart}
+                        minWidth={75}
                     />
-                    : null
-            }
-        </View>
+                    <Text style={{ marginTop: size12 }}>Chart Type</Text>
+                </View>
+                {
+                    filterList.map(({ iconName, Icon, handlePress }, index) => {
+                        return (
+                            <View key={index} style={styles.filterIconContainer}>
+                                <Pressable onPress={handlePress}>
+                                    <View style={styles.filterIconBoxContainer}>
+                                        <Icon name={iconName}
+                                            size={size24}
+                                            style={styles.filterIcon}
+                                        />
+                                    </View>
+                                </Pressable>
+                                <Text
+                                    style={{ marginTop: size12 }}
+                                >
+                                    {iconName.charAt(0).toUpperCase() + iconName.slice(1).toLowerCase()}
+                                </Text>
+                            </View>
+                        )
+                    })
+                }
+                {
+                    filterTypemModal && hasValue(filterType) ?
+
+                        <FilterModal
+                            setModalVisible={setFilterTypeModal}
+                            modalVisible={filterTypemModal}
+                            filterType={filterType}
+                            filterTypes={filterTypes}
+                            setFilterType={setFilterType}
+                            filterTypemModalIsOpen={filterTypemModalIsOpen}
+                            setFilterTypeModalIsOpen={setFilterTypeModalIsOpen}
+                            reportType={reportType}
+                            selectedTab={selectedTab}
+                            handleOnpressFilterItem={handleOnpressFilterItem}
+                            setChartUserFilterPayload={setChartUserFilterPayload}
+                            chartUserFilterPayload={chartUserFilterPayload}
+                            setChartDataFilterPayload={setChartDataFilterPayload}
+                            chartDataFilterPayload={chartDataFilterPayload}
+                            setChartFilterPayload={setChartFilterPayload}
+                            chartFilterPayload={chartFilterPayload}
+                        />
+                        : null
+                }
+            </View>
+        </ScrollView>
     )
 }
 
