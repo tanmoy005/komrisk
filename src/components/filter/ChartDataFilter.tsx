@@ -3,7 +3,7 @@ import GetComplianceStatusDataFilterLevelData from "@/src/server/api-functions/g
 import GetImpactAnalysisDataFilterLevelData from "@/src/server/api-functions/get-impact-analysis-datafilter-filterlevel-data";
 import GetComplianceDataFilterData from "@/src/server/api-functions/get-datafilter-compliance-data";
 import { RootState } from "@/src/store/rootReducer";
-import { ActivityStatusDataFilterLevelData, ComplianceStatusDataFilterLevelData, DropDownItem, FilterTypeModalProps, ImpactAnalysisDataFilterLevelData, DataFilterDataPayLoad, DataFilterLevelDataPayLoad, DataFilterReportChartData, DefaultDropDownItem, ChartDataFilterModalProps } from "@/src/types";
+import { ActivityStatusDataFilterLevelData, ComplianceStatusDataFilterLevelData, DropDownItem, ImpactAnalysisDataFilterLevelData, DataFilterDataPayLoad, DataFilterLevelDataPayLoad, DataFilterReportChartData, DefaultDropDownItem, ChartDataFilterModalProps } from "@/src/types";
 import { hasValue } from "@/src/utils";
 import { useEffect, useState } from "react";
 import { View } from "react-native";

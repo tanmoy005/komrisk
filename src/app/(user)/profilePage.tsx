@@ -18,9 +18,20 @@ import React, { useState } from 'react'
 import { Pressable, Text, useColorScheme } from 'react-native'
 import { Divider, Image } from 'react-native-elements'
 
+import AuthProvider, {AuthContext} from '../../provider/AuthProvider';
+import { router } from 'expo-router';
+
 const ProfilePage = () => {
   const colorScheme = useColorScheme();
   const [firstName, setFirstName] = useState<string>('test');
+  const { clearToken } = React.useContext(AuthContext);
+
+  const handleLogout = () => {
+    clearToken();
+    router.push('/(pages)')
+    
+    // Navigate to login or perform other actions
+  };
   return (
     <CardContainer3 styles={{
       backgroundColor: '#FFFFFF',
@@ -34,6 +45,7 @@ const ProfilePage = () => {
           text='Logout'
           btnColor='#5645C0'
           type='outline'
+          onPress={handleLogout}
           // onPress={() => router.push('/(user)/dashboard/complianceStatus')}
           style={{
             paddingVertical: Math.floor(screenWidth * 0.05),
