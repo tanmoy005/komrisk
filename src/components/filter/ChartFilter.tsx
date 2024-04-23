@@ -7,8 +7,8 @@ import { RootState } from '@/src/store/rootReducer';
 import { DateFormatDDMMYYYY, StringToDate, StringToDateDDMMYYYY, hasValue } from '@/src/utils';
 import { View } from 'react-native';
 import CustomDatePicker from '../CustomDatePicker';
-import DropDown from '../CustomeDropDown';
 import Button from '../Button';
+import CustomeDropDown from '../CustomeDropDown';
 
 const ChartFilter = ({
     chartFilterPayload,
@@ -17,11 +17,32 @@ const ChartFilter = ({
     setModalVisible
 }: ChartFilterProps) => {
 
+    // const countryDropdownLabel: DropDownItem = {
+    //     lable: 'Country', value: '', icon: () => <MuiIcon name="web" size={size24} color="rgba(160, 151, 220, 1)" />
+    // }
+    // const countryDropdownLabel: DropDownItem = {
+    //     lable: 'Country',
+    //     value: '',
+    //     image: {
+    //         uri: ''
+    //     }
+    // }
     const countryDropdownLabel: DropDownItem = {
-        label: 'Country', value: '', icon: () => <MuiIcon name="web" size={size24} color="rgba(160, 151, 220, 1)" />
+        lable: 'Country',
+        value: '',
+        image: {
+            uri: ''
+        }
     }
+    // const viewAsDropdownLabel: DropDownItem = {
+    //     lable: 'View As', value: '', icon: () => <MuiIcon name="earth" size={size24} color="rgba(160, 151, 220, 1)" />
+    // }
     const viewAsDropdownLabel: DropDownItem = {
-        label: 'View As', value: '', icon: () => <MuiIcon name="earth" size={size24} color="rgba(160, 151, 220, 1)" />
+        lable: 'View As',
+        value: '',
+        image: {
+            uri: ''
+        }
     }
 
     let filterCountrylist: DropDownItem[] = [countryDropdownLabel];
@@ -36,21 +57,37 @@ const ChartFilter = ({
     const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
 
     const { countryEnabled, countryList, complianceViewAs } = useAccessDetails;
+    console.log('useAccessDetails', useAccessDetails);
+    
+    
     if (countryEnabled) {
         const filteredCountryData: [number, string][] | null = countryList && countryList.filter((x: [number, string]) => x[0] !== null || x[1] !== null);
 
         if (filteredCountryData && filteredCountryData.length > 0) {
             filteredCountryData.forEach((subList: [number, string]) => {
-                filterCountrylist = [...filterCountrylist, { value: subList[0].toString(), label: subList[1] }];
+                filterCountrylist = [...filterCountrylist, {
+                    value: subList[0].toString(),
+                    lable: subList[1],
+                    image: {
+                        uri: ''
+                    }
+                }];
             });
         }
     }
+    console.log('filterCountrylist', filterCountrylist);
 
     if (reportType === "COMPLIANCE") {
         const filteredViewedAsData: ComplianceView[] | null = complianceViewAs && complianceViewAs.filter((x: ComplianceView) => x.key !== null || x.value !== null);
         if (filteredViewedAsData && filteredViewedAsData.length > 0) {
             filteredViewedAsData.forEach(({ value, key }: ComplianceView) => {
-                filterViewedAslist = [...filterViewedAslist, { value: value, label: key }];
+                filterViewedAslist = [...filterViewedAslist, {
+                    value: value,
+                    lable: key,
+                    image: {
+                        uri: ''
+                    }
+                }];
             });
         }
         // filterViewedAslist = filteredViewedAsData && filteredViewedAsData.length > 0 ? [...filterViewedAslist, ...filteredViewedAsData?.map((subList: ComplianceView) => {
@@ -61,13 +98,13 @@ const ChartFilter = ({
         const filteredViewedAsDataIncident: availableViews[] | null = useAvailableViews && useAvailableViews.filter((x: availableViews) => x.key !== null || x.value !== null);
         if (filteredViewedAsDataIncident && filteredViewedAsDataIncident.length > 0) {
             filteredViewedAsDataIncident.forEach((subList: availableViews) => {
-                filterViewedAslist = [...filterViewedAslist, { value: subList?.value ?? "", label: subList?.key ?? "" }];
+                filterViewedAslist = [...filterViewedAslist, { value: subList?.value ?? "", lable: subList?.key ?? "" }];
             });
         }
         // filterViewedAslist = filteredViewedAsDataIncident && filteredViewedAsDataIncident.length > 0 ? filteredViewedAsDataIncident?.map((subList: availableViews) => {
         //     return { value: subList?.value ?? "", label: subList?.key ?? "" };
         // }) : [countryDropdownLabel];
-        
+
     }
     console.log('filterViewedAslist', filterViewedAslist);
 
@@ -85,15 +122,15 @@ const ChartFilter = ({
         }
         if (hasValue(selectedCountry)) {
 
-            const { label: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
+            const { lable: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
             chartFilterPayload.country = _selectedCountry ?? "India";
         }
 
 
         chartFilterPayload.start = DateFormatDDMMYYYY(startDate && startDate.toString()) ?? "";
         chartFilterPayload.end = DateFormatDDMMYYYY(endDate.toString()) ?? "";
-        const { label: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
-        chartFilterPayload.countryName = selectedCountry;
+        const { lable: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
+        chartFilterPayload.country = selectedCountry;
         console.log('chartFilterPayload', chartFilterPayload);
 
         setChartFilterPayload({ ...chartFilterPayload });
@@ -119,7 +156,7 @@ const ChartFilter = ({
                     />
                 </View>
                 <View style={{ marginTop: 38, zIndex: 2120 }}>
-                    <DropDown
+                    <CustomeDropDown
                         dropdownItems={filterCountrylist}
                         selectedValue={selectedCountry}
                         setSelectedValue={setSelectedCountry}
@@ -127,7 +164,7 @@ const ChartFilter = ({
                     />
                 </View>
                 <View style={{ marginTop: 38, zIndex: 2119 }}>
-                    <DropDown
+                    <CustomeDropDown
                         dropdownItems={filterViewedAslist}
                         selectedValue={selectedViewAs}
                         setSelectedValue={setSelectedViewAs}

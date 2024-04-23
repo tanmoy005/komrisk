@@ -580,10 +580,33 @@ export interface ChartDataFilterDataPayLoad {
 //   icon?: () => JSX.Element
 // }
 export interface DropDownItem {
-  lable: string | null;
-  value: string  | null;
+  lable: string | null | undefined;
+  value: string  | null | undefined;
   image?: {
     uri: string;
+  }
+}
+export class DropdownItemClass {
+  constructor(public lable: string | undefined,  public value: string | undefined, public uri: string ) {
+    this.lable = lable;
+    this.value = value;
+    this.uri = uri;
+  }
+  createDropdownObject () :DropDownItem{
+    return {
+      lable: this.lable,
+      value: this.value,
+      image:{
+        uri: this.uri
+      }
+    }
+  }
+}
+
+
+export class CreateDropdownItem {
+  constructor() {
+    
   }
 }
 

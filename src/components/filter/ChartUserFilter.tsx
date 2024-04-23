@@ -6,14 +6,14 @@ import GetIncidentComparisonUserFilterLevelData from "@/src/server/api-functions
 import GetComplianceUserFilterData from "@/src/server/api-functions/get-userfilter-compliance-data";
 import GetIncidentUserFilterData from "@/src/server/api-functions/get-userfilter-incident-data";
 import { RootState } from "@/src/store/rootReducer";
-import { ActivityStatusUserFilterLevelData, ChartUserFilterModalProps, ComplianceStatusUserFilterLevelData, ComplianceUserFilterData, DropDownItem, ImpactAnalysisUserFilterLevelData, IncidentActivityUserFilterLevelData, IncidentComparisonUserFilterLevelData, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from "@/src/types";
+import { ActivityStatusUserFilterLevelData, ChartUserFilterModalProps, ComplianceStatusUserFilterLevelData, ComplianceUserFilterData, DropDownItem, DropdownItemClass, ImpactAnalysisUserFilterLevelData, IncidentActivityUserFilterLevelData, IncidentComparisonUserFilterLevelData, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from "@/src/types";
 import { hasValue } from "@/src/utils";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Alert } from "react-native";
 import { useSelector } from "react-redux";
-import DropDown from "../Dropdown";
 import Button from "../Button";
+import CustomeDropDown from "../CustomeDropDown";
 
 
 
@@ -33,7 +33,13 @@ const ChartUserFilter = ({
         subTitle: null,
         chartData: null
     });
-    const [firstFilterDropdown, setFirstFilterDropdown] = useState<DropDownItem[]>([{ label: '', value: '' }]);
+    const [firstFilterDropdown, setFirstFilterDropdown] = useState<DropDownItem[]>([{
+        lable: '',
+        value: '',
+        image: {
+            uri: ''
+        }
+    }]);
 
     const [incidentUserFilterChartData, setIncidentUserFilterChartData] = useState<IncidentUserFilterData>({
         title: null,
@@ -44,7 +50,7 @@ const ChartUserFilter = ({
     });
     const [filteredChartData, setFilteredChartData] = useState<UserFilterReportChartData[]>([]);
 
-    const [filteredLevelChartData, setFilteredLevelChartData] = useState<UserFilterReportChartData[]>([]);
+    const [filteredLevelChartData, setFilteredLevelChartData] = useState<DropDownItem[]>([]);
 
     const [activityStatusUserFilterLevelChartData, setActivityStatusUserFilterLevelChartData] = useState<ActivityStatusUserFilterLevelData>({
         title: null,
@@ -120,8 +126,11 @@ const ChartUserFilter = ({
             const filterDropdown = userfilteredchartData.map(({ displayValue, filterLevel }) => {
 
                 return {
-                    label: displayValue,
-                    value: filterLevel
+                    lable: displayValue,
+                    value: filterLevel?.toString(),
+                    image: {
+                        uri: ''
+                    }
                 }
             })
             setFilteredChartData(userfilteredchartData);
@@ -171,7 +180,13 @@ const ChartUserFilter = ({
             const userfilteredleveltData: UserFilterReportChartData[] = chartData && chartData.filter((x: UserFilterReportChartData) => x.label !== "NULL");
 
             const userfilteredlevelchartData = userfilteredleveltData && userfilteredleveltData.length > 0 ? userfilteredleveltData?.map((data) => {
-                return { value: data?.userFilter?.toString(), label: data.label, userFilter: data?.userFilter };
+                return { 
+                    value: data?.userFilter?.toString(),
+                     lable: data.label,  
+                     image: {
+                        uri: ''
+                     }
+                    };
             }) : [];
 
             setFilteredLevelChartData(userfilteredlevelchartData);
@@ -214,7 +229,7 @@ const ChartUserFilter = ({
     return (
         <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110 }}>
             <View style={{ zIndex: 2110 }}>
-                <DropDown
+                <CustomeDropDown
                     dropdownItems={firstFilterDropdown}
                     setSelectedValue={setSelectedFilterType1}
                     selectedValue={selectedFilterType1}
@@ -224,7 +239,7 @@ const ChartUserFilter = ({
             {
                 filteredLevelChartData.length > 0 &&
                 <View style={{ zIndex: 2108 }}>
-                    <DropDown
+                    <CustomeDropDown
                         dropdownItems={filteredLevelChartData}
                         setSelectedValue={setSelectedFilterType2}
                         selectedValue={selectedFilterType2}

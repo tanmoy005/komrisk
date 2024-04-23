@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Pressable, TextInput, View } from 'react-native';
+import { Button, Pressable, Text, TextInput, View } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { CustomeDatePickerProps } from '../types';
-import { styles } from '../style';
+import { size24, styles } from '../style';
 import { DateFormatDDMMYYYY } from '../utils';
+import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
-const CustomDatePicker = ({ setDate, date }: CustomeDatePickerProps): JSX.Element => {
+const CustomDatePicker = ({ setDate, date, label }: CustomeDatePickerProps): JSX.Element => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -27,12 +27,16 @@ const CustomDatePicker = ({ setDate, date }: CustomeDatePickerProps): JSX.Elemen
     <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
       {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
       <Pressable onPress={showDatePicker}>
-        <TextInput
+        {/* <TextInput
           style={{ ...styles.input, ...styles['inputType' + '3'] }}
           value={DateFormatDDMMYYYY(date && date.toString())}
           placeholder={'DD/MM/YYYY'}
           readOnly={true}
-        />
+        /> */}
+        <View style={styles.datePickerLabelContainer}>
+          <MuiIcon name="calendar" size={size24} color="rgba(120, 106, 205, 1)" />
+          <Text style={styles.textStyle2}>{label}</Text>
+        </View>
       </Pressable>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

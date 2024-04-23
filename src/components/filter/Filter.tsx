@@ -9,7 +9,7 @@ import { DefaultDropDownItem, DropDownItem, FilterProps } from '@/src/types';
 import { hasValue } from '@/src/utils';
 import FilterModal from './FilterModal';
 import FilterDropdown from './FilterDropdown';
-import DropDown from '../Dropdown';
+import CustomeDropDown from '../CustomeDropDown';
 
 
 const Filter = (
@@ -36,26 +36,71 @@ const Filter = (
     ];
 
     const chartItems = [
-        { label: 'PIE', value: 'PIE', icon: () => <MuiIcon name="chart-pie" size={size24} color="rgba(120, 106, 205, 1)" /> },
-        { label: 'BAR', value: 'BAR', icon: () => <MuiIcon name="chart-bar" size={size24} color="rgba(120, 106, 205, 1)" /> },
-        { label: 'DONUT', value: 'DONUT', icon: () => <MuiIcon name="chart-donut" size={size24} color="rgba(120, 106, 205, 1)" /> }
+        {
+            lable: 'PIE',
+            value: 'PIE',
+            image: {
+                uri: require('@/assets/images/Pie.png'),
+            }
+            // icon: () => <MuiIcon name="chart-pie" size={size24} color="rgba(120, 106, 205, 1)" />
+        },
+        {
+            lable: 'BAR',
+            value: 'BAR',
+            image: {
+                uri: require('@/assets/images/Graph.png'),
+            }
+            // icon: () => <MuiIcon name="chart-bar" size={size24} color="rgba(120, 106, 205, 1)" />
+        },
+        {
+            lable: 'DONUT',
+            value: 'DONUT',
+            image: {
+                uri: require('@/assets/images/Donut.png'),
+            }
+            // icon: () => <MuiIcon name="chart-donut" size={size24} color="rgba(120, 106, 205, 1)" />
+        }
     ];
 
     let filterTypes: DropDownItem[] = [DefaultDropDownItem];
 
     if (reportType === 'COMPLIANCE') {
         const filterTypesData = [
-            { label: 'Chart Data', value: 'Chart Data', icon: () => <MuiIcon name="filter" size={size24} color="rgba(160, 151, 220, 1)" /> },
-            { label: 'Chart User', value: 'Chart User', icon: () => <MuiIcon name="filter" size={size24} color="rgba(160, 151, 220, 1)" /> },
-            { label: 'Chart Filter', value: 'Chart Filter', icon: () => <MuiIcon name="filter" size={size24} color="rgba(160, 151, 220, 1)" /> },
+            {
+                lable: 'Chart Data', value: 'Chart Data',
+                image: {
+                    uri: ''
+                }
+            },
+            {
+                lable: 'Chart User', value: 'Chart User',
+                image: {
+                    uri: ''
+                }
+            },
+            {
+                lable: 'Chart Filter', value: 'Chart Filter',
+                image: {
+                    uri: ''
+                }
+            },
 
         ];
         filterTypes = filterTypesData;
     }
     if (reportType === 'INCIDENT') {
         const filterTypesData = [
-            { label: 'Chart User', value: 'Chart User', icon: () => <MuiIcon name="filter" size={size24} color="rgba(160, 151, 220, 1)" /> },
-            { label: 'Chart Filter', value: 'Chart Filter', icon: () => <MuiIcon name="filter" size={size24} color="rgba(160, 151, 220, 1)" /> }
+            {
+                lable: 'Chart User', value: 'Chart User',
+                image: {
+                    uri: ''
+                }
+            },
+            {
+                lable: 'Chart Filter', value: 'Chart Filter', image: {
+                    uri: ''
+                }
+            }
         ];
         filterTypes = filterTypesData;
     }
@@ -75,7 +120,7 @@ const Filter = (
                 handleOnpressFilterItem={handleOnpressFilterItem}
             />
             <View style={styles.filterBoxContainer}>
-                <DropDown
+                <CustomeDropDown
                     selectedValue={currentChart}
                     dropdownItems={chartItems}
                     setSelectedValue={setCurrentChart}

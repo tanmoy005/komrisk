@@ -289,18 +289,23 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         width: size136,
         alignItems: 'center',
         backgroundColor: 'rgba(235, 246, 251, 1)',
-        borderColor: 'rgba(235, 246, 251, 1)'
+        borderColor: 'rgba(235, 246, 251, 1)',
+        paddingHorizontal: 12,
+        paddingVertical: 3
     },
     dropdownListContainer: {
         borderWidth: 1,
         borderRadius: 5,
         borderColor: 'rgba(186, 186, 186, 1)',
-        maxHeight: 'auto'
+        maxHeight: 'auto',
+        paddingHorizontal: 16,
     },
     dropdownItemContainer: {
         flexDirection: 'row',
-        paddingHorizontal: 16,
-        paddingVertical: 9
+        // paddingHorizontal: 16,
+        paddingVertical: 9,
+        borderBottomWidth: 1,
+        borderColor: 'rgba(223, 223, 223, 1)'
     },
     dropdownItem: {
         flexDirection: 'row'
@@ -352,9 +357,9 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         backgroundColor: '#F194FF',
     },
     closeButton:{
-        height: scaleCardSize(44),
-        width: scaleCardSize(44),
-        // backgroundColor: 'red'
+        height: scaleCardSize(34),
+        width: scaleCardSize(34),
+        backgroundColor: 'red'
     },
     textStyle: {
         color: 'rgba(38, 38, 44, 1)',

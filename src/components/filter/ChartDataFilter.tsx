@@ -26,10 +26,16 @@ const ChartDataFilter = ({
     const [selectedFilterType1, setSelectedFilterType1] = useState('');
     const [selectedFilterType2, setSelectedFilterType2] = useState('');
 
-    const [firstFilterDropdown, setFirstFilterDropdown] = useState<DropDownItem[]>([{ label: '', value: '' }]);
+    const [firstFilterDropdown, setFirstFilterDropdown] = useState<DropDownItem[]>([{
+        lable: '',
+        value: '',
+        image: {
+            uri: ''
+        }
+    }]);
 
 
-    const [filteredLevelChartData, setFilteredLevelChartData] = useState<DataFilterReportChartData[]>([]);
+    const [filteredLevelChartData, setFilteredLevelChartData] = useState<DropDownItem[]>([]);
     const [activityStatusDataFilterLevelChartData, setActivityStatusDataFilterLevelChartData] = useState<ActivityStatusDataFilterLevelData>({
         title: null,
         subTitle: null,
@@ -82,8 +88,14 @@ const ChartDataFilter = ({
             setDataFilteredData(data);
             let filterDropdown: DropDownItem[] = [];
             data.forEach((item: string) => {
-                filterDropdown = [...filterDropdown, { label: item, value: item }];
-          });
+                filterDropdown = [...filterDropdown, {
+                    lable: item,
+                    value: item,
+                    image: {
+                        uri: ''
+                    }
+                }];
+            });
             setFirstFilterDropdown(filterDropdown);
 
         } else {
@@ -123,7 +135,13 @@ const ChartDataFilter = ({
             const datafilteredlevelchartData: DataFilterReportChartData[] = chartData && chartData.filter((x: DataFilterReportChartData) => x.label !== "NULL");
 
             const chartFilteredSecondLevelData = datafilteredlevelchartData && datafilteredlevelchartData.length > 0 ? datafilteredlevelchartData?.map((data) => {
-                return { value: data.dataFilter.toString(), label: data.label, dataFilter: data.dataFilter };
+                return {
+                    value: data.dataFilter.toString(),
+                    lable: data.label,
+                    image: {
+                        uri: ''
+                    }
+                };
             }) : [];
 
             setFilteredLevelChartData(chartFilteredSecondLevelData);
