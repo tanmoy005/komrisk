@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Alert } from "react-native";
 import { useSelector } from "react-redux";
-import DropDown from "../Dropdown";
+import DropDown from "../CustomeDropDown";
 import Button from "../Button";
 
 
@@ -80,10 +80,11 @@ const ChartDataFilter = ({
         if (status === 200) {
             const { chartData, title, subTitle } = data;
             setDataFilteredData(data);
-            const filterDropdown = data.map((item: string) => ({ label: item, value: item }));
+            let filterDropdown: DropDownItem[] = [];
+            data.forEach((item: string) => {
+                filterDropdown = [...filterDropdown, { label: item, value: item }];
+          });
             setFirstFilterDropdown(filterDropdown);
-
-
 
         } else {
             // Alert.alert("error", error.message);

@@ -7,7 +7,7 @@ import { RootState } from '@/src/store/rootReducer';
 import { DateFormatDDMMYYYY, StringToDate, StringToDateDDMMYYYY, hasValue } from '@/src/utils';
 import { View } from 'react-native';
 import CustomDatePicker from '../CustomDatePicker';
-import DropDown from '../Dropdown';
+import DropDown from '../CustomeDropDown';
 import Button from '../Button';
 
 const ChartFilter = ({
@@ -38,26 +38,38 @@ const ChartFilter = ({
     const { countryEnabled, countryList, complianceViewAs } = useAccessDetails;
     if (countryEnabled) {
         const filteredCountryData: [number, string][] | null = countryList && countryList.filter((x: [number, string]) => x[0] !== null || x[1] !== null);
-        filterCountrylist = filteredCountryData && filteredCountryData.length > 0 ? [...filterCountrylist, ...filteredCountryData?.map((subList: [number, string]) => {
-            return { value: subList[0].toString(), label: subList[1] };
-        })] : [...filterCountrylist];
 
+        if (filteredCountryData && filteredCountryData.length > 0) {
+            filteredCountryData.forEach((subList: [number, string]) => {
+                filterCountrylist = [...filterCountrylist, { value: subList[0].toString(), label: subList[1] }];
+            });
+        }
     }
 
     if (reportType === "COMPLIANCE") {
         const filteredViewedAsData: ComplianceView[] | null = complianceViewAs && complianceViewAs.filter((x: ComplianceView) => x.key !== null || x.value !== null);
-
-        filterViewedAslist = filteredViewedAsData && filteredViewedAsData.length > 0 ? [...filterViewedAslist, ...filteredViewedAsData?.map((subList: ComplianceView) => {
-            return { value: subList.value, label: subList.key };
-        })] : [...filterViewedAslist];
+        if (filteredViewedAsData && filteredViewedAsData.length > 0) {
+            filteredViewedAsData.forEach(({ value, key }: ComplianceView) => {
+                filterViewedAslist = [...filterViewedAslist, { value: value, label: key }];
+            });
+        }
+        // filterViewedAslist = filteredViewedAsData && filteredViewedAsData.length > 0 ? [...filterViewedAslist, ...filteredViewedAsData?.map((subList: ComplianceView) => {
+        //     return { value: subList.value, label: subList.key };
+        // })] : [...filterViewedAslist];
     }
     if (reportType === "INCIDENT") {
         const filteredViewedAsDataIncident: availableViews[] | null = useAvailableViews && useAvailableViews.filter((x: availableViews) => x.key !== null || x.value !== null);
-
-        filterViewedAslist = filteredViewedAsDataIncident && filteredViewedAsDataIncident.length > 0 ? filteredViewedAsDataIncident?.map((subList: availableViews) => {
-            return { value: subList?.value ?? "", label: subList?.key ?? "" };
-        }) : [countryDropdownLabel];
+        if (filteredViewedAsDataIncident && filteredViewedAsDataIncident.length > 0) {
+            filteredViewedAsDataIncident.forEach((subList: availableViews) => {
+                filterViewedAslist = [...filterViewedAslist, { value: subList?.value ?? "", label: subList?.key ?? "" }];
+            });
+        }
+        // filterViewedAslist = filteredViewedAsDataIncident && filteredViewedAsDataIncident.length > 0 ? filteredViewedAsDataIncident?.map((subList: availableViews) => {
+        //     return { value: subList?.value ?? "", label: subList?.key ?? "" };
+        // }) : [countryDropdownLabel];
+        
     }
+    console.log('filterViewedAslist', filterViewedAslist);
 
     const handleApplyFilters = () => {
         if (!hasValue(startDate)) {
@@ -80,6 +92,9 @@ const ChartFilter = ({
 
         chartFilterPayload.start = DateFormatDDMMYYYY(startDate && startDate.toString()) ?? "";
         chartFilterPayload.end = DateFormatDDMMYYYY(endDate.toString()) ?? "";
+        const { label: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
+        chartFilterPayload.countryName = selectedCountry;
+        console.log('chartFilterPayload', chartFilterPayload);
 
         setChartFilterPayload({ ...chartFilterPayload });
         setModalVisible(false);
@@ -117,6 +132,7 @@ const ChartFilter = ({
                         selectedValue={selectedViewAs}
                         setSelectedValue={setSelectedViewAs}
                         minWidth={160}
+
 
                     />
                 </View>

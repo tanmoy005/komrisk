@@ -574,13 +574,20 @@ export interface ChartDataFilterDataPayLoad {
   filterType: string;
 }
 
+// export interface DropDownItem {
+//   label: string | null | undefined;
+//   value: string | number | null | undefined;
+//   icon?: () => JSX.Element
+// }
 export interface DropDownItem {
-  label: string | null | undefined;
-  value: string | number | null | undefined;
-  icon?: () => JSX.Element
+  lable: string | null;
+  value: string  | null;
+  image?: {
+    uri: string;
+  }
 }
 
-export interface Dropdown {
+export interface DropdownProps {
   dropdownItems: DropDownItem[];
   setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
   selectedValue: any;
@@ -588,10 +595,11 @@ export interface Dropdown {
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   onpress?: () => void;
+  leftIcon?: () => JSX.Element;
 }
 
 export const DefaultDropDownItem: DropDownItem = {
-  label: "",
+  lable: "",
   value: ""
 }
 
