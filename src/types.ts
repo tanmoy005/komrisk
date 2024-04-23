@@ -108,7 +108,7 @@ export interface ActivityStatusDataPayLoad {
   username: string;
   password: string;
   start: string;
-  viewAs: string;
+  viewAs?: string;
   end: string;
 }
 
@@ -144,7 +144,7 @@ export interface ComplianceStatusDataListPayLoad {
   username: string;
   password: string;
   start: string;
-  viewAs: string;
+  viewAs?: string;
   end: string;
   comparison: string;
 }
@@ -152,7 +152,7 @@ export interface ComplianceStatusDataPayLoad {
   username: string;
   password: string;
   start: string;
-  viewAs: string;
+  viewAs?: string;
   end: string;
   filterLevel?: string;
   filterType?: string;
@@ -214,7 +214,7 @@ export interface IncidentActivityDataPayLoad {
   username: string;
   password: string;
   start: string;
-  viewAs: string;
+  viewAs?: string;
   end: string;
 }
 
@@ -250,7 +250,7 @@ export interface ImpactAnalysisDataPayLoad {
   username: string;
   password: string;
   start: string;
-  viewAs: string;
+  viewAs?: string;
   end: string;
 }
 
@@ -284,7 +284,7 @@ export interface IncidentComparisonDataPayLoad {
   username: string;
   password: string;
   start: string;
-  viewAs: string;
+  viewAs?: string;
   end: string;
 }
 
@@ -563,8 +563,8 @@ export interface FilterProps {
 export interface ChartFilterDataPayLoad {
   start: string;
   end: string;
-  viewAs: string;
-  // countryName?: string;
+  viewAs?: string;
+  country?: string;
 }
 export interface ChartUserFilterDataPayLoad {
   filterLevel: string;
@@ -646,7 +646,7 @@ export interface UserFilterDataPayLoad {
   username: string;
   password: string;
   start: string;
-  viewAs: string;
+  viewAs?: string;
   end: string;
 }
 
@@ -800,7 +800,7 @@ export interface DataFilterDataPayLoad {
   username: string;
   password: string;
   start: string;
-  viewAs: string;
+  viewAs?: string;
   end: string;
 }
 

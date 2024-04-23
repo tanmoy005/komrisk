@@ -16,8 +16,8 @@ const ComplianceStatus = () => {
   const [filterType, setFilterType] = useState<string>('Chart Data');
   const [chartFilterPayload, setChartFilterPayload] = useState<ChartFilterDataPayLoad>({
     start: startDate,
-    viewAs: "COMPANY EXECUTIVE",
-    end: currentDate
+    end: currentDate,
+    // viewAs: "COMPANY EXECUTIVE",
 
   });
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});

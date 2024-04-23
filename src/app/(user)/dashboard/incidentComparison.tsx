@@ -16,8 +16,8 @@ const IncidentComparison = () => {
   const [filterType, setFilterType] = useState<string>('Chart Data');
   const [chartFilterPayload, setChartFilterPayload] = useState<ChartFilterDataPayLoad>({
     start: startDate,
-    viewAs: "COMPANY HEAD",
-    end: currentDate
+    end: currentDate,
+    // viewAs: "COMPANY HEAD",
 
   });
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});

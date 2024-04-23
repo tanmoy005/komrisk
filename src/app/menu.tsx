@@ -3,7 +3,7 @@ import { Image, Platform, Pressable, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '@/src/components/EditScreenInfo';
 import { Text, View } from '@/src/components/Themed';
-import Button from '../components/Button';
+import Button from '@/src/components/Button';
 import { router } from 'expo-router';
 interface RedirectionButton {
   btnName: string;

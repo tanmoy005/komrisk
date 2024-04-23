@@ -4,7 +4,7 @@ import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ChartFilterProps, ComplianceView, DropDownItem, availableViews } from '@/src/types';
 import { scaleCardSize, size24 } from '@/src/style';
 import { RootState } from '@/src/store/rootReducer';
-import { DateFormatDDMMYYYY, hasValue } from '@/src/utils';
+import { DateFormatDDMMYYYY, StringToDate, StringToDateDDMMYYYY, hasValue } from '@/src/utils';
 import { View } from 'react-native';
 import CustomDatePicker from '../CustomDatePicker';
 import DropDown from '../Dropdown';
@@ -28,9 +28,9 @@ const ChartFilter = ({
     let filterViewedAslist: DropDownItem[] = [viewAsDropdownLabel];
 
     const [selectedCountry, setSelectedCountry] = useState<string>('');
-    const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload.viewAs);
-    const [startDate, setStartDate] = useState<Date>(new Date());
-    const [endDate, setEndDate] = useState<Date>(new Date());
+    const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload?.viewAs ?? "");
+    const [startDate, setStartDate] = useState<Date>(StringToDateDDMMYYYY(chartFilterPayload.start.trim()));
+    const [endDate, setEndDate] = useState<Date>(StringToDateDDMMYYYY(chartFilterPayload.end.trim()));
 
     const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
     const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
@@ -60,23 +60,27 @@ const ChartFilter = ({
     }
 
     const handleApplyFilters = () => {
-        if (!hasValue(selectedViewAs)) {
-            return;
-        }
         if (!hasValue(startDate)) {
             return;
         }
         if (!hasValue(endDate)) {
             return;
         }
-        // if (!hasValue(selectedCountry)) {
-        //     return setSelectedCountry("India");
-        // }
-        chartFilterPayload.viewAs = selectedViewAs;
+
+        if (hasValue(selectedViewAs)) {
+
+            chartFilterPayload.viewAs = selectedViewAs;
+        }
+        if (hasValue(selectedCountry)) {
+
+            const { label: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
+            chartFilterPayload.country = _selectedCountry ?? "India";
+        }
+
+
         chartFilterPayload.start = DateFormatDDMMYYYY(startDate && startDate.toString()) ?? "";
         chartFilterPayload.end = DateFormatDDMMYYYY(endDate.toString()) ?? "";
-        // const { label: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
-        // chartFilterPayload.countryName = selectedCountry;
+
         setChartFilterPayload({ ...chartFilterPayload });
         setModalVisible(false);
     }

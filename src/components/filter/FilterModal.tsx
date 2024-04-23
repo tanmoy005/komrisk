@@ -9,7 +9,7 @@ import { screenWidth, styles } from '@/src/style';
 import ChartDataFilter from './ChartDataFilter';
 import Button from '../Button';
 import ChartFilter from './ChartFilter';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const FilterModal = ({ setModalVisible,
   modalVisible,
@@ -43,9 +43,9 @@ const FilterModal = ({ setModalVisible,
           <View style={styles.modalView}>
             <Pressable
               onPress={() => setModalVisible(!modalVisible)}>
-              <View style={styles.closeButton}>
-                <Text style={styles.textStyle}>X</Text>
-              </View>
+              <Icon name="close"
+                size={25} color={"black"}
+              />
             </Pressable>
             <View style={{ ...styles.dashboardContainer, marginTop: 23, width: (screenWidth * 0.75) }}>
               <View style={styles.chartContainer}>

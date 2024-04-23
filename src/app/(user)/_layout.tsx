@@ -12,20 +12,20 @@ export default function TabTwoScreen() {
       backgroundColor: '#F6EEF4',
     },
     title: "dashboard",
-    headerTitleAlign:'center',
-    headerLeft: () =>
-      <Link href="/(pages)/signin" asChild>
-        <Pressable>
-          {({ pressed }) => (
-            <FontAwesome
-              name="sign-out"
-              size={25}
-              color={Colors[colorScheme ?? 'light'].text}
-              style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-            />
-          )}
-        </Pressable>
-      </Link>,
+    headerTitleAlign: 'center',
+    // headerLeft: () =>
+    //   <Link href="/(pages)/signin" asChild>
+    //     <Pressable>
+    //       {({ pressed }) => (
+    //         <FontAwesome
+    //           name="sign-out"
+    //           size={25}
+    //           color={Colors[colorScheme ?? 'light'].text}
+    //           style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+    //         />
+    //       )}
+    //     </Pressable>
+    //   </Link>,
     headerRight: () =>
       <Link href="/menu" asChild>
         <Pressable>
@@ -48,11 +48,11 @@ export default function TabTwoScreen() {
           backgroundColor: '#F6EEF4', // Change the background color here
         }
       }} />
-      <Stack.Screen name="chartReport" options={{ headerShown: false }} />
-      <Stack.Screen name="profilePage" options={{ title:"Profile", headerShown: true, headerTitleAlign:'center' }} />
-
-      {/* Add another screen below */}
-      {/* <Stack.Screen name='Notification'
+    <Stack.Screen name="chartReport" options={{ headerShown: false }} />
+    <Stack.Screen name="profilePage" options={{ title: "Profile", headerShown: true, headerTitleAlign: 'center' }} />
+    
+    {/* Add another screen below */}
+    {/* <Stack.Screen name='Notification'
         options={{
           title: "Notification",
           headerTitleAlign: 'center',
@@ -60,7 +60,7 @@ export default function TabTwoScreen() {
             backgroundColor: '#F6EEF4', // Change the background color here
           }
         }} /> */}
-    
+
   </Stack>;
 
 };
