@@ -14,6 +14,7 @@ import { storeAuthUserDetails } from '@/src/store/slices/auth-user-details-slice
 import GetIncidentAvailableViews from '@/src/server/api-functions/get-incident-available-views';
 import { storeIncidentAvailableViews } from '@/src/store/slices/incident-available-views-slice';
 import { RootState } from '@/src/store';
+import { screenWidth } from '@/src/style';
 // import { useDispatch } from 'react-redux';
 // import { storeLoginData } from '@/src/store/slices/login-data-slice';
 
@@ -87,7 +88,7 @@ let SignIn = () => {
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                <Image style={{ width: 100 }} source={require('@/assets/images/Komrisk-Logo-small.png')} />
+                <Image style={{ width: (screenWidth * 0.2333333333), height: (screenWidth * 0.06) }} source={require('@/assets/images/Small-logo.png')} />
             </View>
             <View style={styles.workSpaceImageContainer}>
                 <View style={styles.workspaceHeadingSection}>
