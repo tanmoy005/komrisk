@@ -63,7 +63,7 @@ export default function Menu() {
           text='Notifications'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.push('/Notification/')}
+          onPress={() => router.push('/notification/notification_tab/compliancesnotificationList')}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,

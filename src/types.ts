@@ -359,7 +359,21 @@ export interface taskCardData {
   }
 }
 
+export interface notificationCardListData{
+  firstSection: {
+    heading: string | null;
+    description: string | null;
+  },
 
+  secondSection: {
+    dateHeading: string | null;
+    date: string | null;
+    sectionRight?: {
+      dateHeading: string | null;
+      date: string | null;
+    }
+  }
+}
 export interface CompliancesItemDetailsPayLoad {
   username: string;
   password: string;
@@ -581,22 +595,22 @@ export interface ChartDataFilterDataPayLoad {
 // }
 export interface DropDownItem {
   lable: string | null | undefined;
-  value: string  | null | undefined;
+  value: string | null | undefined;
   image?: {
     uri: string;
   }
 }
 export class DropdownItemClass {
-  constructor(public lable: string | undefined,  public value: string | undefined, public uri: string ) {
+  constructor(public lable: string | undefined, public value: string | undefined, public uri: string) {
     this.lable = lable;
     this.value = value;
     this.uri = uri;
   }
-  createDropdownObject () :DropDownItem{
+  createDropdownObject(): DropDownItem {
     return {
       lable: this.lable,
       value: this.value,
-      image:{
+      image: {
         uri: this.uri
       }
     }
@@ -606,7 +620,7 @@ export class DropdownItemClass {
 
 export class CreateDropdownItem {
   constructor() {
-    
+
   }
 }
 
@@ -876,4 +890,21 @@ export interface DataFilterReportChartData {
   label: string;
   value: number;
   dataFilter: any
+}
+
+
+export interface NotificationListDataItem {
+  id: number;
+  complianceId: string | null;
+  complianceTitle: string | null;
+  complianceNo: string | null;
+  complianceNature: string | null;
+  updatedField: string | null;
+  oldValue: string | null;
+  newValue: string | null;
+  updatedOn: string | null;
+  status: string | null;
+  whatHasChanged: string | null;
+  lawNames: string | null;
+
 }
