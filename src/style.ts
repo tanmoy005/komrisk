@@ -23,8 +23,8 @@ const size33 = Math.floor(screenWidth * 0.09);
 const size13 = Math.floor(screenWidth * 0.03);
 const size15 = Math.floor(screenWidth * 0.04);
 const size39 = Math.floor(screenWidth * 0.01);
-export const filterIconBoxheight = Math.floor(screenWidth * 0.118);
-const filterIconBoxWidth = Math.floor(screenWidth * 0.125);
+export const filterIconBoxheight = Math.floor(screenWidth * 0.110);
+const filterIconBoxWidth = Math.floor(screenWidth * 0.120);
 export const size24 = Math.floor(screenWidth * 0.06);
 export const size136 = Math.floor(screenWidth * 0.314814814815);
 

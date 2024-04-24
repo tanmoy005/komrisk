@@ -110,8 +110,7 @@ const Filter = (
     }
 
     return (
-        <ScrollView
-            horizontal>
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal>
             <View style={styles.dashboardFilterContainer}>
                 <FilterDropdown
                     filterType={filterType}

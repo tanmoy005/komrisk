@@ -32,37 +32,39 @@ const IncidentActivity = () => {
     setChartFilterPayload(defaultFilterPayload)
     setRefreshing(true);
   }, []);
-  
+
   return (
     <SafeAreaView style={styles.dashboardContainer}>
       <HeadImageSection />
-      <Filter
-        currentChart={currentChart}
-        setCurrentChart={setCurrentChart}
-        filterType={filterType}
-        setFilterType={setFilterType}
-        reportType="INCIDENT"
-        selectedTab="incident_activity"
-        setChartFilterPayload={setChartFilterPayload}
-        chartFilterPayload={chartFilterPayload}
-        chartUserFilterPayload={chartUserFilterPayload}
-        setChartUserFilterPayload={setChartUserFilterPayload}
-        chartDataFilterPayload={chartDataFilterPayload}
-        setChartDataFilterPayload={setChartDataFilterPayload}
-      />
-      <ScrollView
-        contentContainerStyle={styles.dashboardChartContainer}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <IncidentActivityInfo
+      <View>
+        <Filter
           currentChart={currentChart}
+          setCurrentChart={setCurrentChart}
+          filterType={filterType}
+          setFilterType={setFilterType}
+          reportType="INCIDENT"
+          selectedTab="incident_activity"
+          setChartFilterPayload={setChartFilterPayload}
           chartFilterPayload={chartFilterPayload}
           chartUserFilterPayload={chartUserFilterPayload}
+          setChartUserFilterPayload={setChartUserFilterPayload}
           chartDataFilterPayload={chartDataFilterPayload}
-          setRefreshing={setRefreshing}
+          setChartDataFilterPayload={setChartDataFilterPayload}
         />
-      </ScrollView>
+        <ScrollView
+          contentContainerStyle={styles.dashboardChartContainer}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
+          <IncidentActivityInfo
+            currentChart={currentChart}
+            chartFilterPayload={chartFilterPayload}
+            chartUserFilterPayload={chartUserFilterPayload}
+            chartDataFilterPayload={chartDataFilterPayload}
+            setRefreshing={setRefreshing}
+          />
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

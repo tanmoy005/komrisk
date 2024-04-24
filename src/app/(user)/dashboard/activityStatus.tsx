@@ -36,33 +36,36 @@ const ActivityStatus = () => {
   return (
     <SafeAreaView style={styles.dashboardContainer}>
       <HeadImageSection />
-      <Filter
-        currentChart={currentChart}
-        setCurrentChart={setCurrentChart}
-        filterType={filterType}
-        setFilterType={setFilterType}
-        reportType="COMPLIANCE"
-        selectedTab="activity_status"
-        setChartFilterPayload={setChartFilterPayload}
-        chartFilterPayload={chartFilterPayload}
-        chartUserFilterPayload={chartUserFilterPayload}
-        setChartUserFilterPayload={setChartUserFilterPayload}
-        chartDataFilterPayload={chartDataFilterPayload}
-        setChartDataFilterPayload={setChartDataFilterPayload}
-      />
-      <ScrollView
-        contentContainerStyle={styles.dashboardChartContainer}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <ActivityStatusInfo
+      <View>
+        <Filter
           currentChart={currentChart}
+          setCurrentChart={setCurrentChart}
+          filterType={filterType}
+          setFilterType={setFilterType}
+          reportType="COMPLIANCE"
+          selectedTab="activity_status"
+          setChartFilterPayload={setChartFilterPayload}
           chartFilterPayload={chartFilterPayload}
           chartUserFilterPayload={chartUserFilterPayload}
+          setChartUserFilterPayload={setChartUserFilterPayload}
           chartDataFilterPayload={chartDataFilterPayload}
-          setRefreshing={setRefreshing}
+          setChartDataFilterPayload={setChartDataFilterPayload}
         />
-      </ScrollView>
+
+        <ScrollView
+          contentContainerStyle={styles.dashboardChartContainer}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
+          <ActivityStatusInfo
+            currentChart={currentChart}
+            chartFilterPayload={chartFilterPayload}
+            chartUserFilterPayload={chartUserFilterPayload}
+            chartDataFilterPayload={chartDataFilterPayload}
+            setRefreshing={setRefreshing}
+          />
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
