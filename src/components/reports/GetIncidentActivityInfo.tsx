@@ -5,7 +5,7 @@ import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/rootReducer';
+import { RootState } from '@/src/store';
 import DonatChartData from '../charts/DonatChart';
 import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
@@ -15,7 +15,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
-const IncidentActivityInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload }: ChartProp) => {
+const IncidentActivityInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload , setRefreshing}: ChartProp) => {
   {
     const [incidentActivityChartData, setIncidentActivityChartData] = useState<IncidentActivityData>({
       title: null,
@@ -50,6 +50,7 @@ const IncidentActivityInfo = ({ currentChart, chartFilterPayload, chartUserFilte
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
+        setRefreshing(false);
         if (filteredchartData.length <= 0) {
           setNoDataAvailable(true);
         }

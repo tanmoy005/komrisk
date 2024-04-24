@@ -1,15 +1,16 @@
-import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
+import { FlatList, Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 
 import ImpactAnalysisInfo from "@/src/components/reports/GetImpactAnalysisInfo";
 import { styles } from "@/src/style";
 import Filter from "@/src/components/filter/Filter";
-import { useState } from "react";
+import React, { useState } from "react";
 import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import moment from "moment";
 import { ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
 // const Product = products[3];
 
 const ImpactAnalysis = () => {
+  const [refreshing, setRefreshing] = useState(true);
   const currentDate: string = moment().format('DD/MM/YYYY');
   const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
   const [currentChart, setCurrentChart] = useState<string>('PIE');
@@ -22,6 +23,16 @@ const ImpactAnalysis = () => {
   });
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
   const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
+
+  const onRefresh = React.useCallback(() => {
+    const defaultFilterPayload: ChartFilterDataPayLoad = {
+      start: startDate,
+      end: currentDate,
+    }
+    setChartFilterPayload(defaultFilterPayload)
+    setRefreshing(true);
+  }, []);
+
 
   return (
     <SafeAreaView style={styles.dashboardContainer}>
@@ -40,15 +51,19 @@ const ImpactAnalysis = () => {
         chartDataFilterPayload={chartDataFilterPayload}
         setChartDataFilterPayload={setChartDataFilterPayload}
       />
-      <View style={styles.dashboardChartContainer}>
+      <ScrollView
+        contentContainerStyle={styles.dashboardChartContainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <ImpactAnalysisInfo
           currentChart={currentChart}
           chartFilterPayload={chartFilterPayload}
           chartUserFilterPayload={chartUserFilterPayload}
           chartDataFilterPayload={chartDataFilterPayload}
-
+          setRefreshing={setRefreshing}
         />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

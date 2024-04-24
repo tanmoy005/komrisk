@@ -6,7 +6,6 @@ import { UserModel } from '@/src/types';
 import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/src/store/rootReducer';
 import { storeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice';
 import Button from '@/src/components/Button';
 import GetUserAccessDetails from '@/src/server/api-functions/user-access-details';
@@ -14,6 +13,7 @@ import { storeAuthUserAccessDetails } from '@/src/store/slices/auth-user-access-
 import { storeAuthUserDetails } from '@/src/store/slices/auth-user-details-slice';
 import GetIncidentAvailableViews from '@/src/server/api-functions/get-incident-available-views';
 import { storeIncidentAvailableViews } from '@/src/store/slices/incident-available-views-slice';
+import { RootState } from '@/src/store';
 // import { useDispatch } from 'react-redux';
 // import { storeLoginData } from '@/src/store/slices/login-data-slice';
 

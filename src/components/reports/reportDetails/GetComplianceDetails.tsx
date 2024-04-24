@@ -1,12 +1,12 @@
 import GetCompliancesItemDetails from '@/src/server/api-functions/get_compliances_item_details';
-import { RootState } from '@/src/store/rootReducer';
+import { RootState } from '@/src/store';
 import { CompliancesItemDetails, CompliancesItemDetailsPayLoad, CompliancesItemDetailsResponse } from '@/src/types';
 import React, { useEffect, useState } from 'react'
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
-import CustomeCard from '../../cards/CustomeCard';
 import TaskItemDetails from '../../task/TaskItemDetails';
 import CardSkelton from '../../skelton/CardSkelton';
+import CustomeCard from '../../cards/CustomeCard';
 interface ComplianceDetailsProps {
     complianceId: string
 }

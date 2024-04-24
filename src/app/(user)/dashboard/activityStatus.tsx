@@ -1,18 +1,16 @@
-import { FlatList, Image, SafeAreaView, StyleSheet, View } from "react-native";
+import { FlatList, Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import ActivityStatusInfo from "@/src/components/reports/GetActivityStatusInfo";
 import { styles } from "@/src/style";
 import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import Filter from "@/src/components/filter/Filter";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityStatusDataPayLoad, ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
-import { useSelector } from "react-redux";
-import { RootState } from "@/src/store/rootReducer";
 import moment from "moment";
 // const Product = products[3];
 
 const ActivityStatus = () => {
 
-
+  const [refreshing, setRefreshing] = useState(true);
   const currentDate: string = moment().format('DD/MM/YYYY');
   const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
   const [currentChart, setCurrentChart] = useState<string>('PIE');
@@ -25,6 +23,16 @@ const ActivityStatus = () => {
   });
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
   const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
+
+  const onRefresh = React.useCallback(() => {
+    const defaultFilterPayload: ChartFilterDataPayLoad = {
+      start: startDate,
+      end: currentDate,
+    }
+    setChartFilterPayload(defaultFilterPayload)
+    setRefreshing(true);
+  }, []);
+
   return (
     <SafeAreaView style={styles.dashboardContainer}>
       <HeadImageSection />
@@ -42,14 +50,19 @@ const ActivityStatus = () => {
         chartDataFilterPayload={chartDataFilterPayload}
         setChartDataFilterPayload={setChartDataFilterPayload}
       />
-      <View style={styles.dashboardChartContainer}>
+      <ScrollView
+        contentContainerStyle={styles.dashboardChartContainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <ActivityStatusInfo
           currentChart={currentChart}
           chartFilterPayload={chartFilterPayload}
           chartUserFilterPayload={chartUserFilterPayload}
           chartDataFilterPayload={chartDataFilterPayload}
+          setRefreshing={setRefreshing}
         />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

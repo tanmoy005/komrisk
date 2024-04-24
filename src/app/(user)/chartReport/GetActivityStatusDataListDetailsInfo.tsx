@@ -4,7 +4,7 @@ import GetActivityStatusDataList from '@/src/server/api-functions/get-activity-s
 import { ActivityStatusDataList, ActivityStatusDataListPayLoad, ChartListDataItem } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/src/store/rootReducer';
+import { RootState } from '@/src/store';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';

@@ -1,5 +1,5 @@
 import GetIncidentTaskDataDetails from '@/src/server/api-functions/get-incident-task-data-details';
-import { RootState } from '@/src/store/rootReducer';
+import { RootState } from '@/src/store';
 import { DefaultIncidentItemDetailsResponse, IncidentItemDetailsPayLoad, IncidentItemDetailsResponse } from '@/src/types';
 import React, { useEffect, useState } from 'react'
 import { Alert } from 'react-native';

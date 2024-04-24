@@ -6,7 +6,7 @@ import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/rootReducer';
+import { RootState } from '@/src/store';
 import DonatChartData from '../charts/DonatChart';
 import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
@@ -17,7 +17,7 @@ import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
 
 
-const IncidentComparisonInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload }: ChartProp) => {
+const IncidentComparisonInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, setRefreshing }: ChartProp) => {
   {
     const [incidentComparisonChartData, setIncidentComparisonChartData] = useState<IncidentComparisonData>({
       title: null,
@@ -51,6 +51,7 @@ const IncidentComparisonInfo = ({ currentChart, chartFilterPayload, chartUserFil
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
+        setRefreshing(false);
         if (filteredchartData.length <= 0) {
           setNoDataAvailable(true);
         }

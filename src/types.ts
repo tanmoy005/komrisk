@@ -641,6 +641,7 @@ export interface ChartProp {
   chartFilterPayload: ChartFilterDataPayLoad;
   chartUserFilterPayload: ChartUserFilterDataPayLoad;
   chartDataFilterPayload: ChartDataFilterDataPayLoad;
+  setRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export interface CustomeDatePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Date>>

@@ -35,7 +35,7 @@
 //       });
 //     }
 //     const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    
+
 //     let finalStatus = existingStatus;
 //     if (existingStatus !== "granted") {
 //       const { status } = await Notifications.requestPermissionsAsync();
@@ -111,7 +111,7 @@
 //   );
 // }
 
-import { Button, Text, View,Platform } from "react-native";
+import { Button, Text, View, Platform } from "react-native";
 import { useState, useEffect } from "react";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
@@ -124,15 +124,16 @@ Notifications.setNotificationHandler({
   }),
 });
 
+
 export default function PushNotificationExample() {
-  const [expoPushToken, setExpoPushToken] = useState("");
+  const [expoPushToken, setExpoPushToken] = useState<string>("");
 
   useEffect(() => {
     console.log("Registering for push notifications...");
     registerForPushNotificationsAsync()
       .then((token) => {
         console.log("token: ", token);
-        setExpoPushToken(token);
+        setExpoPushToken(token ?? "");
       })
       .catch((err) => console.log(err));
   }, []);
@@ -181,7 +182,7 @@ export default function PushNotificationExample() {
   const sendNotification = async () => {
     console.log("Sending push notification...");
 
-    
+
 
     // notification message
     const message = {

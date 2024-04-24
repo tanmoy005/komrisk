@@ -79,10 +79,12 @@ import React, { useEffect } from 'react';
 
 import { useColorScheme } from '@/src/components/useColorScheme';
 import { Provider } from 'react-redux';
-import store from '../store';
+// import store from '../store';
 
 
 import AuthProvider, { AuthContext } from '../provider/AuthProvider';
+import { persistor, store } from '../store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -134,21 +136,25 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
+    // <Provider store={store}>
     <Provider store={store}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <AuthProvider>
-          <Stack screenOptions={{
-            headerStyle: {
-              backgroundColor: '#F6EEF4'
-            }
-          }}>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="(pages)" options={{ headerShown: false }} />
-            <Stack.Screen name="(user)" options={{ headerShown: false }} />
-            <Stack.Screen name="menu" options={{ title: "Profile", headerShown: true, headerTitleAlign: 'center', presentation: 'modal' }} />
-          </Stack>
-        </AuthProvider>
-      </ThemeProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <AuthProvider>
+            <Stack screenOptions={{
+              headerStyle: {
+                backgroundColor: '#F6EEF4'
+              }
+            }}>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="(pages)" options={{ headerShown: false }} />
+              <Stack.Screen name="(user)" options={{ headerShown: false }} />
+              <Stack.Screen name="menu" options={{ title: "Profile", headerShown: true, headerTitleAlign: 'center', presentation: 'modal' }} />
+              <Stack.Screen name="Notification" options={{ headerShown: false }} />
+            </Stack>
+          </AuthProvider>
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   );
 }

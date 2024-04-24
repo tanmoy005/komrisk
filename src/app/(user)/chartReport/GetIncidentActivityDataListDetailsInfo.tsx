@@ -5,7 +5,7 @@ import { IncidentActivityDataList, IncidentActivityDataListPayLoad, IncidentChar
 import { useLocalSearchParams } from 'expo-router';
 import GetIncidentActivityDataList from '@/src/server/api-functions/get-incident-activity-datalist-details';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/src/store/rootReducer';
+import { RootState } from '@/src/store';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import IncidentTaskDetails from '@/src/components/task/IncidentTaskDetails';

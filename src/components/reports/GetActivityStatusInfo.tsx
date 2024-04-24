@@ -5,7 +5,6 @@ import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/rootReducer';
 import { router } from 'expo-router';
 import BarChartData from '../charts/BarChart';
 import DonatChartData from '../charts/DonatChart';
@@ -14,8 +13,9 @@ import { styles } from '../../style';
 import { Card, Text } from 'react-native-elements';
 import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
+import { RootState } from '@/src/store';
 
-const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload }: ChartProp) => {
+const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload, setRefreshing }: ChartProp) => {
   {
     const [activityStatusChartData, setActivityStatusChartData] = useState<ActivityStatusData>({
       title: null,
@@ -49,6 +49,7 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterP
 
         const filteredchartData: ReportChartData[] = chartData && chartData.filter((x: ReportChartData) => x.label !== "NULL" || x.color !== null);
         setFilteredChartData(filteredchartData);
+        setRefreshing(false);
         if (filteredchartData.length <= 0) {
           setNoDataAvailable(true);
         }

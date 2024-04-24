@@ -1,6 +1,7 @@
 import { Link, Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import { Text, View } from '@/src/components/Themed';
+import PushNotificationExample from '../../Notification/PushNotificationExample';
 
 export default function NotFoundScreen() {
   return (
@@ -9,6 +10,7 @@ export default function NotFoundScreen() {
       <View style={styles.container}>
         <Text style={styles.title}>This screen is under construction.</Text>
 
+        <PushNotificationExample />
         <Link href="/" style={styles.link}>
           <Text style={styles.linkText}>Go to home screen!</Text>
         </Link>

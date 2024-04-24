@@ -6,10 +6,10 @@ import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
 import { useLocalSearchParams } from 'expo-router';
 import GetImpactAnalysisDataList from '@/src/server/api-functions/get-impact-analysis-datalist-details';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/src/store/rootReducer';
 import moment from 'moment';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
+import { RootState } from '@/src/store';
 
 
 

@@ -50,7 +50,7 @@ const CustomeDropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWi
       renderLeftIcon={() => {
         if (typeof image?.uri === 'string') {
           return <Image
-            source={image.uri}
+            // source={image.uri}
             style={[styles.image]}
           />
         } else {

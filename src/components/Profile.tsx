@@ -7,7 +7,7 @@ import Text1 from './headings/Label1'
 import InputField from './input-fields/InputField'
 import Button from './Button'
 import { useSelector } from 'react-redux'
-import { RootState } from '../store/rootReducer'
+import { RootState } from '@/src/store';
 
 const Profile = () => {
   const { userDetails, countryEnabled } = useSelector((state: RootState) => state.authUserDetails.payload);

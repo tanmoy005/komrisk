@@ -5,7 +5,7 @@ import { IncidentChartListDataItem, IncidentComparisonDataList, IncidentComparis
 import { useLocalSearchParams } from 'expo-router';
 import GetIncidentComparisonDataList from '@/src/server/api-functions/get-incident-comparison-datalist-details';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/src/store/rootReducer';
+import { RootState } from '@/src/store';
 import moment from 'moment';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';

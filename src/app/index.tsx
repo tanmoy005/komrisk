@@ -16,7 +16,6 @@
 import React from 'react';
 import Workspace from './(pages)';
 import { Provider } from 'react-redux';
-import store from '../store';
 // import store from '../store';
 import AuthProvider, {AuthContext} from '../provider/AuthProvider';
 //import ComplianceStatus from './(user)/dashboard/complianceStatus';
