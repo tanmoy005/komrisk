@@ -596,6 +596,7 @@ export interface ChartDataFilterDataPayLoad {
 export interface DropDownItem {
   lable: string | null | undefined;
   value: string | null | undefined;
+
   image?: {
     uri: string;
   }
@@ -907,4 +908,12 @@ export interface NotificationListDataItem {
   whatHasChanged: string | null;
   lawNames: string | null;
 
+}
+
+export interface BtnFilterHeaderProps {
+
+  firstBtnName: string;
+  fistBtnOnpress: () => void;
+  secondBtnName: string;
+  secondBtnOnpress: () => void;
 }
