@@ -49,7 +49,7 @@ export interface ChartListDataItem {
   taskId: number;
   complianceGenId: string | null;
 }
-export interface PendinTask {
+export interface PendingTask {
   mapId: number;
   complianceId: number;
   title: string | null;
@@ -967,4 +967,19 @@ export interface BtnFilterHeaderProps {
   fistBtnOnpress: () => void;
   secondBtnName: string;
   secondBtnOnpress: () => void;
+}
+
+export interface ProofListPayload {
+  taskId: number;
+  objectType: string
+}
+
+
+export interface ProofListData {
+  docType: string;
+  docTitle: string;
+  docId: number;
+  module: string;
+  extension: string;
+  docDesc: string;
 }
