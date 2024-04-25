@@ -49,6 +49,25 @@ export interface ChartListDataItem {
   taskId: number;
   complianceGenId: string | null;
 }
+export interface PendinTask {
+  mapId: number;
+  complianceId: number;
+  title: string | null;
+  taskName: string | null;
+  description: string | null;
+  nameOfLaw: string | null;
+  department: string | null;
+  opUnit: string | null;
+  owner: string | null;
+  Assignee: string | null;
+  currOwner: string | null;
+  reviewer: string | null;
+  dueDate: string | null;
+  impact: string | null;
+  status: number;
+  taskId: number;
+  complianceGenId: string | null;
+}
 export const defaultChartData: ChartListDataItem = {
 
   mapId: 0,
@@ -165,6 +184,12 @@ export interface ComplianceStatusData {
   chartData: ReportChartData[] | null
 }
 export interface ComplianceStatusDataList {
+  sEcho: string | null;
+  aaData: ChartListDataItem[] | null;
+  iTotalRecords: number | null;
+  iTotalDisplayRecords: number | null;
+}
+export interface PendingTaskDataList {
   sEcho: string | null;
   aaData: ChartListDataItem[] | null;
   iTotalRecords: number | null;
@@ -359,7 +384,7 @@ export interface taskCardData {
   }
 }
 
-export interface notificationCardListData{
+export interface notificationCardListData {
   firstSection: {
     heading: string | null;
     description: string | null;
@@ -907,6 +932,32 @@ export interface NotificationListDataItem {
   status: string | null;
   whatHasChanged: string | null;
   lawNames: string | null;
+
+}
+interface ActivityInerface {
+  type: string | null;
+  updateOn: string | null;
+  updatedBy: string | null;
+}
+export interface TaskListDataItem {
+  mapId: number;
+  complianceId: number;
+  title: string;
+  taskName: string;
+  description: string | null;
+  nameOfLaw: string | null;
+  department: string | null;
+  opUnit: string | null;
+  owner: string | null;
+  currOwner: string | null;
+  reviewer: string | null;
+  Assignee: string | null;
+  dueDate: string | null;
+  impact: string | null;
+  status: number;
+  taskId: number;
+  complianceGenId: string | null;
+  activities: ActivityInerface[];
 
 }
 

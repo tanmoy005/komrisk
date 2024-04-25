@@ -14,7 +14,7 @@ export const scaleCardSize = (size: number) => {
     return Math.round(size * scaleFactor);
 };
 
-export const smFont = 14;
+export const smFont = scaleFontSize(14);
 const circle1Size = Math.floor(screenWidth * .076);
 export const skeltonwidth = Math.floor(screenWidth * .82);
 const profileImageContainerSize = Math.floor(screenWidth * 0.2);
@@ -154,9 +154,10 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         color: '#eee',
     },
     accordTitle: {
-        ...commonFontStyle,
+        fontSize: scaleFontSize(9),
         fontWeight: '600',
-        lineHeight: 24,
+        lineHeight: 16,
+        color: '#58595B',
     },
     shortDescription: {
         ...commonFontStyle,
@@ -172,8 +173,10 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         fontWeight: '400'
     },
     bodyInfoText: {
-        ...commonFontStyle,
-        opacity: 0.64
+        fontSize: scaleFontSize(9),
+        opacity: 0.64,
+        overflow: 'hidden',
+        color: '#58595B'
     },
     commentInputContainer: {
         // width: Math.floor(screenWidth * .82)
