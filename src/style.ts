@@ -42,6 +42,9 @@ const cardTextContainer = {
 const taskCardContainer = {
     padding: 8
 }
+export const headerColor={
+    backgroundColor: '#F6EEF4'
+}
 export const profileImageSize = Math.floor(screenWidth * .133);
 export const styles: { [key: string]: any } = StyleSheet.create({
     container: {
@@ -336,7 +339,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         width: '100%',
-        columnGap: 32
+        columnGap: 32,
+        paddingLeft:10
     },
     centeredView: {
         flex: 1,

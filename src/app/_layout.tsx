@@ -86,6 +86,7 @@ import { Provider } from 'react-redux';
 import AuthProvider, { AuthContext } from '../provider/AuthProvider';
 import { persistor, store } from '../store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { headerColor } from '../style';
 // import SecureScreen, { ScreenCaptureProvider } from '../provider/SecureScreenProvider';
 
 export {
@@ -144,21 +145,19 @@ function RootLayoutNav() {
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <AuthProvider>
             <Stack screenOptions={{
-              headerStyle: {
-                backgroundColor: '#F6EEF4'
-              }
+              headerStyle: headerColor
             }}>
               {/* <ScreenCaptureProvider> */}
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-                <Stack.Screen name="(pages)" options={{ headerShown: false }} />
-                <Stack.Screen name="(user)" options={{ headerShown: false }} />
-                <Stack.Screen name="menu" options={{ title: "Profile", headerShown: true, headerTitleAlign: 'center', presentation: 'modal' }} />
-                <Stack.Screen name="notification" options={{ headerShown: false }} />
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="(pages)" options={{ headerShown: false }} />
+              <Stack.Screen name="(user)" options={{ headerShown: false }} />
+              <Stack.Screen name="menu" options={{ title: "Profile", headerShown: true, headerTitleAlign: 'center', presentation: 'modal' }} />
+              <Stack.Screen name="notification" options={{ headerShown: false }} />
               {/* </ScreenCaptureProvider> */}
             </Stack>
           </AuthProvider>
         </ThemeProvider>
       </PersistGate>
-    </Provider>
+    </Provider >
   );
 }

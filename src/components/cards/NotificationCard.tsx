@@ -40,9 +40,9 @@ const NotificationCard = ({ data }: notificationCardListDataProps) => {
                         onPress={() => router.push({
                             pathname: `/notification/[id]`,
                             params: {
-                                type: "COMPLIANCE",
+                                type: "NOTIFICATION",
                                 id: data?.id,
-                                complianceId: data?.complianceId,
+                                // complianceId: data?.complianceId,
                             }
                         } as never)}
                     >
