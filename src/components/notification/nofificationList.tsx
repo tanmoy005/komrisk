@@ -40,19 +40,21 @@ const NotificationList = () => {
         handleGetComplianceAlertsList();
     }, []);
 
+    console.log('DataList', DataList);
 
     return (
-        
-        <View style={styles.chartContainer}>
-            {/* <HeadImageSection /> */}
-            <FlatList
-                data={DataList}
-                renderItem={({ item }) => <NotificationCard data={item} />}
-                contentContainerStyle={{ gap: 10, padding: 10 }}
-            // refreshControl={
-            //     <RefreshControl refreshing={refreshing} onRefresh={handleGetActivityStatusDataList} />
-            // }
-            />
+        <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center', width: '100%' }}>
+            {/* <View style={styles.chartContainer}> */}
+                {/* <HeadImageSection /> */}
+                <FlatList
+                    data={DataList}
+                    renderItem={({ item }) => <NotificationCard data={item} />}
+                    contentContainerStyle={{ gap: 10, padding: 10 }}
+                // refreshControl={
+                //     <RefreshControl refreshing={refreshing} onRefresh={handleGetActivityStatusDataList} />
+                // }
+                />
+            {/* </View> */}
         </View>
     )
 }

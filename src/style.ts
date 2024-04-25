@@ -163,6 +163,11 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         height: 16,
         overflow: 'hidden'
     },
+    description: {
+        ...commonFontStyle,
+        lineHeight: 16,
+        fontWeight: '400'
+    },
     bodyInfoText: {
         ...commonFontStyle,
         opacity: 0.64
@@ -247,7 +252,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         borderColor: '#000000',
         color: '#000000'
     },
-    datePickerLabelContainer:{
+    datePickerLabelContainer: {
         flexDirection: 'row',
         paddingVertical: 0,
         paddingHorizontal: 8,
@@ -310,6 +315,11 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     dropdownItem: {
         flexDirection: 'row'
     },
+    directionRowSpaceBetween: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
     chartfilterFieldStyle: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -321,6 +331,12 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     chartFilterFieldLabelContainer: {
         textAlign: 'left',
         alignSelf: 'center'
+    },
+    btnFilterHeaderContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        width: '100%',
+        columnGap: 32
     },
     centeredView: {
         flex: 1,
@@ -353,10 +369,11 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
+
     buttonOpen: {
         backgroundColor: '#F194FF',
     },
-    closeButton:{
+    closeButton: {
         height: scaleCardSize(34),
         width: scaleCardSize(34),
         backgroundColor: 'red'
@@ -366,15 +383,19 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         textAlign: 'right',
         fontSize: scaleFontSize(14)
     },
-    textStyle2:{
-       color:  'rgba(38, 38, 44, 1)',
-       fontSize: scaleFontSize(12),
-       fontWeight: '400',
-       lineHeight: 14
+    textStyle2: {
+        color: 'rgba(38, 38, 44, 1)',
+        fontSize: scaleFontSize(12),
+        fontWeight: '400',
+        lineHeight: 14
     },
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
     },
+    defaultSeperator: {
+        height: 1,
+        backgroundColor: 'rgba(255, 255, 255, 1)'
+    }
 
 });
