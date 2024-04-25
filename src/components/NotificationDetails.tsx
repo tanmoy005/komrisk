@@ -48,7 +48,7 @@ const NotificationDetails = () => {
                         </View>
                     </View>
                     <Seperator11 />
-                    <View>
+                    {/* <View>
                         <SmallHeading>{'Watcher'}</SmallHeading>
                         <View style={{
                             flexDirection: 'row',
@@ -67,7 +67,7 @@ const NotificationDetails = () => {
                                 })
                             }
                         </View>
-                    </View>
+                    </View> */}
                     <Seperator11 />
                     <DefaultDivider />
                     <Seperator11 />

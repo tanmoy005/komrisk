@@ -28,7 +28,7 @@ const Button = forwardRef<View | null, ButtonProps>(
 
     const backgroundColor = (type === 'default' || type === 'md-default' || type === 'btnIcon' || type === 'sm') ? btnColor : 'transparent';
     let _color;
-    console.log('style?.color', style?.color);
+    // console.log('style?.color', style?.color);
 
     if (type === 'default' || type === 'md-default' || type === 'btnIcon') {
       _color = '#fff';
@@ -37,7 +37,7 @@ const Button = forwardRef<View | null, ButtonProps>(
     } else {
       _color = btnColor;
     }
-    console.log('_color', _color);
+    // console.log('_color', _color);
 
     // const _color = (type === 'default' || 'btnIcon') ? '#fff' : btnColor;
     const btnTextStyle: StyleProp<TextStyle> = {

@@ -8,12 +8,14 @@ import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 
 const compliancesnotificationList: React.FC = () => {
+
+ 
   const handleSeeAll = () => {
-console.log('handleSeeAll11');
+    console.log('handleSeeAll11');
 
   }
   const handleClose = () => {
-console.log('handleClose');
+    console.log('handleClose');
 
   }
   return (

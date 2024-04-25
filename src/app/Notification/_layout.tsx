@@ -2,13 +2,17 @@ import { View } from '@/src/components/Themed'
 import React from 'react'
 import { StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
+import { headerColor } from '@/src/style';
 
 
 const Notification_Page_layout = () => {
     return (
-        <Stack>
+        <Stack screenOptions={{
+            headerStyle: headerColor
+          }}>
             <Stack.Screen name="notification_tab" options={{ title:"Notification", headerShown: true, headerTitleAlign:'center' }} />
-        
+            <Stack.Screen name="[id]" options={{ title: 'Notification Details', headerShown: true, headerTitleAlign:'center' }} />
+
         </Stack>
     )
 }

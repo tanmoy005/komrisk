@@ -23,7 +23,7 @@ const allnotificationList: React.FC = () => {
         secondBtnOnpress={handleSeeAll}
       />
       <Seperator24 />
-      <NotificationDetails />
+      {/* <NotificationDetails /> */}
     </SafeAreaView>
   );
 };
