@@ -18,7 +18,7 @@ import { RootState } from '@/src/store';
 import { addComment, updateComment } from '@/src/store/slices/task-comments-slice'; // Assuming your action creators are named addComment and updateComment
 
 const AccordianCommonHeader = ({ title, descriptions, icons, expanded, setExpanded, type = 'chevron', taskId, commentText, setCommentText }: AccordianCommonHeaderProps) => {
-    const shortDescription = descriptions.length > 64 ? `${descriptions.slice(0, 64)}...` : descriptions;
+    const shortDescription = descriptions && descriptions.length > 64 ? `${descriptions.slice(0, 64)}...` : descriptions;
 
     const taskID = taskId;
 

@@ -67,6 +67,7 @@ export interface PendingTask {
   status: number;
   taskId: number;
   complianceGenId: string | null;
+  activities: ActivityInerface[];
 }
 export const defaultChartData: ChartListDataItem = {
 
@@ -194,6 +195,12 @@ export interface PendingTaskDataList {
   aaData: ChartListDataItem[] | null;
   iTotalRecords: number | null;
   iTotalDisplayRecords: number | null;
+}
+export interface PendingTaskItemDetailsResponse {
+  title: string | null;
+  complianceId: string | null;
+  description: string | null;
+  lawName: string | null;
 }
 export interface ReportChartData {
   label: string;
@@ -338,13 +345,13 @@ export interface IncidentComparisonDataList {
 }
 
 export type AccordionItemPros = PropsWithChildren<{
-  title: string;
-  descriptions: string;
+  title: string | null;
+  descriptions: string | null;
 }>;
 
 export interface AccordianCommonHeaderProps {
-  title: string;
-  descriptions: string;
+  title: string | null;
+  descriptions: string | null;
   expanded: boolean;
   type?: string;
   taskId?:number;
@@ -425,6 +432,7 @@ export interface CompliancesItemDetailsResponse {
   lawName: string | null;
 
 }
+
 export const CompliancesItemDetails: CompliancesItemDetailsResponse = {
 
   info: null,

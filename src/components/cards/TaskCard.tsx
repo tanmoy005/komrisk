@@ -77,7 +77,7 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
                                                 {pic ? pic :
                                                     <Circle />
                                                 }
-                                                <Text style={styles.bodyInfoText}>{name}</Text>
+                                                <Text style={{ ...styles.bodyInfoText, width: 50 }}>{name}</Text>
                                             </View>
                                         )
                                     })
