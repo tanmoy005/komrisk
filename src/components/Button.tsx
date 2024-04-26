@@ -43,7 +43,36 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>(
     const handlePress = () => {
       Haptics.selectionAsync(); // Triggers a light haptic effect
       if (onPress) onPress(); // Call the passed onPress function if provided
-    };
+    }; 
+    
+    let paddingHorizontal;
+    let paddingVertical;
+    let fontSize;
+    let fontWeight;
+    let borderRadius;
+    let padding;
+    let width;
+    if (type === 'sm') {
+      paddingVertical = 5;
+      paddingHorizontal = 10;
+      fontWeight = '400';
+      fontSize = 12;
+      borderRadius = 5;
+    } else if (type === 'md-default' || type === 'md-outline') {
+      padding = 10.5;
+      fontWeight = '400';
+      fontSize = 16;
+      borderRadius = 5;
+      width = 104;
+    } else {
+      paddingVertical = style?.paddingVertical;
+      paddingHorizontal = style?.paddingHorizontal;
+      fontWeight = style?.fontWeight;
+      fontSize = style?.fontSize;
+      borderRadius = style?.borderRadius;
+      padding = style?.padding;
+      width = style?.width;
+    }
 
     return (
       <TouchableOpacity ref={ref} onPress={handlePress} {...touchableOpacityProps}>
