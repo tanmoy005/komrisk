@@ -253,7 +253,7 @@
 import { Link, Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import { Text, View } from '@/src/components/Themed';
-import PushNotificationExample from '../../Notification/PushNotificationExample';
+import PushNotificationExample from '../../notification/PushNotificationExample';
 
 export default function NotFoundScreen() {
 
