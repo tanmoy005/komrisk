@@ -17,7 +17,7 @@ const isObjectEmpty = (objectName: ChartListDataItem) => {
 
 const PendingTaskDetails = ({ data }: PendingTaskDetailsProps) => {
 
-  const { taskName, description, dueDate, owner, reviewer, Assignee } = data
+  const { taskName, description, dueDate, owner, reviewer, Assignee, taskId, activities } = data
   const taskCardData = {
     firstSection: {
       heading: "Task Name",
@@ -25,7 +25,7 @@ const PendingTaskDetails = ({ data }: PendingTaskDetailsProps) => {
     },
     secondSection: {
       heading: 'Last Activity',
-      description: 'description'
+      description: activities[activities.length -1]?.type
     },
     thirdSection: {
       dateHeading: 'Actual Completion Date',
@@ -59,11 +59,11 @@ const PendingTaskDetails = ({ data }: PendingTaskDetailsProps) => {
 
           <Pressable
             onPress={() => router.push({
-              pathname: `/chartReport/[id]`,
+                pathname: `/task/[id]`,
               params: {
-                type: "COMPLIANCE",
-                id: data?.complianceId,
-                taskId: 0,
+                type: "PendingTask",
+                id: taskId
+            
               }
             } as never)}
           >

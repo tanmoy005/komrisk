@@ -14,7 +14,8 @@ export const scaleCardSize = (size: number) => {
     return Math.round(size * scaleFactor);
 };
 
-export const smFont = scaleFontSize(14);
+// export const smFont = scaleFontSize(14);
+export const smFont = scaleFontSize(9);
 const circle1Size = Math.floor(screenWidth * .076);
 export const skeltonwidth = Math.floor(screenWidth * .82);
 const profileImageContainerSize = Math.floor(screenWidth * 0.2);
@@ -97,7 +98,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     subtitleContainer: {
         flexDirection: 'row',
-        gap: 5
+        gap: 5,
+        
     },
     profileImageContainer: {
         // padding: Math.floor(screenWidth * 0.333),
@@ -139,25 +141,41 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     accodianHeaderContainer: {
         // width: '100%',
         ...taskCardContainer,
-        backgroundColor: '#A097DC29',
+        // backgroundColor: '#A097DC29',
         color: '#eee',
         flex: 1,
-        borderRadius: 5
+        borderRadius: 5,
+        height: 100,
+    },
+    accodianHeaderContainer2: {
+        // width: '100%',
+     
+        backgroundColor: '#A097DC29',
+        color: '#eee',
+        borderRadius: 5,
+        height: 100,
+        padding: 14
     },
     cardTextContainer: cardTextContainer,
     titleContainer: {
-        ...cardTextContainer,
+        // ...cardTextContainer,
+        paddingHorizontal: 14,
+        paddingVertical: 7,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
         color: '#eee',
+        height: 100,
+        backgroundColor: '#A097DC29',
+        borderRadius: 5,
+        position: 'relative',
     },
     accordTitle: {
-        fontSize: scaleFontSize(9),
+        ...commonFontStyle,
+        color: '#58595B',
         fontWeight: '600',
         lineHeight: 16,
-        color: '#58595B',
     },
     shortDescription: {
         ...commonFontStyle,

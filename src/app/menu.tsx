@@ -38,7 +38,7 @@ export default function Menu() {
           text='My Pending Tasks'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.push('/(user)/dashboard/complianceStatus')}
+          onPress={() => router.push('/(user)/task/pendingTaskPage')}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,

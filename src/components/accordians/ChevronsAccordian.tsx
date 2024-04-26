@@ -8,10 +8,11 @@ import { AccordionItemPros } from '@/src/types';
 
 
 
-const ChevronsAccordian = ({ children, title, descriptions }: AccordionItemPros): JSX.Element => {
-    const [expanded, setExpanded] = useState(false);
+const ChevronsAccordian = ({ children, title, descriptions, setExpanded, expanded }: AccordionItemPros): JSX.Element => {
+    // const [expanded, setExpanded] = useState(false);
 
     const body = <View style={styles.accordBody}>{children}</View>;
+console.log('expanded', expanded);
 
     return (
         <View style={styles.accordContainer}>
@@ -26,14 +27,23 @@ const ChevronsAccordian = ({ children, title, descriptions }: AccordionItemPros)
                 }}
             />
 
-            {expanded && body}
+            {/* {expanded && body} */}
+            {expanded &&
+
+                <View style={{ marginTop: 80 }}>
+                    {
+                        body
+                    }
+                </View>
+            }
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     accordContainer: {
-        paddingBottom: 4
+        paddingBottom: 4,
+        // backgroundColor: '#A097DC29',
     },
     accordBody: {
         padding: 12

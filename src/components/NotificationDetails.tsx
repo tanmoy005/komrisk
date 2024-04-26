@@ -13,20 +13,6 @@ import Button from './Button'
 
 const NotificationDetails = () => {
 
-    const watcher = [
-        {
-            name: 'Name',
-            pic: ''
-        },
-        {
-            name: 'Name',
-            pic: ''
-        },
-        {
-            name: 'Name',
-            pic: ''
-        }
-    ]
     return (
         <View style={{ ...styles.taskCard, width: '100%' }}>
             <CardContainer>
