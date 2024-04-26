@@ -1,12 +1,12 @@
 import { StyleSheet, Pressable } from "react-native";
 import { ChartListDataItem, PendinTask } from "@/src/types";
 import { Link, router } from "expo-router";
-import { View } from "../Themed";
-import ChartItemSkelton from "../skelton/ChartItemSkelton";
-import TaskCard from "../cards/TaskCard";
-import { styles } from "../../style";
-import CardContainer from "../cards/CardContainer";
-import CardTextContainer from "../cards/CardTextContainer";
+import { View } from "../../Themed";
+import ChartItemSkelton from "../../skelton/ChartItemSkelton";
+import TaskCard from "../../cards/TaskCard";
+import { styles } from "../../../style";
+import CardContainer from "../../cards/CardContainer";
+import CardTextContainer from "../../cards/CardTextContainer";
 
 type PendingTaskDetailsProps = {
   data: PendinTask
