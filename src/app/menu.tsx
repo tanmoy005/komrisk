@@ -38,7 +38,7 @@ export default function Menu() {
           text='My Pending Tasks'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.push('/(user)/dashboard/complianceStatus')}
+          onPress={() => router.push('/(user)/pending_task/pending_task')}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,
@@ -63,7 +63,7 @@ export default function Menu() {
           text='Notifications'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.push('/notification/notification_tab/allnotificationList')}
+          onPress={() => router.push('/Notification/notification_tab/allnotificationList')}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,

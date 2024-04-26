@@ -25,6 +25,7 @@ import authUserCredSlice from './slices/auth-user-cred-slice';
 import authUserAccessDetailsSlice from './slices/auth-user-access-details-slice';
 import authUserDetailsSlice from './slices/auth-user-details-slice';
 import incidentAvailableViewsSlice from './slices/incident-available-views-slice';
+import commentsSlice from './slices/task-comments-slice'
 
 const rootReducer = combineReducers({
   baseUrl: baseUrlSlice,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   authUserDetails: authUserDetailsSlice,
   authUserAccess: authUserAccessDetailsSlice,
   incidentAvailableViews: incidentAvailableViewsSlice,
+  comments: commentsSlice,
   // Add other reducers as needed
 });
 

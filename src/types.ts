@@ -347,7 +347,10 @@ export interface AccordianCommonHeaderProps {
   descriptions: string;
   expanded: boolean;
   type?: string;
+  taskId?:number;
+  commentText?:string | " ";
   setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+  setCommentText: React.Dispatch<React.SetStateAction<string>>;
   icons: {
     open: string;
     close: string;
@@ -982,4 +985,10 @@ export interface ProofListData {
   module: string;
   extension: string;
   docDesc: string;
+}
+
+
+export interface Comment {
+  commentText: any |null |undefined;
+  taskID: number |null |undefined;
 }

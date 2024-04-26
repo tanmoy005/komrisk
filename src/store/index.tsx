@@ -26,7 +26,7 @@ import rootReducer from './rootReducer';
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['authUserCred', 'authUserDetails', 'authUserAccess'] // Only persist these slices
+    whitelist: ['authUserCred', 'authUserDetails', 'authUserAccess','incidentAvailableViews','comments'] // Only persist these slices
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
