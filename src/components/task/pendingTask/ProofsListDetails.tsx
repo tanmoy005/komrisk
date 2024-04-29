@@ -8,6 +8,7 @@ import { Text  } from 'react-native';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 //import { styles } from '@/src/style';
 import { FlatList,StyleSheet } from 'react-native';
+import { screenHeight } from "@/src/style";
 
 type ProofsListDetailsProps = {
     taskId: number,
@@ -64,6 +65,8 @@ const ProofsListDetails = ({ taskId, type  }: ProofsListDetailsProps) => {
             data={proofDataList}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
+            showsVerticalScrollIndicator= {true}
+            style={{height: screenHeight * 0.5}}
         />
         </View>
     );

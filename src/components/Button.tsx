@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { TouchableOpacity, Text, View, TextStyle, StyleProp } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Haptics from 'expo-haptics';
@@ -26,12 +26,19 @@ type ButtonProps = {
 const Button = forwardRef<TouchableOpacity, ButtonProps>(
   ({ text, btnColor, icon, leftIcon, style, type = 'default', onPress, ...touchableOpacityProps }, ref) => {
     const backgroundColor = (type === 'default' || type === 'md-default' || type === 'btnIcon' || type === 'sm') ? btnColor : 'transparent';
-    let _color = '#fff';
-    if (type !== 'default' && type !== 'md-default' && type !== 'btnIcon' && style?.color) {
-      _color = style.color;
-    } else if (type !== 'default' && type !== 'md-default' && type !== 'btnIcon') {
-      _color = btnColor?? 'trans';
-    }
+
+    const defaultBttnTextColor = style?.color ?? '';
+    const [_color, set_color] = useState('#fff');
+
+    useEffect(() => {
+
+      if (type !== 'default' && type !== 'md-default' && type !== 'btnIcon' && style?.color) {
+        set_color(style.color);
+      } else if (type !== 'default' && type !== 'md-default' && type !== 'btnIcon') {
+        set_color(btnColor ?? 'trans');
+      }
+    }, [])
+
 
     const btnTextStyle: StyleProp<TextStyle> = {
       color: _color,
@@ -43,8 +50,16 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>(
     const handlePress = () => {
       Haptics.selectionAsync(); // Triggers a light haptic effect
       if (onPress) onPress(); // Call the passed onPress function if provided
-    }; 
-    
+     
+    };
+    const handleOnPresssIn =()=>{
+      if (backgroundColor === '#A097DC') {
+        set_color('rgba(38, 38, 44, 1)');
+      }
+    }
+    const handleOnPresssOut =()=>{
+      set_color(defaultBttnTextColor);
+    }
     let paddingHorizontal;
     let paddingVertical;
     let fontSize;
@@ -74,8 +89,19 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>(
       width = style?.width;
     }
 
+    let backgroundColorOnTouch;
+
+    if (backgroundColor === '#A097DC') {
+      backgroundColorOnTouch = 'rgba(229, 227, 245, 1)'
+    }
+
+    let btnTouchStyle = {
+      borderRadius: borderRadius,
+      backgroundColor: backgroundColorOnTouch
+    }
+
     return (
-      <TouchableOpacity ref={ref} onPress={handlePress} {...touchableOpacityProps}>
+      <TouchableOpacity ref={ref} onPressIn={handleOnPresssIn} onPressOut={handleOnPresssOut} onPress={handlePress} style={btnTouchStyle} {...touchableOpacityProps}>
         <View style={{
           flexDirection: 'row',
           alignItems: 'center',

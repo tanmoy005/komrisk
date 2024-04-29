@@ -102,7 +102,7 @@ const PendingTaskOverViewPage = () => {
 
     return (
 
-        <ScrollView>
+        // <ScrollView>
             <CardContainer3 styles={{
                 backgroundColor: '#FFFFFF',
                 minHeight: screenHeight,
@@ -160,7 +160,7 @@ const PendingTaskOverViewPage = () => {
 
 
             </CardContainer3>
-        </ScrollView>
+        /* </ScrollView> */
 
     )
 }
