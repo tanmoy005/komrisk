@@ -100,7 +100,7 @@ const PendingTaskOverViewPage = () => {
             updatedOn: '10/02/2222'
         },
     ]
-    const [commentText, setCommentText] = useState<s>("");
+    const [commentText, setCommentText] = useState<string>("");
     const [taskid, setTaskId] = useState(303)
     const comments = useSelector((state: RootState) => state.comments.commentsList);
 
