@@ -5,12 +5,18 @@ import EditScreenInfo from '@/src/components/EditScreenInfo';
 import { Text, View } from '@/src/components/Themed';
 import Button from '@/src/components/Button';
 import { router } from 'expo-router';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 interface RedirectionButton {
   btnName: string;
   pathName: string;
 }
 
 export default function Menu() {
+  const userDetails = useSelector((state: RootState) => state.authUserDetails.payload);
+  const [userName, setUserName] = useState<string>(userDetails?.userDetails?.displayName ?? "");
+  const [userRole, setUserRole] = useState<string>(userDetails?.userDetails?.role ?? "");
   const navigateToProfile = () => {
     router.push('/profilePage');
   }
@@ -20,9 +26,9 @@ export default function Menu() {
       <Pressable onPress={navigateToProfile}>
         <View style={{ ...styles.profileImageContainer, height: "50%" }}>
           <Image style={{ width: 120, height: 120 }} source={require('@/assets/images/User.png')} />
-          <Text style={styles.userTitle}>Alicia Lockheed</Text>
+          <Text style={styles.userTitle}>{userName}</Text>
           <View style={styles.separator}></View>
-          <Text style={styles.designation}>Senior Manager</Text>
+          <Text style={styles.designation}>{userRole}</Text>
         </View>
       </Pressable>
       <View
