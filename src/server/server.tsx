@@ -62,7 +62,7 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
 
             }
         } else {
-            response.error = 'An unexpected error occurred';
+            response.error = error;
         }
         //console.log("API Error:", response);
     } finally {
