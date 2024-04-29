@@ -25,10 +25,11 @@ import Seperator48 from '@/src/components/seperators/Seperator48'
 import ChartItemSkelton from '@/src/components/skelton/ChartItemSkelton'
 import TaskCard from '@/src/components/cards/TaskCard'
 import ComplianceChartDataList from '@/assets/data/chartdataList'
-import PendingTaskDetails from '@/src/components/task/PendingTaskDetails'
+// import PendingTaskDetails from '@/src/components/task/PendingTaskDetails'
 import { ComplianceStatusDataList, PendingTaskDataList, TaskListDataItem } from '@/src/types'
 import { RootState } from '@/src/store'
 import { useSelector } from 'react-redux'
+import PendingTaskDetails from '@/src/components/task/pendingTask/PendingTaskDetails'
 
 const PendingTaskPage = () => {
   const colorScheme = useColorScheme();

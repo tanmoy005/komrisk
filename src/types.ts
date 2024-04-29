@@ -201,6 +201,11 @@ export interface PendingTaskItemDetailsResponse {
   complianceId: string | null;
   description: string | null;
   lawName: string | null;
+  lastActivity: ActivityInerface;
+}
+export interface LastActivityComment {
+  comment: string | null;
+  updatedOn: string | null;
 }
 export interface ReportChartData {
   label: string;
@@ -344,21 +349,19 @@ export interface IncidentComparisonDataList {
   iTotalDisplayRecords: number | null;
 }
 
-export type AccordionItemPros = PropsWithChildren<{
-  title: string | null;
-  descriptions: string | null;
-}>;
+export interface AccordionItemPros extends AccordianCommonHeaderProps {
+  children: ReactNode
+}
+
 
 export interface AccordianCommonHeaderProps {
   title: string | null;
   descriptions: string | null;
-  expanded: boolean;
   type?: string;
-  taskId?:number;
-  commentText?:string | " ";
-  setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
-  setCommentText: React.Dispatch<React.SetStateAction<string>>;
-  icons: {
+  taskId?: number;
+  commentText?: string | " ";
+  setCommentText?: React.Dispatch<React.SetStateAction<string>>;
+  icons?: {
     open: string;
     close: string;
   };
@@ -997,6 +1000,13 @@ export interface ProofListData {
 
 
 export interface Comment {
-  commentText: any |null |undefined;
-  taskID: number |null |undefined;
+  commentText: any | null | undefined;
+  taskID: number | null | undefined;
+}
+
+export interface PendingTaskOverViewProps {
+  pendingTaskDetails: PendingTaskItemDetailsResponse;
+  lastActivitycomments: LastActivityComment;
+  commentText: string;
+  setCommentText: React.Dispatch<React.SetStateAction<string>>;
 }

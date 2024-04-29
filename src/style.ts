@@ -39,11 +39,12 @@ const commonFontStyle = {
 const cardTextContainer = {
     paddingHorizontal: 9,
     paddingVertical: 3,
+    // backgroundColor: '#000'
 }
 const taskCardContainer = {
     padding: 8
 }
-export const headerColor={
+export const headerColor = {
     backgroundColor: '#F6EEF4'
 }
 export const profileImageSize = Math.floor(screenWidth * .133);
@@ -99,7 +100,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     subtitleContainer: {
         flexDirection: 'row',
         gap: 5,
-        
+
     },
     profileImageContainer: {
         // padding: Math.floor(screenWidth * 0.333),
@@ -138,18 +139,27 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     taskCardContainer: {
         ...taskCardContainer
     },
-    accodianHeaderContainer: {
-        // width: '100%',
+    expandSectionHeaderContainer:{
+      padding: 28,
+      paddingBottom: 0,
+      rowGap: 8
+    },
+    commentContainer: {
+        width: '100%',
         ...taskCardContainer,
-        // backgroundColor: '#A097DC29',
+        backgroundColor: '#A097DC29',
         color: '#eee',
-        flex: 1,
         borderRadius: 5,
-        height: 100,
+        rowGap: 14
+    },
+    expandSectionHeader: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between'
     },
     accodianHeaderContainer2: {
         // width: '100%',
-     
+
         backgroundColor: '#A097DC29',
         color: '#eee',
         borderRadius: 5,
@@ -164,10 +174,11 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '100%',
+        // width: '100%',
+        // width: '100%',
         color: '#eee',
         height: 100,
-        backgroundColor: '#A097DC29',
+        // backgroundColor: '#A097DC29',
         borderRadius: 5,
         position: 'relative',
     },
@@ -198,7 +209,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     commentInputContainer: {
         // width: Math.floor(screenWidth * .82)
-        width: '88%'
+        width: '88%',
+        height: 40
     },
     circle: {
         width: circle1Size,
@@ -209,6 +221,15 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     taskCardBottomRightSection: {
         alignItems: 'center',
         rowGap: 6
+    },
+    pendingTaskOverViewSubmit: {
+        flexDirection: 'row',
+        position: 'absolute',
+        zIndex: 2,
+        width: '100%',
+        bottom: 80,
+        justifyContent: 'space-around',
+        left: 16,
     },
     dashboardContainer: {
         flex: 1,
@@ -361,7 +382,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         justifyContent: 'flex-start',
         width: '100%',
         columnGap: 32,
-        paddingLeft:10
+        paddingLeft: 10
     },
     centeredView: {
         flex: 1,

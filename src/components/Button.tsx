@@ -81,13 +81,13 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>(
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: backgroundColor,
-          borderRadius: style?.borderRadius,
+          borderRadius: borderRadius,
           borderColor: btnColor,
           borderWidth: 2,
-          padding: style?.padding,
-          paddingHorizontal: style?.paddingHorizontal,
-          paddingVertical: style?.paddingVertical,
-          width: style?.width,
+          padding: padding,
+          paddingHorizontal: paddingHorizontal,
+          paddingVertical: paddingVertical,
+          width: width,
           height: style?.height
         }}>
           {leftIcon && <Icon name={leftIcon} size={24} color={_color} />}

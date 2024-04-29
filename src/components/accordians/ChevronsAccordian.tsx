@@ -8,23 +8,23 @@ import { AccordionItemPros } from '@/src/types';
 
 
 
-const ChevronsAccordian = ({ children, title, descriptions, setExpanded, expanded }: AccordionItemPros): JSX.Element => {
-    // const [expanded, setExpanded] = useState(false);
+const ChevronsAccordian = ({ children, title, descriptions }: AccordionItemPros): JSX.Element => {
+    const [expanded, setExpanded] = useState(false);
 
     const body = <View style={styles.accordBody}>{children}</View>;
-console.log('expanded', expanded);
+
 
     return (
         <View style={styles.accordContainer}>
             <AccordianCommonHeader
                 title={title}
                 descriptions={descriptions}
-                setExpanded={setExpanded}
-                expanded={expanded}
                 icons={{
                     open: 'chevron-up',
                     close: 'chevron-down'
                 }}
+                setExpanded={setExpanded}
+                expanded={expanded}
             />
 
             {/* {expanded && body} */}

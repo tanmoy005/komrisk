@@ -8,7 +8,7 @@ import { AccordionItemPros } from '@/src/types';
 import { Text } from 'react-native';
 
 
-const CommentAccordian = ({ children, title, descriptions }: AccordionItemPros): JSX.Element => {
+const CommentAccordian = ({ children, descriptions, title, setCommentText }: AccordionItemPros): JSX.Element => {
     const [expanded, setExpanded] = useState(false);
 
     const body = <View style={styles.accordBody}>{children}</View>;
@@ -25,6 +25,7 @@ const CommentAccordian = ({ children, title, descriptions }: AccordionItemPros):
                     open: 'arrow-collapse',
                     close: 'arrow-expand'
                 }}
+                setCommentText={setCommentText}
             />
             {expanded && body}
         </View>
@@ -33,7 +34,11 @@ const CommentAccordian = ({ children, title, descriptions }: AccordionItemPros):
 
 const styles = StyleSheet.create({
     accordContainer: {
-        paddingBottom: 4,
+        // paddingBottom: 4,
+        width: '100%',
+        padding: 4,
+        backgroundColor: '#A097DC29',
+        borderRadius: 5,
 
     },
     accordBody: {
