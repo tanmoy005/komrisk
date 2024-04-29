@@ -20,12 +20,15 @@ export default function Menu() {
   const navigateToProfile = () => {
     router.push('/profilePage');
   }
-
+  const avatarLetter = userName ? userName[0].toUpperCase() : ''; // Ensure the first character is always upper case.
   return (
     <View style={styles.container}>
       <Pressable onPress={navigateToProfile}>
         <View style={{ ...styles.profileImageContainer, height: "50%" }}>
-          <Image style={{ width: 120, height: 120 }} source={require('@/assets/images/User.png')} />
+          {/* <Image style={{ width: 120, height: 120 }} source={require('@/assets/images/User.png')} /> */}
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>{avatarLetter}</Text>
+          </View>
           <Text style={styles.userTitle}>{userName}</Text>
           <View style={styles.separator}></View>
           <Text style={styles.designation}>{userRole}</Text>
@@ -115,5 +118,18 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 14,
     color: '#26262C'
-  }
+  },
+  avatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#5645C0',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  avatarText: {
+    color: 'white',
+    fontSize: 50, // Adjust size as needed
+    fontWeight: 'bold'
+  },
 });
