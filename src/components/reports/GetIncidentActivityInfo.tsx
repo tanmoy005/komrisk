@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { IncidentActivityDataPayLoad, ReportChartData, IncidentActivityData, ChartProp } from '../../types';
-import GetIncidentActivityData from '../../server/api-functions/get-incident-activity-data';
+import GetIncidentActivityData from '../../server/api-functions/Chart/get-incident-activity-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import PieChartData from '../charts/PieChart';

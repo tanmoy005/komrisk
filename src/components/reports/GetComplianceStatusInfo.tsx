@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { ComplianceStatusDataPayLoad, ReportChartData, ComplianceStatusData, ChartProp } from '../../types';
-import GetComplianceStatusData from '../../server/api-functions/get-compliance-status-data';
+import GetComplianceStatusData from '../../server/api-functions/Chart/get-compliance-status-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import PieChartData from '../charts/PieChart';

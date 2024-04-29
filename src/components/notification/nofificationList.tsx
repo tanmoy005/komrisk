@@ -4,7 +4,7 @@ import { styles } from '@/src/style'
 import { Alert, FlatList, View } from 'react-native'
 import { RootState } from '@/src/store'
 import NotificationCard from '../cards/NotificationCard'
-import GetComplianceAlertsListDetails from '@/src/server/api-functions/get-compliance-alerts-list'
+import GetComplianceAlertsListDetails from '@/src/server/api-functions/Alerts/get-compliance-alerts-list'
 import { ComplianceStatusDataList, NotificationListDataItem, UserModel } from '@/src/types'
 
 const NotificationList = () => {

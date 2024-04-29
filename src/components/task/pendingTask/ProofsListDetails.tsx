@@ -1,7 +1,7 @@
 
 import { ProofListData, ProofListPayload,Item } from "@/src/types";
 import { View } from "../../Themed";
-import GetProofDataList from "@/src/server/api-functions/get-proof-data-list";
+import GetProofDataList from "@/src/server/api-functions/Tasks/get-proof-data-list";
 import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { Text  } from 'react-native';
@@ -22,7 +22,7 @@ const ProofsListDetails = ({ taskId, type  }: ProofsListDetailsProps) => {
 
     const handleGetproofListData = async (payLoad: ProofListPayload) => {
         const { data, error, status } = await GetProofDataList(payLoad);
-        console.log("data",data);
+        //console.log("data",data);
        
         
         if (status === 200) {
@@ -47,7 +47,7 @@ const ProofsListDetails = ({ taskId, type  }: ProofsListDetailsProps) => {
         handleGetproofListData(updatedPayLoad);
     }, [taskId, type]);
 
-    console.log("data**",(proofDataList));
+    //console.log("data**",(proofDataList));
 
 
     const renderItem = ({ item }: { item: Item }) => (

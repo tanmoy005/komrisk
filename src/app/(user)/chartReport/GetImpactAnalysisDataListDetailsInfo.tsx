@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { ChartListDataItem, ImpactAnalysisDataList, ImpactAnalysisDataListPayLoad } from '@/src/types';
 import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
 import { useLocalSearchParams } from 'expo-router';
-import GetImpactAnalysisDataList from '@/src/server/api-functions/get-impact-analysis-datalist-details';
+import GetImpactAnalysisDataList from '@/src/server/api-functions/TaskList_(DataList)/get-impact-analysis-datalist-details';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { styles } from '@/src/style';

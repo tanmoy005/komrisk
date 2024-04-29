@@ -3,15 +3,15 @@ import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, ToastAndroid, A
 // import axios from "axios";
 import { Redirect, router } from 'expo-router';
 import { UserModel } from '@/src/types';
-import AuthenticateUser from '@/src/server/api-functions/authenticate-user';
+import AuthenticateUser from '@/src/server/api-functions/Login/authenticate-user';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice';
 import Button from '@/src/components/Button';
-import GetUserAccessDetails from '@/src/server/api-functions/user-access-details';
+import GetUserAccessDetails from '@/src/server/api-functions/Misc/user-access-details';
 import { storeAuthUserAccessDetails } from '@/src/store/slices/auth-user-access-details-slice';
 import { storeAuthUserDetails } from '@/src/store/slices/auth-user-details-slice';
-import GetIncidentAvailableViews from '@/src/server/api-functions/get-incident-available-views';
+import GetIncidentAvailableViews from '@/src/server/api-functions/Misc/get-incident-available-views';
 import { storeIncidentAvailableViews } from '@/src/store/slices/incident-available-views-slice';
 import { RootState } from '@/src/store';
 import { screenWidth } from '@/src/style';

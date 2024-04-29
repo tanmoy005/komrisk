@@ -1,5 +1,5 @@
 import { UserModel } from '@/src/types';
-import Server from '../server';
+import Server from '../../server';
 
 const AuthenticateUser = async(payLoad: UserModel) => {
     const url = `/auth/login`;

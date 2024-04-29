@@ -3,7 +3,7 @@ import { Alert, FlatList } from 'react-native';
 import { View } from 'react-native';
 import { IncidentActivityDataList, IncidentActivityDataListPayLoad, IncidentChartListDataItem, defaultIncidentChartData } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
-import GetIncidentActivityDataList from '@/src/server/api-functions/get-incident-activity-datalist-details';
+import GetIncidentActivityDataList from '@/src/server/api-functions/TaskList_(DataList)/get-incident-activity-datalist-details';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store';
 import { styles } from '@/src/style';

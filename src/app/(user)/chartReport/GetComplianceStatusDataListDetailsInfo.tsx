@@ -4,7 +4,7 @@ import { Alert, FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { ChartListDataItem, ComplianceStatusDataList, ComplianceStatusDataListPayLoad } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
-import GetComplianceStatusDataList from '@/src/server/api-functions/get-compliance-status-datalist-details';
+import GetComplianceStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-compliance-status-datalist-details';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { styles } from '@/src/style';

@@ -1,4 +1,4 @@
-import GetIncidentTaskDataDetails from '@/src/server/api-functions/get-incident-task-data-details';
+import GetIncidentTaskDataDetails from '@/src/server/api-functions/MapDetails/get-incident-task-data-details';
 import { RootState } from '@/src/store';
 import { DefaultIncidentItemDetailsResponse, IncidentItemDetailsPayLoad, IncidentItemDetailsResponse } from '@/src/types';
 import React, { useEffect, useState } from 'react'

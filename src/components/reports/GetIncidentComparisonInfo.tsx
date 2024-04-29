@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { IncidentComparisonDataPayLoad, ReportChartData, IncidentComparisonData, ChartProp } from '../../types';
-import GetIncidentComparisonData from '../../server/api-functions/get-incident-comparison-data';
+import GetIncidentComparisonData from '../../server/api-functions/Chart/get-incident-comparison-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import PieChartData from '../charts/PieChart';

@@ -1,10 +1,10 @@
-import GetActivityStatusUserFilterLevelData from "@/src/server/api-functions/get-activity-status-userfilter-filterlevel-data";
-import GetComplianceStatusUserFilterLevelData from "@/src/server/api-functions/get-compliance-status-userfilter-filterlevel-data";
-import GetImpactAnalysisUserFilterLevelData from "@/src/server/api-functions/get-impact-analysis-userfilter-filterlevel-data";
-import GetIncidentActivityUserFilterLevelData from "@/src/server/api-functions/get-incident-activity-userfilter-filterlevel-data";
-import GetIncidentComparisonUserFilterLevelData from "@/src/server/api-functions/get-incident-comparison-userfilter-filterlevel-data";
-import GetComplianceUserFilterData from "@/src/server/api-functions/get-userfilter-compliance-data";
-import GetIncidentUserFilterData from "@/src/server/api-functions/get-userfilter-incident-data";
+import GetActivityStatusUserFilterLevelData from "@/src/server/api-functions/UserFilter/get-activity-status-userfilter-filterlevel-data";
+import GetComplianceStatusUserFilterLevelData from "@/src/server/api-functions/UserFilter/get-compliance-status-userfilter-filterlevel-data";
+import GetImpactAnalysisUserFilterLevelData from "@/src/server/api-functions/UserFilter/get-impact-analysis-userfilter-filterlevel-data";
+import GetIncidentActivityUserFilterLevelData from "@/src/server/api-functions/UserFilter/get-incident-activity-userfilter-filterlevel-data";
+import GetIncidentComparisonUserFilterLevelData from "@/src/server/api-functions/UserFilter/get-incident-comparison-userfilter-filterlevel-data";
+import GetComplianceUserFilterData from "@/src/server/api-functions/UserFilterType/get-userfilter-compliance-data";
+import GetIncidentUserFilterData from "@/src/server/api-functions/UserFilterType/get-userfilter-incident-data";
 import { ActivityStatusUserFilterLevelData, ChartUserFilterModalProps, ComplianceStatusUserFilterLevelData, ComplianceUserFilterData, DropDownItem, DropdownItemClass, ImpactAnalysisUserFilterLevelData, IncidentActivityUserFilterLevelData, IncidentComparisonUserFilterLevelData, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from "@/src/types";
 import { hasValue } from "@/src/utils";
 import { useEffect, useState } from "react";

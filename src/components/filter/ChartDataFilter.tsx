@@ -1,7 +1,7 @@
-import GetActivityStatusDataFilterLevelData from "@/src/server/api-functions/get-activity-status-datafilter-filterlevel-data";
-import GetComplianceStatusDataFilterLevelData from "@/src/server/api-functions/get-compliance-status-datafilter-filterlevel-data";
-import GetImpactAnalysisDataFilterLevelData from "@/src/server/api-functions/get-impact-analysis-datafilter-filterlevel-data";
-import GetComplianceDataFilterData from "@/src/server/api-functions/get-datafilter-compliance-data";
+import GetActivityStatusDataFilterLevelData from "@/src/server/api-functions/DataFilter/get-activity-status-datafilter-filterlevel-data";
+import GetComplianceStatusDataFilterLevelData from "@/src/server/api-functions/DataFilter/get-compliance-status-datafilter-filterlevel-data";
+import GetImpactAnalysisDataFilterLevelData from "@/src/server/api-functions/DataFilter/get-impact-analysis-datafilter-filterlevel-data";
+import GetComplianceDataFilterData from "@/src/server/api-functions/DataFilterType/get-datafilter-compliance-data";
 import { ActivityStatusDataFilterLevelData, ComplianceStatusDataFilterLevelData, DropDownItem, ImpactAnalysisDataFilterLevelData, DataFilterDataPayLoad, DataFilterLevelDataPayLoad, DataFilterReportChartData, DefaultDropDownItem, ChartDataFilterModalProps } from "@/src/types";
 import { hasValue } from "@/src/utils";
 import { useEffect, useState } from "react";

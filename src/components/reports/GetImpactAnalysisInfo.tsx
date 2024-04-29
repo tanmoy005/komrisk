@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData, ChartProp } from '../../types';
-import GetImpactAnalysisData from '../../server/api-functions/get-impact-analysis-data';
+import GetImpactAnalysisData from '../../server/api-functions/Chart/get-impact-analysis-data';
 import { Alert, Pressable } from 'react-native';
 import { View } from 'react-native';
 import PieChartData from '../charts/PieChart';

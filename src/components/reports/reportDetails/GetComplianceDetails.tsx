@@ -1,4 +1,4 @@
-import GetCompliancesItemDetails from '@/src/server/api-functions/get_compliances_item_details';
+import GetCompliancesItemDetails from '@/src/server/api-functions/TaskDetails/get_compliances_item_details';
 import { RootState } from '@/src/store';
 import { CompliancesItemDetails, CompliancesItemDetailsPayLoad, CompliancesItemDetailsResponse } from '@/src/types';
 import React, { useEffect, useState } from 'react'

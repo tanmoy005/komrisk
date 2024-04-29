@@ -3,7 +3,7 @@ import { Alert, FlatList } from 'react-native';
 import { View } from 'react-native';
 import { IncidentChartListDataItem, IncidentComparisonDataList, IncidentComparisonDataListPayLoad, defaultIncidentChartData } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
-import GetIncidentComparisonDataList from '@/src/server/api-functions/get-incident-comparison-datalist-details';
+import GetIncidentComparisonDataList from '@/src/server/api-functions/TaskList_(DataList)/get-incident-comparison-datalist-details';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store';
 import moment from 'moment';

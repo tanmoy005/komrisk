@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert } from 'react-native';
 import { router } from 'expo-router';
-import AuthenticateWorkspace from '@/src/server/api-functions/authenticate-workspace';
+import AuthenticateWorkspace from '@/src/server/api-functions/Login/authenticate-workspace';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 import { useDispatch } from 'react-redux';
 import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
