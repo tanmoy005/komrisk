@@ -1,8 +1,9 @@
+
 import ComplianceChartDataList from '@/assets/data/chartdataList'
 import ChevronsAccordian from '@/src/components/accordians/ChevronsAccordian'
 import ChevronsAccordian2 from '@/src/components/accordians/ChevronsAccordian2'
 import CardContainer from '@/src/components/cards/CardContainer'
-import CardContainer2 from '@/src/components/cards/CardContainer2'
+
 import CardContainer3 from '@/src/components/cards/CardContainer3'
 import TaskCard from '@/src/components/cards/TaskCard'
 import HeadImageSection from '@/src/components/headSection/HeadImageSection'
@@ -15,7 +16,10 @@ import { screenHeight } from '@/src/style'
 import { PendingTaskItemDetailsResponse } from '@/src/types'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { Text } from 'react-native'
+
+
+import ProofSection from './ProofSection'
+
 
 const PendingTaskOverViewPage = () => {
     const data = useLocalSearchParams();
@@ -33,16 +37,19 @@ const PendingTaskOverViewPage = () => {
     });
     const [expandedTitle, setExpandedTitle] = useState(false)
     const [expanded, setExpanded] = useState(false)
+    const [activeTab, setActiveTab] = useState('Overview'); // Track active tab state
+
+
+
     const pendingTaskList = ComplianceChartDataList;
 
-
-    const GetPendingTaskDetails = (taskId: string) => { // Change this to async function for api call
+    const GetPendingTaskDetails = (taskId: string) => {
         const selectedTask = pendingTaskList.aaData.filter(({ taskId }) => taskId.toString() === selectedTaskId)[0];
         return selectedTask
     }
+
     const setTaskDetails = (selectedTaskId: string) => {
         const taskDetails = GetPendingTaskDetails(selectedTaskId);
-        console.log('taskDetailssdfasdas', taskDetails);
 
         const { title, description, nameOfLaw, complianceId } = taskDetails;
         setPendingTaskDetails({
@@ -57,19 +64,15 @@ const PendingTaskOverViewPage = () => {
     useEffect(() => {
         setTaskDetails(selectedTaskId);
     }, [selectedTaskId]);
+
     const handlePressOnOverview = () => {
-
+        setActiveTab('Overview'); // Set active tab to 'Overview'
     }
+
     const handlePressOnProofs = () => {
-
+        setActiveTab('Proofs'); // Set active tab to 'Proofs'
     }
-    // {
-    //     title: string | null;
-    //     complianceId: string | null;
-    //     section: string | null;
-    //     description: string | null;
-    //     lawName: string | null;
-    //   }
+
     return (
         <CardContainer3 styles={{
             backgroundColor: '#FFFFFF',
@@ -83,60 +86,28 @@ const PendingTaskOverViewPage = () => {
                 secondBtnOnpress={handlePressOnProofs}
             />
             <Seperator48 />
-            <CardContainer>
-                <SmallHeading>Task Details</SmallHeading>
-                <ChevronsAccordian2
-                    title={pendingTaskDetails.title}
-                    descriptions={pendingTaskDetails.description}
-                >
-                    <PendingTaskAccordianBody
-                        pendingTaskDetails={pendingTaskDetails}
-                    />
-                </ChevronsAccordian2>
-            </CardContainer>
-            {/* <ChevronsAccordian2></ChevronsAccordian2> */}
-            {/* <ChevronsAccordian
-                title={pendingTaskDetails.title}
-                descriptions={pendingTaskDetails.description}
-                expanded = {expandedTitle}
-                setExpanded={setExpandedTitle}
-
-            >
-                <PendingTaskAccordianBody
-                    pendingTaskDetails={pendingTaskDetails}
-                />
-            </ChevronsAccordian> */}
+            {activeTab === 'Overview' && (
+                <CardContainer>
+                    <SmallHeading>Task Details</SmallHeading>
+                    <ChevronsAccordian2
+                        title={pendingTaskDetails.title}
+                        descriptions={pendingTaskDetails.description}
+                    >
+                        <PendingTaskAccordianBody
+                            pendingTaskDetails={pendingTaskDetails}
+                        />
+                    </ChevronsAccordian2>
+                </CardContainer>
+            )}
+            {activeTab === 'Proofs' && (
+                <ProofSection/>
+                
+            )
+            }
             <Seperator14 />
-            {/* <ChevronsAccordian
-                title={pendingTaskDetails.title}
-                descriptions={pendingTaskDetails.description}
-                expanded = {expanded}
-                setExpanded={setExpanded}
-
-            >
-                <PendingTaskAccordianBody
-                    pendingTaskDetails={pendingTaskDetails}
-                />
-            </ChevronsAccordian> */}
-            {/* <ChevronsAccordian
-                title='Title'
-                descriptions={pendingTaskDetails.description}
-            >
-                <PendingTaskAccordianBody
-                    pendingTaskDetails={pendingTaskDetails}
-                />
-            </ChevronsAccordian> */}
-
-            {/* <ChevronsAccordian
-                title='Title'
-                descriptions='fsdj ksdfkl sdjf asjf lks afkla fj'
-            >
-                <PendingTaskAccordianBody
-                    pendingTaskDetails={pendingTaskDetails}
-                />
-            </ChevronsAccordian> */}
-        </CardContainer3>
+        </CardContainer3 >
     )
 }
+
 
 export default PendingTaskOverViewPage

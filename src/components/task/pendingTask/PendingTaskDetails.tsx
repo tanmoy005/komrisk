@@ -1,5 +1,5 @@
 import { StyleSheet, Pressable } from "react-native";
-import { ChartListDataItem, PendinTask } from "@/src/types";
+import { ChartListDataItem, PendingTask } from "@/src/types";
 import { Link, router } from "expo-router";
 import { View } from "../../Themed";
 import ChartItemSkelton from "../../skelton/ChartItemSkelton";
@@ -9,7 +9,7 @@ import CardContainer from "../../cards/CardContainer";
 import CardTextContainer from "../../cards/CardTextContainer";
 
 type PendingTaskDetailsProps = {
-  data: PendinTask
+  data: PendingTask
 }
 const isObjectEmpty = (objectName: ChartListDataItem) => {
   return Object.keys(objectName).length === 0

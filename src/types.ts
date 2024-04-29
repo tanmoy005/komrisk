@@ -1000,3 +1000,10 @@ export interface Comment {
   commentText: any |null |undefined;
   taskID: number |null |undefined;
 }
+
+
+export interface Item {
+  docTitle: string;
+  extension: string;
+  // Add other properties as needed
+}
