@@ -12,7 +12,7 @@ import { ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterData
 const IncidentComparison = () => {
   const [refreshing, setRefreshing] = useState(true);
   const currentDate: string = moment().format('DD/MM/YYYY');
-  const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
+  const startDate: string = moment().startOf('month').format('DD/MM/YYYY');
   const [currentChart, setCurrentChart] = useState<string>('PIE');
   const [filterType, setFilterType] = useState<string>('Chart Data');
   const [chartFilterPayload, setChartFilterPayload] = useState<ChartFilterDataPayLoad>({
