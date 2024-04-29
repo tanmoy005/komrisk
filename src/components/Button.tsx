@@ -125,6 +125,7 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>(
         onPressOut={handlePressOut}
         onPress={onPress}
         style={buttonStyle}
+        activeOpacity={0.5}
         {...touchableOpacityProps}
       >
         {leftIcon && <Icon name={leftIcon} size={24} color={dynamicTextColor} />}
