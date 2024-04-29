@@ -1024,3 +1024,8 @@ export interface Item {
   extension: string;
   // Add other properties as needed
 }
+
+export interface ProofsListDetailsProps {
+  taskId: number,
+  type: string,
+}

@@ -13,13 +13,13 @@ const ProofSection = () => {
 
 
     // =========== Need for Upload and Visible Image ================ //
+    const [refreshing, setRefreshing] = useState(true);
 
     //const [selectedImages, setSelectedImages] = useState([]);
     const [selectedImages, setSelectedImages] = useState<{ uri: string, fileName: string | null | undefined }[]>([]);
     const [modalVisible, setModalVisible] = useState(false);
     //const [selectedImageUri, setSelectedImageUri] = useState(null);
     const [selectedImageUri, setSelectedImageUri] = useState<string | null | undefined>(null);
-
 
 
 
