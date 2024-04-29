@@ -1,29 +1,16 @@
 import ComplianceChartDataList from '@/assets/data/chartdataList'
 import Button from '@/src/components/Button'
-import AccordianCommonHeader from '@/src/components/accordians/AccordianCommonHeader'
-import ChevronsAccordian from '@/src/components/accordians/ChevronsAccordian'
-import ChevronsAccordian2 from '@/src/components/accordians/ChevronsAccordian2'
-import CommentAccordian from '@/src/components/accordians/CommentAccordian'
-import CardContainer from '@/src/components/cards/CardContainer'
-import CardContainer2 from '@/src/components/cards/CardContainer2'
 import CardContainer3 from '@/src/components/cards/CardContainer3'
-import TaskCard from '@/src/components/cards/TaskCard'
 import HeadImageSection from '@/src/components/headSection/HeadImageSection'
-import { SmallHeading } from '@/src/components/headings/SmallHeading'
-import Seperator14 from '@/src/components/seperators/Seperator14'
-import Seperator24 from '@/src/components/seperators/Seperator24'
 import Seperator48 from '@/src/components/seperators/Seperator48'
 import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader'
-import LastActivityAccordianBody from '@/src/components/task/LastActivityAccordianBody'
-import PendingTaskAccordianBody from '@/src/components/task/PendingTaskAccordianBody'
 import PendingTaskOverView from '@/src/components/task/pendingTask/PendingTaskOverView'
 import { RootState } from '@/src/store'
 import { screenHeight, styles } from '@/src/style'
 import { LastActivityComment, PendingTaskItemDetailsResponse } from '@/src/types'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { ScrollView, Text, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 const PendingTaskOverViewPage = () => {
@@ -113,7 +100,7 @@ const PendingTaskOverViewPage = () => {
             updatedOn: '10/02/2222'
         },
     ]
-    const [commentText, setCommentText] = useState<string>("");
+    const [commentText, setCommentText] = useState<s>("");
     const [taskid, setTaskId] = useState(303)
     const comments = useSelector((state: RootState) => state.comments.commentsList);
 

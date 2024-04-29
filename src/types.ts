@@ -1006,7 +1006,21 @@ export interface Comment {
 
 export interface PendingTaskOverViewProps {
   pendingTaskDetails: PendingTaskItemDetailsResponse;
-  lastActivitycomments: LastActivityComment;
+  lastActivitycomments: LastActivityComment[];
   commentText: string;
   setCommentText: React.Dispatch<React.SetStateAction<string>>;
+}
+
+
+export interface Item {
+  docTitle: string;
+  extension: string;
+  // Add other properties as needed
+}
+
+
+export interface Item {
+  docTitle: string;
+  extension: string;
+  // Add other properties as needed
 }
