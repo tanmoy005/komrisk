@@ -1,26 +1,12 @@
 
-import ComplianceChartDataList from '@/assets/data/chartdataList'
-import ChevronsAccordian from '@/src/components/accordians/ChevronsAccordian'
-import ChevronsAccordian2 from '@/src/components/accordians/ChevronsAccordian2'
-import CardContainer from '@/src/components/cards/CardContainer'
 import CardContainer2 from '@/src/components/cards/CardContainer2'
-import CardContainer3 from '@/src/components/cards/CardContainer3'
-import TaskCard from '@/src/components/cards/TaskCard'
-import HeadImageSection from '@/src/components/headSection/HeadImageSection'
-import { SmallHeading } from '@/src/components/headings/SmallHeading'
-import Seperator14 from '@/src/components/seperators/Seperator14'
-import Seperator48 from '@/src/components/seperators/Seperator48'
-import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader'
-import PendingTaskAccordianBody from '@/src/components/task/PendingTaskAccordianBody'
-import { screenHeight } from '@/src/style'
-import { PendingTaskItemDetailsResponse } from '@/src/types'
-import { useLocalSearchParams } from 'expo-router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Text, View } from 'react-native'
 import ProofsListDetails from '@/src/components/task/pendingTask/ProofsListDetails'
 import { Button, StyleSheet, Alert, Modal, Image, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import CardContainer from '../../cards/CardContainer';
 
 
 const ProofSection = () => {
@@ -54,8 +40,6 @@ const ProofSection = () => {
             allowsMultipleSelection: true, // Enable multiple photo selection
         });
 
-        console.log(result);
-
         if (!result.canceled) {
             const imagesData = result.assets.map(asset => ({
                 uri: asset.uri,
@@ -76,7 +60,7 @@ const ProofSection = () => {
 
 
     return (
-        <CardContainer2>
+        <CardContainer>
             <View style={{ position: 'absolute', top: 0, left: 0, margin: 8 }}>
 
                 <TouchableOpacity
@@ -112,7 +96,7 @@ const ProofSection = () => {
 
             <ProofsListDetails taskId={330038} type="COMPLIANCE_PROOF" />
 
-        </CardContainer2>
+        </CardContainer>
 
     )
 }

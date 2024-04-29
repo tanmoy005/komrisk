@@ -12,6 +12,7 @@ import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
+import ProofSection from '../../../components/task/pendingTask/ProofSection'
 
 const PendingTaskOverViewPage = () => {
     const data = useLocalSearchParams();
@@ -21,6 +22,7 @@ const PendingTaskOverViewPage = () => {
     const taskId = typeof id === 'string' ? id : id[0];
     const [selectedTaskId] = useState<string>(taskId);
     const [complianceId, setComplianceId] = useState<string>('');
+    const [activeTab, setActiveTab] = useState('Overview'); // Track active tab state
     const [pendingTaskDetails, setPendingTaskDetails] = useState<PendingTaskItemDetailsResponse>({
         title: null,
         complianceId: null,
@@ -67,25 +69,18 @@ const PendingTaskOverViewPage = () => {
         if (filteredComments.length != 0) {
 
             setCommentText(filteredComments[0][0].commentText);
-            //console.log("filteredCommentsggggg", gotfilteredComments);
-            //commentText = gotfilteredComments;
         }
         console.log('selectedTaskId', selectedTaskId);
 
     }, [selectedTaskId]);
     const handlePressOnOverview = () => {
-
+        setActiveTab('Overview'); // Set active tab to 'Overview'
     }
+
     const handlePressOnProofs = () => {
-
+        setActiveTab('Proofs'); // Set active tab to 'Proofs'
     }
-    // {
-    //     title: string | null;
-    //     complianceId: string | null;
-    //     section: string | null;
-    //     description: string | null;
-    //     lawName: string | null;
-    //   }
+
     const lastActivitycomments: LastActivityComment[] = [
         {
             comment: ' sdlkfj lksasdlkj lksd sadf ',
@@ -124,12 +119,18 @@ const PendingTaskOverViewPage = () => {
                         secondBtnOnpress={handlePressOnProofs}
                     />
                     <Seperator48 />
-                    <PendingTaskOverView
-                        pendingTaskDetails={pendingTaskDetails}
-                        lastActivitycomments={lastActivitycomments}
-                        commentText={commentText}
-                        setCommentText={setCommentText}
-                    />
+                    {activeTab === 'Overview' && (
+                        <PendingTaskOverView
+                            pendingTaskDetails={pendingTaskDetails}
+                            lastActivitycomments={lastActivitycomments}
+                            commentText={commentText}
+                            setCommentText={setCommentText}
+                        />
+                    )}
+                    {activeTab === 'Proofs' && (
+                        <ProofSection />
+
+                    )}
                 </View>
                 {/* <Seperator14 /> */}
                 <View style={styles.pendingTaskOverViewSubmit}>

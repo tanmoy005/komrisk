@@ -60,7 +60,6 @@ const ProofsListDetails = ({ taskId, type  }: ProofsListDetailsProps) => {
 
     return (
         <View >
-        
         <FlatList
             data={proofDataList}
             renderItem={renderItem}

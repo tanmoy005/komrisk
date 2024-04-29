@@ -1,15 +1,20 @@
 import axios from 'axios';
 import getDataFromAsyncStorage from '../utils/associate/get-from-localstorage';
+import React from 'react';
+import { AuthContext } from '../provider/AuthProvider';
+import { router } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { useSelector } from 'react-redux';
 // import { ReduxState } from '../types';
 
 interface Response { data: any, error: any, status: number | null };
 
 const Server = async (payLoad: object, url: string, method: string, hasToken: boolean = true) => {
+    // const { clearToken } = React.useContext(AuthContext);
 
     const baseUrl = await getDataFromAsyncStorage('baseUrl');
     const token = await getDataFromAsyncStorage('token');
-    
+
     const api = axios.create({
         // baseURL: "https://komrisknxtcont.komrisk.com/"
         baseURL: baseUrl
@@ -47,7 +52,19 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
                 break;
         }
     } catch (error) {
-        response.error = error;
+        // response.error = error;
+        if (axios.isAxiosError(error)) {
+            response.error = error.response?.data || error.message;
+            response.status = error.response?.status ?? null;
+            if (response.status === 401) {
+                await AsyncStorage.removeItem('token'); // Assuming you store the token in AsyncStorage
+                router.push('/(pages)')
+
+            }
+        } else {
+            response.error = 'An unexpected error occurred';
+        }
+        //console.log("API Error:", response);
     } finally {
         return response
     }
