@@ -51,10 +51,11 @@ const NotificationList = () => {
         <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center', width: '100%' }}>
             {/* <View style={styles.chartContainer}> */}
             {/* <HeadImageSection /> */}
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 refreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                 }
+
                 data={DataList}
                 renderItem={({ item }) => <NotificationCard data={item} />}
                 contentContainerStyle={{ gap: 10, padding: 10 }}

@@ -73,7 +73,7 @@ const GetComplianceStatusDataListDetailsInfo = () => {
     return (
       <View style={styles.chartContainer}>
         <HeadImageSection />
-        <FlatList
+        <FlatList showsVerticalScrollIndicator={false}
           data={DataList}
           renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
           contentContainerStyle={{ gap: 10, padding: 10 }}

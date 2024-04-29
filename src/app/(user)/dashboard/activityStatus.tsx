@@ -1,10 +1,10 @@
-import { FlatList, Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { RefreshControl, SafeAreaView, ScrollView, View } from "react-native";
 import ActivityStatusInfo from "@/src/components/reports/GetActivityStatusInfo";
 import { styles } from "@/src/style";
 import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import Filter from "@/src/components/filter/Filter";
-import React, { useEffect, useState } from "react";
-import { ActivityStatusDataPayLoad, ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
+import React, { useState } from "react";
+import { ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
 import moment from "moment";
 // const Product = products[3];
 

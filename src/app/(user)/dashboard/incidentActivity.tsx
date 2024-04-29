@@ -1,4 +1,4 @@
-import { FlatList, Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { RefreshControl, SafeAreaView, ScrollView, View } from "react-native";
 
 import IncidentActivityInfo from "@/src/components/reports/GetIncidentActivityInfo";
 import { styles } from "@/src/style";

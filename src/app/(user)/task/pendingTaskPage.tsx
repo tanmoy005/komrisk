@@ -78,7 +78,7 @@ const PendingTaskPage = () => {
       />
       <Seperator48 />
       <View >
-        <FlatList
+        <FlatList showsVerticalScrollIndicator={false}
           data={DataList}
           renderItem={({ item }) => <PendingTaskDetails data={item} />}
           contentContainerStyle={{ gap: 10, padding: 10 }}

@@ -68,14 +68,13 @@ const ProofsListDetails = ({ taskId, type }: ProofsListDetailsProps) => {
 
     return (
         <View >
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 refreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                 }
                 data={proofDataList}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
-                showsVerticalScrollIndicator={true}
                 style={{ height: screenHeight * 0.5 }}
             />
         </View>
