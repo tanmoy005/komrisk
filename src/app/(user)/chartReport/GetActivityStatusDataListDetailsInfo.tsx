@@ -8,6 +8,7 @@ import { RootState } from '@/src/store';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
 
 const GetActivityStatusDataListDetailsInfo = () => {
   {
@@ -19,7 +20,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
     });
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
 
-    const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
+    const [DataList, setDataList] = useState<ChartListDataItem[]>([]);
 
     // Get the payload from the navigation params
     const { payload, statusType } = useLocalSearchParams();
@@ -62,11 +63,16 @@ const GetActivityStatusDataListDetailsInfo = () => {
     return (
       <View style={styles.getDetailsContainer}>
         <HeadImageSection />
-        <FlatList showsVerticalScrollIndicator={false}
-          data={DataList}
-          renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
-          contentContainerStyle={{ gap: 10, padding: 10 }}
-        />
+
+        {
+          DataList.length > 0 ?
+            <FlatList showsVerticalScrollIndicator={false}
+              data={DataList}
+              renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
+              contentContainerStyle={{ gap: 10, padding: 10 }}
+            /> :
+            <NoDataAvailableCard />
+        }
       </View>
     )
   }

@@ -33,7 +33,6 @@ const compliancesnotificationList: React.FC = () => {
       <View style={{ justifyContent: 'center' }}>
         <NotificationList />
       </View>
-      {/* <NotificationDetails /> */}
     </SafeAreaView>
 
   );

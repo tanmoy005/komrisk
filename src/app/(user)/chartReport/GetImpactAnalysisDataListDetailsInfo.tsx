@@ -10,6 +10,7 @@ import moment from 'moment';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import { RootState } from '@/src/store';
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
 
 
 
@@ -23,7 +24,7 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
     });
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
 
-    const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
+    const [DataList, setDataList] = useState<ChartListDataItem[]>([]);
     const currentDate: string = moment().format('DD/MM/YYYY');
     const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
@@ -70,11 +71,15 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
     return (
       <View style={styles.getDetailsContainer}>
         <HeadImageSection />
-        <FlatList showsVerticalScrollIndicator={false}
-          data={DataList}
-          renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
-          contentContainerStyle={{ gap: 10, padding: 10 }}
-        />
+        {DataList.length > 0 ?
+
+          <FlatList showsVerticalScrollIndicator={false}
+            data={DataList}
+            renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
+            contentContainerStyle={{ gap: 10, padding: 10 }}
+          /> :
+          <NoDataAvailableCard />
+        }
       </View>
     )
   }

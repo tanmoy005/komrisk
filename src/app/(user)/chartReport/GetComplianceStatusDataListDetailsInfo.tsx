@@ -11,6 +11,7 @@ import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
 import { RootState } from '@/src/store';
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
 
 
 
@@ -43,7 +44,7 @@ const GetComplianceStatusDataListDetailsInfo = () => {
       parsedPayload = {};
     }
 
-    
+
 
     const payLoad: ComplianceStatusDataListPayLoad = {
       ...parsedPayload,
@@ -73,14 +74,19 @@ const GetComplianceStatusDataListDetailsInfo = () => {
     return (
       <View style={styles.getDetailsContainer}>
         <HeadImageSection />
-        <FlatList showsVerticalScrollIndicator={false}
-          data={DataList}
-          renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
-          contentContainerStyle={{ gap: 10, padding: 10 }}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleGetActivityStatusDataList} />
-          }
-        />
+
+        {
+          DataList.length > 0 ?
+            <FlatList showsVerticalScrollIndicator={false}
+              data={DataList}
+              renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
+              contentContainerStyle={{ gap: 10, padding: 10 }}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={handleGetActivityStatusDataList} />
+              }
+            /> :
+            <NoDataAvailableCard />
+        }
       </View>
     )
   }

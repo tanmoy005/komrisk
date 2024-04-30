@@ -9,6 +9,18 @@ import Button from './Button'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/src/store';
 
+interface FormLabelProps {
+  label: string;
+}
+
+const FormLabel = ({ label }: FormLabelProps) => {
+  return (
+    <View style={styles.inputType1}>
+      <Text1>{label}</Text1>
+    </View>
+  )
+}
+
 const Profile = () => {
   const { userDetails, countryEnabled } = useSelector((state: RootState) => state.authUserDetails.payload);
   const [firstName, setFirstName] = useState<string>(userDetails?.firstName ?? "");
@@ -27,55 +39,28 @@ const Profile = () => {
       </View>
       <Divider style={{ ...styles.divider1, marginTop: Math.floor(screenWidth * 0.066) }} />
       <View style={{ marginTop: Math.floor(screenWidth * 0.066), height: 'auto', alignItems: 'stretch' }}>
-        <CardTextContainer>
-          <View style={styles.profileFormContainer}>
-            <View style={styles.profileInputFiledRowContainer}>
-              <Text1>First Name</Text1>
-              <View style={styles.profileInputFieldContainer}>
-                <InputField value={firstName} setInput={setFirstName} placeholder={'first name here'} type='1' editable={false} />
-              </View>
+        <CardTextContainer styles={{width: '100%', position: 'relative'}}>
+          {/* <View style={styles.profileFormContainer}> */}
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ rowGap: 10 }}>
+              <FormLabel label={'First Name'} />
+              <FormLabel label={'Last Name'} />
+              <FormLabel label={'Role'} />
+              <FormLabel label={'Username'} />
+              <FormLabel label={'Company'} />
+              <FormLabel label={'Operating Unit'} />
+              <FormLabel label={'Department'} />
+              <FormLabel label={'Phone'} />
             </View>
-            <View style={styles.profileInputFiledRowContainer}>
-              <Text1>Last Name</Text1>
-              <View style={styles.profileInputFieldContainer}>
-                <InputField value={lastName} setInput={setFirstName} placeholder={'last Name here'} type='1' editable={false} />
-              </View>
-            </View>
-            <View style={styles.profileInputFiledRowContainer}>
-              <Text1>Role</Text1>
-              <View style={styles.profileInputFieldContainer}>
-                <InputField value={roleName} setInput={setRoleName} placeholder={'role here'} type='1' editable={false} />
-              </View>
-            </View>
-            <View style={styles.profileInputFiledRowContainer}>
-              <Text1>Username</Text1>
-              <View style={styles.profileInputFieldContainer}>
-                <InputField value={username} setInput={setUsername} placeholder={'username here'} type='1' editable={false} />
-              </View>
-            </View>
-            <View style={styles.profileInputFiledRowContainer}>
-              <Text1>Company</Text1>
-              <View style={styles.profileInputFieldContainer}>
-                <InputField value={company} setInput={setCompany} placeholder={'company name here'} type='1' editable={false} />
-              </View>
-            </View>
-            <View style={styles.profileInputFiledRowContainer}>
-              <Text1>Operating Unit</Text1>
-              <View style={styles.profileInputFieldContainer}>
-                <InputField value={operatingUnit} setInput={setOperatingUnit} placeholder={'operating unit name here'} type='1' editable={false} />
-              </View>
-            </View>
-            <View style={styles.profileInputFiledRowContainer}>
-              <Text1>Department</Text1>
-              <View style={styles.profileInputFieldContainer}>
-                <InputField value={department} setInput={setDepartment} placeholder={'dept. name here'} type='1' editable={false} />
-              </View>
-            </View>
-            <View style={styles.profileInputFiledRowContainer}>
-              <Text1>Phone</Text1>
-              <View style={styles.profileInputFieldContainer}>
-                <InputField value={phone} setInput={setPhone} placeholder={'phone number here'} type='1' editable={false} />
-              </View>
+            <View style={{ ...styles.profileInputFieldContainer, rowGap: 10 }}>
+              <InputField value={firstName} setInput={setFirstName} placeholder={'first name here'} type='1' editable={false} />
+              <InputField value={lastName} setInput={setFirstName} placeholder={'last Name here'} type='1' editable={false} />
+              <InputField value={roleName} setInput={setRoleName} placeholder={'role here'} type='1' editable={false} />
+              <InputField value={username} setInput={setUsername} placeholder={'username here'} type='1' editable={false} />
+              <InputField value={company} setInput={setCompany} placeholder={'company name here'} type='1' editable={false} />
+              <InputField value={operatingUnit} setInput={setOperatingUnit} placeholder={'operating unit name here'} type='1' editable={false} />
+              <InputField value={department} setInput={setDepartment} placeholder={'dept. name here'} type='1' editable={false} />
+              <InputField value={phone} setInput={setPhone} placeholder={'phone number here'} type='1' editable={false} />
             </View>
           </View>
         </CardTextContainer>

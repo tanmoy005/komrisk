@@ -9,6 +9,7 @@ import { RootState } from '@/src/store';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import IncidentTaskDetails from '@/src/components/task/IncidentTaskDetails';
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
 
 
 
@@ -65,19 +66,24 @@ const GetIncidentActivityDataListDetailsInfo = () => {
       handleGetIncidentActivityDataList();
     }, []);
 
-  //   {
-  //     width: '100%',
-  //     alignItems: 'center',
-  //     padding: 10
-  // }
+    //   {
+    //     width: '100%',
+    //     alignItems: 'center',
+    //     padding: 10
+    // }
     return (
       <View style={styles.getDetailsContainer}>
         <HeadImageSection />
-        <FlatList showsVerticalScrollIndicator={false}
-          data={DataList}
-          renderItem={({ item }) => <IncidentTaskDetails data={item} />}
-          contentContainerStyle={{ gap: 10, padding: 10 }}
-        />
+        {
+          DataList.length > 0 ?
+            <FlatList showsVerticalScrollIndicator={false}
+              data={DataList}
+              renderItem={({ item }) => <IncidentTaskDetails data={item} />}
+              contentContainerStyle={{ gap: 10, padding: 10 }}
+            />
+            :
+            <NoDataAvailableCard />
+        }
       </View>
     )
   }

@@ -10,6 +10,7 @@ import moment from 'moment';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import IncidentTaskDetails from '@/src/components/task/IncidentTaskDetails';
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
 
 
 
@@ -68,11 +69,16 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
     return (
       <View style={styles.getDetailsContainer}>
         <HeadImageSection />
-        <FlatList showsVerticalScrollIndicator={false}
-          data={DataList}
-          renderItem={({ item }) => <IncidentTaskDetails data={item} />}
-          contentContainerStyle={{ gap: 10, padding: 10 }}
-        />
+        {
+          DataList.length > 0 ?
+            <FlatList showsVerticalScrollIndicator={false}
+              data={DataList}
+              renderItem={({ item }) => <IncidentTaskDetails data={item} />}
+              contentContainerStyle={{ gap: 10, padding: 10 }}
+            />
+            :
+            <NoDataAvailableCard />
+        }
       </View>
     )
   }

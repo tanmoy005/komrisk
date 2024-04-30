@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { connect, useSelector } from 'react-redux'
-import { styles } from '@/src/style'
+import { useSelector } from 'react-redux'
 import { Alert, FlatList, RefreshControl, View } from 'react-native'
 import { RootState } from '@/src/store'
 import NotificationCard from '../cards/NotificationCard'
 import GetComplianceAlertsListDetails from '@/src/server/api-functions/Alerts/get-compliance-alerts-list'
 import { ComplianceStatusDataList, NotificationListDataItem, UserModel } from '@/src/types'
+import NoDataAvailableCard from '../NoDataAvailableCard'
 
 const NotificationList = () => {
     const [refreshing, setRefreshing] = useState(true);
@@ -17,7 +17,7 @@ const NotificationList = () => {
         iTotalRecords: null,
         iTotalDisplayRecords: null,
     });
-    const [DataList, setDataList] = useState<NotificationListDataItem[]>([{}]);
+    const [DataList, setDataList] = useState<NotificationListDataItem[]>([]);
 
     const handleGetComplianceAlertsList = async () => {
         const payLoad: UserModel = {
@@ -29,8 +29,8 @@ const NotificationList = () => {
             setComplianceAlertDataList(data);
             if (aaData.length > 0) {
                 setDataList(aaData);
-                // setRefreshing(false);
             }
+            setRefreshing(false);
         } else {
             Alert.alert("error4444", error.message);
         }
@@ -47,15 +47,21 @@ const NotificationList = () => {
 
     return (
         <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center', width: '100%' }}>
-            <FlatList showsVerticalScrollIndicator={false}
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                }
+            {
+                DataList.length > 0 ?
 
-                data={DataList}
-                renderItem={({ item }) => <NotificationCard data={item} />}
-                contentContainerStyle={{ gap: 10, padding: 10 }}
-            />
+                    <FlatList showsVerticalScrollIndicator={false}
+                        refreshControl={
+                            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                        }
+
+                        data={DataList}
+                        renderItem={({ item }) => <NotificationCard data={item} />}
+                        contentContainerStyle={{ gap: 10, padding: 10 }}
+                    />
+                    :
+                    <NoDataAvailableCard />
+            }
         </View>
     )
 }
