@@ -36,7 +36,7 @@ const CustomDatePicker = ({ setDate, date, label, _handleConfirm }: CustomeDateP
         /> */}
         <View style={styles.datePickerLabelContainer}>
           <MuiIcon name="calendar" size={size24} color="rgba(120, 106, 205, 1)" />
-          <Text style={styles.textStyle2}>{label}</Text>
+          <Text style={{...styles.textStyle2, marginLeft: 2}}>{label}</Text>
         </View>
       </Pressable>
       <DateTimePickerModal
