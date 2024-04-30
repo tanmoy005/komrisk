@@ -6,10 +6,9 @@ import { router } from 'expo-router';
 import { useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-interface RedirectionButton {
-  btnName: string;
-  pathName: string;
-}
+import { styles } from '../style';
+import Initials from '../components/Initials';
+
 
 export default function Menu() {
   const userDetails = useSelector((state: RootState) => state.authUserDetails.payload);
@@ -23,17 +22,14 @@ export default function Menu() {
     setUserName(userDetails?.userDetails?.displayName ?? "");
     setUserRole(userDetails?.userDetails?.role ?? "");
   }, [userDetails]);
-  const avatarLetter = userName ? userName[0].toUpperCase() : ''; // Ensure the first character is always upper case.
+ // Ensure the first character is always upper case.
   return (
-    <View style={styles.container}>
+    <View style={styles.profileImageSectioncontainer}>
       <Pressable onPress={navigateToProfile}>
-        <View style={{ ...styles.profileImageContainer, height: "50%" }}>
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>{avatarLetter}</Text>
-          </View>
+        <View style={{ ...styles.bigprofileImageContainer, height: "50%" }}>
+          <Initials size={120} fontSize ={50} />
           <Text style={styles.userTitle}>{userName}</Text>
-          <View style={styles.separator}></View>
-          <Text style={styles.designation}>{userRole}</Text>
+          <Text style={{ ...styles.designation, marginTop: 3 }}>{userRole}</Text>
         </View>
       </Pressable>
       <View
@@ -87,51 +83,3 @@ export default function Menu() {
     </View >
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 60
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 5,
-    height: 1,
-    width: '45%',
-    backgroundColor: "#26262C3D"
-  },
-  profileImageContainer: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  userTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    marginTop: 5
-  },
-  designation: {
-    fontSize: 12,
-    fontWeight: '400',
-    lineHeight: 14,
-    color: '#26262C'
-  },
-  avatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: '#5645C0',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  avatarText: {
-    color: 'white',
-    fontSize: 50, // Adjust size as needed
-    fontWeight: 'bold'
-  },
-});
