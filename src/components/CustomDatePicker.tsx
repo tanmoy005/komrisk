@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Pressable, Text, TextInput, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { CustomeDatePickerProps } from '../types';
 import { size24, styles } from '../style';
-import { DateFormatDDMMYYYY } from '../utils';
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const CustomDatePicker = ({ setDate, date, label, _handleConfirm }: CustomeDatePickerProps): JSX.Element => {
