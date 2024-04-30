@@ -1,11 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { Image, Platform, Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
-import EditScreenInfo from '@/src/components/EditScreenInfo';
 import { Text, View } from '@/src/components/Themed';
 import Button from '@/src/components/Button';
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 interface RedirectionButton {
@@ -20,6 +18,11 @@ export default function Menu() {
   const navigateToProfile = () => {
     router.push('/profilePage');
   }
+
+  useEffect(() => {
+    setUserName(userDetails?.userDetails?.displayName ?? "");
+    setUserRole(userDetails?.userDetails?.role ?? "");
+  }, [userDetails]);
   const avatarLetter = userName ? userName[0].toUpperCase() : ''; // Ensure the first character is always upper case.
   return (
     <View style={styles.container}>

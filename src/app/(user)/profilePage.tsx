@@ -2,25 +2,15 @@ import Button from '@/src/components/Button'
 import Profile from '@/src/components/Profile'
 // import Profile from '@/src/components/Profile'
 import { View } from '@/src/components/Themed'
-import CardContainer from '@/src/components/cards/CardContainer'
-import CardContainer2 from '@/src/components/cards/CardContainer2'
 import CardContainer3 from '@/src/components/cards/CardContainer3'
-import CardTextContainer from '@/src/components/cards/CardTextContainer'
 import HeadImageSection from '@/src/components/headSection/HeadImageSection'
-import Text1 from '@/src/components/headings/Label1'
-import InputField from '@/src/components/input-fields/InputField'
-import SmSectionSeperator from '@/src/components/seperators/SmSectionSeperator'
-import Colors from '@/src/constants/Colors'
-import { screenHeight, screenWidth, styles } from '@/src/style'
-import { FontAwesome } from '@expo/vector-icons'
-import { Link, Stack } from 'expo-router'
+import { screenHeight, screenWidth } from '@/src/style'
 import React, { useState } from 'react'
-import { Pressable, Text, useColorScheme } from 'react-native'
-import { Divider, Image } from 'react-native-elements'
+import { useColorScheme } from 'react-native'
 
 
 
-import AuthProvider, {AuthContext} from '../../provider/AuthProvider';
+import {AuthContext} from '../../provider/AuthProvider';
 import { router } from 'expo-router';
 
 const ProfilePage = () => {

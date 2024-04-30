@@ -12,6 +12,7 @@ import  { useEffect, useRef } from 'react';
 import Colors from '@/src/constants/Colors';
 import { useColorScheme } from '@/src/components/useColorScheme';
 import { useClientOnlyValue } from '@/src/components/useClientOnlyValue';
+import { useNavigation } from 'expo-router';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -32,7 +33,7 @@ const CustomTabLabel = ({ title }: { title: string }) => (
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const lastBackPressed = useRef<number | null>(null);
-
+  const navigation = useNavigation();
 
 
   useEffect(() => {
@@ -45,9 +46,20 @@ export default function TabLayout() {
       lastBackPressed.current = Date.now();
       ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
       return true;
+
     });
 
-    return () => backHandler.remove();
+
+    navigation .addListener('beforeRemove', (e) => {
+      e.preventDefault();
+     // backHandler.remove()
+      //console.log('onback');
+      // Do your stuff here
+     // navigation.dispatch(e.data.action);
+     
+  });
+  return () => backHandler.remove();
+
   }, []);
 
 

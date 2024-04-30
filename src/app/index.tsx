@@ -14,32 +14,32 @@ const index = () => {
 
   // ===================== Checking for removing redux elements except comments ========================== //
 
-  // console.log("session",session);
-  // const authUserDetails = useSelector((state: RootState) => state.authUserDetails);
+  console.log("session",session);
+  const authUserDetails = useSelector((state: RootState) => state.authUserDetails);
   
-  // console.log("authUserDetails got log out",authUserDetails);
+  console.log("authUserDetails got log out",authUserDetails);
 
-  // const authUserCred = useSelector((state: RootState) => state.authUserCred);
+  const authUserCred = useSelector((state: RootState) => state.authUserCred);
 
-  // console.log("authUserCred got log out",authUserCred);
+  console.log("authUserCred got log out",authUserCred);
 
   
-  // const authUserAccess = useSelector((state: RootState) => state.authUserAccess);
+  const authUserAccess = useSelector((state: RootState) => state.authUserAccess);
 
-  // console.log("authUserAccess got log out",authUserAccess);
+  console.log("authUserAccess got log out",authUserAccess);
 
 
-  // const baseUrl = useSelector((state: RootState) => state.baseUrl);
+  const baseUrl = useSelector((state: RootState) => state.baseUrl);
 
-  // console.log("baseUrl got log out",baseUrl);
+  console.log("baseUrl got log out",baseUrl);
 
-  // const incidentAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews);
+  const incidentAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews);
 
-  // console.log("incidentAvailableViews got log out",incidentAvailableViews);
+  console.log("incidentAvailableViews got log out",incidentAvailableViews);
 
-  // const comments = useSelector((state: RootState) => state.comments);
+  const comments = useSelector((state: RootState) => state.comments);
 
-  // console.log("comments got log out",comments);
+  console.log("comments got log out",comments);
 
   
 

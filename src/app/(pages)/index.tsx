@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert } from 'react-native';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import AuthenticateWorkspace from '@/src/server/api-functions/Login/authenticate-workspace';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 import { useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ const Workspace = () => {
 
   const [workSpaceName, setWorkSpaceName] = useState<string>('');
   const dispatch = useDispatch();
-
+  const navigation = useNavigation();
 
   const handleSubmitWorkSpace = async () => {
 
@@ -32,7 +32,8 @@ const Workspace = () => {
 
         dispatch(storeBaseUrl({ workSpaceName: workSpaceName.trim(), baseUrl: baseURL }));
 
-        router.push("/signin");
+        //navigation.reset;
+        router.navigate("/signin");
       } else {
         setDataToAsyncStorage('baseUrl', "");
         Alert.alert("error", "Unknown workspace");
