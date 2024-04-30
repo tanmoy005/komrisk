@@ -65,11 +65,14 @@ const GetIncidentActivityDataListDetailsInfo = () => {
       handleGetIncidentActivityDataList();
     }, []);
 
-
+  //   {
+  //     width: '100%',
+  //     alignItems: 'center',
+  //     padding: 10
+  // }
     return (
-      <View style={styles.chartContainer}>
+      <View style={styles.getDetailsContainer}>
         <HeadImageSection />
-
         <FlatList showsVerticalScrollIndicator={false}
           data={DataList}
           renderItem={({ item }) => <IncidentTaskDetails data={item} />}

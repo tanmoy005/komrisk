@@ -60,7 +60,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
 
 
     return (
-      <View style={styles.chartContainer}>
+      <View style={styles.getDetailsContainer}>
         <HeadImageSection />
         <FlatList showsVerticalScrollIndicator={false}
           data={DataList}

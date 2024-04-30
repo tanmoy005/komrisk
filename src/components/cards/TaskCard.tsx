@@ -20,7 +20,6 @@ const TaskCard = ({ taskCard }: taskCardDataProp) => {
     return (
         <View style={styles.taskCard}>
             <View>
-
                 <CardContainer>
                     <CardTextContainer>
                         {

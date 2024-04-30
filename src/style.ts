@@ -3,6 +3,8 @@ import { StyleSheet, Dimensions, PixelRatio } from "react-native";
 export const screenWidth = Math.floor(Dimensions.get('window').width);
 export const screenHeight = Math.floor(Dimensions.get('window').height);
 
+console.log('screenHeight', screenHeight);
+
 
 const SCALE = 350;
 const scaleFontSize = (fontSize: any) => {
@@ -21,8 +23,10 @@ const circle1Size = Math.floor(screenWidth * .076);
 export const skeltonwidth = Math.floor(screenWidth * .82);
 const profileImageContainerSize = Math.floor(screenWidth * 0.2);
 export const size12 = Math.floor(screenWidth * 0.033);
-const size33 = Math.floor(screenWidth * 0.09);
-const size13 = Math.floor(screenWidth * 0.03);
+// const size33 = Math.floor(screenWidth * 0.09);
+// const size13 = Math.floor(screenWidth * 0.03);
+const size33 = Math.floor(screenHeight * 0.04);
+const size13 = Math.floor(screenHeight * 0.009);
 const size15 = Math.floor(screenWidth * 0.04);
 const size39 = Math.floor(screenWidth * 0.01);
 export const filterIconBoxheight = Math.floor(screenWidth * 0.110);
@@ -48,6 +52,11 @@ const taskCardContainer = {
 export const headerColor = {
     backgroundColor: '#F6EEF4'
 }
+const containerPd10 = {
+    // width: '100%',
+    padding: 10,
+}
+
 export const profileImageSize = Math.floor(screenWidth * .133);
 export const styles: { [key: string]: any } = StyleSheet.create({
     container: {
@@ -72,6 +81,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         padding: Math.floor(screenWidth * .044),
         // height: Math.floor(screenHeight)
     },
+    getDetailsContainer: containerPd10,
     cardStyle: {
         // width: Math.floor(screenWidth *.82), 
         width: 360,
@@ -118,9 +128,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         height: profileImageSize
     },
     chartContainer: {
-        width: '100%',
-        alignItems: 'center',
-        padding: 10
+       ...containerPd10,
+        alignItems: 'center'
     },
     chartLabel: {
         fontSize: scaleFontSize(12)
@@ -134,8 +143,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         shadowColor: 'rgba(120, 106, 205, 0.12)', // Shadow color with opacity
         shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
         shadowOpacity: 1, // Shadow opacity (1 is fully opaque)
-        shadowRadius: 10
-
+        shadowRadius: 10,
+        width: 'auto', 
     },
     taskCardContainer: {
         ...taskCardContainer
@@ -279,7 +288,6 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         padding: size13,
         height: size33,
         color: '#99A3A4',
-
     },
     inputType2: {
         paddingHorizontal: 14,
