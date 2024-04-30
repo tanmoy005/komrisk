@@ -6,7 +6,7 @@ import { size24, styles } from '../style';
 import { DateFormatDDMMYYYY } from '../utils';
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const CustomDatePicker = ({ setDate, date, label }: CustomeDatePickerProps): JSX.Element => {
+const CustomDatePicker = ({ setDate, date, label, _handleConfirm }: CustomeDatePickerProps): JSX.Element => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -21,6 +21,7 @@ const CustomDatePicker = ({ setDate, date, label }: CustomeDatePickerProps): JSX
     // console.warn("A date has been picked: ", date);
     setDate(date);
     hideDatePicker();
+    _handleConfirm &&  _handleConfirm(date);
   };
 
   return (

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ChartFilterProps, ComplianceView, DropDownItem, availableViews } from '@/src/types';
-import { scaleCardSize, size24 } from '@/src/style';
-import { DateFormatDDMMYYYY, StringToDate, StringToDateDDMMYYYY, hasValue } from '@/src/utils';
+import { scaleCardSize } from '@/src/style';
+import { DateFormatDDMMYYYY, StringToDateDDMMYYYY, hasValue } from '@/src/utils';
 import { View } from 'react-native';
 import CustomDatePicker from '../CustomDatePicker';
 import Button from '../Button';
@@ -16,6 +15,7 @@ const ChartFilter = ({
     reportType,
     setModalVisible
 }: ChartFilterProps) => {
+
 
 
     const countryDropdownLabel: DropDownItem = {
@@ -40,6 +40,8 @@ const ChartFilter = ({
     const [selectedCountry, setSelectedCountry] = useState<string>('');
     const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload?.viewAs ?? "");
     const [startDate, setStartDate] = useState<Date>(StringToDateDDMMYYYY(chartFilterPayload.start.trim()));
+    const [displayStartDate, setDisplayStartDate] = useState<string | null | undefined>('Start Date');
+    const [displayEndDate, setDisplayEndDate] = useState<string | null | undefined>('End Date');
     const [endDate, setEndDate] = useState<Date>(StringToDateDDMMYYYY(chartFilterPayload.end.trim()));
 
     const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
@@ -84,7 +86,6 @@ const ChartFilter = ({
                 filterViewedAslist = [...filterViewedAslist, { value: subList?.value ?? "", lable: subList?.key ?? "" }];
             });
         }
-
     }
 
     const handleApplyFilters = () => {
@@ -113,8 +114,15 @@ const ChartFilter = ({
         setChartFilterPayload({ ...chartFilterPayload });
         setModalVisible(false);
     }
+    console.log('startDate', startDate);
 
-
+    console.log('startDate3423', DateFormatDDMMYYYY(startDate && startDate.toString()));
+    const handleStartDateConfirmation = (date: Date) => {
+        setDisplayStartDate(DateFormatDDMMYYYY(date && date.toString()));
+    }
+    const handleEndDateConfirmation = (date: Date) => {
+        setDisplayEndDate(DateFormatDDMMYYYY(date && date.toString()));
+    }
 
     return (
         <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110, position: 'absolute', left: scaleCardSize(8), justifyContent: 'space-between', height: '100%' }}>
@@ -124,12 +132,14 @@ const ChartFilter = ({
                     <CustomDatePicker
                         setDate={setStartDate}
                         date={startDate}
-                        label={'Start Date'}
+                        label={displayStartDate}
+                        _handleConfirm={handleStartDateConfirmation}
                     />
                     <CustomDatePicker
                         setDate={setEndDate}
                         date={endDate}
-                        label={'End Date'}
+                        label={displayEndDate}
+                        _handleConfirm={handleEndDateConfirmation}
                     />
                 </View>
                 <View style={{ marginTop: 38, zIndex: 2120 }}>

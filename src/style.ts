@@ -260,8 +260,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         alignItems: 'center'
-    }
-    ,
+    },
     profileFormContainer: {
         rowGap: size15
     },

@@ -680,7 +680,8 @@ export interface ChartProp {
 export interface CustomeDatePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Date>>
   date: Date | null
-  label: string
+  label: string | null | undefined
+  _handleConfirm?: (date: Date)=> void
 }
 
 export interface filterSelectProps {
