@@ -7,7 +7,7 @@ import { Link, Tabs } from 'expo-router';
 import { Image, Pressable } from 'react-native';
 import { Text, View } from 'react-native';
 import { BackHandler, ToastAndroid } from 'react-native';
-import  { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Colors from '@/src/constants/Colors';
 import { useColorScheme } from '@/src/components/useColorScheme';
@@ -50,15 +50,15 @@ export default function TabLayout() {
     });
 
 
-    navigation .addListener('beforeRemove', (e) => {
-      e.preventDefault();
-     // backHandler.remove()
-      //console.log('onback');
-      // Do your stuff here
-     // navigation.dispatch(e.data.action);
-     
-  });
-  return () => backHandler.remove();
+    navigation.addListener('beforeRemove', (e) => {
+
+      if (e?.data?.action?.source != null) {
+        e.preventDefault();
+      } else {
+        navigation.dispatch(e.data.action);
+      }
+    });
+    return () => backHandler.remove();
 
   }, []);
 

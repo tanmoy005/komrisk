@@ -3,7 +3,7 @@ import { Pressable, StyleSheet } from 'react-native';
 import { Text, View } from '@/src/components/Themed';
 import Button from '@/src/components/Button';
 import { router } from 'expo-router';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { styles } from '../style';
@@ -13,7 +13,20 @@ import Initials from '../components/Initials';
 export default function Menu() {
   const userDetails = useSelector((state: RootState) => state.authUserDetails.payload);
   const [userName, setUserName] = useState<string>(userDetails?.userDetails?.displayName ?? "");
+  const [userLastName, setUserLastName] = useState<string>(userDetails?.userDetails?.lastName ?? "");
   const [userRole, setUserRole] = useState<string>(userDetails?.userDetails?.role ?? "");
+
+  const CreateInitials = (str: string) => {
+    const firstLetter = str[0].toUpperCase();
+    const words = str.split(' ');
+    const lastWord = words[words.length - 1];
+    const lastLetter = lastWord[0].toUpperCase();
+    return (
+      `${firstLetter}${lastLetter}`
+    )
+  }
+
+
   const navigateToProfile = () => {
     router.push('/profilePage');
   }
@@ -21,8 +34,9 @@ export default function Menu() {
   useEffect(() => {
     setUserName(userDetails?.userDetails?.displayName ?? "");
     setUserRole(userDetails?.userDetails?.role ?? "");
+    setUserLastName(userDetails?.userDetails?.lastName ?? "")
   }, [userDetails]);
- // Ensure the first character is always upper case.
+  const avatarLetter = `${userName ? userName[0].toUpperCase() : ''}${userLastName ? userLastName[0].toUpperCase() : ''}`; // Ensure the first character is always upper case.
   return (
     <View style={styles.profileImageSectioncontainer}>
       <Pressable onPress={navigateToProfile}>

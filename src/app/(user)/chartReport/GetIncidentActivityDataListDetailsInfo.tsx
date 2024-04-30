@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, FlatList } from 'react-native';
+import { Alert, FlatList, RefreshControl } from 'react-native';
 import { View } from 'react-native';
 import { IncidentActivityDataList, IncidentActivityDataListPayLoad, IncidentChartListDataItem, defaultIncidentChartData } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
@@ -22,10 +22,8 @@ const GetIncidentActivityDataListDetailsInfo = () => {
       iTotalDisplayRecords: null,
     });
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-
+    const [refreshing, setRefreshing] = useState(true);
     const [DataList, setDataList] = useState<IncidentChartListDataItem[]>([defaultIncidentChartData]);
-    // const currentDate: string = moment().format('DD/MM/YYYY');
-    // const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
     // Get the payload from the navigation params
     const { payload, statusType } = useLocalSearchParams();
     const filterStatus = typeof statusType === 'string' ? statusType : statusType[0];
@@ -57,6 +55,7 @@ const GetIncidentActivityDataListDetailsInfo = () => {
         setIncidentActivityChartDataList(data);
         if (aaData.length > 0) {
           setDataList(aaData);
+          setRefreshing(false);
         }
       } else {
         Alert.alert("error4444", error.message);
@@ -80,11 +79,15 @@ const GetIncidentActivityDataListDetailsInfo = () => {
               data={DataList}
               renderItem={({ item }) => <IncidentTaskDetails data={item} />}
               contentContainerStyle={{ gap: 10, padding: 10 }}
-            />
+              refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleGetIncidentActivityDataList} />
+          }
+        />
             :
             <NoDataAvailableCard />
         }
       </View>
+
     )
   }
 }

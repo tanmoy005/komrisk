@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, FlatList } from 'react-native';
+import { Alert, FlatList, RefreshControl } from 'react-native';
 import { View } from 'react-native';
 import { IncidentChartListDataItem, IncidentComparisonDataList, IncidentComparisonDataListPayLoad, defaultIncidentChartData } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
@@ -27,6 +27,7 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
     const [DataList, setDataList] = useState<IncidentChartListDataItem[]>([defaultIncidentChartData]);
     const currentDate: string = moment().format('DD/MM/YYYY');
     const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
+    const [refreshing, setRefreshing] = useState(true);
 
     // Get the payload from the navigation params
     const { payload, statusType } = useLocalSearchParams();
@@ -55,6 +56,7 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
         setIncidentComparisonChartDataList(data);
         if (aaData.length > 0) {
           setDataList(aaData);
+          setRefreshing(false);
         }
       } else {
         Alert.alert("error4444", error.message);
@@ -75,7 +77,10 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
               data={DataList}
               renderItem={({ item }) => <IncidentTaskDetails data={item} />}
               contentContainerStyle={{ gap: 10, padding: 10 }}
-            />
+              refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleGetIncidentComparisonDataList} />
+          }
+        />
             :
             <NoDataAvailableCard />
         }

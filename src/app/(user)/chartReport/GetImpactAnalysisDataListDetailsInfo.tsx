@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, StyleSheet } from 'react-native';
+import { Alert, FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { ChartListDataItem, ImpactAnalysisDataList, ImpactAnalysisDataListPayLoad } from '@/src/types';
 import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
@@ -23,6 +23,7 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
       iTotalDisplayRecords: null,
     });
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+    const [refreshing, setRefreshing] = useState(true);
 
     const [DataList, setDataList] = useState<ChartListDataItem[]>([]);
     const currentDate: string = moment().format('DD/MM/YYYY');
@@ -57,6 +58,7 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
         setImpactAnalysisChartDataList(data);
         if (aaData.length > 0) {
           setDataList(aaData);
+          setRefreshing(false);
         }
       } else {
         Alert.alert("error4444", error.message);
@@ -77,6 +79,9 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
             data={DataList}
             renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
             contentContainerStyle={{ gap: 10, padding: 10 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleGetImpactAnalysisDataList} />
+          }
           /> :
           <NoDataAvailableCard />
         }

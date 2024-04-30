@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, FlatList, View } from 'react-native';
+import { Alert, FlatList, RefreshControl, View } from 'react-native';
 import GetActivityStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-activity-status-datalist-details';
 import { ActivityStatusDataList, ActivityStatusDataListPayLoad, ChartListDataItem } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
@@ -21,6 +21,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
 
     const [DataList, setDataList] = useState<ChartListDataItem[]>([]);
+    const [refreshing, setRefreshing] = useState(true);
 
     // Get the payload from the navigation params
     const { payload, statusType } = useLocalSearchParams();
@@ -49,6 +50,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
         setActivityStatusChartDataList(data);
         if (aaData.length > 0) {
           setDataList(aaData);
+          setRefreshing(false);
         }
       } else {
         Alert.alert("error4444", error.message);
@@ -70,7 +72,10 @@ const GetActivityStatusDataListDetailsInfo = () => {
               data={DataList}
               renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
               contentContainerStyle={{ gap: 10, padding: 10 }}
-            /> :
+              refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleGetActivityStatusDataList} />
+          }
+        /> :
             <NoDataAvailableCard />
         }
       </View>
