@@ -15,8 +15,7 @@ import GetIncidentAvailableViews from '@/src/server/api-functions/Misc/get-incid
 import { storeIncidentAvailableViews } from '@/src/store/slices/incident-available-views-slice';
 import { RootState } from '@/src/store';
 import { screenWidth } from '@/src/style';
-// import { useDispatch } from 'react-redux';
-// import { storeLoginData } from '@/src/store/slices/login-data-slice';
+
 
 
 let SignIn = () => {
@@ -26,6 +25,8 @@ let SignIn = () => {
     const workspaceName = useSelector((state: RootState) => state.baseUrl.payload.workSpaceName);
 
     const dispatch = useDispatch();
+    
+
 
     const handleSubmitSignIn = async () => {
 

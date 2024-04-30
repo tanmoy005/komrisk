@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { BaseUrlWorkspace,DefaultBaseUrlWorkspace } from "@/src/types"
 
 interface BaseUrlState {
-    payload: { workSpaceName: string, baseUrl: string }; // Define the type of the payload
+    payload: BaseUrlWorkspace; // Define the type of the payload
 }
 const initialState: BaseUrlState = {
-    payload: { workSpaceName: "", baseUrl: "" },
+    payload: DefaultBaseUrlWorkspace,
 };
 const BaseUrlSlice = createSlice({
     name: "baseUrlSlice",
@@ -13,8 +14,8 @@ const BaseUrlSlice = createSlice({
         storeBaseUrl(state, action: BaseUrlState) {
             state.payload = action.payload;
         },
-        removeBaseUrl(state, action) {
-            state = initialState
+        removeBaseUrl(state) {
+            state.payload = DefaultBaseUrlWorkspace
         },
     }
 })

@@ -16,8 +16,8 @@ const AuthUserAccessDetailsSlice = createSlice({
         storeAuthUserAccessDetails(state, action: AuthUserAccessDetailsState) {
             state.payload = action.payload;
         },
-        removeAuthUserAccessDetails(state, action) {
-            state = initialState
+        removeAuthUserAccessDetails(state) {
+            state.payload = DefaultAccessDetails
         }
     }
 })

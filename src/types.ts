@@ -120,8 +120,8 @@ export const defaultIncidentChartData: IncidentChartListDataItem = {
 }
 
 export interface UserModel {
-  username: string,
-  password: string
+  username: string | null,
+  password: string | null
 }
 
 export interface ActivityStatusDataPayLoad {
@@ -1025,7 +1025,156 @@ export interface Item {
   // Add other properties as needed
 }
 
+
+
+export interface ComplianceTaskMapDetailsPayLoad {
+  complianceMapId: number | null,
+  userDetails: userDetails
+}
+
+export interface ComplianceTaskMapDetailsResponse {
+    mapId: number | null,
+    complianceGenId: string | null,
+    mapName: string | null,
+    operatingUnit: string | null,
+    department: string | null,
+    ownerName: string | null,
+    approverName: string | null,
+    ownerId: number | null,
+    approverId: number | null,
+    routeId: number | null,
+    taskStatus: string | null,
+    wipReminderFrequency: string | null,
+    recipients: string | null,
+    operatingUnitId: number | null,
+    reassignmentRequested: boolean | null,
+    dueDate: string | null,
+    startDate: string | null,
+    completedOn: string | null,
+    frequency: string | null,
+    requiresProof: boolean | null,
+    alertBeforeDue: number | null,
+    failureImpact: string | null,
+    recurringYear: string | null,
+    reminderFrequency: number | null,
+    taskId: number | null,
+    status: string | null,
+    taskSource: string | null,
+    taskType: string | null,
+    ownerComments: string | null,
+    taskComments: string | null,
+    reviewerComments: string | null,
+    loggedUserTaskAuthority: string | null,
+    taskName: string | null,
+    info: string | null
+   }
+
+export const DefaultComplianceTaskMapDetailsResponse: ComplianceTaskMapDetailsResponse = {
+
+  mapId: null,
+  complianceGenId:  null,
+  mapName: null,
+  operatingUnit:  null,
+  department:  null,
+  ownerName: null,
+  approverName:  null,
+  ownerId:  null,
+  approverId:  null,
+  routeId:  null,
+  taskStatus:  null,
+  wipReminderFrequency:  null,
+  recipients:  null,
+  operatingUnitId:  null,
+  reassignmentRequested:  null,
+  dueDate:  null,
+  startDate:  null,
+  completedOn:  null,
+  frequency:  null,
+  requiresProof: null,
+  alertBeforeDue: null,
+  failureImpact:  null,
+  recurringYear:  null,
+  reminderFrequency:  null,
+  taskId:  null,
+  status:  null,
+  taskSource:  null,
+  taskType:  null,
+  ownerComments:  null,
+  taskComments:  null,
+  reviewerComments:  null,
+  loggedUserTaskAuthority:  null,
+  taskName:  null,
+  info: null
+}
+
+export interface UserListPayload {
+  complianceMapId: number ;
+}
+
+
+export interface UserListData {
+  userId: number,
+  username: string,
+  fullName: string
+}
+
+export interface DeleteProofPayload {
+  taskId: number;
+  objectType: string
+}
+
+
+export interface CompleteTaskPayload {
+  taskId: number;
+  taskAction: string,
+  taskType: string,
+  taskComments: string
+}
+
+
+export interface RequestAssignPayload {
+  taskId: number;
+  mapId: number,
+  reason: string
+}
+
+
+export interface ComplianceAlertsUpdateDetailsPayload extends UserModel {
+  alertsId: number;
+}
+
+export interface ComplianceAlertsHideDetailsPayload extends UserModel {
+  alertsId: number;
+}
+
+
+
+
+export const DefaultUserModel: UserModel = {
+
+  username: null,
+  password: null
+}
+
+
+
+
+
 export interface ProofsListDetailsProps {
   taskId: number,
   type: string,
 }
+
+export interface BaseUrlWorkspace {
+  workSpaceName: string | null, 
+  baseUrl: string | null
+}
+
+export const DefaultBaseUrlWorkspace: BaseUrlWorkspace = {
+  workSpaceName: null, 
+  baseUrl: null
+}
+
+
+
+

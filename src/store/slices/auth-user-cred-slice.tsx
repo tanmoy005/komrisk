@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { UserModel, DefaultUserModel } from "@/src/types"
 
 interface AuthUserCredState {
-    payload: { username: string, password: string }; // Define the type of the payload
+    payload: UserModel; // Define the type of the payload
 }
 const initialState: AuthUserCredState = {
-    payload: { username: "", password: "" },
+    payload: DefaultUserModel,
 };
+
+
 const AuthUserCredSlice = createSlice({
     name: "authUserCredSlice",
     initialState,
@@ -13,8 +16,8 @@ const AuthUserCredSlice = createSlice({
         storeAuthUserCred(state, action: AuthUserCredState) {
             state.payload = action.payload;
         },
-        removeAuthUserCred(state, action) {
-            state = initialState
+        removeAuthUserCred(state) {
+            state.payload = DefaultUserModel
         }
     }
 })

@@ -14,8 +14,8 @@ const AuthUserDetailsSlice = createSlice({
         storeAuthUserDetails(state, action: AuthUserCredState) {
             state.payload = action.payload;
         },
-        removeAuthUserDetails(state, action) {
-            state = initialState
+        removeAuthUserDetails(state) {
+            state.payload = DefaultAuthUserDetails;
         }
     }
 })

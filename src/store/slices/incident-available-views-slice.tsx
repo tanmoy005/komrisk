@@ -16,8 +16,8 @@ const IncidentAvailableViewsSlice = createSlice({
         storeIncidentAvailableViews(state, action: IncidentAvailableViewsState) {
             state.payload = action.payload;
         },
-        removeIncidentAvailableViews(state, action) {
-            state = initialState
+        removeIncidentAvailableViews(state) {
+            state.payload = [defaultAvailableViews]
         }
     }
 })

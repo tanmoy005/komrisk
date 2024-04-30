@@ -18,6 +18,8 @@ import React, { useState } from 'react'
 import { Pressable, Text, useColorScheme } from 'react-native'
 import { Divider, Image } from 'react-native-elements'
 
+
+
 import AuthProvider, {AuthContext} from '../../provider/AuthProvider';
 import { router } from 'expo-router';
 
@@ -27,7 +29,8 @@ const ProfilePage = () => {
   const { clearToken } = React.useContext(AuthContext);
 
   const handleLogout = () => {
-    clearToken();
+    clearToken(); 
+
     router.push('/(pages)')
     
     // Navigate to login or perform other actions
