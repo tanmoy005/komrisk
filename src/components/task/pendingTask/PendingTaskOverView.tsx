@@ -9,8 +9,42 @@ import AccordianCommonHeader from '../../accordians/AccordianCommonHeader'
 import { PendingTaskOverViewProps } from '@/src/types'
 import { screenHeight } from '@/src/style'
 import { ScrollView } from 'react-native'
+import { useDispatch, useSelector} from 'react-redux';
+import { RootState } from '@/src/store';
+import { useState,useEffect } from 'react'
 
-const PendingTaskOverView = ({ pendingTaskDetails, lastActivitycomments, commentText, setCommentText }: PendingTaskOverViewProps) => {
+const PendingTaskOverView = ({ pendingTaskDetails, lastActivitycomments,commentText, setCommentText }: PendingTaskOverViewProps) => {
+
+    //console.log("commentText got",commentText);
+    const [taskid, setTaskId] = useState(304)
+
+    // const authUserDetails = useSelector((state: RootState) => state.authUserDetails);
+  
+    // console.log("UserId",authUserDetails.payload.userDetails.userId);
+
+
+    const comments = useSelector((state: RootState) => state.comments.commentsList);
+
+    useEffect(() => {
+        // You can access the comments array here
+        //console.log('Comments from Redux:', comments);
+        const filteredComments = comments.filter(comment => comment[0].taskID === taskid);
+        //console.log("filteredComments", filteredComments);
+
+        if (filteredComments.length != 0) {
+
+            setCommentText(filteredComments[0][0].commentText);
+            //console.log("filteredCommentsggggg", gotfilteredComments);
+            //commentText = gotfilteredComments;
+        }
+    }, [taskid]);
+ 
+    // const commentText = filteredComments[0][0].commentText; // Extract comment text
+    // setCommentText(commentText);
+      
+
+
+    
     return (
 
 
@@ -42,7 +76,7 @@ const PendingTaskOverView = ({ pendingTaskDetails, lastActivitycomments, comment
                     descriptions="Your Description 1"
                     icons={{ open: 'open-icon-name', close: 'close-icon-name' }}
                     type="comment"
-                    taskId={303}
+                    taskId={304}
                     commentText={commentText}
                     setCommentText={setCommentText}
                 />

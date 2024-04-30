@@ -1,3 +1,4 @@
+
 import React from 'react';
 // import FontAwesome5  from '@expo/vector-icons/FontAwesome';
 import { FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
@@ -5,6 +6,8 @@ import { FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo
 import { Link, Tabs } from 'expo-router';
 import { Image, Pressable } from 'react-native';
 import { Text, View } from 'react-native';
+import { BackHandler, ToastAndroid } from 'react-native';
+import  { useEffect, useRef } from 'react';
 
 import Colors from '@/src/constants/Colors';
 import { useColorScheme } from '@/src/components/useColorScheme';
@@ -28,6 +31,25 @@ const CustomTabLabel = ({ title }: { title: string }) => (
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const lastBackPressed = useRef<number | null>(null);
+
+
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (lastBackPressed.current && lastBackPressed.current + 2000 >= Date.now()) {
+        BackHandler.exitApp();
+        return true;
+      }
+
+      lastBackPressed.current = Date.now();
+      ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
+      return true;
+    });
+
+    return () => backHandler.remove();
+  }, []);
+
 
   return (
 
