@@ -1,6 +1,6 @@
-import { StyleSheet, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import { ChartListDataItem } from "@/src/types";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import { View } from "../Themed";
 import ChartItemSkelton from "../skelton/ChartItemSkelton";
 import TaskCard from "../cards/TaskCard";

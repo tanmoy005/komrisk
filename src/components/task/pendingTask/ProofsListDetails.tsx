@@ -5,8 +5,6 @@ import GetProofDataList from "@/src/server/api-functions/Tasks/get-proof-data-li
 import React, { useEffect, useState } from "react";
 import { Alert, RefreshControl } from "react-native";
 import { Text } from 'react-native';
-import HeadImageSection from '@/src/components/headSection/HeadImageSection';
-//import { styles } from '@/src/style';
 import { FlatList, StyleSheet } from 'react-native';
 import { screenHeight } from "@/src/style";
 
@@ -21,12 +19,8 @@ const ProofsListDetails = ({ taskId, type }: ProofsListDetailsProps) => {
 
     const handleGetproofListData = async (payLoad: ProofListPayload) => {
         const { data, error, status } = await GetProofDataList(payLoad);
-        //console.log("data",data);
-
-
         if (status === 200) {
             const { aaData } = data
-            //   const { chartData, title, subTitle, yAxisName, xAxisName } = data;
             setProofDataList(aaData);
             setRefreshing(false);
 
@@ -55,13 +49,13 @@ const ProofsListDetails = ({ taskId, type }: ProofsListDetailsProps) => {
         handleGetproofListData(updatedPayLoad);
     }, [taskId, type]);
 
-    //console.log("data**",(proofDataList));
-
-
     const renderItem = ({ item }: { item: Item }) => (
-        <View style={styles.titleContainer}>
-            <Text>{`${item.docTitle}.${item.extension}`}</Text>
-        </View>
+        item?.docTitle == null ? <View style={styles.titleContainer}>
+            {/* <ChartItemSkelton /> */}
+        </View> :
+            <View style={styles.titleContainer}>
+                <Text>{`${item.docTitle}.${item.extension}`}</Text>
+            </View>
     );
 
 

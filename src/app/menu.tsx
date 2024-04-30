@@ -25,7 +25,6 @@ export default function Menu() {
     <View style={styles.container}>
       <Pressable onPress={navigateToProfile}>
         <View style={{ ...styles.profileImageContainer, height: "50%" }}>
-          {/* <Image style={{ width: 120, height: 120 }} source={require('@/assets/images/User.png')} /> */}
           <View style={styles.avatar}>
             <Text style={styles.avatarText}>{avatarLetter}</Text>
           </View>

@@ -17,16 +17,7 @@ const ChartFilter = ({
     setModalVisible
 }: ChartFilterProps) => {
 
-    // const countryDropdownLabel: DropDownItem = {
-    //     lable: 'Country', value: '', icon: () => <MuiIcon name="web" size={size24} color="rgba(160, 151, 220, 1)" />
-    // }
-    // const countryDropdownLabel: DropDownItem = {
-    //     lable: 'Country',
-    //     value: '',
-    //     image: {
-    //         uri: ''
-    //     }
-    // }
+
     const countryDropdownLabel: DropDownItem = {
         lable: 'Country',
         value: '',
@@ -34,9 +25,7 @@ const ChartFilter = ({
             uri: ''
         }
     }
-    // const viewAsDropdownLabel: DropDownItem = {
-    //     lable: 'View As', value: '', icon: () => <MuiIcon name="earth" size={size24} color="rgba(160, 151, 220, 1)" />
-    // }
+  
     const viewAsDropdownLabel: DropDownItem = {
         lable: 'View As',
         value: '',
@@ -57,8 +46,6 @@ const ChartFilter = ({
     const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
 
     const { countryEnabled, countryList, complianceViewAs } = useAccessDetails;
-    console.log('useAccessDetails', useAccessDetails);
-    
     
     if (countryEnabled) {
         const filteredCountryData: [number, string][] | null = countryList && countryList.filter((x: [number, string]) => x[0] !== null || x[1] !== null);
@@ -75,7 +62,6 @@ const ChartFilter = ({
             });
         }
     }
-    console.log('filterCountrylist', filterCountrylist);
 
     if (reportType === "COMPLIANCE") {
         const filteredViewedAsData: ComplianceView[] | null = complianceViewAs && complianceViewAs.filter((x: ComplianceView) => x.key !== null || x.value !== null);
@@ -90,9 +76,6 @@ const ChartFilter = ({
                 }];
             });
         }
-        // filterViewedAslist = filteredViewedAsData && filteredViewedAsData.length > 0 ? [...filterViewedAslist, ...filteredViewedAsData?.map((subList: ComplianceView) => {
-        //     return { value: subList.value, label: subList.key };
-        // })] : [...filterViewedAslist];
     }
     if (reportType === "INCIDENT") {
         const filteredViewedAsDataIncident: availableViews[] | null = useAvailableViews && useAvailableViews.filter((x: availableViews) => x.key !== null || x.value !== null);
@@ -101,12 +84,8 @@ const ChartFilter = ({
                 filterViewedAslist = [...filterViewedAslist, { value: subList?.value ?? "", lable: subList?.key ?? "" }];
             });
         }
-        // filterViewedAslist = filteredViewedAsDataIncident && filteredViewedAsDataIncident.length > 0 ? filteredViewedAsDataIncident?.map((subList: availableViews) => {
-        //     return { value: subList?.value ?? "", label: subList?.key ?? "" };
-        // }) : [countryDropdownLabel];
 
     }
-    console.log('filterViewedAslist', filterViewedAslist);
 
     const handleApplyFilters = () => {
         if (!hasValue(startDate)) {
@@ -131,8 +110,6 @@ const ChartFilter = ({
         chartFilterPayload.end = DateFormatDDMMYYYY(endDate.toString()) ?? "";
         const { lable: _selectedCountry } = filterCountrylist.filter(({ value }) => value === selectedCountry)[0];
         chartFilterPayload.country = selectedCountry;
-        console.log('chartFilterPayload', chartFilterPayload);
-
         setChartFilterPayload({ ...chartFilterPayload });
         setModalVisible(false);
     }

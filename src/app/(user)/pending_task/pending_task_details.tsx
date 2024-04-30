@@ -1,13 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import AccordianCommonHeader from '../../../components/accordians/AccordianCommonHeader';
 import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store'; // Assuming RootState is your root state type
 import { StyleSheet } from 'react-native';
-import { Link, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 
 const Pending_Task_Details = () => {
     const [commentText, setCommentText] = useState("");
@@ -19,23 +17,11 @@ const Pending_Task_Details = () => {
 
     useEffect(() => {
         // You can access the comments array here
-        console.log('Comments from Redux:', comments);
         const filteredComments = comments.filter(comment => comment[0].taskID === taskid);
-        console.log("filteredComments", filteredComments);
-
         if (filteredComments.length != 0) {
-
             setCommentText(filteredComments[0][0].commentText);
-            //console.log("filteredCommentsggggg", gotfilteredComments);
-            //commentText = gotfilteredComments;
         }
     }, [taskid]);
-
-
-
-
-    //console.log("************",comments[0][0].commentText);
-
 
 
     return (

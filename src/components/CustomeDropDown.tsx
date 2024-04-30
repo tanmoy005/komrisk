@@ -60,9 +60,6 @@ const CustomeDropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWi
       // renderLeftIcon={}
       onChange={e => {
         setImage(e.image);
-        console.log('imagesss', e.image);
-
-        // setCountry(e.value);
         setSelectedValue(e.value);
         onpress && onpress();
       }}

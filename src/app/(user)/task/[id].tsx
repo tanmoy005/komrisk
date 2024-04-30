@@ -45,8 +45,6 @@ const PendingTaskOverViewPage = () => {
     }
     const setTaskDetails = (selectedTaskId: string) => {
         const taskDetails = GetPendingTaskDetails(selectedTaskId);
-        console.log('taskDetailssdfasdas', taskDetails);
-
         const { title, description, nameOfLaw, complianceId, activities } = taskDetails;
         setPendingTaskDetails({
             title: title,
@@ -61,17 +59,11 @@ const PendingTaskOverViewPage = () => {
 
     useEffect(() => {
         setTaskDetails(selectedTaskId);
-
-        console.log('Comments from Redux:', comments);
         const filteredComments = comments.filter(comment => comment[0].taskID?.toString() === selectedTaskId);
-        console.log("filteredComments", filteredComments);
-
         if (filteredComments.length != 0) {
 
             setCommentText(filteredComments[0][0].commentText);
         }
-        console.log('selectedTaskId', selectedTaskId);
-
     }, [selectedTaskId]);
     const handlePressOnOverview = () => {
         setActiveTab('Overview'); // Set active tab to 'Overview'
@@ -103,63 +95,63 @@ const PendingTaskOverViewPage = () => {
     return (
 
         // <ScrollView>
-            <CardContainer3 styles={{
-                backgroundColor: '#FFFFFF',
-                minHeight: screenHeight,
-                justifyContent: 'space-between'
-            }}>
+        <CardContainer3 styles={{
+            backgroundColor: '#FFFFFF',
+            minHeight: screenHeight,
+            justifyContent: 'space-between'
+        }}>
 
-                <View>
+            <View>
 
-                    <HeadImageSection />
-                    <BtnFilterHeader
-                        firstBtnName='Overview'
-                        fistBtnOnpress={handlePressOnOverview}
-                        secondBtnName='Proofs'
-                        secondBtnOnpress={handlePressOnProofs}
+                <HeadImageSection />
+                <BtnFilterHeader
+                    firstBtnName='Overview'
+                    fistBtnOnpress={handlePressOnOverview}
+                    secondBtnName='Proofs'
+                    secondBtnOnpress={handlePressOnProofs}
+                />
+                <Seperator48 />
+                {activeTab === 'Overview' && (
+                    <PendingTaskOverView
+                        pendingTaskDetails={pendingTaskDetails}
+                        lastActivitycomments={lastActivitycomments}
+                        commentText={commentText}
+                        setCommentText={setCommentText}
                     />
-                    <Seperator48 />
-                    {activeTab === 'Overview' && (
-                        <PendingTaskOverView
-                            pendingTaskDetails={pendingTaskDetails}
-                            lastActivitycomments={lastActivitycomments}
-                            commentText={commentText}
-                            setCommentText={setCommentText}
-                        />
-                    )}
-                    {activeTab === 'Proofs' && (
-                        <ProofSection />
+                )}
+                {activeTab === 'Proofs' && (
+                    <ProofSection />
 
-                    )}
-                </View>
-                {/* <Seperator14 /> */}
-                <View style={styles.pendingTaskOverViewSubmit}>
-                    <Button
-                        btnColor={'#A097DC'}
-                        text='Reassign'
-                        leftIcon='account-multiple-plus'
-                        // type='md-default'
-                        type='md-outline'
-                    // onPress={handleSubmitSignIn}
-                    />
-                    <Button
-                        btnColor={'#A097DC'}
-                        text='Save'
-                        leftIcon='content-save'
-                        type='md-default'
-                    // onPress={handleSubmitSignIn}
-                    />
-                    <Button
-                        btnColor={'#42C997'}
-                        text='Complete'
-                        leftIcon='checkbox-marked-circle-plus-outline'
-                        type='md-default'
-                    // onPress={handleSubmitSignIn}
-                    />
-                </View>
+                )}
+            </View>
+            {/* <Seperator14 /> */}
+            <View style={styles.pendingTaskOverViewSubmit}>
+                <Button
+                    btnColor={'#A097DC'}
+                    text='Reassign'
+                    leftIcon='account-multiple-plus'
+                    // type='md-default'
+                    type='md-outline'
+                // onPress={handleSubmitSignIn}
+                />
+                <Button
+                    btnColor={'#A097DC'}
+                    text='Save'
+                    leftIcon='content-save'
+                    type='md-default'
+                // onPress={handleSubmitSignIn}
+                />
+                <Button
+                    btnColor={'#42C997'}
+                    text='Complete'
+                    leftIcon='checkbox-marked-circle-plus-outline'
+                    type='md-default'
+                // onPress={handleSubmitSignIn}
+                />
+            </View>
 
 
-            </CardContainer3>
+        </CardContainer3>
         /* </ScrollView> */
 
     )

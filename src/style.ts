@@ -2,7 +2,6 @@ import { StyleSheet, Dimensions, PixelRatio } from "react-native";
 
 export const screenWidth = Math.floor(Dimensions.get('window').width);
 export const screenHeight = Math.floor(Dimensions.get('window').height);
-console.log('screenHeight', screenHeight);
 
 
 const SCALE = 350;

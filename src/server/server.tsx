@@ -64,7 +64,6 @@ const Server = async (payLoad: object, url: string, method: string, hasToken: bo
         } else {
             response.error = error;
         }
-        //console.log("API Error:", response);
     } finally {
         return response
     }

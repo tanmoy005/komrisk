@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1030884796013",
+    "project_id": "testakomrisk",
+    "storage_bucket": "testakomrisk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030884796013:android:8bd7b4feed6e7112f90164",
+        "android_client_info": {
+          "package_name": "com.fake.komrsik"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNiWlZGUcgH76jHfN8oTXuxUrQlO7BrFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

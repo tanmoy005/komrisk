@@ -73,18 +73,6 @@ const Workspace = () => {
           }}
           onPress={handleSubmitWorkSpace}
         />
-        {/* <Button
-          text='Next'
-          type='default'
-          btnColor={'#A097DC'}
-          style={{
-            paddingVertical: 20,
-            paddingHorizontal: 48,
-            fontWeight: '400',
-            fontSize: 16,
-            borderRadius: 5
-          }}
-        /> */}
       </View>
     </View>
   );

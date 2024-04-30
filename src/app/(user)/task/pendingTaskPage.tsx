@@ -18,8 +18,6 @@ import { useSelector } from 'react-redux'
 const PendingTaskPage = () => {
   const colorScheme = useColorScheme();
   const data = ComplianceChartDataList;
-  console.log('DataList2323', data);
-
   const [refreshing, setRefreshing] = useState(true);
   const [pendingTaskDataList, setPendingDataList] = useState<PendingTaskDataList>({
     sEcho: null,
@@ -29,8 +27,6 @@ const PendingTaskPage = () => {
   });
   const [DataList, setDataList] = useState<TaskListDataItem[]>([]);
   const { userDetails } = useSelector((state: RootState) => state.authUserDetails.payload);
-  console.log('userDetails', userDetails);
-
   const { clearToken } = React.useContext(AuthContext);
 
   const handleLogout = () => {

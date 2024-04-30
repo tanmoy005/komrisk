@@ -11,11 +11,11 @@ const compliancesnotificationList: React.FC = () => {
 
 
   const handleSeeAll = () => {
-    console.log('handleSeeAll11');
+    // console.log('handleSeeAll11');
 
   }
   const handleClose = () => {
-    console.log('handleClose');
+    // console.log('handleClose');
 
   }
   

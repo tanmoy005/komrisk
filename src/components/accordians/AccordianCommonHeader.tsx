@@ -1,17 +1,14 @@
 
 import { AccordianCommonHeaderProps } from '@/src/types';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     TouchableOpacity
 } from 'react-native';
-import SmSectionSeperator from '../seperators/SmSectionSeperator';
 import InputField from '../input-fields/InputField';
 import Button from '../Button';
-import { screenWidth, smFont, styles } from '@/src/style';
-import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
+import { styles } from '@/src/style';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/src/store';
 import { addComment, updateComment } from '@/src/store/slices/task-comments-slice'; // Assuming your action creators are named addComment and updateComment
@@ -25,10 +22,6 @@ const AccordianCommonHeader = ({ title, descriptions, icons, type = 'chevron', t
     // Retrieve the comment for this header from state
     // const [commentText, setCommentText] = useState('');
     const comments = useSelector((state: RootState) => state.comments.commentsList);
-    //console.log("Previous comment",comments);
-
-    console.log("comments got", commentText)
-
     const dispatch = useDispatch(); // Move inside the component body
 
     function toggleItem() {
@@ -51,20 +44,6 @@ const AccordianCommonHeader = ({ title, descriptions, icons, type = 'chevron', t
         setCommentText(''); // Clear the comment input after submission
     };
 
-    // Console log the comments array from the Redux store
-    console.log("Submitted Comment", comments);
-
-    // // Handle the submission of the comment
-    // const handleSubmitComment = () => {                       
-    //     // Add a new comment to the Redux store
-    //     dispatch(addComment({ taskID, commentText }));
-
-    //     setCommentText(''); // Clear the comment input after submission
-    // };
-
-    // // Console log the comments array from the Redux store
-    // console.log("Submitted Comment", comments);
-
     return (
         <TouchableOpacity onPress={toggleItem}>
             <View style={styles.commentContainer}>
@@ -76,14 +55,10 @@ const AccordianCommonHeader = ({ title, descriptions, icons, type = 'chevron', t
                         </View>
                         <MuiIcon name={expanded ? 'arrow-expand' : 'arrow-collapse'} size={24} color="#26262C" />
                     </View>
-                    {/* <SmSectionSeperator /> */}
-
-                    {/* <View style={{ ...styles.cardTextContainer }}> */}
                     <View>
                         <Text style={styles.bodyInfoText}>Name</Text>
                         <Text style={styles.bodyInfoText}>DD/MM/YY   16:30</Text>
                     </View>
-                    {/* <SmSectionSeperator /> */}
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

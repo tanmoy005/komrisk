@@ -1,5 +1,4 @@
 
-import CardContainer2 from '@/src/components/cards/CardContainer2'
 import React, { useState } from 'react'
 import { Text, View } from 'react-native'
 import ProofsListDetails from '@/src/components/task/pendingTask/ProofsListDetails'

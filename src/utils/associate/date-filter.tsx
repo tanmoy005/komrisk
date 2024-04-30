@@ -3,8 +3,6 @@ import { hasValue } from "./has-value";
 
 
 export const DateFormatDDMMYYYY = (dateTime: string | undefined | null) => {
-  // console.log('dateTime', dateTime);
-
   return dateTime && moment(dateTime).format("DD/MM/YYYY");
 };
 
@@ -15,10 +13,8 @@ export const StringToDate = (dateTime: string) => {
 };
 
 export const StringToDateDDMMYYYY = (dateTime: string) => {
-  // console.log('dateTime', dateTime);
   var parts = dateTime.split('/');
   var splitData = parts.length > 1 ? parts : dateTime.split('-');
   var convertedDate = new Date(parseInt(splitData[2]), parseInt(splitData[1]) - 1, parseInt(splitData[0]));
-
   return convertedDate;
 };

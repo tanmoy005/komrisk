@@ -151,15 +151,6 @@ export interface ActivityStatusDataList {
 }
 
 
-// export interface ComplianceStatusDataListPayLoad {
-//   username: string;
-//   password: string;
-//   start: string;
-//   viewAs: string;
-//   end: string;
-//   status: string;
-// }
-
 export interface ComplianceStatusDataListPayLoad {
   username: string;
   password: string;
@@ -519,12 +510,6 @@ export interface ComplianceView {
   key: string;
   value: string;
 }
-// export const DefaultComplianceView: ComplianceView =
-// {
-//   key: null,
-//   value: null,
-// }
-
 
 export interface EntityView {
   options: any[]; // You might want to replace `any[]` with a more specific type if you have information about the possible options.
@@ -627,11 +612,6 @@ export interface ChartDataFilterDataPayLoad {
   filterType: string;
 }
 
-// export interface DropDownItem {
-//   label: string | null | undefined;
-//   value: string | number | null | undefined;
-//   icon?: () => JSX.Element
-// }
 export interface DropDownItem {
   lable: string | null | undefined;
   value: string | null | undefined;

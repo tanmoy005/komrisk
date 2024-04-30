@@ -11,10 +11,7 @@ interface LastActivityAccordianBodyProps {
 }
 
 export default function LastActivityAccordianBody({ comments }: LastActivityAccordianBodyProps) {
-    console.log('comments', comments);
-
     return (
-
         <View style={styles.taskCard}>
             {/* <ScrollView> */}
             <CardTextContainer>

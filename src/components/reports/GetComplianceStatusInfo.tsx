@@ -42,7 +42,6 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilte
 
 
   const handleGetComplianceStatusData = async (payLoad: ComplianceStatusDataPayLoad) => {
-    console.log('GetComplianceStatusData', payLoad);
     const { data, error, status } = await GetComplianceStatusData(payLoad);
     if (status === 200) {
       const { chartData, title, subTitle, yAxisName, xAxisName } = data;
