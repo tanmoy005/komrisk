@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable } from 'react-native';
 
 import { Text, View } from '@/src/components/Themed';
 import Button from '@/src/components/Button';

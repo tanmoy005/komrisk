@@ -64,6 +64,13 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    profileImageSectioncontainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 60,
+        width: '100%',
+    },
     cardContainer: {
         width: Math.floor(screenWidth * .86), // Adjust the width as needed
         height: Math.floor(screenWidth * .86),
@@ -102,6 +109,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         fontSize: scaleFontSize(14),
         marginBottom: 5,
     },
+
     title1: {
         fontWeight: '500',
         fontSize: scaleFontSize(14),
@@ -123,12 +131,17 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    bigprofileImageContainer: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     profileImage: {
         width: profileImageSize,
         height: profileImageSize
     },
     chartContainer: {
-       ...containerPd10,
+        ...containerPd10,
         alignItems: 'center'
     },
     chartLabel: {
@@ -144,15 +157,15 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
         shadowOpacity: 1, // Shadow opacity (1 is fully opaque)
         shadowRadius: 10,
-        width: 'auto', 
+        width: 'auto',
     },
     taskCardContainer: {
         ...taskCardContainer
     },
-    expandSectionHeaderContainer:{
-      padding: 28,
-      paddingBottom: 0,
-      rowGap: 8
+    expandSectionHeaderContainer: {
+        padding: 28,
+        paddingBottom: 0,
+        rowGap: 8
     },
     commentContainer: {
         width: '100%',
@@ -316,6 +329,37 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     profileInputFieldContainer: {
         width: '75%'
     },
+    avatar: {
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        backgroundColor: '#5645C0',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    avatarText: {
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    designation: {
+        fontSize: 12,
+        fontWeight: '400',
+        lineHeight: 14,
+        color: '#26262C'
+    },
+    userTitle: {
+        fontSize: 16,
+        fontWeight: '700',
+        marginTop: 5,
+        padding: 6,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(120, 106, 205, 0.48)'
+    },
+    //   profileImageContainer: {
+    //     width: '100%',
+    //     justifyContent: 'center',
+    //     alignItems: 'center'
+    //   },
     dashboardFilterContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',

@@ -6,7 +6,7 @@ const ChartReportLayout = () => {
   return (
     <Stack screenOptions={{
       headerStyle: headerColor
-    }}>
+    }}> 
       <Stack.Screen name="GetActivityStatusDataListDetailsInfo" options={{ title: 'Activity Task List', headerShown: true, headerTitleAlign: 'center' }} />
       <Stack.Screen name="GetComplianceStatusDataListDetailsInfo" options={{ title: 'Compliance Task List', headerShown: true, headerTitleAlign: 'center' }} />
       <Stack.Screen name="GetIncidentActivityDataListDetailsInfo" options={{ title: 'Incident Activity List', headerShown: true, headerTitleAlign: 'center' }} />

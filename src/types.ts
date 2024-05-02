@@ -1156,6 +1156,9 @@ export const DefaultBaseUrlWorkspace: BaseUrlWorkspace = {
   baseUrl: null
 }
 
-
+export interface InitialsProps {
+  size: number;
+  fontSize: number
+}
 
 
