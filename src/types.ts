@@ -1490,12 +1490,10 @@ export interface IncidentComparisonDataList {
 
 
 // Detail Part ??
-export interface CompliancesItemDetailsPayLoad {
-  username: string;
-  password: string;
+
+export interface CompliancesItemDetailsPayLoad extends UserModel {
   complianceId: string;
 }
-
 export interface CompliancesItemDetailsResponse {
   info: string | null;
   complianceId: string | null;
@@ -1532,12 +1530,13 @@ export const CompliancesItemDetails: CompliancesItemDetailsResponse = {
   lawName: null,
 }
 
-export interface IncidentItemDetailsPayLoad {
-  username: string;
-  password: string;
+
+
+export interface IncidentItemDetailsPayLoad extends UserModel {
   incidentMapId: string;
   taskId: number;
 }
+
 
 export interface IncidentItemDetailsResponse {
   mapId: number | null;
