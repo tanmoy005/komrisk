@@ -8,6 +8,7 @@ import InputField from './input-fields/InputField'
 import Button from './Button'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/src/store';
+import Initials from './Initials'
 
 interface FormLabelProps {
   label: string;
@@ -35,13 +36,14 @@ const Profile = () => {
   return (
     <View>
       <View style={styles.profileImageContainer}>
-        <Image style={styles.profileImage} source={require('@/assets/images/User.png')} />
+      <Initials size={60} fontSize={30} />
+        {/* <Image style={styles.profileImage} source={require('@/assets/images/User.png')} /> */}
       </View>
       <Divider style={{ ...styles.divider1, marginTop: Math.floor(screenWidth * 0.066) }} />
       <View style={{ marginTop: Math.floor(screenWidth * 0.066), height: 'auto', alignItems: 'stretch' }}>
         <CardTextContainer styles={{width: '100%', position: 'relative'}}>
           {/* <View style={styles.profileFormContainer}> */}
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', width: '90%' }}>
             <View style={{ rowGap: 10 }}>
               <FormLabel label={'First Name'} />
               <FormLabel label={'Last Name'} />
