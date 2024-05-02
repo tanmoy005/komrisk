@@ -48,7 +48,7 @@ const GetComplianceStatusDataListDetailsInfo = () => {
 
     const payLoad: ComplianceStatusDataListPayLoad = {
       ...parsedPayload,
-      status: filterStatus
+      comparison: filterStatus
     };
 
     const handleGetActivityStatusDataList = async () => {
