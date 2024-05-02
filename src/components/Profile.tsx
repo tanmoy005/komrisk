@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { screenWidth, styles } from '../style'
-import { Divider, Image } from 'react-native-elements'
+import { Divider } from 'react-native-elements'
 import CardTextContainer from './cards/CardTextContainer'
 import Text1 from './headings/Label1'
 import InputField from './input-fields/InputField'
-import Button from './Button'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/src/store';
 import Initials from './Initials'
@@ -37,12 +36,10 @@ const Profile = () => {
     <View>
       <View style={styles.profileImageContainer}>
       <Initials size={60} fontSize={30} />
-        {/* <Image style={styles.profileImage} source={require('@/assets/images/User.png')} /> */}
       </View>
       <Divider style={{ ...styles.divider1, marginTop: Math.floor(screenWidth * 0.066) }} />
       <View style={{ marginTop: Math.floor(screenWidth * 0.066), height: 'auto', alignItems: 'stretch' }}>
         <CardTextContainer styles={{width: '100%', position: 'relative'}}>
-          {/* <View style={styles.profileFormContainer}> */}
           <View style={{ flexDirection: 'row', width: '90%' }}>
             <View style={{ rowGap: 10 }}>
               <FormLabel label={'First Name'} />
@@ -56,7 +53,7 @@ const Profile = () => {
             </View>
             <View style={{ ...styles.profileInputFieldContainer, rowGap: 10 }}>
               <InputField value={firstName} setInput={setFirstName} placeholder={'first name here'} type='1' editable={false} />
-              <InputField value={lastName} setInput={setFirstName} placeholder={'last Name here'} type='1' editable={false} />
+              <InputField value={lastName} setInput={setLastName} placeholder={'last Name here'} type='1' editable={false} />
               <InputField value={roleName} setInput={setRoleName} placeholder={'role here'} type='1' editable={false} />
               <InputField value={username} setInput={setUsername} placeholder={'username here'} type='1' editable={false} />
               <InputField value={company} setInput={setCompany} placeholder={'company name here'} type='1' editable={false} />
