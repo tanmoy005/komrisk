@@ -22,12 +22,10 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
       iTotalRecords: null,
       iTotalDisplayRecords: null,
     });
-    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const [refreshing, setRefreshing] = useState(true);
 
+    const [refreshing, setRefreshing] = useState(true);
     const [DataList, setDataList] = useState<ChartListDataItem[]>([]);
-    const currentDate: string = moment().format('DD/MM/YYYY');
-    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
+
 
 
     // Get the payload from the navigation params

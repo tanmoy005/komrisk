@@ -1,12 +1,11 @@
 
 import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { Alert, FlatList, RefreshControl } from 'react-native';
 import { View } from 'react-native';
 import { ChartListDataItem, ComplianceStatusDataList, ComplianceStatusDataListPayLoad } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
 import GetComplianceStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-compliance-status-datalist-details';
 import { useSelector } from 'react-redux';
-import moment from 'moment';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
@@ -23,12 +22,9 @@ const GetComplianceStatusDataListDetailsInfo = () => {
       iTotalRecords: null,
       iTotalDisplayRecords: null,
     });
-    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    const [refreshing, setRefreshing] = useState(true);
-    const [DataList, setDataList] = useState<ChartListDataItem[]>([{}]);
-    // const currentDate: string = moment().format('DD/MM/YYYY');
-    // const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
 
+    const [refreshing, setRefreshing] = useState(true);
+    const [DataList, setDataList] = useState<ChartListDataItem[]>([]);
 
     // Get the payload from the navigation params
     const { payload, statusType } = useLocalSearchParams();

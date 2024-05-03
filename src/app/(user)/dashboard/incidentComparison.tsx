@@ -7,7 +7,6 @@ import Filter from "@/src/components/filter/Filter";
 import React, { useState } from "react";
 import moment from "moment";
 import { ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
-// const Product = products[3];
 
 const IncidentComparison = () => {
   const [refreshing, setRefreshing] = useState(true);
@@ -17,9 +16,7 @@ const IncidentComparison = () => {
   const [filterType, setFilterType] = useState<string>('Chart Data');
   const [chartFilterPayload, setChartFilterPayload] = useState<ChartFilterDataPayLoad>({
     start: startDate,
-    end: currentDate,
-    // viewAs: "COMPANY HEAD",
-
+    end: currentDate
   });
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
   const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});

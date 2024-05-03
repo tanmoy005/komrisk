@@ -10,18 +10,16 @@ import { screenHeight, styles } from '@/src/style'
 import { LastActivityComment, PendingTaskItemDetailsResponse } from '@/src/types'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { ScrollView, View } from 'react-native'
+import { View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ProofSection from '../../../components/task/pendingTask/ProofSection'
 
 const PendingTaskOverViewPage = () => {
     const data = useLocalSearchParams();
 
-    const { type, id } = data;
-    const paramType = typeof type === 'string' ? type : type[0];
+    const { id } = data;
     const taskId = typeof id === 'string' ? id : id[0];
     const [selectedTaskId] = useState<string>(taskId);
-    const [complianceId, setComplianceId] = useState<string>('');
     const [activeTab, setActiveTab] = useState('Overview'); // Track active tab state
     const [pendingTaskDetails, setPendingTaskDetails] = useState<PendingTaskItemDetailsResponse>({
         title: null,
@@ -34,7 +32,7 @@ const PendingTaskOverViewPage = () => {
             updatedBy: null
         }
     });
-    const [expandedTitle, setExpandedTitle] = useState(false)
+
 
     const pendingTaskList = ComplianceChartDataList;
 
@@ -88,7 +86,7 @@ const PendingTaskOverViewPage = () => {
         },
     ]
     const [commentText, setCommentText] = useState<string>("");
-    const [taskid, setTaskId] = useState(303)
+
     const comments = useSelector((state: RootState) => state.comments.commentsList);
 
 

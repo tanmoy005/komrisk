@@ -254,6 +254,28 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         justifyContent: 'space-around',
         left: 16,
     },
+    tabBarStyle: {
+        height: screenHeight * 0.115,
+        backgroundColor: "#F1F1F1"
+    },
+    tabBarLabelStyle: {
+        fontSize: 18,
+        fontWeight: '400',
+        lineHeight: 16,
+        textAlign: 'center',
+        color: '#fff',
+    },
+    tabBarItemStyle: {
+        marginBottom: 5,
+        borderRadius: 6,
+        margin: 5,
+        padding: 10,
+        backgroundColor: "#fff",
+
+    },
+    tabBarIconStyle: {
+        padding: 1
+    },
     dashboardContainer: {
         flex: 1,
         alignItems: 'center',
@@ -263,13 +285,16 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     imageContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         width: '100%',
-        marginBottom: 30
+        // marginBottom: 30
+        height: screenHeight * 0.1
     },
     dashboardChartContainer: {
         width: '100%',
         alignItems: 'center',
-        marginTop: 75
+        // marginTop: 75
+        marginTop: screenHeight * 0.05
     },
     divider1: {
         // borderColor:'rgba(38, 38, 44, 0.24)'
@@ -365,7 +390,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        columnGap: 30
+        columnGap: 30,
+        height: screenHeight * 0.12
     },
     filterBoxContainerHorizontal: {
         flexDirection: 'row-reverse',

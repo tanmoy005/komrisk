@@ -7,7 +7,6 @@ import HeadImageSection from "@/src/components/headSection/HeadImageSection";
 import Filter from "@/src/components/filter/Filter";
 import moment from "moment";
 import { ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
-// const Product = products[3];
 
 const IncidentActivity = () => {
   const [refreshing, setRefreshing] = useState(true);

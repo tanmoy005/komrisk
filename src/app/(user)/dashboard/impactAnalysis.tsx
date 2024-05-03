@@ -21,6 +21,7 @@ const ImpactAnalysis = () => {
     // viewAs: "COMPANY HEAD",
 
   });
+  
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
   const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
 

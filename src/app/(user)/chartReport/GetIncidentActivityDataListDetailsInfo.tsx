@@ -21,7 +21,7 @@ const GetIncidentActivityDataListDetailsInfo = () => {
       iTotalRecords: null,
       iTotalDisplayRecords: null,
     });
-    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+
     const [refreshing, setRefreshing] = useState(true);
     const [DataList, setDataList] = useState<IncidentChartListDataItem[]>([defaultIncidentChartData]);
     // Get the payload from the navigation params
@@ -58,18 +58,14 @@ const GetIncidentActivityDataListDetailsInfo = () => {
           setRefreshing(false);
         }
       } else {
-        Alert.alert("error4444", error.message);
+        Alert.alert("error", error.message);
       }
     }
     useEffect(() => {
       handleGetIncidentActivityDataList();
     }, []);
 
-    //   {
-    //     width: '100%',
-    //     alignItems: 'center',
-    //     padding: 10
-    // }
+
     return (
       <View style={styles.getDetailsContainer}>
         <HeadImageSection />

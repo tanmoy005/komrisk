@@ -4,9 +4,6 @@ import { View } from 'react-native';
 import { IncidentChartListDataItem, IncidentComparisonDataList, IncidentComparisonDataListPayLoad, defaultIncidentChartData } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
 import GetIncidentComparisonDataList from '@/src/server/api-functions/TaskList_(DataList)/get-incident-comparison-datalist-details';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/src/store';
-import moment from 'moment';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import IncidentTaskDetails from '@/src/components/task/IncidentTaskDetails';
@@ -22,11 +19,8 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
       iTotalRecords: null,
       iTotalDisplayRecords: null,
     });
-    const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
 
     const [DataList, setDataList] = useState<IncidentChartListDataItem[]>([defaultIncidentChartData]);
-    const currentDate: string = moment().format('DD/MM/YYYY');
-    const startDate: string = moment().subtract(1, 'months').format('DD/MM/YYYY');
     const [refreshing, setRefreshing] = useState(true);
 
     // Get the payload from the navigation params
@@ -61,7 +55,6 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
       } else {
         Alert.alert("error4444", error.message);
       }
-      // setDataList([{}]);
     }
     useEffect(() => {
       handleGetIncidentComparisonDataList();
@@ -78,9 +71,9 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
               renderItem={({ item }) => <IncidentTaskDetails data={item} />}
               contentContainerStyle={{ gap: 10, padding: 10 }}
               refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleGetIncidentComparisonDataList} />
-          }
-        />
+                <RefreshControl refreshing={refreshing} onRefresh={handleGetIncidentComparisonDataList} />
+              }
+            />
             :
             <NoDataAvailableCard />
         }

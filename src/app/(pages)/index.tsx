@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert } from 'react-native';
-import { router, useNavigation } from 'expo-router';
+import { router } from 'expo-router';
 import AuthenticateWorkspace from '@/src/server/api-functions/Login/authenticate-workspace';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
 import { useDispatch } from 'react-redux';
@@ -13,7 +13,6 @@ const Workspace = () => {
 
   const [workSpaceName, setWorkSpaceName] = useState<string>('');
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   const handleSubmitWorkSpace = async () => {
 
@@ -26,13 +25,12 @@ const Workspace = () => {
       };
       const baseURL = `${payLoad.Url}/komrisk/api`;
       setDataToAsyncStorage('baseUrl', baseURL);
-      const { error, status } = await AuthenticateWorkspace(payLoad);
+      const { status } = await AuthenticateWorkspace(payLoad);
 
       if (status === 200) {
 
         dispatch(storeBaseUrl({ workSpaceName: workSpaceName.trim(), baseUrl: baseURL }));
 
-        //navigation.reset;
         router.navigate("/signin");
       } else {
         setDataToAsyncStorage('baseUrl', "");
@@ -85,14 +83,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 50,
-    // backgroundColor: "red"
   },
   input: {
-    // height: 60,
     borderColor: '#D9D9D9',
     borderWidth: 2,
     padding: 13,
-    // paddingHorizontal: 20,
     borderRadius: 5,
     color: '#99A3A4'
   },
@@ -104,7 +99,6 @@ const styles = StyleSheet.create({
     height: 56
   },
   submitBtnContainer: {
-    // marginTop: 100,
     alignSelf: 'stretch'
   },
   logoContainer: {

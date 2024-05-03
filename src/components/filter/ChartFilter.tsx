@@ -42,8 +42,8 @@ const ChartFilter = ({
     const [selectedCountry, setSelectedCountry] = useState<string>('');
     const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload?.viewAs ?? "");
     const [startDate, setStartDate] = useState<Date>(StringToDateDDMMYYYY(chartFilterPayload.start.trim()));
-    const [displayStartDate, setDisplayStartDate] = useState<string | null | undefined>(today);
-    const [displayEndDate, setDisplayEndDate] = useState<string | null | undefined>(today);
+    const [displayStartDate, setDisplayStartDate] = useState<string | null | undefined>(null ?? today);
+    const [displayEndDate, setDisplayEndDate] = useState<string | null | undefined>(chartFilterPayload.end.trim() ?? today);
     const [endDate, setEndDate] = useState<Date>(StringToDateDDMMYYYY(chartFilterPayload.end.trim()));
 
     const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
