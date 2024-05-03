@@ -292,9 +292,10 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     dashboardChartContainer: {
         width: '100%',
-        alignItems: 'center',
+        justifyContent: 'center',
         // marginTop: 75
-        marginTop: screenHeight * 0.05
+        // marginTop: screenHeight * 0.05
+        height: screenHeight * 0.58,
     },
     divider1: {
         // borderColor:'rgba(38, 38, 44, 0.24)'
