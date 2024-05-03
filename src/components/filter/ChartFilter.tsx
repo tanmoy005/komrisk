@@ -25,7 +25,7 @@ const ChartFilter = ({
             uri: ''
         }
     }
-  
+
     const viewAsDropdownLabel: DropDownItem = {
         lable: 'View As',
         value: '',
@@ -37,18 +37,20 @@ const ChartFilter = ({
     let filterCountrylist: DropDownItem[] = [countryDropdownLabel];
     let filterViewedAslist: DropDownItem[] = [viewAsDropdownLabel];
 
+    const today = DateFormatDDMMYYYY(new Date().toString())
+
     const [selectedCountry, setSelectedCountry] = useState<string>('');
     const [selectedViewAs, setSelectedViewAs] = useState<string>(chartFilterPayload?.viewAs ?? "");
     const [startDate, setStartDate] = useState<Date>(StringToDateDDMMYYYY(chartFilterPayload.start.trim()));
-    const [displayStartDate, setDisplayStartDate] = useState<string | null | undefined>('Start Date');
-    const [displayEndDate, setDisplayEndDate] = useState<string | null | undefined>('End Date');
+    const [displayStartDate, setDisplayStartDate] = useState<string | null | undefined>(today);
+    const [displayEndDate, setDisplayEndDate] = useState<string | null | undefined>(today);
     const [endDate, setEndDate] = useState<Date>(StringToDateDDMMYYYY(chartFilterPayload.end.trim()));
 
     const useAccessDetails = useSelector((state: RootState) => state.authUserAccess.payload);
     const useAvailableViews = useSelector((state: RootState) => state.incidentAvailableViews.payload);
 
     const { countryEnabled, countryList, complianceViewAs } = useAccessDetails;
-    
+
     if (countryEnabled) {
         const filteredCountryData: [number, string][] | null = countryList && countryList.filter((x: [number, string]) => x[0] !== null || x[1] !== null);
 
@@ -156,12 +158,9 @@ const ChartFilter = ({
                         selectedValue={selectedViewAs}
                         setSelectedValue={setSelectedViewAs}
                         minWidth={160}
-
-
                     />
                 </View>
             </View>
-
             <View>
                 <Button
                     btnColor={'#A097DC'}
