@@ -9,7 +9,7 @@ export default function NotFoundScreen() {
       <Stack.Screen options={{ title: 'Advanced Reports' }} />
       <View style={styles.container}>
         <Text style={styles.title}>This screen is under construction.</Text>
-        <PushNotificationExample />
+        {/* <PushNotificationExample /> */}
         <Link href="/" style={styles.link}>
           <Text style={styles.linkText}>Go to home screen!</Text>
         </Link>
