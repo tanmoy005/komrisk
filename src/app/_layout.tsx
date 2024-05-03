@@ -152,7 +152,6 @@ function RootLayoutNav() {
               <Stack.Screen name="(pages)" options={{ headerShown: false }} />
               <Stack.Screen name="(user)" options={{ headerShown: false }} />
               <Stack.Screen name="menu" options={{ title: "Profile", headerShown: true, headerTitleAlign: 'center', presentation: 'modal' }} />
-              <Stack.Screen name="notification" options={{ headerShown: false }} />
               {/* <Stack.Screen name="pending_task" options={{ headerShown: false }} /> */}
 
               {/* </ScreenCaptureProvider> */}

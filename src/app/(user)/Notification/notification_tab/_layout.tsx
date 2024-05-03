@@ -10,6 +10,7 @@ import { Text, View } from 'react-native';
 import Colors from '@/src/constants/Colors';
 import { useColorScheme } from '@/src/components/useColorScheme';
 import { useClientOnlyValue } from '@/src/components/useClientOnlyValue';
+import { styles } from '@/src/style';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -36,20 +37,8 @@ export default function NotificationTabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        tabBarStyle: {
-          height: 80,
-          backgroundColor: "#F1F1F1",
-
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: '400',
-          lineHeight: 16,
-          textAlign: 'center',
-          color: '#000000',
-
-
-        },
+        tabBarStyle: styles.tabBarStyle,
+        tabBarLabelStyle: styles.tabBarLabelStyle,        
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
 
@@ -64,17 +53,8 @@ export default function NotificationTabLayout() {
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="See All" />
           ),
-          tabBarItemStyle: {
-            marginBottom: 5,
-            borderRadius: 6,
-            margin: 5,
-            padding: 10,
-            backgroundColor: "#fff"
-          },
-          tabBarIconStyle: {
-            padding: 1
-          },
-
+          tabBarItemStyle: styles.tabBarItemStyle,
+          tabBarIconStyle: styles.tabBarIconStyle
         }}
       />
 
@@ -83,14 +63,6 @@ export default function NotificationTabLayout() {
         options={{
           title: 'Compliances',
           headerShown: false,
-          // tabBarIcon: ({ color, size }) => (
-
-          //   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          //     <AntDesign name="file1" size={24} color="black" style={{ marginRight: -12 }} />
-          //     <MaterialCommunityIcons name="playlist-check" size={18} color="black" style={{ marginLeft: -6, marginTop: 12 }} />
-          //   </View>
-          // ),
-
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require('@/assets/images/Property 1=Compliances.png')}
@@ -104,17 +76,8 @@ export default function NotificationTabLayout() {
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="Compliances" />
           ),
-          tabBarItemStyle: {
-            marginBottom: 5,
-            borderRadius: 6,
-            margin: 5,
-            padding: 10,
-            backgroundColor: "#fff"
-          },
-          tabBarIconStyle: {
-            padding: 1
-          },
-
+          tabBarItemStyle: styles.tabBarItemStyle,
+          tabBarIconStyle: styles.tabBarIconStyle
         }}
       />
 
@@ -127,17 +90,8 @@ export default function NotificationTabLayout() {
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="Tasks" />
           ),
-          tabBarItemStyle: {
-            marginBottom: 5,
-            borderRadius: 6,
-            margin: 5,
-            padding: 10,
-            backgroundColor: "#fff"
-          },
-          tabBarIconStyle: {
-            padding: 1
-          },
-
+          tabBarItemStyle: styles.tabBarItemStyle,
+          tabBarIconStyle: styles.tabBarIconStyle
         }}
       />
 
@@ -150,16 +104,8 @@ export default function NotificationTabLayout() {
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="Alerts" />
           ),
-          tabBarItemStyle: {
-            marginBottom: 5,
-            borderRadius: 6,
-            margin: 5,
-            padding: 10,
-            backgroundColor: "#fff"
-          },
-          tabBarIconStyle: {
-            padding: 1
-          },
+          tabBarItemStyle: styles.tabBarItemStyle,
+          tabBarIconStyle: styles.tabBarIconStyle
 
         }}
       />

@@ -15,7 +15,7 @@ export default function Menu() {
   const [userName, setUserName] = useState<string>(userDetails?.userDetails?.displayName ?? "");
   const [userLastName, setUserLastName] = useState<string>(userDetails?.userDetails?.lastName ?? "");
   const [userRole, setUserRole] = useState<string>(userDetails?.userDetails?.role ?? "");
-
+  const isPresented = router.canGoBack();
   const CreateInitials = (str: string) => {
     const firstLetter = str[0].toUpperCase();
     const words = str.split(' ');
@@ -28,7 +28,7 @@ export default function Menu() {
 
 
   const navigateToProfile = () => {
-    router.push('/profilePage');
+    router.replace('/profilePage');
   }
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Menu() {
     <View style={styles.profileImageSectioncontainer}>
       <Pressable onPress={navigateToProfile}>
         <View style={{ ...styles.bigprofileImageContainer, height: "50%" }}>
-          <Initials size={120} fontSize ={50} />
+          <Initials size={120} fontSize={50} />
           <Text style={styles.userTitle}>{userName}</Text>
           <Text style={{ ...styles.designation, marginTop: 3 }}>{userRole}</Text>
         </View>
@@ -59,7 +59,11 @@ export default function Menu() {
           text='My Pending Tasks'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.push('/(user)/task/pendingTaskPage')}
+          onPress={() => 
+            
+           router.replace('/(user)/task/pendingTaskPage')
+            
+          }
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,
@@ -71,7 +75,7 @@ export default function Menu() {
           text='Dashboard'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.push('/(user)/dashboard/complianceStatus')}
+          onPress={() => router.replace('/(user)/dashboard/complianceStatus')}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,
@@ -84,7 +88,7 @@ export default function Menu() {
           text='Notifications'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.push('/notification/notification_tab/allnotificationList')}
+          onPress={() => router.replace('/Notification/notification_tab/allnotificationList')}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,

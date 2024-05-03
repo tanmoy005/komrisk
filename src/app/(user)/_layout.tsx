@@ -38,7 +38,8 @@ export default function TabTwoScreen() {
     <Stack.Screen name="chartReport" options={{ headerShown: false }} />
     <Stack.Screen name="profilePage" options={{ title: "Profile", headerShown: true, headerTitleAlign: 'center' }} />
     <Stack.Screen name="task" options={{ title: "Pending Task", headerShown: true, headerTitleAlign: 'center' }} />
-    
+    <Stack.Screen name="Notification" options={{ title:"Notification" ,headerShown: true, headerTitleAlign: 'center' }}/>
+
     {/* Add another screen below */}
     {/* <Stack.Screen name='Notification'
         options={{

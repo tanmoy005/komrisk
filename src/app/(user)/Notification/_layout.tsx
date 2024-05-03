@@ -9,8 +9,9 @@ const Notification_Page_layout = () => {
     return (
         <Stack screenOptions={{
             headerStyle: headerColor
+            
           }}>
-            <Stack.Screen name="notification_tab" options={{ title:"Notification", headerShown: true, headerTitleAlign:'center' }} />
+            <Stack.Screen name="notification_tab" options={{ title:"Notification", headerShown: false, headerTitleAlign:'center' }} />
             <Stack.Screen name="[id]" options={{ title: 'Notification Details', headerShown: true, headerTitleAlign:'center' }} />
 
         </Stack>
