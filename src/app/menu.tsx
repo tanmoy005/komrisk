@@ -88,7 +88,7 @@ export default function Menu() {
           text='Notifications'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.replace('/Notification/notification_tab/allnotificationList')}
+          onPress={() => router.replace('/notification/notification_tab/allnotificationList')}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,
