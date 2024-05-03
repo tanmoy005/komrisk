@@ -69,13 +69,13 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         width: '100%',
     },
     cardContainer: {
-        width: Math.floor(screenWidth * .86), // Adjust the width as needed
-        height: Math.floor(screenWidth * .86),
+        width: Math.floor(screenWidth * .88), // Adjust the width as needed
+        height: Math.floor(screenWidth * .88),
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         backgroundColor: '#F5F5F5',
         borderRadius: 10,
-        padding: 30,
+        //padding: 30,
     },
     cardContainer2: {
         padding: Math.floor(screenWidth * .06),
@@ -385,11 +385,12 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     //   },
     dashboardFilterContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        width: '100%',
-        columnGap: 30,
-        height: screenHeight * 0.12
+        width: screenWidth *1.5,
+        columnGap: 25,
+        height: screenHeight * 0.12,
+
     },
     filterBoxContainerHorizontal: {
         flexDirection: 'row-reverse',
