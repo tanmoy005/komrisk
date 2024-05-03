@@ -32,8 +32,8 @@ const Pending_Task_Details = () => {
                     title="Your Title 1"
                     descriptions="Your Description 1"
                     icons={{ open: 'open-icon-name', close: 'close-icon-name' }}
-                    expanded={true}
-                    setExpanded={() => { }}
+                   // expanded={true}
+                    //setExpanded={() => { }}
                     type="comment"
                     taskId={303}
                     commentText={commentText}

@@ -19,7 +19,7 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>['name'];
   color: string;
 }) {
-  return <FontAwesome5 size={20} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome5 size={22} style={{ marginBottom: -3 }} {...props} />;
 }
 
 
@@ -80,7 +80,7 @@ export default function TabLayout() {
         options={{
           title: 'Impact Analysis',
           headerShown: false,
-          tabBarIcon: () => <MaterialCommunityIcons name="gavel" size={20} color="black" />,
+          tabBarIcon: () => <MaterialCommunityIcons name="gavel" size={24} color="black" />,
           tabBarLabel: () => (
             <CustomTabLabel title="Impact Analysis" />
           ),

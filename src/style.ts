@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, PixelRatio } from "react-native";
+import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";
 
 export const screenWidth = Math.floor(Dimensions.get('window').width);
 export const screenHeight = Math.floor(Dimensions.get('window').height);
@@ -44,7 +44,7 @@ const cardTextContainer = {
     // backgroundColor: '#000'
 }
 const taskCardContainer = {
-    padding: 8
+    padding: 6
 }
 export const headerColor = {
     backgroundColor: '#F6EEF4'
@@ -85,7 +85,11 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         padding: Math.floor(screenWidth * .044),
         // height: Math.floor(screenHeight)
     },
-    getDetailsContainer: containerPd10,
+    getDetailsContainer: {
+        ...containerPd10,
+        backgroundColor:'#fff',
+        height:screenHeight
+    },
     cardStyle: {
         // width: Math.floor(screenWidth *.82), 
         width: 360,
@@ -139,7 +143,8 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     chartContainer: {
         ...containerPd10,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor:'#fff'
     },
     chartLabel: {
         fontSize: scaleFontSize(12)
@@ -165,7 +170,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         rowGap: 8
     },
     commentContainer: {
-        width: '100%',
+       // width: '100%',
         ...taskCardContainer,
         backgroundColor: '#A097DC29',
         color: '#eee',
@@ -244,15 +249,12 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     pendingTaskOverViewSubmit: {
         flexDirection: 'row',
-        position: 'absolute',
-        zIndex: 2,
-        width: '100%',
-        bottom: 80,
-        justifyContent: 'space-around',
-        left: 16,
+        justifyContent: 'space-evenly',
+        height:screenHeight*0.05,
+        top:10
     },
     tabBarStyle: {
-        height: screenHeight * 0.115,
+        height: (Platform.OS === "android")? screenHeight * 0.105:screenHeight * 0.125,
         backgroundColor: "#F1F1F1"
     },
     tabBarLabelStyle: {
@@ -277,7 +279,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         flex: 1,
         // alignItems: 'center',
         padding: 20,
-        backgroundColor: 'white'
+        backgroundColor: '#fff'
     },
     imageContainer: {
         flexDirection: 'row',
@@ -457,9 +459,10 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     btnFilterHeaderContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        width: '100%',
+        //width: '100%',
         columnGap: 32,
-        paddingLeft: 10
+        paddingLeft: 10,
+        height: screenHeight*0.045
     },
     centeredView: {
         flex: 1,

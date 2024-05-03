@@ -62,6 +62,7 @@ const PendingTaskOverView = ({ pendingTaskDetails, lastActivitycomments,commentT
                     />
                 </ChevronsAccordian2>
                 <Seperator24 />
+                <SmallHeading>Comments</SmallHeading>
                 <AccordianCommonHeader
                     title="Last Comment"
                     descriptions="Your Description 1"

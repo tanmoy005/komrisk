@@ -62,7 +62,7 @@ const PendingTaskPage = () => {
   }, []);
   return (
     <CardContainer3 styles={{
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '#fff',
       height: screenHeight
     }}>
       <HeadImageSection />

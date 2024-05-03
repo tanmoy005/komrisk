@@ -96,7 +96,7 @@ const PendingTaskOverViewPage = () => {
         <CardContainer3 styles={{
             backgroundColor: '#FFFFFF',
             minHeight: screenHeight,
-            justifyContent: 'space-between'
+            //justifyContent: 'space-between'
         }}>
 
             <View>
