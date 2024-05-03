@@ -278,7 +278,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     dashboardContainer: {
         flex: 1,
-        alignItems: 'center',
+        // alignItems: 'center',
         padding: 20,
         backgroundColor: 'white'
     },
