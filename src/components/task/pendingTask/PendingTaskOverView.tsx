@@ -15,27 +15,18 @@ import { useState,useEffect } from 'react'
 
 const PendingTaskOverView = ({ pendingTaskDetails, lastActivitycomments,commentText, setCommentText }: PendingTaskOverViewProps) => {
 
-    //console.log("commentText got",commentText);
     const [taskid, setTaskId] = useState(304)
-
-    // const authUserDetails = useSelector((state: RootState) => state.authUserDetails);
-  
-    // console.log("UserId",authUserDetails.payload.userDetails.userId);
-
 
     const comments = useSelector((state: RootState) => state.comments.commentsList);
 
     useEffect(() => {
         // You can access the comments array here
-        //console.log('Comments from Redux:', comments);
         const filteredComments = comments.filter(comment => comment[0].taskID === taskid);
-        //console.log("filteredComments", filteredComments);
 
         if (filteredComments.length != 0) {
 
             setCommentText(filteredComments[0][0].commentText);
-            //console.log("filteredCommentsggggg", gotfilteredComments);
-            //commentText = gotfilteredComments;
+
         }
     }, [taskid]);
  

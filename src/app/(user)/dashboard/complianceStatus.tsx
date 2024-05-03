@@ -1,5 +1,4 @@
 import { RefreshControl, SafeAreaView, ScrollView, View } from "react-native";
-
 import ComplianceStatusInfo from "@/src/components/reports/GetComplianceStatusInfo";
 import { styles } from "@/src/style";
 import HeadImageSection from "@/src/components/headSection/HeadImageSection";
@@ -23,6 +22,8 @@ const ComplianceStatus = () => {
     // viewAs: "COMPANY EXECUTIVE",
 
   });
+
+  
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
   const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
 
@@ -37,10 +38,8 @@ const ComplianceStatus = () => {
 
   return (
     <SafeAreaView style={styles.dashboardContainer}>
-
       <HeadImageSection />
       <View>
-
         <Filter
           currentChart={currentChart}
           setCurrentChart={setCurrentChart}

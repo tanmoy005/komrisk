@@ -69,9 +69,6 @@ export default function NotificationTabLayout() {
               style={{ width: 20, height: 24 }} // Set the width and height to the desired size
             />
           ),
-
-
-
           // tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="text-box-check-outline" size={24} color="black" />,
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="Compliances" />

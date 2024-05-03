@@ -8,7 +8,6 @@ import { InitialsProps } from '../types';
 
 const Initials = ({ size, fontSize }: InitialsProps) => {
     const userDetails = useSelector((state: RootState) => state.authUserDetails.payload);
-    console.log('userDetails', userDetails);
     
     const firstName = userDetails?.userDetails?.firstName ?? "";
     const lastName = userDetails?.userDetails?.lastName ?? "";

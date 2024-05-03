@@ -20,17 +20,8 @@ const AccordianCommonHeader = ({ title, descriptions, icons, type = 'chevron', t
     const taskID = taskId;
 
     // Retrieve the comment for this header from state
-    //const [commentText, setCommentText] = useState('');
+
     const comments = useSelector((state: RootState) => state.comments.commentsList);
-    //console.log("Previous comment",comments);
-
-    // const authUserDetails = useSelector((state: RootState) => state.authUserDetails);
-  
-    // console.log("UserId in Accordian",authUserDetails.payload.userDetails.userId);
-
-    
-
-    //console.log("comments got", commentText)
 
     const dispatch = useDispatch(); // Move inside the component body
 

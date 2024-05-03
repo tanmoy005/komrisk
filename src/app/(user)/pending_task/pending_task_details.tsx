@@ -28,7 +28,6 @@ const Pending_Task_Details = () => {
         <>
             <Stack.Screen options={{ title: 'Pending Task Details' }} />
             <View style={styles.container}>
-
                 <AccordianCommonHeader
                     title="Your Title 1"
                     descriptions="Your Description 1"

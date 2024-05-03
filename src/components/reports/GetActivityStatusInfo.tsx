@@ -41,7 +41,7 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterP
     }
 
     const handleGetActivityStatusData = async (filterPayload: ActivityStatusDataPayLoad) => {
-
+      
       const { data, error, status } = await GetActivityStatusData(filterPayload);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;

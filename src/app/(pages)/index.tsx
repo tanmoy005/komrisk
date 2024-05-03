@@ -43,6 +43,7 @@ const Workspace = () => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
+        {/* <Image style={{ width: 230 }} source={require('@/assets/images/Komrisk-Logo.png')} /> */}
         <Image style={{ width: 230 }} source={require('@/assets/images/Komrisk-Logo.png')} />
         <View style={styles.lexLogoContainer}>
           <Image source={require('@/assets/images/Rectangle98.png')} />

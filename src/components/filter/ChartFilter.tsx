@@ -116,9 +116,7 @@ const ChartFilter = ({
         setChartFilterPayload({ ...chartFilterPayload });
         setModalVisible(false);
     }
-    console.log('startDate', startDate);
 
-    console.log('startDate3423', DateFormatDDMMYYYY(startDate && startDate.toString()));
     const handleStartDateConfirmation = (date: Date) => {
         setDisplayStartDate(DateFormatDDMMYYYY(date && date.toString()));
     }

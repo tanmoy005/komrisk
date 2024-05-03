@@ -18,6 +18,8 @@ const IncidentComparison = () => {
     start: startDate,
     end: currentDate
   });
+
+  
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
   const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
 
@@ -29,7 +31,6 @@ const IncidentComparison = () => {
     setChartFilterPayload(defaultFilterPayload)
     setRefreshing(true);
   }, []);
-
 
   return (
     <SafeAreaView style={styles.dashboardContainer}>

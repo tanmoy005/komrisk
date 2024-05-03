@@ -221,7 +221,7 @@ const ChartUserFilter = ({
         const filterLevel = filtrLevelArray.length > 1 ? filtrLevelArray[1] : filtrLevelArray[0];
         chartUserFilterPayload.filterType = selectedFilterType1?.toString();
         chartUserFilterPayload.filterLevel = `${selectedFilterType1?.toString()}:${filterLevel}`;
-
+        
         setUserFilterPayload({ ...chartUserFilterPayload });
         setModalVisible(false)
     }

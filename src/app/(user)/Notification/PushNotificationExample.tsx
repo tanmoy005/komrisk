@@ -16,7 +16,6 @@ export default function PushNotificationExample() {
   const [expoPushToken, setExpoPushToken] = useState<string>("");
 
   useEffect(() => {
-    //console.log("Registering for push notifications...");
     registerForPushNotificationsAsync()
       .then((token) => {
         setExpoPushToken(token ?? "");
@@ -65,7 +64,6 @@ export default function PushNotificationExample() {
 
 
   const sendNotification = async () => {
-    // console.log("Sending push notification...");
 
     // notification message
     const message = {

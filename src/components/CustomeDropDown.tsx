@@ -9,15 +9,21 @@ import {
 import { Dropdown } from 'react-native-element-dropdown';
 import { DropdownProps } from '../types';
 import { styles } from '../style';
+import { hasValue } from '../utils';
 
 const renderItem = (item: any) => {
-  const isLocalImage = item && item.image && item.image.uri && typeof item.image.uri === 'string';
+  const isLocalImage = hasValue(item?.image?.uri);
   return (
     <View style={{ flexDirection: 'row' }}>
-      <Image
-        source={isLocalImage ? item.image : item.image.uri}
-        style={[styles.image]}
-      />
+      {
+      isLocalImage &&
+
+          <Image
+            source={ item.image.uri}
+            style={[styles.image]}
+          />
+        
+      }
       <Text>
         {item.lable}
       </Text>
@@ -50,14 +56,13 @@ const CustomeDropDown = ({ setSelectedValue, dropdownItems, selectedValue, minWi
       renderLeftIcon={() => {
         if (typeof image?.uri === 'string') {
           return <Image
-            // source={image.uri}
             style={[styles.image]}
           />
         } else {
           return leftIcon && leftIcon()
         }
       }}
-      // renderLeftIcon={}
+
       onChange={e => {
         setImage(e.image);
         setSelectedValue(e.value);

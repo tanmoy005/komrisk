@@ -6,7 +6,7 @@ import Filter from "@/src/components/filter/Filter";
 import React, { useState } from "react";
 import { ChartDataFilterDataPayLoad, ChartFilterDataPayLoad, ChartUserFilterDataPayLoad } from "@/src/types";
 import moment from "moment";
-// const Product = products[3];
+
 
 const ActivityStatus = () => {
 
@@ -21,6 +21,7 @@ const ActivityStatus = () => {
     // viewAs: "COMPANY HEAD",
 
   });
+  
   const [chartUserFilterPayload, setChartUserFilterPayload] = useState<ChartUserFilterDataPayLoad>({});
   const [chartDataFilterPayload, setChartDataFilterPayload] = useState<ChartDataFilterDataPayLoad>({});
 
