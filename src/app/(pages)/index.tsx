@@ -3,15 +3,16 @@ import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert } from 'r
 import { router } from 'expo-router';
 import AuthenticateWorkspace from '@/src/server/api-functions/Login/authenticate-workspace';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
-import { useDispatch } from 'react-redux';
-import { storeBaseUrl } from '@/src/store/slices/base-url-slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeBaseUrl, storeBaseUrl } from '@/src/store/slices/base-url-slice';
 import Button from '@/src/components/Button';
+import { RootState } from '@/src/store';
 
 
 
 const Workspace = () => {
-
-  const [workSpaceName, setWorkSpaceName] = useState<string>('');
+  const prevWorkSpaceName = useSelector((state: RootState) => state.baseUrl.payload.workSpaceName);
+  const [workSpaceName, setWorkSpaceName] = useState<string>(prevWorkSpaceName ?? '');
   const dispatch = useDispatch();
 
   const handleSubmitWorkSpace = async () => {
@@ -25,10 +26,11 @@ const Workspace = () => {
       };
       const baseURL = `${payLoad.Url}/komrisk/api`;
       setDataToAsyncStorage('baseUrl', baseURL);
+
       const { status } = await AuthenticateWorkspace(payLoad);
 
       if (status === 200) {
-
+        dispatch(removeBaseUrl())
         dispatch(storeBaseUrl({ workSpaceName: workSpaceName.trim(), baseUrl: baseURL }));
 
         router.navigate("/signin");

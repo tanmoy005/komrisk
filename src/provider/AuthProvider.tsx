@@ -72,9 +72,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const clearToken = async () => {
         try {
             await AsyncStorage.removeItem('token'); // Assuming you store the token in AsyncStorage
+            await AsyncStorage.removeItem('baseUrl'); // Assuming you store the token in AsyncStorage
             setToken(null);
             setSession(false);
-            dispatch(removeBaseUrl())
+            // dispatch(removeBaseUrl())
             dispatch(removeAuthUserCred())
             dispatch(removeAuthUserDetails());
             dispatch(removeAuthUserAccessDetails())

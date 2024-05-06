@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from '@/src/components/Themed';
 
 
-export default function NotFoundScreen() {
+export default function AdvancedReports() {
   return (
     <>
       <Stack.Screen options={{ title: 'Advanced Reports' }} />
