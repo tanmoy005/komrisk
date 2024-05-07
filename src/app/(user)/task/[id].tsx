@@ -10,7 +10,7 @@ import { screenHeight, styles } from '@/src/style'
 import { LastActivityComment, PendingTaskItemDetailsResponse } from '@/src/types'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { KeyboardAvoidingView, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ProofSection from '../../../components/task/pendingTask/ProofSection'
 
@@ -92,37 +92,45 @@ const PendingTaskOverViewPage = () => {
 
     return (
 
-        // <ScrollView>
         <CardContainer3 styles={{
             backgroundColor: '#FFFFFF',
-            minHeight: screenHeight,
-            //justifyContent: 'space-between'
+            flex: 1,
         }}>
 
-            <View>
-
-                <HeadImageSection />
-                <BtnFilterHeader
-                    firstBtnName='Overview'
-                    fistBtnOnpress={handlePressOnOverview}
-                    secondBtnName='Proofs'
-                    secondBtnOnpress={handlePressOnProofs}
-                />
-                <Seperator48 />
-                {activeTab === 'Overview' && (
-                    <PendingTaskOverView
-                        pendingTaskDetails={pendingTaskDetails}
-                        lastActivitycomments={lastActivitycomments}
-                        commentText={commentText}
-                        setCommentText={setCommentText}
+            {activeTab === 'Overview' && (
+                <KeyboardAvoidingView behavior="padding">
+                    <ScrollView>
+                        <HeadImageSection />
+                        <BtnFilterHeader
+                            firstBtnName='Overview'
+                            fistBtnOnpress={handlePressOnOverview}
+                            secondBtnName='Proofs'
+                            secondBtnOnpress={handlePressOnProofs}
+                        />
+                        <Seperator48 />
+                        <PendingTaskOverView
+                            pendingTaskDetails={pendingTaskDetails}
+                            lastActivitycomments={lastActivitycomments}
+                            commentText={commentText}
+                            setCommentText={setCommentText}
+                        />
+                    </ScrollView>
+                </KeyboardAvoidingView>
+            )}
+            {activeTab === 'Proofs' && (
+                <View>
+                    <HeadImageSection />
+                    <BtnFilterHeader
+                        firstBtnName='Overview'
+                        fistBtnOnpress={handlePressOnOverview}
+                        secondBtnName='Proofs'
+                        secondBtnOnpress={handlePressOnProofs}
                     />
-                )}
-                {activeTab === 'Proofs' && (
+                    <Seperator48 />
                     <ProofSection />
 
-                )}
-            </View>
-            {/* <Seperator14 /> */}
+                </View>
+            )}
             <View style={styles.pendingTaskOverViewSubmit}>
                 <Button
                     btnColor={'#A097DC'}

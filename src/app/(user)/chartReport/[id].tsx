@@ -32,20 +32,19 @@ const ShowDetailsReport = () => {
 
 
     return (
-        <ScrollView>
-            <CardContainer>
-                <View>
-                    {
-                        taskType == 'COMPLIANCE' ?
-                            <GetComplianceDetails complianceId={complianceId} />
-                            : taskType == 'INCIDENT' ?
-                                <GetIncidentDetails taskId={incedentTaskId} incidentId={incidentId} /> : null
-                    }
-
-                </View>
-
-            </CardContainer>
-        </ScrollView>
+        <CardContainer styles={{
+            backgroundColor: '#FFFFFF',
+            flex: 1
+        }}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                {
+                    taskType == 'COMPLIANCE' ?
+                        <GetComplianceDetails complianceId={complianceId} />
+                        : taskType == 'INCIDENT' ?
+                            <GetIncidentDetails taskId={incedentTaskId} incidentId={incidentId} /> : null
+                }
+            </ScrollView>
+        </CardContainer>
     )
 }
 
