@@ -1,3 +1,5 @@
+
+import React, { memo } from 'react';
 import { Pressable } from "react-native";
 import { ChartListDataItem } from "@/src/types";
 import { router } from "expo-router";
@@ -18,8 +20,7 @@ interface NavigateChartList {
   pathname: string;
   params: ChartItemProps
 }
-const ComplianceTaskDetails = ({ data }: ChartItemProps) => {
-
+const ComplianceTaskDetails = memo(({ data }: ChartItemProps) => {
   const { taskName, description, dueDate, owner, reviewer } = data
   const taskCardData = {
     firstSection: {
@@ -47,15 +48,11 @@ const ComplianceTaskDetails = ({ data }: ChartItemProps) => {
       ]
     }
   }
-  // const taskCardData
-  const id = ['COMPLIANCE', data?.complianceId]
 
   return (
     <View >
       {
         !isObjectEmpty(data) ?
-          // <Link href={`/chartReport/id`} asChild>
-
           <Pressable
             onPress={() => router.push({
               pathname: `/chartReport/[id]`,
@@ -70,7 +67,6 @@ const ComplianceTaskDetails = ({ data }: ChartItemProps) => {
               taskCard={taskCardData}
             />
           </Pressable>
-          // </Link>
           :
           <View style={styles.taskCard}>
             <CardContainer>
@@ -82,6 +78,6 @@ const ComplianceTaskDetails = ({ data }: ChartItemProps) => {
       }
     </View>
   );
-};
+});
 
 export default ComplianceTaskDetails;

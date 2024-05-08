@@ -7,11 +7,10 @@ import { Alert, RefreshControl } from "react-native";
 import { Text } from 'react-native';
 import { FlatList, StyleSheet } from 'react-native';
 import { screenHeight } from "@/src/style";
+import { memo } from 'react';
 
 
-
-
-const ProofsListDetails = ({ taskId, type }: ProofsListDetailsProps) => {
+const ProofsListDetails = memo(({ taskId, type }: ProofsListDetailsProps) => {
     const [refreshing, setRefreshing] = useState(true);
 
     const [proofDataList, setProofDataList] = useState<ProofListData[]>([{}]);
@@ -73,7 +72,7 @@ const ProofsListDetails = ({ taskId, type }: ProofsListDetailsProps) => {
             />
         </View>
     );
-};
+});
 
 const styles = StyleSheet.create({
     titleContainer: {

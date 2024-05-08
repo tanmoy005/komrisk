@@ -7,6 +7,7 @@ import TaskCard from "../../cards/TaskCard";
 import { styles } from "../../../style";
 import CardContainer from "../../cards/CardContainer";
 import CardTextContainer from "../../cards/CardTextContainer";
+import React, { memo } from 'react';
 
 type PendingTaskDetailsProps = {
   data: PendingTask
@@ -15,8 +16,9 @@ const isObjectEmpty = (objectName: ChartListDataItem) => {
   return Object.keys(objectName).length === 0
 }
 
-const PendingTaskDetails = ({ data }: PendingTaskDetailsProps) => {
 
+
+const PendingTaskDetails  = memo(({ data }: PendingTaskDetailsProps) => {
   const { taskName, description, dueDate, owner, reviewer, Assignee, taskId, activities } = data
   const taskCardData = {
     firstSection: {
@@ -83,6 +85,6 @@ const PendingTaskDetails = ({ data }: PendingTaskDetailsProps) => {
       }
     </View>
   );
-};
+});
 
 export default PendingTaskDetails;

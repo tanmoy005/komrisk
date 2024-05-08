@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Pressable, Text, View } from 'react-native'
 import CardContainer from './CardContainer'
 import { styles } from '@/src/style'
@@ -7,12 +7,16 @@ import { NotificationListDataItem, notificationCardListData } from '@/src/types'
 import CardTextContainer from './CardTextContainer'
 import { router } from 'expo-router'
 import ChartItemSkelton from '../skelton/ChartItemSkelton'
+import React, { memo } from 'react';
 
 interface notificationCardListDataProps {
     data: NotificationListDataItem
 }
 
-const NotificationCard = ({ data }: notificationCardListDataProps) => {
+
+
+
+const NotificationCard = memo(({ data }: notificationCardListDataProps) => {
     const CardData: notificationCardListData = {
         firstSection: {
             heading: data.complianceNature,
@@ -114,6 +118,6 @@ const NotificationCard = ({ data }: notificationCardListDataProps) => {
             }
         </View>
     );
-};
+});
 
 export default NotificationCard
