@@ -1774,9 +1774,13 @@ export interface filterSelectProps {
 
 // Chart User Filter
 
+// export interface ChartUserFilterDataPayLoad {
+//   filterLevel: string;
+//   filterType: string;
+// }
+
 export interface ChartUserFilterDataPayLoad {
-  filterLevel: string;
-  filterType: string;
+  userFilter: string;
 }
 export interface userchartFilterProps {
   chartFilterPayload: ChartFilterDataPayLoad
@@ -1921,8 +1925,12 @@ export interface ChartUserFilterModalProps extends BaseFilterModalProps {
 // Chart Data Filter
 
 
+// export interface ChartDataFilterDataPayLoad {
+//   filterType: string;
+// }
+
 export interface ChartDataFilterDataPayLoad {
-  filterType: string;
+  dataFilter: string;
 }
 export interface ChartDataFilterModalProps extends BaseFilterModalProps {
 

@@ -1,3 +1,4 @@
+
 import GetActivityStatusDataFilterLevelData from "@/src/server/api-functions/DataFilter/get-activity-status-datafilter-filterlevel-data";
 import GetComplianceStatusDataFilterLevelData from "@/src/server/api-functions/DataFilter/get-compliance-status-datafilter-filterlevel-data";
 import GetImpactAnalysisDataFilterLevelData from "@/src/server/api-functions/DataFilter/get-impact-analysis-datafilter-filterlevel-data";
@@ -162,7 +163,7 @@ const ChartDataFilter = ({
 
     const handleApplyFilters = () => {
 
-        chartDataFilterPayload.filterType = selectedFilterType2?.toString();
+        chartDataFilterPayload.dataFilter = selectedFilterType2?.toString();
 
         setDataFilterPayload({ ...chartDataFilterPayload });
         setModalVisible(false)

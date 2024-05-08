@@ -65,21 +65,15 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilte
       ...useCredential,
       ...chartFilterPayload,
       ...chartUserFilterPayload,
-
-    }
-    setPayLoad(updatedPayLoad)
-    handleGetComplianceStatusData(updatedPayLoad);
-  }, [chartFilterPayload, chartUserFilterPayload]);
-
-  useEffect(() => {
-    const updatedPayLoad = {
-      ...useCredential,
-      ...chartFilterPayload,
       ...chartDataFilterPayload
+
     }
     setPayLoad(updatedPayLoad)
     handleGetComplianceStatusData(updatedPayLoad);
-  }, [chartDataFilterPayload]);
+  }, [chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload]);
+
+  console.log("PayLoad",payLoad);
+  
   return (
     <View style={styles.chartContainer}>
       {

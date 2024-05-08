@@ -68,21 +68,15 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload, chartUserFilterP
         ...useCredential,
         ...chartFilterPayload,
         ...chartUserFilterPayload,
-
-      }
-      setPayLoad(updatedPayLoad)
-      handleGetImpactAnalysisData(updatedPayLoad);
-    }, [chartFilterPayload, chartUserFilterPayload]);
-
-    useEffect(() => {
-      const updatedPayLoad = {
-        ...useCredential,
-        ...chartFilterPayload,
         ...chartDataFilterPayload
+
       }
       setPayLoad(updatedPayLoad)
       handleGetImpactAnalysisData(updatedPayLoad);
-    }, [chartDataFilterPayload]);
+    }, [chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload]);
+
+    console.log("PayLoad",payLoad);
+
     return (
       <View style={styles.chartContainer}>
         {

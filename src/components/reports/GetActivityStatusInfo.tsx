@@ -65,22 +65,15 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterP
         ...useCredential,
         ...chartFilterPayload,
         ...chartUserFilterPayload,
-
-      }
-      setPayLoad(updatedPayLoad)
-      handleGetActivityStatusData(updatedPayLoad);
-    }, [chartFilterPayload, chartUserFilterPayload]);
-
-    useEffect(() => {
-      const updatedPayLoad = {
-        ...useCredential,
-        ...chartFilterPayload,
         ...chartDataFilterPayload
 
       }
       setPayLoad(updatedPayLoad)
       handleGetActivityStatusData(updatedPayLoad);
-    }, [chartDataFilterPayload]);
+    }, [chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload]);
+
+    console.log("PayLoad",payLoad);
+
     return (
       <View style={styles.chartContainer}>
         {

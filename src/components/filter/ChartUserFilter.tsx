@@ -1,3 +1,4 @@
+
 import GetActivityStatusUserFilterLevelData from "@/src/server/api-functions/UserFilter/get-activity-status-userfilter-filterlevel-data";
 import GetComplianceStatusUserFilterLevelData from "@/src/server/api-functions/UserFilter/get-compliance-status-userfilter-filterlevel-data";
 import GetImpactAnalysisUserFilterLevelData from "@/src/server/api-functions/UserFilter/get-impact-analysis-userfilter-filterlevel-data";
@@ -116,6 +117,8 @@ const ChartUserFilter = ({
         }
 
         const { data, error, status } = await apiFunction(userfilterPayload);
+        
+        
         if (status === 200) {
             const { chartData, title, subTitle } = data;
 
@@ -217,10 +220,12 @@ const ChartUserFilter = ({
     }, [complianceUserFilterChartData, incidentUserFilterChartData, filteredChartData]);
 
     const handleApplyFilters = () => {
-        const filtrLevelArray = selectedFilterType2?.toString()?.split(':');
-        const filterLevel = filtrLevelArray.length > 1 ? filtrLevelArray[1] : filtrLevelArray[0];
-        chartUserFilterPayload.filterType = selectedFilterType1?.toString();
-        chartUserFilterPayload.filterLevel = `${selectedFilterType1?.toString()}:${filterLevel}`;
+        const filtrLevelArray = selectedFilterType2?.toString()?.split(':');       
+        const filterLevel = filtrLevelArray.length > 1 ? filtrLevelArray[1] : filtrLevelArray[0];       
+        //chartUserFilterPayload.filterType = selectedFilterType1?.toString();
+        chartUserFilterPayload.userFilter = `${selectedFilterType1?.toString()}:${filterLevel}`;
+        
+        
         
         setUserFilterPayload({ ...chartUserFilterPayload });
         setModalVisible(false)
