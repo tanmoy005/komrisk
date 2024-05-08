@@ -70,7 +70,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     },
     cardContainer: {
         width: Math.floor(screenWidth * .88), // Adjust the width as needed
-        height: Math.floor(screenWidth * .88),
+        // height: Math.floor(screenWidth * .88),
         display: 'flex',
         justifyContent: 'space-evenly',
         backgroundColor: '#F5F5F5',

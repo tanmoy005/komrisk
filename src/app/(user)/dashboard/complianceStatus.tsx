@@ -33,6 +33,8 @@ const ComplianceStatus = () => {
       end: currentDate,
     }
     setChartFilterPayload(defaultFilterPayload)
+    setChartUserFilterPayload({})
+    setChartDataFilterPayload({})
     setRefreshing(true);
   }, []);
 

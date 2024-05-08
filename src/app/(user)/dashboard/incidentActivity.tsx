@@ -29,6 +29,8 @@ const IncidentActivity = () => {
       end: currentDate,
     }
     setChartFilterPayload(defaultFilterPayload)
+    setChartUserFilterPayload({})
+    setChartDataFilterPayload({})
     setRefreshing(true);
   }, []);
 

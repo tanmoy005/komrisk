@@ -30,7 +30,10 @@ const ActivityStatus = () => {
       start: startDate,
       end: currentDate,
     }
+    console.log(defaultFilterPayload);
     setChartFilterPayload(defaultFilterPayload)
+    setChartUserFilterPayload({})
+    setChartDataFilterPayload({})
     setRefreshing(true);
   }, []);
 

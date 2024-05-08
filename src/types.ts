@@ -1780,7 +1780,7 @@ export interface filterSelectProps {
 // }
 
 export interface ChartUserFilterDataPayLoad {
-  userFilter: string;
+  userFilter?: string;
 }
 export interface userchartFilterProps {
   chartFilterPayload: ChartFilterDataPayLoad
@@ -1930,7 +1930,7 @@ export interface ChartUserFilterModalProps extends BaseFilterModalProps {
 // }
 
 export interface ChartDataFilterDataPayLoad {
-  dataFilter: string;
+  dataFilter?: string;
 }
 export interface ChartDataFilterModalProps extends BaseFilterModalProps {
 

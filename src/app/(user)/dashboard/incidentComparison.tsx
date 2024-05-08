@@ -29,6 +29,8 @@ const IncidentComparison = () => {
       end: currentDate,
     }
     setChartFilterPayload(defaultFilterPayload)
+    setChartUserFilterPayload({})
+    setChartDataFilterPayload({})
     setRefreshing(true);
   }, []);
 
