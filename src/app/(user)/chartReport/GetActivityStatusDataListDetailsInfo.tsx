@@ -47,8 +47,8 @@ const GetActivityStatusDataListDetailsInfo = () => {
         setActivityStatusChartDataList(data);
         if (aaData.length > 0) {
           setDataList(aaData);
-          setRefreshing(false);
         }
+        setRefreshing(false);
       } else {
         Alert.alert("error", error.message);
       }
@@ -63,7 +63,8 @@ const GetActivityStatusDataListDetailsInfo = () => {
         <HeadImageSection />
 
         {
-          DataList.length > 0 ?
+          DataList.length == 0 && refreshing == false ?
+            <NoDataAvailableCard /> :
             <FlatList showsVerticalScrollIndicator={false}
               data={DataList}
               renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
@@ -74,8 +75,7 @@ const GetActivityStatusDataListDetailsInfo = () => {
                   onRefresh={handleGetActivityStatusDataList}
                 />
               }
-            /> :
-            <NoDataAvailableCard />
+            />
         }
       </View>
     )

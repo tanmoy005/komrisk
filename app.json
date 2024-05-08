@@ -4,7 +4,7 @@
     "slug": "komrisk",
     "version": "1.2.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/Icons_Mo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "light",
     "splash": {

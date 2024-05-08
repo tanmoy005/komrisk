@@ -71,17 +71,17 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
     return (
       <View style={styles.getDetailsContainer}>
         <HeadImageSection />
-        {DataList.length > 0 ?
-
-          <FlatList showsVerticalScrollIndicator={false}
-            data={DataList}
-            renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
-            contentContainerStyle={{ gap: 10, padding: 10 }}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleGetImpactAnalysisDataList} />
-          }
-          /> :
-          <NoDataAvailableCard />
+        {
+          DataList.length == 0 && refreshing == false ?
+            <NoDataAvailableCard /> :
+            <FlatList showsVerticalScrollIndicator={false}
+              data={DataList}
+              renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
+              contentContainerStyle={{ gap: 10, padding: 10 }}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={handleGetImpactAnalysisDataList} />
+              }
+            />
         }
       </View>
     )

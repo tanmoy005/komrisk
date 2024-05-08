@@ -65,7 +65,8 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
       <View style={styles.getDetailsContainer}>
         <HeadImageSection />
         {
-          DataList.length > 0 ?
+          DataList.length == 0 && refreshing == false ?
+            <NoDataAvailableCard /> :
             <FlatList showsVerticalScrollIndicator={false}
               data={DataList}
               renderItem={({ item }) => <IncidentTaskDetails data={item} />}
@@ -74,8 +75,6 @@ const GetIncidentComparisonDataListDetailsInfo = () => {
                 <RefreshControl refreshing={refreshing} onRefresh={handleGetIncidentComparisonDataList} />
               }
             />
-            :
-            <NoDataAvailableCard />
         }
       </View>
     )

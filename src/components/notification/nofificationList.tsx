@@ -48,7 +48,8 @@ const NotificationList = () => {
     return (
         <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center', width: '100%' }}>
             {
-                DataList.length > 0 ?
+                DataList.length == 0 && refreshing == false ?
+                    <NoDataAvailableCard /> :
 
                     <FlatList showsVerticalScrollIndicator={false}
                         refreshControl={
@@ -59,8 +60,6 @@ const NotificationList = () => {
                         renderItem={({ item }) => <NotificationCard data={item} />}
                         contentContainerStyle={{ gap: 10, padding: 10 }}
                     />
-                    :
-                    <NoDataAvailableCard />
             }
         </View>
     )

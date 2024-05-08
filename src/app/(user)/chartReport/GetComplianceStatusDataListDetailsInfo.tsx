@@ -72,7 +72,8 @@ const GetComplianceStatusDataListDetailsInfo = () => {
         <HeadImageSection />
 
         {
-          DataList.length > 0 ?
+          DataList.length == 0 && refreshing == false ?
+            <NoDataAvailableCard /> :
             <FlatList showsVerticalScrollIndicator={false}
               data={DataList}
               renderItem={({ item }) => <ComplianceTaskDetails data={item} />}
@@ -80,8 +81,7 @@ const GetComplianceStatusDataListDetailsInfo = () => {
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={handleGetActivityStatusDataList} />
               }
-            /> :
-            <NoDataAvailableCard />
+            />
         }
       </View>
     )
