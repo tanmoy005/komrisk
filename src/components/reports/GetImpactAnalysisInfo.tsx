@@ -75,8 +75,6 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload, chartUserFilterP
       handleGetImpactAnalysisData(updatedPayLoad);
     }, [chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload]);
 
-    console.log("PayLoad",payLoad);
-
     return (
       <View style={styles.chartContainer}>
         {

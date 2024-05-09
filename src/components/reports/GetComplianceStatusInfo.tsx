@@ -72,7 +72,6 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilte
     handleGetComplianceStatusData(updatedPayLoad);
   }, [chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload]);
 
-  console.log("PayLoad",payLoad);
   
   return (
     <View style={styles.chartContainer}>

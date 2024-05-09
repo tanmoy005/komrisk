@@ -72,8 +72,6 @@ const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterP
       handleGetActivityStatusData(updatedPayLoad);
     }, [chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload]);
 
-    console.log("PayLoad",payLoad);
-
     return (
       <View style={styles.chartContainer}>
         {
