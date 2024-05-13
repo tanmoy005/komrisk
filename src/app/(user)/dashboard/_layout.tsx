@@ -50,14 +50,14 @@ export default function TabLayout() {
     });
 
 
-    navigation.addListener('beforeRemove', (e) => {
+    // navigation.addListener('beforeRemove', (e) => {
 
-      if (e?.data?.action?.source != null) {
-        e.preventDefault();
-      } else {
-        navigation.dispatch(e.data.action);
-      }
-    });
+    //   if (e?.data?.action?.source != null) {
+    //     e.preventDefault();
+    //   } else {
+    //     navigation.dispatch(e.data.action);
+    //   }
+    // });
     return () => backHandler.remove();
 
   }, []);

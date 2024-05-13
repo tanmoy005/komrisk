@@ -33,7 +33,7 @@ const Workspace = () => {
         dispatch(removeBaseUrl())
         dispatch(storeBaseUrl({ workSpaceName: workSpaceName.trim(), baseUrl: baseURL }));
 
-        router.navigate("/signin");
+        router.replace("/signin");
       } else {
         setDataToAsyncStorage('baseUrl', "");
         Alert.alert("error", "Unknown workspace");

@@ -5,9 +5,10 @@ import Button from '@/src/components/Button';
 import { router } from 'expo-router';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-import { styles } from '../style';
-import Initials from '../components/Initials';
+import { RootState } from '@/src/store';
+import { styles } from '@/src/style';
+import Initials from '@/src/components/Initials';
+
 
 
 export default function Menu() {
@@ -61,7 +62,7 @@ export default function Menu() {
           type='outline'
           onPress={() => 
             
-           router.replace('/(user)/task/pendingTaskPage')
+           router.navigate('/(user)/task/pendingTaskPage')
             
           }
           style={{
@@ -88,7 +89,7 @@ export default function Menu() {
           text='Notifications'
           btnColor='#5645C0'
           type='outline'
-          onPress={() => router.replace('/notification/notification_tab/allnotificationList')}
+          onPress={() => router.navigate('/notification/notification_tab/allnotificationList')}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 48,

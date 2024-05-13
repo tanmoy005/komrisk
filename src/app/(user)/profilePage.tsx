@@ -10,7 +10,7 @@ import { useColorScheme } from 'react-native'
 
 
 
-import {AuthContext} from '../../provider/AuthProvider';
+import { AuthContext } from '../../provider/AuthProvider';
 import { router } from 'expo-router';
 
 const ProfilePage = () => {
@@ -19,10 +19,8 @@ const ProfilePage = () => {
   const { clearToken } = React.useContext(AuthContext);
 
   const handleLogout = () => {
-    clearToken(); 
-
-    router.push('/(pages)')
-    
+    clearToken();
+    router.replace('/(pages)')
     // Navigate to login or perform other actions
   };
   return (

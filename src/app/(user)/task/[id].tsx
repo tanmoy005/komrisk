@@ -5,6 +5,7 @@ import HeadImageSection from '@/src/components/headSection/HeadImageSection'
 import Seperator48 from '@/src/components/seperators/Seperator48'
 import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader'
 import PendingTaskOverView from '@/src/components/task/pendingTask/PendingTaskOverView'
+import ProofSection from '@/src/components/task/pendingTask/ProofSection'
 import { RootState } from '@/src/store'
 import { screenHeight, styles } from '@/src/style'
 import { LastActivityComment, PendingTaskItemDetailsResponse } from '@/src/types'
@@ -12,7 +13,6 @@ import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import ProofSection from '../../../components/task/pendingTask/ProofSection'
 
 const PendingTaskOverViewPage = () => {
     const data = useLocalSearchParams();

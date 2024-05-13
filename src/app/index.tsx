@@ -1,12 +1,10 @@
 import React from 'react';
 import Workspace from './(pages)';
-import { Provider } from 'react-redux';
 // import store from '../store';
-import AuthProvider, {AuthContext} from '../provider/AuthProvider';
+import {AuthContext} from '../provider/AuthProvider';
 //import ComplianceStatus from './(user)/dashboard/complianceStatus';
 import TabIndex from './(user)';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/src/store';
+import { router } from 'expo-router';
 
 
 const index = () => {
@@ -19,6 +17,8 @@ const index = () => {
   } 
   else 
   {
+    // router.navigate('/(user)/dashboard/complianceStatus')
+     //router.navigate('./(pages)/index') ;
     return <Workspace />;
   }
 };

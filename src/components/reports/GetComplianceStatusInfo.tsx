@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import { ComplianceStatusDataPayLoad, ReportChartData, ComplianceStatusData, ChartProp } from '../../types';
 import GetComplianceStatusData from '../../server/api-functions/Chart/get-compliance-status-data';
-import { Alert, Pressable } from 'react-native';
+import { Alert, Pressable, Text } from 'react-native';
 import { View } from 'react-native';
 import PieChartData from '../charts/PieChart';
 import { useSelector } from 'react-redux';
 import DonatChartData from '../charts/DonatChart';
 import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
-import { Card, Text } from 'react-native-elements';
+import { Card} from 'react-native-elements';
 import { styles } from '../../style';
 import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from '../skelton/CardSkelton';
