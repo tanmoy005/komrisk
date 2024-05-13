@@ -16,21 +16,34 @@ import { useSelector } from 'react-redux'
 
 const PendingTaskOverViewPage = () => {
     const data = useLocalSearchParams();
-
     const { id } = data;
-    const taskId = typeof id === 'string' ? id : id[0];
-    const [selectedTaskId] = useState<string>(taskId);
+    const compliance_id = typeof data.compliance_id === 'string' ? data.compliance_id : null;
+    const task_id = typeof data.task_id === 'string' ? data.task_id : null;    
+    const task_desc= typeof data.task_desc === 'string' ? data.task_desc : null; 
+    const name_of_law= typeof data.name_of_law === 'string' ? data.name_of_law : null;
+    const task_name= typeof data.task_name === 'string' ? data.task_name : null;
+    const map_id= typeof data.map_id === 'string' ? data.map_id : null;
+
+    // const taskId = typeof id === 'string' ? id : id[0];
+    const [selectedTaskId] = useState<string>(task_id??"");
     const [activeTab, setActiveTab] = useState('Overview'); // Track active tab state
     const [pendingTaskDetails, setPendingTaskDetails] = useState<PendingTaskItemDetailsResponse>({
-        title: null,
-        complianceId: null,
-        description: null,
-        lawName: null,
-        lastActivity: {
-            type: null,
-            updateOn: null,
-            updatedBy: null
-        }
+        // title: null,
+        // complianceId: null,
+        // description: null,
+        // lawName: null,
+        // lastActivity: {
+        //     type: null,
+        //     updateOn: null,
+        //     updatedBy: null
+        // }
+          
+        compliance_id: null ,
+        task_desc: null,
+        name_of_law: null,
+        map_id: null,
+        task_name:null,
+        task_id: null
     });
 
 
@@ -43,13 +56,19 @@ const PendingTaskOverViewPage = () => {
     }
     const setTaskDetails = (selectedTaskId: string) => {
         const taskDetails = GetPendingTaskDetails(selectedTaskId);
-        const { title, description, nameOfLaw, complianceId, activities } = taskDetails;
+        // const { title, description, nameOfLaw, complianceId, activities } = taskDetails;
         setPendingTaskDetails({
-            title: title,
-            description: description,
-            complianceId: complianceId.toString(),
-            lawName: nameOfLaw,
-            lastActivity: activities[activities.length - 1]
+            // title: title,
+            // description: description,
+            // complianceId: complianceId.toString(),
+            // lawName: nameOfLaw,
+            // lastActivity: activities[activities.length - 1]
+            task_id: task_id ,           
+            task_desc: task_desc,
+            compliance_id:  compliance_id ,
+            name_of_law: name_of_law ,
+            task_name: task_name ,
+            map_id: map_id ,
         })
 
     }
@@ -88,6 +107,7 @@ const PendingTaskOverViewPage = () => {
     const [commentText, setCommentText] = useState<string>("");
 
     const comments = useSelector((state: RootState) => state.comments.commentsList);
+    const [shortDescription, setShortDescription] = useState<string>("");
 
 
     return (
@@ -110,9 +130,11 @@ const PendingTaskOverViewPage = () => {
                         <Seperator48 />
                         <PendingTaskOverView
                             pendingTaskDetails={pendingTaskDetails}
-                            lastActivitycomments={lastActivitycomments}
+                           // lastActivitycomments={lastActivitycomments}
                             commentText={commentText}
                             setCommentText={setCommentText}
+                            setShortDescription={setShortDescription}
+                            shortDescription={shortDescription}
                         />
                     </ScrollView>
                 </KeyboardAvoidingView>

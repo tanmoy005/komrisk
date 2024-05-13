@@ -16,7 +16,7 @@ export default function     PendingTaskAccordianBody({ pendingTaskDetails }: Pro
             <CardTextContainer>
                 <View>
                     <SmallHeading>{'Title'}</SmallHeading>
-                    <Text style={styles.bodyInfoText}>{pendingTaskDetails?.title ?? "NA"}</Text>
+                    <Text style={styles.bodyInfoText}>{pendingTaskDetails?.task_name ?? "NA"}</Text>
                     <Divider
                         color='#A097DC'
                         style={{
@@ -25,7 +25,7 @@ export default function     PendingTaskAccordianBody({ pendingTaskDetails }: Pro
                             borderWidth: 1,
                         }} />
                     <SmallHeading>{'Complliance Id'}:</SmallHeading>
-                    <Text style={styles.bodyInfoText}>{pendingTaskDetails?.complianceId ?? 'NA'}</Text>
+                    <Text style={styles.bodyInfoText}>{pendingTaskDetails?.compliance_id ?? 'NA'}</Text>
                     <Divider
                         color='transparent'
                         style={{
@@ -34,7 +34,7 @@ export default function     PendingTaskAccordianBody({ pendingTaskDetails }: Pro
                             borderWidth: 0,
                         }} />
                     <SmallHeading>{'Task Description'}:</SmallHeading>
-                    <Text style={styles.bodyInfoText}>{pendingTaskDetails?.description ?? 'NA'}</Text>
+                    <Text style={styles.bodyInfoText}>{pendingTaskDetails?.task_desc?? 'NA'}</Text>
                     <Divider
                         color='transparent'
                         style={{
@@ -43,7 +43,7 @@ export default function     PendingTaskAccordianBody({ pendingTaskDetails }: Pro
                             borderWidth: 0,
                         }} />
                     <SmallHeading>{'Law Name'}:</SmallHeading>
-                    <Text style={styles.bodyInfoText}>{pendingTaskDetails?.lawName ?? 'NA'}</Text>
+                    <Text style={styles.bodyInfoText}>{pendingTaskDetails?.name_of_law ?? 'NA'}</Text>
                 </View>
             </CardTextContainer>
         </View>

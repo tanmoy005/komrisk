@@ -2017,10 +2017,12 @@ export interface AccordionItemPros extends AccordianCommonHeaderProps {
 export interface AccordianCommonHeaderProps {
   title: string | null;
   descriptions: string | null;
+  shortDescription?: string | null;
+  setCommentText?: React.Dispatch<React.SetStateAction<string>>;
   type?: string;
   taskId?: number;
   commentText?: string | " ";
-  setCommentText?: React.Dispatch<React.SetStateAction<string>>;
+  setShortDescription?: React.Dispatch<React.SetStateAction<string>>;
   icons?: {
     open: string;
     close: string;
@@ -2177,11 +2179,13 @@ export interface PendingTaskDataList {
   iTotalDisplayRecords: number | null;
 }
 export interface PendingTaskItemDetailsResponse {
-  title: string | null;
-  complianceId: string | null;
-  description: string | null;
-  lawName: string | null;
-  lastActivity: ActivityInerface;
+  task_name: string | null;
+  compliance_id: string | null;
+  task_desc: string | null;
+  name_of_law: string | null;
+  map_id: string | null;
+  task_id: string | null;
+  lastActivity?: ActivityInerface;
 }
 export interface LastActivityComment {
   comment: string | null;
@@ -2190,9 +2194,11 @@ export interface LastActivityComment {
 
 export interface PendingTaskOverViewProps {
   pendingTaskDetails: PendingTaskItemDetailsResponse;
-  lastActivitycomments: LastActivityComment[];
+  lastActivitycomments?: LastActivityComment[];
   commentText: string;
   setCommentText: React.Dispatch<React.SetStateAction<string>>;
+  shortDescription: string;
+  setShortDescription:React.Dispatch<React.SetStateAction<string>>;
 }
 
 
