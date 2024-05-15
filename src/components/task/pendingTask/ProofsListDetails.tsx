@@ -13,7 +13,7 @@ import { memo } from 'react';
 const ProofsListDetails = memo(({ taskId, type }: ProofsListDetailsProps) => {
     const [refreshing, setRefreshing] = useState(true);
 
-    const [proofDataList, setProofDataList] = useState<ProofListData[]>([{}]);
+    const [proofDataList, setProofDataList] = useState<ProofListData[]>([]);
 
 
     const handleGetproofListData = async (payLoad: ProofListPayload) => {

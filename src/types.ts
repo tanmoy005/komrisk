@@ -1492,7 +1492,7 @@ export interface IncidentComparisonDataList {
 // Detail Part ??
 
 export interface CompliancesItemDetailsPayLoad extends UserModel {
-  complianceId: string;
+  complianceId: string | null;
 }
 export interface CompliancesItemDetailsResponse {
   info: string | null;
@@ -2009,8 +2009,15 @@ export interface DataFilterReportChartData {
 
 
 
-export interface AccordionItemPros extends AccordianCommonHeaderProps {
-  children: ReactNode
+// export interface AccordionItemPros extends AccordianCommonHeaderProps {
+//   children?: ReactNode
+// }
+
+
+export interface AccordionItemPros {
+  children?: ReactNode,
+  title: string | null;
+  descriptions: string | null;
 }
 
 
@@ -2018,10 +2025,10 @@ export interface AccordianCommonHeaderProps {
   title: string | null;
   descriptions: string | null;
   shortDescription?: string | null;
-  setCommentText?: React.Dispatch<React.SetStateAction<string>>;
+  setCommentText: React.Dispatch<React.SetStateAction<string | null>>;
   type?: string;
   taskId?: number;
-  commentText?: string | " ";
+  commentText?: string | " " | null;
   setShortDescription?: React.Dispatch<React.SetStateAction<string>>;
   icons?: {
     open: string;
@@ -2179,6 +2186,7 @@ export interface PendingTaskDataList {
   iTotalDisplayRecords: number | null;
 }
 export interface PendingTaskItemDetailsResponse {
+  taskType:string | null,
   task_name: string | null;
   compliance_id: string | null;
   task_desc: string | null;
@@ -2195,8 +2203,8 @@ export interface LastActivityComment {
 export interface PendingTaskOverViewProps {
   pendingTaskDetails: PendingTaskItemDetailsResponse;
   lastActivitycomments?: LastActivityComment[];
-  commentText: string;
-  setCommentText: React.Dispatch<React.SetStateAction<string>>;
+  commentText: string | null;
+  setCommentText: React.Dispatch<React.SetStateAction<string | null>> ;
   shortDescription: string;
   setShortDescription:React.Dispatch<React.SetStateAction<string>>;
 }
@@ -2302,7 +2310,7 @@ export const DefaultComplianceTaskMapDetailsResponse: ComplianceTaskMapDetailsRe
 }
 
 export interface UserListPayload {
-  complianceMapId: number ;
+  complianceMapId: string | null ;
 }
 
 
@@ -2313,23 +2321,23 @@ export interface UserListData {
 }
 
 export interface DeleteProofPayload {
-  taskId: number;
-  objectType: string
+  docId: string | null;
+  objectType: string | null
 }
 
 
 export interface CompleteTaskPayload {
-  taskId: number;
-  taskAction: string,
-  taskType: string,
-  taskComments: string
+  taskId: string | null;
+  taskAction: string | null,
+  taskType: string | null,
+  taskComments: string | null,
 }
 
 
 export interface RequestAssignPayload {
-  taskId: number;
-  mapId: number,
-  reason: string
+  taskId: string | null;
+  mapId: string | null,
+  reason: string | null,
 }
 
 

@@ -107,7 +107,7 @@ import { PendingTaskDataList, TaskListDataItem } from '@/src/types'
 import { RootState } from '@/src/store'
 import { useSelector } from 'react-redux'
 import GetActivityStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-activity-status-datalist-details';
-import { ActivityStatusDataListPayLoad,ChartFilterDataPayLoad } from '@/src/types';
+import { ActivityStatusDataListPayLoad, ChartFilterDataPayLoad } from '@/src/types';
 import moment from "moment";
 
 const PendingTaskPage = () => {
@@ -122,10 +122,13 @@ const PendingTaskPage = () => {
     iTotalRecords: null,
     iTotalDisplayRecords: null,
   });
-  const [DataList, setDataList] = useState<TaskListDataItem[]>([]);
+  //const [DataList, setDataList] = useState<TaskListDataItem[]>([]);
+  const [DataListOwner, setDataListOwner] = useState<TaskListDataItem[]>([]);
+  const [DataListReviewer, setDataListReviewer] = useState<TaskListDataItem[]>([]);
   const { userDetails } = useSelector((state: RootState) => state.authUserDetails.payload);
   const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
   const { clearToken } = React.useContext(AuthContext);
+  const [taskType, setTaskType] = useState('OwnerTask');
   const [chartFilterPayload, setChartFilterPayload] = useState<ChartFilterDataPayLoad>({
     start: startDate,
     end: currentDate,
@@ -140,8 +143,8 @@ const PendingTaskPage = () => {
 
   });
 
-  console.log("payload in pending task",payLoad);
-  
+  //console.log("payload in pending task", payLoad);
+
 
 
   const handleLogout = () => {
@@ -150,24 +153,28 @@ const PendingTaskPage = () => {
     // Navigate to login or perform other actions
   };
   const handlePressOnOwner = () => {
-    handleGetTaskList();
+    setTaskType('OwnerTask')
+    handleGetTaskListOwner();
   }
   const handlePressOnReviewer = () => {
-    const reviewerList = DataList.filter(({ reviewer }) => reviewer === userDetails.displayName);
-    setDataList(reviewerList);
+    setTaskType('ReviewerTask')
+    handleGetTaskListReviewer();
+    // const reviewerList = DataList.filter(({ reviewer }) => reviewer === userDetails.displayName);
+    // setDataList(reviewerList);
   }
 
-  const handleGetTaskList = async () => {
+  const handleGetTaskListOwner = async () => {
 
     const { data, error, status } = await GetActivityStatusDataList(payLoad);
-    console.log("response got",data);
-    
+    //console.log("response got", data);
+
     //const status = 200;
     if (status === 200) {
       const { aaData } = data;
+      setTaskType('OwnerTask')
       setPendingDataList(data);
       if (aaData.length > 0) {
-        setDataList(aaData);
+        setDataListOwner(aaData);
         setRefreshing(false);
       }
     } else {
@@ -175,8 +182,33 @@ const PendingTaskPage = () => {
     }
   }
   useEffect(() => {
-    handleGetTaskList();
+    handleGetTaskListOwner();
+    //handleGetTaskListReviewer();
   }, []);
+
+
+  const handleGetTaskListReviewer = async () => {
+    
+
+    const { data, error, status } = await GetActivityStatusDataList(payLoad);
+    //console.log("response got", data);
+
+    //const status = 200;
+    if (status === 200) {
+      const { aaData } = data;
+      setTaskType('ReviewerTask')
+      setPendingDataList(data);
+      if (aaData.length > 0) {
+        setDataListReviewer(aaData);
+        setRefreshing(false);
+      }
+    } else {
+      // Alert.alert("error4444", error.message);
+    }
+  }
+
+  //console.log("taskType", taskType);
+
   return (
     <CardContainer3 styles={{
       backgroundColor: '#fff',
@@ -190,16 +222,30 @@ const PendingTaskPage = () => {
         secondBtnOnpress={handlePressOnReviewer}
       />
       <Seperator48 />
-      <View >
-        <FlatList showsVerticalScrollIndicator={false}
-          data={DataList}
-          renderItem={({ item }) => <PendingTaskDetails data={item} />}
-          contentContainerStyle={{ gap: 10, padding: 10 }}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleGetTaskList} />
-          }
-        />
-      </View>
+      {taskType === 'OwnerTask' && (
+        <View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={DataListOwner}
+            renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
+            contentContainerStyle={{ gap: 10, padding: 10 }}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleGetTaskListReviewer} />}
+          />
+        </View>
+      )}
+
+      {taskType === 'ReviewerTask' && (
+        <View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={DataListReviewer}
+            renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
+            contentContainerStyle={{ gap: 10, padding: 10 }}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleGetTaskListOwner} />}
+          />
+        </View>
+      )}
+
     </CardContainer3>
   )
 }

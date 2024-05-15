@@ -8,7 +8,7 @@ import TaskItemDetails from '../../task/TaskItemDetails';
 import CardSkelton from '../../skelton/CardSkelton';
 import CustomeCard from '../../cards/CustomeCard';
 interface ComplianceDetailsProps {
-    complianceId: string
+    complianceId: string | null
 }
 const GetComplianceDetails = ({ complianceId }: ComplianceDetailsProps) => {
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);

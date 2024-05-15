@@ -30,8 +30,14 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
 
     // Get the payload from the navigation params
     const { payload, statusType } = useLocalSearchParams();
-    const filterStatus = typeof statusType === 'string' ? statusType : statusType[0];
-    const getpayload = typeof payload === 'string' ? payload : payload[0];
+
+    // const filterStatus = typeof statusType === 'string' ? statusType : statusType[0];
+    // const getpayload = typeof payload === 'string' ? payload : payload[0];
+
+
+    const filterStatus = typeof statusType === 'string' ? statusType : (Array.isArray(statusType) ? statusType[0] : '');
+    
+    const getpayload = typeof payload === 'string' ? payload : (Array.isArray(payload) ? payload[0] : '');
 
 
     let parsedPayload;

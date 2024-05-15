@@ -118,15 +118,20 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
     //const shortDescription = descriptions && descriptions.length > 64 ? `${descriptions.slice(0, 64)}...` : descriptions;
     const [expanded, setExpanded] = useState(false)
     const taskID = taskId;
+    //console.log("taskID",taskID);
+    
     const [currentDescription, setCurrentDescription] = useState<string>(commentText??"");
     
     let initialDescription="Your Description";
+
+    //console.log("commentText",commentText);
+    
     
 
-    console.log("initialDescription",initialDescription);
+    //console.log("initialDescription",initialDescription);
 
  
-    console.log("currentDescription",currentDescription);
+    //console.log("currentDescription",currentDescription);
 
     // Retrieve the comment for this header from state
 
@@ -148,8 +153,9 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
     // Handle the submission of the comment having update
     const handleSubmitComment = () => {
 
+        // const taskid = comments.findIndex(comment => comment[0].taskID === taskID)
+        // console.log("taskid",taskid);
         
-
         const existingCommentIndex = comments.findIndex(comment => comment[0].taskID === taskID);
 
         //console.log("existingCommentIndex",existingCommentIndex);
@@ -182,7 +188,7 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
     // Truncate the currentDescription to 64 characters with an ellipsis if it exceeds that length
    
     
-    console.log("final description",currentDescription);
+    //console.log("final description",currentDescription);
 
     // // Update the currentDescription when descriptions change
     // useEffect(() => {
