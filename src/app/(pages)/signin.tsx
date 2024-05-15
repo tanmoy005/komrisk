@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert } from 'react-native';
+import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert,ActivityIndicator  } from 'react-native';
 import { router } from 'expo-router';
 import { UserModel } from '@/src/types';
 import AuthenticateUser from '@/src/server/api-functions/Login/authenticate-user';
@@ -24,6 +24,7 @@ let SignIn = () => {
     const workspaceName = useSelector((state: RootState) => state.baseUrl.payload.workSpaceName);
 
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState<boolean>(false);
 
 
 
@@ -33,11 +34,15 @@ let SignIn = () => {
             Alert.alert("error", 'Username or password cannot be empty');
             return;
         }
+
+        setLoading(true);
         const payLoad: UserModel = {
             username,
             password
         }
         const { data, status } = await AuthenticateUser(payLoad);
+
+        setLoading(false);
 
         if (status === 200) {
             const { token, userDetails, countryEnabled } = data
@@ -123,6 +128,24 @@ let SignIn = () => {
                 <Text style={styles.forgetPass}>Forgot password ?</Text>
             </SafeAreaView>
             <View style={styles.submitBtnContainer}>
+                {loading ? (
+                    <ActivityIndicator size="large" color="#A097DC" />
+                ) : (
+                    <Button
+                        btnColor={'#A097DC'}
+                        text='Login'
+                        style={{
+                            paddingVertical: 20,
+                            paddingHorizontal: 48,
+                            fontWeight: '400',
+                            fontSize: 16,
+                            borderRadius: 5
+                        }}
+                        onPress={handleSubmitSignIn}
+                    />
+                )}
+            </View>
+            {/* <View style={styles.submitBtnContainer}>
                 <Button
                     btnColor={'#A097DC'}
                     text='Login'
@@ -135,7 +158,7 @@ let SignIn = () => {
                     }}
                     onPress={handleSubmitSignIn}
                 />
-            </View>
+            </View> */}
         </View>
     );
 }

@@ -10,10 +10,11 @@ import BarChartData from '../charts/BarChart';
 import DonatChartData from '../charts/DonatChart';
 import { FontAwesome } from '@expo/vector-icons';
 import { styles } from '../../style';
-import { Card, Text } from 'react-native-elements';
+import { Card} from 'react-native-elements';
 import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
 import { RootState } from '@/src/store';
+import { Text } from 'react-native';
 
 const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload, setRefreshing }: ChartProp) => {
   {

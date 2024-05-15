@@ -7,6 +7,7 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<typeof TouchableOpa
   text?: string;
   icon?: string;
   leftIcon?: string;
+  opacity?:number;
   style?: {
     padding?: number;
     paddingVertical?: number;
@@ -21,6 +22,7 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<typeof TouchableOpa
   type?: 'default' | 'outline' | 'md-outline' | 'btnIcon' | 'md-default';
   btnColor?: string;
   selectedBtnColor?: string;
+
   selectedTextColor?: string;
   selected?: boolean;
   onPress?: () => void;
@@ -79,9 +81,10 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>(({
   const textStyle: StyleProp<TextStyle> = {
     color: dynamicStyles.textColor,
     fontSize: style?.fontSize || 16,
-    fontWeight: style?.fontWeight || '400',
+    fontWeight: style?.fontWeight === 'bold' ? 'bold' : '400',
     textAlign: 'center'
-  };
+};
+
 
   const handlePress = () => {
     Haptics.selectionAsync();

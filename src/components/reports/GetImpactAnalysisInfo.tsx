@@ -9,11 +9,12 @@ import { RootState } from '@/src/store';
 import DonatChartData from '../charts/DonatChart';
 import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
-import { Card, Text } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import { styles } from '../../style';
 import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from '../skelton/CardSkelton';
 import calculatePercentage from '../../utils/associate/get-percentage';
+import { Text } from 'react-native';
 
 const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload , setRefreshing}: ChartProp) => {
   {

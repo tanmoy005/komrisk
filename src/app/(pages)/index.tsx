@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert } from 'react-native';
+import { StyleSheet, TextInput, View, SafeAreaView, Image, Text, Alert,ActivityIndicator  } from 'react-native';
 import { router } from 'expo-router';
 import AuthenticateWorkspace from '@/src/server/api-functions/Login/authenticate-workspace';
 import setDataToAsyncStorage from '@/src/utils/associate/set-to-localstorage';
@@ -13,6 +13,7 @@ import { RootState } from '@/src/store';
 const Workspace = () => {
   const prevWorkSpaceName = useSelector((state: RootState) => state.baseUrl.payload.workSpaceName);
   const [workSpaceName, setWorkSpaceName] = useState<string>(prevWorkSpaceName ?? '');
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const handleSubmitWorkSpace = async () => {
@@ -21,6 +22,7 @@ const Workspace = () => {
       Alert.alert("Alert", "Workspace can not be empty");
     }
     else {
+      setLoading(true); // Start loading
       const payLoad = {
         Url: `https://${workSpaceName.trim()}.komrisk.com`
       };
@@ -28,6 +30,8 @@ const Workspace = () => {
       setDataToAsyncStorage('baseUrl', baseURL);
 
       const { status } = await AuthenticateWorkspace(payLoad);
+
+      setLoading(false); // Stop loading
 
       if (status === 200) {
         dispatch(removeBaseUrl())
@@ -63,18 +67,22 @@ const Workspace = () => {
         />
       </SafeAreaView>
       <View style={styles.submitBtnContainer}>
-        <Button
-          btnColor={'#A097DC'}
-          text='Next'
-          style={{
-            paddingVertical: 20,
-            paddingHorizontal: 48,
-            fontWeight: '400',
-            fontSize: 16,
-            borderRadius: 5
-          }}
-          onPress={handleSubmitWorkSpace}
-        />
+        {loading ? (
+          <ActivityIndicator size="large" color="#A097DC" />
+        ) : (
+          <Button
+            btnColor={'#A097DC'}
+            text='Next'
+            style={{
+              paddingVertical: 20,
+              paddingHorizontal: 48,
+              fontWeight: '400',
+              fontSize: 16,
+              borderRadius: 5
+            }}
+            onPress={handleSubmitWorkSpace}
+          />
+        )}
       </View>
     </View>
   );

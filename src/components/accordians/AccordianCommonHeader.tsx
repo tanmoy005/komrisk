@@ -124,20 +124,10 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
     
     let initialDescription="Your Description";
 
-    //console.log("commentText",commentText);
-    
-    
-
-    //console.log("initialDescription",initialDescription);
-
- 
-    //console.log("currentDescription",currentDescription);
-
-    // Retrieve the comment for this header from state
 
     const comments = useSelector((state: RootState) => state.comments.commentsList);
 
-    console.log("comments",comments);
+    //console.log("comments",comments);
     
 
     const dispatch = useDispatch(); // Move inside the component body
@@ -146,19 +136,15 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
         setExpanded(!expanded);
     }
 
-    // useEffect(() => {
-    //     setShortDescription(descriptions && descriptions.length > 64 ? `${descriptions.slice(0, 64)}...` : descriptions);
-    // }, [descriptions]);
 
     // Handle the submission of the comment having update
     const handleSubmitComment = () => {
 
-        // const taskid = comments.findIndex(comment => comment[0].taskID === taskID)
-        // console.log("taskid",taskid);
+
         
         const existingCommentIndex = comments.findIndex(comment => comment[0].taskID === taskID);
 
-        //console.log("existingCommentIndex",existingCommentIndex);
+
         
 
         if (existingCommentIndex !== -1) {
@@ -170,7 +156,7 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
         }
 
         
-        //setCurrentDescription(commentText ??"");
+
         setCommentText('' ); // Clear the comment input after submission
     };
 
@@ -181,27 +167,6 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
         }
     }, [commentText]);
     
-
-   
-
-
-    // Truncate the currentDescription to 64 characters with an ellipsis if it exceeds that length
-   
-    
-    //console.log("final description",currentDescription);
-
-    // // Update the currentDescription when descriptions change
-    // useEffect(() => {
-    //     initialDescription  = hasValue(commentText) ?commentText??"":initialDescription;
-    //     console.log("initialDescription2",initialDescription);
-    //     //shortDescription = initialDescription && initialDescription.length > 70? `${initialDescription.slice(0, 70)}...`: initialDescription;
-    //     // setShortDescription("shortDescription");
-    //     setCurrentDescription(initialDescription??"");
-    //     // shortDescription = initialDescription && initialDescription.length > 64? `${initialDescription.slice(0, 64)}...`: initialDescription;
-    //     // console.log("shortDescription",shortDescription);
-    // }, [currentDescription]);
-
-
 
 
 
