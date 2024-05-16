@@ -10,8 +10,10 @@ import { useLocalSearchParams } from 'expo-router';
 const ShowTaskDetails = () => {
     const data = useLocalSearchParams();
     const { type, id } = data;
-    const paramType = typeof type === 'string' ? type : type[0];
-    const paramId = typeof id === 'string' ? id : id[0];
+    //const paramType = typeof type === 'string' ? type : type[0];
+    const paramType = typeof type === 'string' ? type : (Array.isArray(type) ? type[0] : '');
+    //const paramId = typeof id === 'string' ? id : id[0];
+    const paramId = typeof id === 'string' ? id : (Array.isArray(id) ? id[0] : '');   
     // const paramTaskId = typeof taskId === 'string' ? taskId : taskId[0];
     // const [taskType, setTaskType] = useState<string>(paramType);
     // const [complianceId, setComplianceId] = useState<string>('');

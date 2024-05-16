@@ -4,6 +4,7 @@ import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader';
 import { styles } from '@/src/style';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
+import UnderConstructionView from '@/src/components/UnderConstructionView';
 
 const tasksnotificationList: React.FC = () => {
 
@@ -20,6 +21,7 @@ const tasksnotificationList: React.FC = () => {
         secondBtnOnpress={handleSeeAll}
       />
       <Seperator24 />
+      <UnderConstructionView/>
     </SafeAreaView>
   );
 };

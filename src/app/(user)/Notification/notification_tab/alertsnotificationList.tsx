@@ -4,6 +4,7 @@ import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader';
 import { styles } from '@/src/style';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
+import NotificationList from '@/src/components/notification/nofificationList';
 
 const alertsnotificationList: React.FC = () => {
 
@@ -21,6 +22,7 @@ const alertsnotificationList: React.FC = () => {
         secondBtnOnpress={handleSeeAll}
       />
       <Seperator24 />
+      <NotificationList />
     </SafeAreaView>
   );
 };

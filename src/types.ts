@@ -851,7 +851,8 @@ export interface AccordionItemPros {
   children?: ReactNode,
   title: string | null;
   descriptions: string | null;
-  
+  // setExpanded?: (expanded: boolean) => void; // or Dispatch<SetStateAction<boolean>>;
+  // expanded?: boolean;
 
 }
 
@@ -860,7 +861,7 @@ export interface AccordianCommonHeaderProps {
   title: string | null;
   descriptions: string | null;
   shortDescription?: string | null;
-  setCommentText: React.Dispatch<React.SetStateAction<string | null>>;
+  setCommentText?: React.Dispatch<React.SetStateAction<string | null>>;
   type?: string;
   taskId?: number;
   commentText?: string | " " | null;
@@ -869,8 +870,8 @@ export interface AccordianCommonHeaderProps {
     open: string;
     close: string;
   };
-  // setExpanded?: (expanded: boolean) => void; // or Dispatch<SetStateAction<boolean>>;
-  // expanded: boolean;
+   setExpanded?:React.Dispatch<React.SetStateAction<boolean>>;// or Dispatch<SetStateAction<boolean>>;
+   expanded?: boolean;
 }
 export interface InputFieldProps {
   value: string;

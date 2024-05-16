@@ -6,6 +6,7 @@ import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader';
 import { styles } from '@/src/style';
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
+import UnderConstructionView from '@/src/components/UnderConstructionView';
 
 const compliancesnotificationList: React.FC = () => {
 
@@ -29,9 +30,9 @@ const compliancesnotificationList: React.FC = () => {
         secondBtnOnpress={handleClose}
       />
       <Seperator24 />
-      <View style={{ justifyContent: 'center' }}>
-        <NotificationList />
-      </View>
+      
+      <UnderConstructionView/>
+      
     </SafeAreaView>
 
   );

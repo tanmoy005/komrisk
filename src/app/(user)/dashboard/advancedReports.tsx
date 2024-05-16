@@ -1,40 +1,16 @@
-import { Link, Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
-import { Text, View } from '@/src/components/Themed';
+import { Stack } from 'expo-router';
+
+import UnderConstructionView from '@/src/components/UnderConstructionView';
 
 
 export default function AdvancedReports() {
   return (
     <>
       <Stack.Screen options={{ title: 'Advanced Reports' }} />
-      <View style={styles.container}>
-        <Text style={styles.title}>This screen is under construction.</Text>
-        {/* <PushNotificationExample /> */}
-        <Link href="/" style={styles.link}>
-          <Text style={styles.linkText}>Go to home screen!</Text>
-        </Link>
-      </View>
+      <UnderConstructionView/>
+      {/* <PushNotificationExample /> */}
+
     </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-  linkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-});

@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux'
 import GetActivityStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-activity-status-datalist-details';
 import { ActivityStatusDataListPayLoad, ChartFilterDataPayLoad } from '@/src/types';
 import moment from "moment";
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard'
 
 const PendingTaskPage = () => {
   const colorScheme = useColorScheme();
@@ -98,7 +99,7 @@ const PendingTaskPage = () => {
 
 
   const handleGetTaskListReviewer = async () => {
-    
+
 
     const { data, error, status } = await GetActivityStatusDataList(payLoad);
     //console.log("response got", data);
@@ -133,26 +134,35 @@ const PendingTaskPage = () => {
       />
       <Seperator48 />
       {taskType === 'OwnerTask' && (
+
         <View>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={DataListOwner}
-            renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
-            contentContainerStyle={{ gap: 10, padding: 10 }}
-            refreshControl={<RefreshControl refreshing={refreshingowner} onRefresh={handleGetTaskListOwner} />}
-          />
+          {
+            DataListOwner.length == 0 ?
+              <NoDataAvailableCard /> :
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                data={DataListOwner}
+                renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
+                contentContainerStyle={{ gap: 10, padding: 10 }}
+                refreshControl={<RefreshControl refreshing={refreshingowner} onRefresh={handleGetTaskListOwner} />}
+              />
+          }
         </View>
       )}
 
       {taskType === 'ReviewerTask' && (
         <View>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={DataListReviewer}
-            renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
-            contentContainerStyle={{ gap: 10, padding: 10 }}
-            refreshControl={<RefreshControl refreshing={refreshingreviewer} onRefresh={handleGetTaskListReviewer} />}
-          />
+          {
+            DataListReviewer.length == 0 ?
+              <NoDataAvailableCard /> :
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                data={DataListReviewer}
+                renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
+                contentContainerStyle={{ gap: 10, padding: 10 }}
+                refreshControl={<RefreshControl refreshing={refreshingreviewer} onRefresh={handleGetTaskListReviewer} />}
+              />
+          }
         </View>
       )}
 
