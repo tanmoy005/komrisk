@@ -2,11 +2,12 @@ import GetCompliancesItemDetails from '@/src/server/api-functions/TaskDetails/ge
 import { RootState } from '@/src/store';
 import { CompliancesItemDetails, CompliancesItemDetailsPayLoad, CompliancesItemDetailsResponse } from '@/src/types';
 import React, { useEffect, useState } from 'react'
-import { Alert,ActivityIndicator  } from 'react-native';
+import { Alert, ActivityIndicator } from 'react-native';
 import { useSelector } from 'react-redux';
 import TaskItemDetails from '../../task/TaskItemDetails';
 import CardSkelton from '../../skelton/CardSkelton';
 import CustomeCard from '../../cards/CustomeCard';
+import { View } from 'react-native';
 interface ComplianceDetailsProps {
     complianceId: string | null
 }
@@ -41,14 +42,18 @@ const GetComplianceDetails = ({ complianceId }: ComplianceDetailsProps) => {
 
 
     return (
-        <CustomeCard>
+        <>
             {loading ? (
                 <ActivityIndicator size="large" color="#A097DC" />
             ) : (
-                compliancesItemData?.title === null ? <CardSkelton /> :
-                    <TaskItemDetails compliancesItemData={compliancesItemData} itemType='' />
+                <CustomeCard>
+                    {
+                        compliancesItemData?.title === null ? <CardSkelton /> :
+                            <TaskItemDetails compliancesItemData={compliancesItemData} itemType='' />
+                    }
+                </CustomeCard>
             )}
-        </CustomeCard>
+        </>
     )
 }
 

@@ -5,11 +5,9 @@ import { View } from 'react-native';
 import { ChartListDataItem, ComplianceStatusDataList, ComplianceStatusDataListPayLoad } from '@/src/types';
 import { useLocalSearchParams } from 'expo-router';
 import GetComplianceStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-compliance-status-datalist-details';
-import { useSelector } from 'react-redux';
 import { styles } from '@/src/style';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
-import { RootState } from '@/src/store';
 import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
 
 
