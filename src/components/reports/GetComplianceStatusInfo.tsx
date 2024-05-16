@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import DonatChartData from '../charts/DonatChart';
 import BarChartData from '../charts/BarChart';
 import { router } from 'expo-router';
-import { Card} from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import { styles } from '../../style';
 import { FontAwesome } from '@expo/vector-icons';
 import CardSkelton from '../skelton/CardSkelton';
@@ -17,7 +17,7 @@ import calculatePercentage from '../../utils/associate/get-percentage';
 import { RootState } from '@/src/store';
 
 
-const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload , setRefreshing}: ChartProp) => {
+const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload, setRefreshing }: ChartProp) => {
   const [activityStatusChartData, setActivityStatusChartData] = useState<ComplianceStatusData>({
     title: null,
     subTitle: null,
@@ -72,7 +72,9 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilte
     handleGetComplianceStatusData(updatedPayLoad);
   }, [chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload]);
 
-  
+  useEffect(() => {
+    handleGetComplianceStatusData(payLoad);
+  }, []);
   return (
     <View style={styles.chartContainer}>
       {
