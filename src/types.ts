@@ -1211,3 +1211,10 @@ export interface InitialsProps {
 
 
 
+export interface NotificationDataPayLoad extends UserModel {
+  user: UserId
+}
+
+interface UserId {
+  id: string | null;
+}
