@@ -1,28 +1,52 @@
 
-import React, { useState } from 'react'
-import { Text, View } from 'react-native'
-import ProofsListDetails from '@/src/components/task/pendingTask/ProofsListDetails'
-import { Button, StyleSheet, Alert, Modal, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Button, Alert, Platform, StyleSheet, Modal, Image, TouchableOpacity, Text } from 'react-native';
+import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CardContainer from '../../cards/CardContainer';
+import ProofsListDetails from '@/src/components/task/pendingTask/ProofsListDetails';
+import { AuthContext } from '@/src/provider/AuthProvider';
 
 
-const ProofSection = () => {
+interface ProofSectionProps {
+    onSelectedImagesChange: (images: { uri: string, fileName: string | null | undefined, type: string | null | undefined }[]) => void;
+}
 
-
-    // =========== Need for Upload and Visible Image ================ //
-    const [refreshing, setRefreshing] = useState(true);
-
-    //const [selectedImages, setSelectedImages] = useState([]);
-    const [selectedImages, setSelectedImages] = useState<{ uri: string, fileName: string | null | undefined }[]>([]);
-    const [modalVisible, setModalVisible] = useState(false);
-    //const [selectedImageUri, setSelectedImageUri] = useState(null);
+const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) => {
+    const [selectedImages, setSelectedImages] = useState<{ uri: string, fileName: string | null | undefined, type: string | null | undefined }[]>([]);
     const [selectedImageUri, setSelectedImageUri] = useState<string | null | undefined>(null);
+    const [modalVisible, setModalVisible] = useState(false);
+    const { token } = React.useContext(AuthContext);
+    console.log("token", token);
 
+    useEffect(() => {
+        onSelectedImagesChange(selectedImages);
+    }, [selectedImages]);
 
+    const pickDocument = async () => {
+        if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+                alert('Sorry, we need media library permissions to make this work!');
+                return;
+            }
+        }
 
-    // =========== Need for Upload and Visible Image ================ //
+        const result = await DocumentPicker.getDocumentAsync({});
+        console.log("result", result);
+
+        if (!result.canceled) {
+            console.log("result", result);
+
+            const filesData = result.assets.map(asset => ({
+                uri: asset.uri,
+                fileName: asset.name,
+                type: asset.mimeType
+            }));
+            setSelectedImages(filesData);
+        }
+    };
 
     const pickImage = async () => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -32,50 +56,92 @@ const ProofSection = () => {
         }
 
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            //allowsEditing: true,
-            //aspect: [4, 3],
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
             quality: 1,
-            allowsMultipleSelection: true, // Enable multiple photo selection
+            allowsMultipleSelection: true,
         });
 
         if (!result.canceled) {
-            const imagesData = result.assets.map(asset => ({
+            console.log("result", result);
+
+            const filesData = result.assets.map(asset => ({
                 uri: asset.uri,
                 fileName: asset.fileName,
+                type: asset.mimeType
             }));
-            setSelectedImages(imagesData);
+            setSelectedImages(filesData);
         }
     };
 
-    const openImage = (imageUri: string | null | undefined) => {
-        setSelectedImageUri(imageUri);
-        setModalVisible(true);
+    const takePhoto = async () => {
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
+        if (status !== 'granted') {
+            Alert.alert('Permission needed', 'Please allow access to your camera.');
+            return;
+        }
+
+        let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            quality: 1,
+        });
+
+        console.log("result",result);
+        
+
+        if (!result.canceled) {
+            console.log("result", result);
+
+            const filesData = result.assets.map(asset => ({
+                uri: asset.uri,
+                fileName: asset.fileName,
+                type: asset.mimeType
+            }));
+            setSelectedImages(filesData);
+        }
     };
-    
 
+    const handleFileSelection = () => {
+        Alert.alert(
+            'Select File',
+            'Choose the type of file to upload',
+            [
+                { text: 'Document', onPress: pickDocument },
+                { text: 'Image', onPress: pickImage },
+                {text: 'Camera', onPress:takePhoto},
+                { text: 'Cancel', style: 'cancel' }
+            ],
+            { cancelable: true }
+        );
+    };
 
+    console.log("selectedImages", selectedImages);
 
-
-
-    return ( 
+    return (
         <CardContainer>
             <View style={{ position: 'absolute', top: 0, left: 0, margin: 8 }}>
-
-                <TouchableOpacity
-                    style={styles.uploadButtonContainer}
-                    onPress={pickImage}
-                >
-                    <View style={styles.iconContainer}>
-                        <MaterialCommunityIcons name="download" size={24} color="#5645C0" style={{ transform: [{ rotate: '180deg' }] }} />
-                    </View>
-                    <Text style={styles.uploadButtonText}>Upload</Text>
-                </TouchableOpacity>
-                {selectedImages.map((image, index) => (
-                    <Text key={index} style={styles.filename} onPress={() => openImage(image.uri)}>
-                        {image.fileName}
+                <View style={{ flexDirection: 'row', }}>
+                    <TouchableOpacity
+                        style={styles.uploadButtonContainer}
+                        onPress={handleFileSelection}
+                    >
+                        <View style={styles.iconContainer}>
+                            <MaterialCommunityIcons name="download" size={24} color="#5645C0" style={{ transform: [{ rotate: '180deg' }] }} />
+                        </View>
+                        <Text style={styles.uploadButtonText}>Upload</Text>
+                    </TouchableOpacity>
+                </View>
+                {selectedImages.length === 0 ? (
+                    <Text style={styles.noFileText}>No file chosen</Text>
+                ) : selectedImages.length === 1 ? (
+                    <Text style={styles.filenametext}>
+                        {selectedImages[0].fileName}
                     </Text>
-                ))}
+                ) : (
+                    <Text style={styles.noFileText}>
+                        {selectedImages.length} files selected
+                    </Text>
+                )}
+
                 <Modal
                     animationType="slide"
                     transparent={false}
@@ -83,20 +149,21 @@ const ProofSection = () => {
                     onRequestClose={() => setModalVisible(false)}
                 >
                     <View style={styles.modalContainer}>
-                    <Image source={{ uri: selectedImageUri ?? undefined }} style={styles.modalImage} />
+                        <Image source={{ uri: selectedImageUri ?? undefined }} style={styles.modalImage} />
                         <Button title="Close" onPress={() => setModalVisible(false)} />
                     </View>
                 </Modal>
-
             </View>
 
             <View style={{ marginBottom: 80 }} />
             {/* Render Proofs component here */}
 
-            <ProofsListDetails taskId={330038} type="COMPLIANCE_PROOF" />
+             {/* For Other User get proof list */}
+            {/* <ProofsListDetails taskId={330038} type="COMPLIANCE_PROOF" /> */}
 
+            {/* For Sayan Sarkar pdf download api */}
+            <ProofsListDetails taskId={6850084} type="COMPLIANCE_PROOF" />
         </CardContainer>
-
     )
 }
 
@@ -106,11 +173,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    filename: {
+    filenametext: {
         fontSize: 16,
         marginVertical: 5,
-        textDecorationLine: 'underline',
-        color: 'blue',
+        color: 'black',
     },
     modalContainer: {
         flex: 1,
@@ -134,21 +200,32 @@ const styles = StyleSheet.create({
         color: '#5645C0',
         fontWeight: 'bold',
     },
-
+    chooseButtonText: {
+        color: 'black',
+    },
     iconContainer: {
         marginRight: 10,
     },
-
     uploadButtonContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         borderColor: '#5645C0',
         borderWidth: 1,
         padding: 10,
-
-
     },
-
+    chooseButtonContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderColor: 'black',
+        borderWidth: 1,
+        padding: 10,
+        backgroundColor: '#e6eaf0',
+        marginRight: 80
+    },
+    noFileText: {
+        color: 'black',
+        fontSize: 16,
+    },
 });
 
-export default ProofSection
+export default ProofSection;

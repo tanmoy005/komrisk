@@ -53,8 +53,10 @@ export default function NotificationTabLayout() {
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="See All" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
-          tabBarIconStyle: styles.tabBarIconStyle
+          tabBarIconStyle: styles.tabBarIconStyle,
         }}
       />
 
@@ -73,6 +75,8 @@ export default function NotificationTabLayout() {
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="Compliances" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
           tabBarIconStyle: styles.tabBarIconStyle
         }}
@@ -87,6 +91,8 @@ export default function NotificationTabLayout() {
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="Tasks" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
           tabBarIconStyle: styles.tabBarIconStyle
         }}
@@ -101,6 +107,8 @@ export default function NotificationTabLayout() {
           tabBarLabel: ({ focused, color }) => (
             <CustomTabLabel title="Alerts" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
           tabBarIconStyle: styles.tabBarIconStyle
 

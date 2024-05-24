@@ -10,6 +10,7 @@ import Seperator11 from './seperators/Seperator11'
 import Circle from './Circle'
 import Seperator29 from './seperators/Seperator29'
 import Button from './Button'
+import { router } from 'expo-router';
 
 const NotificationDetails = () => {
 
@@ -63,10 +64,11 @@ const NotificationDetails = () => {
                             <Seperator29 />
                             <Button
                                 btnColor={'#A097DC'}
-                                text='Close'
-                                leftIcon='close'
+                                text='Back'
+                                leftIcon='chevron-left'
                                 type='md-default'
-                            // onPress={handleSubmitSignIn}
+                                onPress={() => router.navigate('/notification/notification_tab/alertsnotificationList')}
+                                
                             />
                         </View>
                     </View>

@@ -68,10 +68,12 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+
         tabBarStyle: styles.tabBarStyle,
         tabBarLabelStyle: styles.tabBarLabelStyle,
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
+
 
         headerShown: useClientOnlyValue(false, true),
       }}>
@@ -84,8 +86,11 @@ export default function TabLayout() {
           tabBarLabel: () => (
             <CustomTabLabel title="Impact Analysis" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
-          tabBarIconStyle: styles.tabBarIconStyle
+          tabBarIconStyle: styles.tabBarIconStyle,
+          //tabBarActiveTintColor: 'blue'
         }}
       />
       <Tabs.Screen
@@ -97,8 +102,12 @@ export default function TabLayout() {
           tabBarLabel: () => (
             <CustomTabLabel title="Activity Status" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
-          tabBarIconStyle: styles.tabBarIconStyle
+          tabBarIconStyle: styles.tabBarIconStyle,
+          // tabBarInactiveTintColor: 'white',
+          // tabBarActiveTintColor: 'blue',
         }}
       />
       <Tabs.Screen
@@ -110,6 +119,8 @@ export default function TabLayout() {
           tabBarLabel: () => (
             <CustomTabLabel title="Compliance Status" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
           tabBarIconStyle: styles.tabBarIconStyle
 
@@ -126,6 +137,8 @@ export default function TabLayout() {
           tabBarLabel: () => (
             <CustomTabLabel title="Incident Activity" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
           tabBarIconStyle: styles.tabBarIconStyle
 
@@ -147,6 +160,8 @@ export default function TabLayout() {
           tabBarLabel: () => (
             <CustomTabLabel title="Incident Comparison" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
           tabBarIconStyle: styles.tabBarIconStyle
         }}
@@ -166,6 +181,8 @@ export default function TabLayout() {
           tabBarLabel: () => (
             <CustomTabLabel title="Advanced Reports" />
           ),
+          tabBarActiveBackgroundColor:"#E4E4E4",
+          tabBarInactiveBackgroundColor:"#FFFFFF",
           tabBarItemStyle: styles.tabBarItemStyle,
           tabBarIconStyle: styles.tabBarIconStyle
         }}

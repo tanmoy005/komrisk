@@ -42,7 +42,7 @@ const PendingTaskPage = () => {
   const [chartFilterPayload, setChartFilterPayload] = useState<ChartFilterDataPayLoad>({
     start: startDate,
     end: currentDate,
-    // viewAs: "COMPANY HEAD",
+    viewAs: "COMPANY HEAD",
 
   });
 
@@ -53,7 +53,10 @@ const PendingTaskPage = () => {
 
   });
 
-  //console.log("payload in pending task", payLoad);
+  console.log("chartFilterPayload", chartFilterPayload);
+
+
+  console.log("payload in pending task", payLoad);
 
 
 
@@ -67,14 +70,14 @@ const PendingTaskPage = () => {
     handleGetTaskListOwner();
   }
   const handlePressOnReviewer = () => {
-    setTaskType('ReviewerTask')
+    setTaskType('APPROVAL')
     handleGetTaskListReviewer();
     // const reviewerList = DataList.filter(({ reviewer }) => reviewer === userDetails.displayName);
     // setDataList(reviewerList);
   }
 
   const handleGetTaskListOwner = async () => {
-    setRefreshingOwner(true);
+    //setRefreshingOwner(true);
 
     const { data, error, status } = await GetActivityStatusDataList(payLoad);
     //console.log("response got", data);
@@ -98,6 +101,9 @@ const PendingTaskPage = () => {
   }, []);
 
 
+
+
+
   const handleGetTaskListReviewer = async () => {
 
 
@@ -107,7 +113,7 @@ const PendingTaskPage = () => {
     //const status = 200;
     if (status === 200) {
       const { aaData } = data;
-      setTaskType('ReviewerTask')
+      setTaskType('APPROVAL')
       setPendingDataList(data);
       if (aaData.length > 0) {
         setDataListReviewer(aaData);
@@ -137,30 +143,40 @@ const PendingTaskPage = () => {
 
         <View>
           {
-            DataListOwner.length == 0 ?
+            DataListOwner.length == 0 && refreshingowner == false?
               <NoDataAvailableCard /> :
               <FlatList
                 showsVerticalScrollIndicator={false}
                 data={DataListOwner}
                 renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
                 contentContainerStyle={{ gap: 10, padding: 10 }}
-                refreshControl={<RefreshControl refreshing={refreshingowner} onRefresh={handleGetTaskListOwner} />}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshingowner}
+                    onRefresh={handleGetTaskListOwner}
+                  />
+                }
               />
           }
         </View>
       )}
 
-      {taskType === 'ReviewerTask' && (
+      {taskType === 'APPROVAL' && (
         <View>
           {
-            DataListReviewer.length == 0 ?
+            DataListReviewer.length == 0 && refreshingreviewer == false?
               <NoDataAvailableCard /> :
               <FlatList
                 showsVerticalScrollIndicator={false}
                 data={DataListReviewer}
                 renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
                 contentContainerStyle={{ gap: 10, padding: 10 }}
-                refreshControl={<RefreshControl refreshing={refreshingreviewer} onRefresh={handleGetTaskListReviewer} />}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshingreviewer}
+                    onRefresh={handleGetTaskListReviewer}
+                  />
+                }
               />
           }
         </View>

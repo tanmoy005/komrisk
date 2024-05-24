@@ -993,6 +993,12 @@ export interface Comment {
 
 
 
+export interface DownloadProofPayload {
+  docId: string;
+}
+
+
+
 // For Pending Task
 
 export interface PendingTask {
@@ -1051,6 +1057,7 @@ export interface PendingTaskOverViewProps {
 export interface Item {
   docTitle: string;
   extension: string;
+  docId: number;
   // Add other properties as needed
 }
 

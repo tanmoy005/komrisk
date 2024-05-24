@@ -269,7 +269,7 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         borderRadius: 6,
         margin: 5,
         padding: 10,
-        backgroundColor: "#fff",
+       // backgroundColor: "#fff",
 
     },
     tabBarIconStyle: {
