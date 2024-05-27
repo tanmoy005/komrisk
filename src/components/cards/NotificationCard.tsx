@@ -3,11 +3,13 @@ import { Pressable, Text, View } from 'react-native'
 import CardContainer from './CardContainer'
 import { styles } from '@/src/style'
 import { SmallHeading } from '../headings/SmallHeading'
-import { NotificationListDataItem, notificationCardListData } from '@/src/types'
+import { NotificationListDataItem, notificationCardListData, notificationSeen } from '@/src/types'
 import CardTextContainer from './CardTextContainer'
-import { router } from 'expo-router'
+import { router, usePathname } from 'expo-router'
 import ChartItemSkelton from '../skelton/ChartItemSkelton'
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
+import { RootState } from '@/src/store'
 
 interface notificationCardListDataProps {
     data: NotificationListDataItem
@@ -17,6 +19,31 @@ interface notificationCardListDataProps {
 
 
 const NotificationCard = memo(({ data }: notificationCardListDataProps) => {
+    const notificationSeenList: notificationSeen[] | undefined = useSelector((state: RootState) => state.notificationSeen.payload);
+    console.log('notificationSeenList4234', notificationSeenList);
+    const userDetails = useSelector((state: RootState) => state.authUserDetails.payload).userDetails;
+    console.log('userDetails', userDetails);
+    const { username: loggedInUserId } = userDetails;
+    const currentPath = usePathname();
+    console.log('currentPath', currentPath);
+    const [isNotificationSeen, setisNotificationSeen] = useState(false);
+    const seenCardborderColor = 'rgba(120, 106, 205, 0.8)';
+    const unseenCardborderColor = 'rgba(120, 106, 205, 0.16)';
+    useEffect(() => {
+        console.log('data', data.id);
+        if (currentPath === '/notification/notification_tab/alertsnotificationList') {
+            const selectedUser = notificationSeenList.filter(({ userId }) => userId === loggedInUserId?.toString())[0];
+            console.log('selectedUser', selectedUser);
+            setisNotificationSeen(selectedUser && selectedUser.notificationIdList.includes(data.id.toString()));
+        }
+
+        //   if (notificationSeenList.includes(selectedUser.userId)) {
+
+        //   }
+
+    }, [currentPath])
+
+
     const CardData: notificationCardListData = {
         firstSection: {
             heading: data.complianceNature,
@@ -50,7 +77,7 @@ const NotificationCard = memo(({ data }: notificationCardListDataProps) => {
                             }
                         } as never)}
                     >
-                        <View style={styles.taskCard}>
+                        <View style={{ ...styles.taskCard, borderColor: isNotificationSeen ? seenCardborderColor : unseenCardborderColor }}>
                             <View>
 
                                 <CardContainer>

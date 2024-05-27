@@ -17,13 +17,13 @@ export interface BaseUrl {
 }
 
 export interface BaseUrlWorkspace extends BaseUrl {
-  workSpaceName: string | null, 
+  workSpaceName: string | null,
 }
 
 
 
 export const DefaultBaseUrlWorkspace: BaseUrlWorkspace = {
-  workSpaceName: null, 
+  workSpaceName: null,
   baseUrl: null
 }
 
@@ -504,6 +504,7 @@ export interface availableViews {
   value: string | null;
 }
 
+
 export const defaultAvailableViews: availableViews = {
   key: null,
   value: null,
@@ -597,7 +598,7 @@ export interface CustomeDatePickerProps {
   setDate: React.Dispatch<React.SetStateAction<Date>>
   date: Date | null
   label: string | null | undefined
-  _handleConfirm?: (date: Date)=> void
+  _handleConfirm?: (date: Date) => void
 }
 
 export interface filterSelectProps {
@@ -871,8 +872,8 @@ export interface AccordianCommonHeaderProps {
     open: string;
     close: string;
   };
-   setExpanded?:React.Dispatch<React.SetStateAction<boolean>>;// or Dispatch<SetStateAction<boolean>>;
-   expanded?: boolean;
+  setExpanded?: React.Dispatch<React.SetStateAction<boolean>>;// or Dispatch<SetStateAction<boolean>>;
+  expanded?: boolean;
 }
 export interface InputFieldProps {
   value: string;
@@ -1031,7 +1032,7 @@ export interface PendingTaskDataList {
   iTotalDisplayRecords: number | null;
 }
 export interface PendingTaskItemDetailsResponse {
-  taskType:string | null,
+  taskType: string | null,
   task_name: string | null;
   compliance_id: string | null;
   task_desc: string | null;
@@ -1049,9 +1050,9 @@ export interface PendingTaskOverViewProps {
   pendingTaskDetails: PendingTaskItemDetailsResponse;
   lastActivitycomments?: LastActivityComment[];
   commentText: string | null;
-  setCommentText: React.Dispatch<React.SetStateAction<string | null>> ;
+  setCommentText: React.Dispatch<React.SetStateAction<string | null>>;
   shortDescription: string;
-  setShortDescription:React.Dispatch<React.SetStateAction<string>>;
+  setShortDescription: React.Dispatch<React.SetStateAction<string>>;
 }
 
 
@@ -1081,82 +1082,82 @@ export interface ComplianceTaskMapDetailsPayLoad {
 }
 
 export interface ComplianceTaskMapDetailsResponse {
-    mapId: number | null,
-    complianceGenId: string | null,
-    mapName: string | null,
-    operatingUnit: string | null,
-    department: string | null,
-    ownerName: string | null,
-    approverName: string | null,
-    ownerId: number | null,
-    approverId: number | null,
-    routeId: number | null,
-    taskStatus: string | null,
-    wipReminderFrequency: string | null,
-    recipients: string | null,
-    operatingUnitId: number | null,
-    reassignmentRequested: boolean | null,
-    dueDate: string | null,
-    startDate: string | null,
-    completedOn: string | null,
-    frequency: string | null,
-    requiresProof: boolean | null,
-    alertBeforeDue: number | null,
-    failureImpact: string | null,
-    recurringYear: string | null,
-    reminderFrequency: number | null,
-    taskId: number | null,
-    status: string | null,
-    taskSource: string | null,
-    taskType: string | null,
-    ownerComments: string | null,
-    taskComments: string | null,
-    reviewerComments: string | null,
-    loggedUserTaskAuthority: string | null,
-    taskName: string | null,
-    info: string | null
-   }
+  mapId: number | null,
+  complianceGenId: string | null,
+  mapName: string | null,
+  operatingUnit: string | null,
+  department: string | null,
+  ownerName: string | null,
+  approverName: string | null,
+  ownerId: number | null,
+  approverId: number | null,
+  routeId: number | null,
+  taskStatus: string | null,
+  wipReminderFrequency: string | null,
+  recipients: string | null,
+  operatingUnitId: number | null,
+  reassignmentRequested: boolean | null,
+  dueDate: string | null,
+  startDate: string | null,
+  completedOn: string | null,
+  frequency: string | null,
+  requiresProof: boolean | null,
+  alertBeforeDue: number | null,
+  failureImpact: string | null,
+  recurringYear: string | null,
+  reminderFrequency: number | null,
+  taskId: number | null,
+  status: string | null,
+  taskSource: string | null,
+  taskType: string | null,
+  ownerComments: string | null,
+  taskComments: string | null,
+  reviewerComments: string | null,
+  loggedUserTaskAuthority: string | null,
+  taskName: string | null,
+  info: string | null
+}
 
 export const DefaultComplianceTaskMapDetailsResponse: ComplianceTaskMapDetailsResponse = {
 
   mapId: null,
-  complianceGenId:  null,
+  complianceGenId: null,
   mapName: null,
-  operatingUnit:  null,
-  department:  null,
+  operatingUnit: null,
+  department: null,
   ownerName: null,
-  approverName:  null,
-  ownerId:  null,
-  approverId:  null,
-  routeId:  null,
-  taskStatus:  null,
-  wipReminderFrequency:  null,
-  recipients:  null,
-  operatingUnitId:  null,
-  reassignmentRequested:  null,
-  dueDate:  null,
-  startDate:  null,
-  completedOn:  null,
-  frequency:  null,
+  approverName: null,
+  ownerId: null,
+  approverId: null,
+  routeId: null,
+  taskStatus: null,
+  wipReminderFrequency: null,
+  recipients: null,
+  operatingUnitId: null,
+  reassignmentRequested: null,
+  dueDate: null,
+  startDate: null,
+  completedOn: null,
+  frequency: null,
   requiresProof: null,
   alertBeforeDue: null,
-  failureImpact:  null,
-  recurringYear:  null,
-  reminderFrequency:  null,
-  taskId:  null,
-  status:  null,
-  taskSource:  null,
-  taskType:  null,
-  ownerComments:  null,
-  taskComments:  null,
-  reviewerComments:  null,
-  loggedUserTaskAuthority:  null,
-  taskName:  null,
+  failureImpact: null,
+  recurringYear: null,
+  reminderFrequency: null,
+  taskId: null,
+  status: null,
+  taskSource: null,
+  taskType: null,
+  ownerComments: null,
+  taskComments: null,
+  reviewerComments: null,
+  loggedUserTaskAuthority: null,
+  taskName: null,
   info: null
 }
 
 export interface UserListPayload {
-  complianceMapId: string | null ;
+  complianceMapId: string | null;
 }
 
 
@@ -1226,6 +1227,10 @@ export enum ownerReviewerType{
 
 export interface NotificationDataPayLoad extends UserModel {
   user: UserId
+}
+export interface notificationSeen {
+  userId: string|null,
+  notificationIdList: string[]
 }
 
 interface UserId {

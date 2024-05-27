@@ -5,6 +5,7 @@ import authUserAccessDetailsSlice from './slices/auth-user-access-details-slice'
 import authUserDetailsSlice from './slices/auth-user-details-slice';
 import incidentAvailableViewsSlice from './slices/incident-available-views-slice';
 import commentsSlice from './slices/task-comments-slice'
+import notificationSeenSlice from './slices/notification-seen-slice';
 
 const rootReducer = combineReducers({
   baseUrl: baseUrlSlice,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   authUserAccess: authUserAccessDetailsSlice,
   incidentAvailableViews: incidentAvailableViewsSlice,
   comments: commentsSlice,
+  notificationSeen: notificationSeenSlice
   // Add other reducers as needed
 });
 

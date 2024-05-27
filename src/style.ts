@@ -153,7 +153,9 @@ export const styles: { [key: string]: any } = StyleSheet.create({
 
         // boxShadow: '4px 4px 40px 0px #786ACD1F'
         borderWidth: 1,
+        // borderColor: 'rgba(120, 106, 205, 0.4)',
         borderColor: 'rgba(120, 106, 205, 0.4)',
+        
         borderRadius: 5,
         shadowColor: 'rgba(120, 106, 205, 0.12)', // Shadow color with opacity
         shadowOffset: { width: 4, height: 4 }, // Shadow offset (horizontal and vertical)
