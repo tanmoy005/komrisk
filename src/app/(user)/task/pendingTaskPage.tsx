@@ -43,6 +43,7 @@ const PendingTaskPage = () => {
     start: startDate,
     end: currentDate,
     viewAs: "COMPANY HEAD",
+    viewAs: "COMPANY HEAD",
 
   });
 
@@ -53,7 +54,10 @@ const PendingTaskPage = () => {
 
   });
 
-  //console.log("payload in pending task", payLoad);
+  console.log("chartFilterPayload", chartFilterPayload);
+
+
+  console.log("payload in pending task", payLoad);
 
 
 
@@ -67,7 +71,7 @@ const PendingTaskPage = () => {
     handleGetTaskListOwner();
   }
   const handlePressOnReviewer = () => {
-    setTaskType('ReviewerTask')
+    setTaskType('APPROVAL')
     handleGetTaskListReviewer();
     // const reviewerList = DataList.filter(({ reviewer }) => reviewer === userDetails.displayName);
     // setDataList(reviewerList);
@@ -75,9 +79,9 @@ const PendingTaskPage = () => {
 
   const handleGetTaskListOwner = async () => {
     setRefreshingOwner(true);
-    console.log({...payLoad , filterLevel: ownerReviewerType.Owner });
+    //console.log({...payLoad , filterLevel: ownerReviewerType.Owner });
     const { data, error, status } = await GetActivityStatusDataList({...payLoad , filterLevel: ownerReviewerType.Owner });
-    console.log("response got", data);
+    //console.log("response got", data);
 
     //const status = 200;
     if (status === 200) {
@@ -98,6 +102,9 @@ const PendingTaskPage = () => {
   }, []);
 
 
+
+
+
   const handleGetTaskListReviewer = async () => {
 console.log({...payLoad , filterLevel: ownerReviewerType.Reviewer });
 
@@ -108,7 +115,7 @@ console.log({...payLoad , filterLevel: ownerReviewerType.Reviewer });
     //const status = 200;
     if (status === 200) {
       const { aaData } = data;
-      setTaskType('ReviewerTask')
+      setTaskType('APPROVAL')
       setPendingDataList(data);
       if (aaData.length > 0) {
         setDataListReviewer(aaData);
@@ -145,13 +152,18 @@ console.log({...payLoad , filterLevel: ownerReviewerType.Reviewer });
                 data={DataListOwner}
                 renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
                 contentContainerStyle={{ gap: 10, padding: 10 }}
-                refreshControl={<RefreshControl refreshing={refreshingowner} onRefresh={handleGetTaskListOwner} />}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshingowner}
+                    onRefresh={handleGetTaskListOwner}
+                  />
+                }
               />
           }
         </View>
       )}
 
-      {taskType === 'ReviewerTask' && (
+      {taskType === 'APPROVAL' && (
         <View>
           {
             DataListReviewer.length == 0  && refreshingreviewer == false?
@@ -161,7 +173,12 @@ console.log({...payLoad , filterLevel: ownerReviewerType.Reviewer });
                 data={DataListReviewer}
                 renderItem={({ item }) => <PendingTaskDetails data={item} taskType={taskType} />}
                 contentContainerStyle={{ gap: 10, padding: 10 }}
-                refreshControl={<RefreshControl refreshing={refreshingreviewer} onRefresh={handleGetTaskListReviewer} />}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshingreviewer}
+                    onRefresh={handleGetTaskListReviewer}
+                  />
+                }
               />
           }
         </View>

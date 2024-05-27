@@ -10,6 +10,7 @@ import { removeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice'
 import { removeIncidentAvailableViews } from '@/src/store/slices/incident-available-views-slice';
 import { useDispatch } from 'react-redux';
 import { hasValue } from '../utils';
+import { removeAllComments } from '../store/slices/task-comments-slice';
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -85,6 +86,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             dispatch(removeAuthUserDetails());
             dispatch(removeAuthUserAccessDetails())
             dispatch(removeIncidentAvailableViews())
+            //dispatch(removeAllComments())
         } catch (error) {
             Alert.alert('Error', 'Failed to clear token');
         }

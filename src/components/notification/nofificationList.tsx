@@ -4,13 +4,16 @@ import { Alert, FlatList, RefreshControl, View } from 'react-native'
 import { RootState } from '@/src/store'
 import NotificationCard from '../cards/NotificationCard'
 import GetComplianceAlertsListDetails from '@/src/server/api-functions/Alerts/get-compliance-alerts-list'
-import { ComplianceStatusDataList, NotificationListDataItem, UserModel } from '@/src/types'
+import { ComplianceStatusDataList, NotificationListDataItem, NotificationDataPayLoad } from '@/src/types'
 import NoDataAvailableCard from '../NoDataAvailableCard'
 
 const NotificationList = () => {
     const [refreshing, setRefreshing] = useState(true);
 
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
+    const useId = useSelector((state: RootState) => state.authUserDetails.payload.userDetails.userId);
+    //console.log("useId",useId);
+    
     const [complianceAlertDataList, setComplianceAlertDataList] = useState<ComplianceStatusDataList>({
         sEcho: null,
         aaData: null,
@@ -20,8 +23,17 @@ const NotificationList = () => {
     const [DataList, setDataList] = useState<NotificationListDataItem[]>([]);
 
     const handleGetComplianceAlertsList = async () => {
-        const payLoad: UserModel = {
-            ...useCredential
+        if (!useId) {
+            Alert.alert("Error", "User ID is missing");
+            setRefreshing(false);
+            return;
+        }
+
+        const payLoad: NotificationDataPayLoad = {
+            ...useCredential,
+            user: {
+                id: useId.toString()
+            }
         }
         const { data, error, status } = await GetComplianceAlertsListDetails(payLoad);
         if (status === 200) {

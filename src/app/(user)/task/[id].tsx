@@ -22,6 +22,8 @@ import ReassignModal from './ReassignModal'
 import { useNavigation } from '@react-navigation/native';
 import PendingTaskPage from './pendingTaskPage'
 import { Link, router } from "expo-router";
+import {  Platform } from 'react-native';
+import SaveUploadProof from '@/src/server/api-functions/Tasks/save-upload-proof';
 
 const PendingTaskOverViewPage = () => {
     const data = useLocalSearchParams();
@@ -33,10 +35,13 @@ const PendingTaskOverViewPage = () => {
     const compliance_id = typeof data.compliance_id === 'string' ? data.compliance_id : null;
     const task_id = typeof data.task_id === 'string' ? data.task_id : null;
     const map_id = typeof data.map_id === 'string' ? data.map_id : null;
+    const [selectedImages, setSelectedImages] = useState<{ uri: string, fileName: string | null | undefined, type: string | null | undefined }[]>([]);
 
 
     const [selectedTaskId] = useState<string>(task_id ?? "");
     const [showModal, setShowModal] = useState(false);
+
+
 
     const [activeTab, setActiveTab] = useState('Overview'); // Track active tab state
     const [pendingTaskDetails, setPendingTaskDetails] = useState<PendingTaskItemDetailsResponse>({
@@ -105,24 +110,34 @@ const PendingTaskOverViewPage = () => {
         setActiveTab('Proofs'); // Set active tab to 'Proofs'
     }
 
-    const lastActivitycomments: LastActivityComment[] = [
-        {
-            comment: ' sdlkfj lksasdlkj lksd sadf ',
-            updatedOn: '10/02/2222'
-        },
-        {
-            comment: ' sdlkfj lksasdlkj lksd sadf ',
-            updatedOn: '10/02/2222'
-        },
-        {
-            comment: ' sdlkfj lksasdlkj lksd sadf ',
-            updatedOn: '10/02/2222'
-        },
-    ]
+
     const [commentText, setCommentText] = useState<string | null>("");
 
     const comments = useSelector((state: RootState) => state.comments.commentsList);
+    console.log("comments here***",comments);
+    const taskid = pendingTaskDetails.task_id
+    console.log("task id",taskid);
+    
+    
     const [shortDescription, setShortDescription] = useState<string>("");
+
+    // useEffect(() => {
+    //     // Ensure comments is not empty and taskid is valid
+    //     if (comments.length > 0 && taskid) {
+    //         // Filter comments based on taskID
+    //         const filteredComments = comments.filter(comment => String(comment[0].taskID) === taskid);
+
+    //         if (filteredComments.length !== 0) {
+    //             // Update commentText with the filtered comment's text
+    //             setCommentText(filteredComments[0][0].commentText);
+    //         }
+    //     }
+    // }, [comments, taskid]); // Add comments to the dependency array
+
+    //console.log("pendingTaskDetails",pendingTaskDetails);
+    console.log("commentText here",commentText);
+    
+    
 
     const savepayload: CompleteTaskPayload = {
         taskType: pendingTaskDetails.taskType,
@@ -160,14 +175,108 @@ const PendingTaskOverViewPage = () => {
         taskAction: "reject",
     };
 
-    const handleSave = async () => {
-        const { data, error, status } = await GetCompleteTaskData(savepayload);
-        if (status === 200) {
-            Alert.alert("Success", "Task details saved successfully");
-        } else {
-            Alert.alert("error", error.message);
+
+    
+    
+
+    const saveUploadFile = async () => {
+        console.log("*************");
+    
+        if (selectedImages.length === 0) {
+            // Handle case where no file is selected
+            return;
         }
-    }
+    
+        const file = selectedImages[0];
+        const fileExtension = file.fileName?.split('.').pop() ?? 'pdf'; // Default to 'pdf' if extension cannot be determined
+    
+        const formData = new FormData();
+        formData.append('file', {
+            uri: Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''), // Adjust uri for Android
+            name: file.fileName ?? `filename.${fileExtension}`, // Use fileName from selectedImages or a default name
+            type: file.type ?? `application/${fileExtension === 'pdf' ? 'pdf' : 'octet-stream'}`, // Use type from selectedImages or a default type
+        } as any); // Use `as any` to bypass type checking
+    
+        //formData.append('objectId', '1880013');
+        formData.append('objectId',pendingTaskDetails.task_id ??'');
+        formData.append('objectType', 'COMPLIANCE_PROOF');
+        //formData.append('mapId', '12899');
+        formData.append('mapId', pendingTaskDetails.map_id ?? '');
+        formData.append('fileName', file.fileName?.replace(/\.[^/.]+$/, '') ?? ''); // Remove extension
+        formData.append('fileNameWithExt', file.fileName ?? '');
+        formData.append('docTitle', file.fileName ?? '');
+        formData.append('extension', fileExtension ?? '');
+    
+        console.log("formData type", typeof(formData));
+        console.log("formData", formData);
+    
+        try {
+            const response = await SaveUploadProof(formData);
+    
+            if (response.status === 200) {
+                // Handle successful upload
+                console.log('File uploaded successfully');
+            } else {
+                // Handle upload failure
+                console.error('Failed to upload file', response);
+            }
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
+    };
+
+    // const handleSave = async () => {
+    //     const { data, error, status } = await GetCompleteTaskData(savepayload);
+    //     if (status === 200) {
+    //         Alert.alert("Success", "Task details saved successfully");
+    //     } else {
+    //         Alert.alert("error", error.message);
+    //     }
+    // }
+
+    const handleSave = async () => {
+        try {
+            const { data, error, status } = await GetCompleteTaskData(savepayload);
+            return { status, error };
+        } catch (error) {
+            return { status: 500, error: { message: 'An unexpected error occurred' } };
+        }
+    };
+    
+    
+
+    const handleFinalSave = async () => {
+        console.log("savepayload",savepayload);
+        try {
+            // Check if taskComments is an empty string
+            if (!savepayload.taskComments || savepayload.taskComments.trim() === '') {
+                // Navigate to the overview tab (replace 'OverviewTab' with the actual name of your overview tab)
+                handlePressOnOverview();
+    
+                // Show an alert asking the user to provide comments
+                Alert.alert("Missing Comments", "Please provide some comments and press Save.");
+                return; // Exit the function early
+            }
+    
+            // If there are selected images, first call saveUploadFile
+            if (selectedImages.length > 0) {
+                await saveUploadFile();
+            }
+    
+            // Call handleSave in both cases
+            const { status, error } = await handleSave();
+    
+            if (status === 200) {
+                Alert.alert("Success", "Task details saved successfully");
+            } else {
+                Alert.alert("Error", error?.message || "Failed to save task details");
+            }
+        } catch (error) {
+            console.error('Error during handleFinalSave process:', error);
+            Alert.alert("Error", "An unexpected error occurred");
+        }
+    };
+    
 
     const handleRequestReassign = () => {
         setShowModal(true);
@@ -176,6 +285,9 @@ const PendingTaskOverViewPage = () => {
     const handleCloseModal = () => {
         setShowModal(false); // Assuming setShowModal is a function to control the modal visibility
     };
+
+
+
 
     const handleModalSave = async (reason:string) => {
         // Update reassignpayload with the reason
@@ -194,6 +306,8 @@ const PendingTaskOverViewPage = () => {
     };
 
     const handleComplete = async () => {
+        console.log("completepayload",completepayload);
+       
         const { data, error, status } = await GetCompleteTaskData(completepayload);
         if (status === 200) {
             Alert.alert("Success", "Task details completed successfully", [
@@ -206,6 +320,14 @@ const PendingTaskOverViewPage = () => {
             Alert.alert("Error", error.message);
         }
     }
+
+    const handleSelectedImagesChange = (images:any) => {
+        setSelectedImages(images);
+    };
+
+    console.log("selectedImages got",selectedImages);
+    
+
     
 
 
@@ -226,6 +348,8 @@ const PendingTaskOverViewPage = () => {
             Alert.alert("error", error.message);
         }
     }
+
+
 
 
 
@@ -269,7 +393,8 @@ const PendingTaskOverViewPage = () => {
                                 secondBtnOnpress={handlePressOnProofs}
                             />
                             <Seperator48 />
-                            <ProofSection />
+                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} />
+
                         </View>
                     )}
                     <View style={styles.pendingTaskOverViewSubmit}>
@@ -285,7 +410,7 @@ const PendingTaskOverViewPage = () => {
                             text='Save'
                             leftIcon='content-save'
                             type='md-default'
-                            onPress={handleSave}
+                            onPress={handleFinalSave}
                         />
                         <Button
                             btnColor={'#42C997'}
@@ -300,7 +425,7 @@ const PendingTaskOverViewPage = () => {
                 </>
             )}
 
-            {task_type === 'ReviewerTask' && (
+            {task_type === 'APPROVAL' && (
                 <>
                     {activeTab === 'Overview' && (
                         <KeyboardAvoidingView behavior="padding">
@@ -333,7 +458,8 @@ const PendingTaskOverViewPage = () => {
                                 secondBtnOnpress={handlePressOnProofs}
                             />
                             <Seperator48 />
-                            <ProofSection />
+                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} />
+
                         </View>
                     )}
                     <View style={styles.pendingTaskOverViewSubmit}>
@@ -354,6 +480,8 @@ const PendingTaskOverViewPage = () => {
                         />
 
                     </View>
+
+                    <ReassignModal visible={showModal} onSave={handleModalSave} onClose={handleCloseModal} />
                 </>
             )}
 

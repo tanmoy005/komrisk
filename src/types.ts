@@ -994,6 +994,12 @@ export interface Comment {
 
 
 
+export interface DownloadProofPayload {
+  docId: string;
+}
+
+
+
 // For Pending Task
 
 export interface PendingTask {
@@ -1052,6 +1058,7 @@ export interface PendingTaskOverViewProps {
 export interface Item {
   docTitle: string;
   extension: string;
+  docId: number;
   // Add other properties as needed
 }
 
@@ -1215,4 +1222,12 @@ export interface InitialsProps {
 export enum ownerReviewerType{
   Owner= "5",
   Reviewer= "4",
+}
+
+export interface NotificationDataPayLoad extends UserModel {
+  user: UserId
+}
+
+interface UserId {
+  id: string | null;
 }
