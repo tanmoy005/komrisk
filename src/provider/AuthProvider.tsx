@@ -5,10 +5,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ScreenCapture from 'expo-screen-capture';
 import { removeAuthUserDetails } from '@/src/store/slices/auth-user-details-slice';
 import { removeAuthUserAccessDetails } from '@/src/store/slices/auth-user-access-details-slice';
-import {removeBaseUrl} from '@/src/store/slices/base-url-slice';
-import {removeAuthUserCred} from '@/src/store/slices/auth-user-cred-slice'
-import {removeIncidentAvailableViews} from '@/src/store/slices/incident-available-views-slice';
+import { removeBaseUrl } from '@/src/store/slices/base-url-slice';
+import { removeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice'
+import { removeIncidentAvailableViews } from '@/src/store/slices/incident-available-views-slice';
 import { useDispatch } from 'react-redux';
+import { hasValue } from '../utils';
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -48,15 +49,19 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     useEffect(() => {
         const getToken = async () => {
             try {
+                //console.log("0");
+
                 const storedToken = await AsyncStorage.getItem('token');
 
+                //console.log("1", storedToken);
 
-                if (storedToken) {
+                if (hasValue(storedToken)) {
                     setToken(storedToken);
                     setSession(true)
                 }
             } catch (error) {
-                Alert.alert('Error', 'Failed to retrieve token');
+                //console.log("2", "storedToken");
+              //  Alert.alert('Error', 'Failed to retrieve token');
             } finally {
                 setLoading(false); // Set loading to false regardless of success or failure
             }

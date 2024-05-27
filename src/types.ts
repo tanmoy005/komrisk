@@ -198,6 +198,7 @@ export interface ActivityStatusData {
 
 export interface ActivityStatusDataListPayLoad extends ActivityStatusDataPayLoad {
   status: string;
+  filterLevel?:string;
 }
 
 
@@ -1211,3 +1212,7 @@ export interface InitialsProps {
 
 
 
+export enum ownerReviewerType{
+  Owner= "5",
+  Reviewer= "4",
+}
