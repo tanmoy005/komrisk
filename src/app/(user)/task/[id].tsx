@@ -11,7 +11,7 @@ import { screenHeight, styles } from '@/src/style'
 import { LastActivityComment, PendingTaskItemDetailsResponse } from '@/src/types'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, ScrollView, View, Alert,ActivityIndicator  } from 'react-native'
+import { KeyboardAvoidingView, ScrollView, View, Alert, ActivityIndicator } from 'react-native'
 import { useSelector } from 'react-redux'
 import GetCompliancesItemDetails from '@/src/server/api-functions/TaskDetails/get_compliances_item_details'
 import { CompliancesItemDetailsPayLoad } from '@/src/types'
@@ -22,7 +22,7 @@ import ReassignModal from './ReassignModal'
 import { useNavigation } from '@react-navigation/native';
 import PendingTaskPage from './pendingTaskPage'
 import { Link, router } from "expo-router";
-import {  Platform } from 'react-native';
+import { Platform } from 'react-native';
 import SaveUploadProof from '@/src/server/api-functions/Tasks/save-upload-proof';
 
 const PendingTaskOverViewPage = () => {
@@ -114,11 +114,11 @@ const PendingTaskOverViewPage = () => {
     const [commentText, setCommentText] = useState<string | null>("");
 
     const comments = useSelector((state: RootState) => state.comments.commentsList);
-    console.log("comments here***",comments);
+    //console.log("comments here***", comments);
     const taskid = pendingTaskDetails.task_id
-    console.log("task id",taskid);
-    
-    
+    //console.log("task id", taskid);
+
+
     const [shortDescription, setShortDescription] = useState<string>("");
 
     // useEffect(() => {
@@ -135,9 +135,9 @@ const PendingTaskOverViewPage = () => {
     // }, [comments, taskid]); // Add comments to the dependency array
 
     //console.log("pendingTaskDetails",pendingTaskDetails);
-    console.log("commentText here",commentText);
-    
-    
+    //console.log("commentText here", commentText);
+
+
 
     const savepayload: CompleteTaskPayload = {
         taskType: pendingTaskDetails.taskType,
@@ -176,63 +176,58 @@ const PendingTaskOverViewPage = () => {
     };
 
 
-    
-    
+
+
 
     const saveUploadFile = async () => {
-        console.log("*************");
-    
+        //console.log("*************");
+
         if (selectedImages.length === 0) {
             // Handle case where no file is selected
-            return;
+            return false;
         }
-    
+
         const file = selectedImages[0];
         const fileExtension = file.fileName?.split('.').pop() ?? 'pdf'; // Default to 'pdf' if extension cannot be determined
-    
+
         const formData = new FormData();
         formData.append('file', {
             uri: Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''), // Adjust uri for Android
             name: file.fileName ?? `filename.${fileExtension}`, // Use fileName from selectedImages or a default name
             type: file.type ?? `application/${fileExtension === 'pdf' ? 'pdf' : 'octet-stream'}`, // Use type from selectedImages or a default type
         } as any); // Use `as any` to bypass type checking
-    
-        //formData.append('objectId', '1880013');
-        formData.append('objectId',pendingTaskDetails.task_id ??'');
+
+        formData.append('objectId', pendingTaskDetails.task_id ?? '');
         formData.append('objectType', 'COMPLIANCE_PROOF');
-        //formData.append('mapId', '12899');
         formData.append('mapId', pendingTaskDetails.map_id ?? '');
         formData.append('fileName', file.fileName?.replace(/\.[^/.]+$/, '') ?? ''); // Remove extension
         formData.append('fileNameWithExt', file.fileName ?? '');
         formData.append('docTitle', file.fileName ?? '');
         formData.append('extension', fileExtension ?? '');
-    
-        console.log("formData type", typeof(formData));
-        console.log("formData", formData);
-    
+
+        // console.log("formData type", typeof (formData));
+        // console.log("formData", formData);
+
         try {
             const response = await SaveUploadProof(formData);
-    
+
             if (response.status === 200) {
                 // Handle successful upload
-                console.log('File uploaded successfully');
+                return new Promise((resolve) => {
+                    Alert.alert('File uploaded successfully', '', [
+                        { text: 'OK', onPress: () => resolve(true) }
+                    ]);
+                });
             } else {
                 // Handle upload failure
-                console.error('Failed to upload file', response);
+                Alert.alert('Failed to upload file', response.error);
+                return false;
             }
         } catch (error) {
-            console.error('Error uploading file:', error);
+            Alert.alert('Error uploading file:');
+            return false;
         }
     };
-
-    // const handleSave = async () => {
-    //     const { data, error, status } = await GetCompleteTaskData(savepayload);
-    //     if (status === 200) {
-    //         Alert.alert("Success", "Task details saved successfully");
-    //     } else {
-    //         Alert.alert("error", error.message);
-    //     }
-    // }
 
     const handleSave = async () => {
         try {
@@ -242,30 +237,29 @@ const PendingTaskOverViewPage = () => {
             return { status: 500, error: { message: 'An unexpected error occurred' } };
         }
     };
-    
-    
 
     const handleFinalSave = async () => {
-        console.log("savepayload",savepayload);
+        //console.log("savepayload", savepayload);
         try {
             // Check if taskComments is an empty string
             if (!savepayload.taskComments || savepayload.taskComments.trim() === '') {
                 // Navigate to the overview tab (replace 'OverviewTab' with the actual name of your overview tab)
                 handlePressOnOverview();
-    
+
                 // Show an alert asking the user to provide comments
                 Alert.alert("Missing Comments", "Please provide some comments and press Save.");
                 return; // Exit the function early
             }
-    
+
             // If there are selected images, first call saveUploadFile
             if (selectedImages.length > 0) {
-                await saveUploadFile();
+                const uploadSuccess = await saveUploadFile();
+                if (!uploadSuccess) return;
             }
-    
+
             // Call handleSave in both cases
             const { status, error } = await handleSave();
-    
+
             if (status === 200) {
                 Alert.alert("Success", "Task details saved successfully");
             } else {
@@ -276,7 +270,7 @@ const PendingTaskOverViewPage = () => {
             Alert.alert("Error", "An unexpected error occurred");
         }
     };
-    
+
 
     const handleRequestReassign = () => {
         setShowModal(true);
@@ -289,25 +283,25 @@ const PendingTaskOverViewPage = () => {
 
 
 
-    const handleModalSave = async (reason:string) => {
+    const handleModalSave = async (reason: string) => {
         // Update reassignpayload with the reason
         reassignpayload.reason = reason;
         //console.log("reassignpayload",reassignpayload);
-        
+
         const { data, error, status } = await GetRequestAssignData(reassignpayload);
-            if (status === 200) {
-                Alert.alert("Success", "Task reassigned successfully");
-            } else {
-                Alert.alert("error", error.message);
-            }
-        
+        if (status === 200) {
+            Alert.alert("Success", "Task reassigned successfully");
+        } else {
+            Alert.alert("error", error.message);
+        }
+
         setShowModal(false);
-       
+
     };
 
     const handleComplete = async () => {
-        console.log("completepayload",completepayload);
-       
+        //console.log("completepayload", completepayload);
+
         const { data, error, status } = await GetCompleteTaskData(completepayload);
         if (status === 200) {
             Alert.alert("Success", "Task details completed successfully", [
@@ -321,14 +315,14 @@ const PendingTaskOverViewPage = () => {
         }
     }
 
-    const handleSelectedImagesChange = (images:any) => {
+    const handleSelectedImagesChange = (images: any) => {
         setSelectedImages(images);
     };
 
-    console.log("selectedImages got",selectedImages);
-    
+    //console.log("selectedImages got", selectedImages);
 
-    
+
+
 
 
     const handleApprove = async () => {

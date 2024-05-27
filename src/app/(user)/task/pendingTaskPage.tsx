@@ -43,7 +43,6 @@ const PendingTaskPage = () => {
     start: startDate,
     end: currentDate,
     viewAs: "COMPANY HEAD",
-    viewAs: "COMPANY HEAD",
 
   });
 
