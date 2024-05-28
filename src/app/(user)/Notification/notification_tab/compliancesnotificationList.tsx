@@ -26,7 +26,7 @@ const compliancesnotificationList: React.FC = () => {
       <BtnFilterHeader
         firstBtnName='See All'
         fistBtnOnpress={handleSeeAll}
-        secondBtnName='Closed'
+        //secondBtnName='Closed'
         secondBtnOnpress={handleClose}
       />
       <Seperator24 />

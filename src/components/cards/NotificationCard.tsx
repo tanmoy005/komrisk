@@ -30,7 +30,7 @@ const NotificationCard = memo(({ data }: notificationCardListDataProps) => {
     const seenCardborderColor = 'rgba(120, 106, 205, 0.8)';
     const unseenCardborderColor = 'rgba(120, 106, 205, 0.16)';
     useEffect(() => {
-        console.log('data', data.id);
+        //console.log('data', data.id);
         if (currentPath === '/notification/notification_tab/alertsnotificationList') {
             const selectedUser = notificationSeenList.filter(({ userId }) => userId === loggedInUserId?.toString())[0];
             console.log('selectedUser', selectedUser);

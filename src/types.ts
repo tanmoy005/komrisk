@@ -968,7 +968,7 @@ export interface BtnFilterHeaderProps {
 
   firstBtnName: string;
   fistBtnOnpress: () => void;
-  secondBtnName: string;
+  secondBtnName?: string;
   secondBtnOnpress: () => void;
 }
 

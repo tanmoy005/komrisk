@@ -214,7 +214,7 @@ const PendingTaskOverViewPage = () => {
             if (response.status === 200) {
                 // Handle successful upload
                 return new Promise((resolve) => {
-                    Alert.alert('File uploaded successfully', '', [
+                    Alert.alert('Success', 'File uploaded successfully', [
                         { text: 'OK', onPress: () => resolve(true) }
                     ]);
                 });
@@ -239,7 +239,7 @@ const PendingTaskOverViewPage = () => {
     };
 
     const handleFinalSave = async () => {
-        //console.log("savepayload", savepayload);
+        console.log("savepayload", savepayload);
         try {
             // Check if taskComments is an empty string
             if (!savepayload.taskComments || savepayload.taskComments.trim() === '') {
@@ -262,6 +262,7 @@ const PendingTaskOverViewPage = () => {
 
             if (status === 200) {
                 Alert.alert("Success", "Task details saved successfully");
+                handlePressOnOverview();
             } else {
                 Alert.alert("Error", error?.message || "Failed to save task details");
             }
@@ -286,7 +287,7 @@ const PendingTaskOverViewPage = () => {
     const handleModalSave = async (reason: string) => {
         // Update reassignpayload with the reason
         reassignpayload.reason = reason;
-        //console.log("reassignpayload",reassignpayload);
+        console.log("reassignpayload",reassignpayload);
 
         const { data, error, status } = await GetRequestAssignData(reassignpayload);
         if (status === 200) {
@@ -300,7 +301,7 @@ const PendingTaskOverViewPage = () => {
     };
 
     const handleComplete = async () => {
-        //console.log("completepayload", completepayload);
+        console.log("completepayload", completepayload);
 
         const { data, error, status } = await GetCompleteTaskData(completepayload);
         if (status === 200) {
@@ -326,6 +327,8 @@ const PendingTaskOverViewPage = () => {
 
 
     const handleApprove = async () => {
+        console.log("approvepayload", approvepayload);
+
         const { data, error, status } = await GetCompleteTaskData(approvepayload);
         if (status === 200) {
             Alert.alert("Success", "Task approved successfully");
@@ -335,6 +338,8 @@ const PendingTaskOverViewPage = () => {
     }
 
     const handleReject = async () => {
+        console.log("rejectpayload", rejectpayload);
+
         const { data, error, status } = await GetCompleteTaskData(rejectpayload);
         if (status === 200) {
             Alert.alert("Success", "Task rejected");
@@ -354,19 +359,21 @@ const PendingTaskOverViewPage = () => {
             flex: 1,
         }}>
 
+            <HeadImageSection />
+            <BtnFilterHeader
+                firstBtnName='Overview'
+                fistBtnOnpress={handlePressOnOverview}
+                secondBtnName='Proofs'
+                secondBtnOnpress={handlePressOnProofs}
+            />
+            <Seperator48 />
+
             {task_type === 'OwnerTask' && (
                 <>
                     {activeTab === 'Overview' && (
                         <KeyboardAvoidingView behavior="padding">
                             <ScrollView>
-                                <HeadImageSection />
-                                <BtnFilterHeader
-                                    firstBtnName='Overview'
-                                    fistBtnOnpress={handlePressOnOverview}
-                                    secondBtnName='Proofs'
-                                    secondBtnOnpress={handlePressOnProofs}
-                                />
-                                <Seperator48 />
+
                                 <PendingTaskOverView
                                     pendingTaskDetails={pendingTaskDetails}
                                     commentText={commentText}
@@ -379,14 +386,7 @@ const PendingTaskOverViewPage = () => {
                     )}
                     {activeTab === 'Proofs' && (
                         <View>
-                            <HeadImageSection />
-                            <BtnFilterHeader
-                                firstBtnName='Overview'
-                                fistBtnOnpress={handlePressOnOverview}
-                                secondBtnName='Proofs'
-                                secondBtnOnpress={handlePressOnProofs}
-                            />
-                            <Seperator48 />
+                            
                             <ProofSection onSelectedImagesChange={handleSelectedImagesChange} />
 
                         </View>
@@ -424,14 +424,7 @@ const PendingTaskOverViewPage = () => {
                     {activeTab === 'Overview' && (
                         <KeyboardAvoidingView behavior="padding">
                             <ScrollView>
-                                <HeadImageSection />
-                                <BtnFilterHeader
-                                    firstBtnName='Overview'
-                                    fistBtnOnpress={handlePressOnOverview}
-                                    secondBtnName='Proofs'
-                                    secondBtnOnpress={handlePressOnProofs}
-                                />
-                                <Seperator48 />
+
                                 <PendingTaskOverView
                                     pendingTaskDetails={pendingTaskDetails}
                                     commentText={commentText}
@@ -444,14 +437,7 @@ const PendingTaskOverViewPage = () => {
                     )}
                     {activeTab === 'Proofs' && (
                         <View>
-                            <HeadImageSection />
-                            <BtnFilterHeader
-                                firstBtnName='Overview'
-                                fistBtnOnpress={handlePressOnOverview}
-                                secondBtnName='Proofs'
-                                secondBtnOnpress={handlePressOnProofs}
-                            />
-                            <Seperator48 />
+                            
                             <ProofSection onSelectedImagesChange={handleSelectedImagesChange} />
 
                         </View>
@@ -487,6 +473,3 @@ const PendingTaskOverViewPage = () => {
 }
 
 export default PendingTaskOverViewPage
-
-
-

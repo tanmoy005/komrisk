@@ -15,7 +15,7 @@ import { PendingTaskDataList, TaskListDataItem } from '@/src/types'
 import { RootState } from '@/src/store'
 import { useSelector } from 'react-redux'
 import GetActivityStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-activity-status-datalist-details';
-import { ActivityStatusDataListPayLoad, ChartFilterDataPayLoad ,ownerReviewerType} from '@/src/types';
+import { ActivityStatusDataListPayLoad, ChartFilterDataPayLoad, ownerReviewerType } from '@/src/types';
 import moment from "moment";
 import NoDataAvailableCard from '@/src/components/NoDataAvailableCard'
 
@@ -49,7 +49,7 @@ const PendingTaskPage = () => {
   const [payLoad, setPayLoad] = useState<ActivityStatusDataListPayLoad>({
     ...useCredential,
     ...chartFilterPayload,
-    status:"initiated,pending",
+    status: "initiated,pending",
 
   });
 
@@ -79,7 +79,7 @@ const PendingTaskPage = () => {
   const handleGetTaskListOwner = async () => {
     setRefreshingOwner(true);
     //console.log({...payLoad , filterLevel: ownerReviewerType.Owner });
-    const { data, error, status } = await GetActivityStatusDataList({...payLoad , filterLevel: ownerReviewerType.Owner });
+    const { data, error, status } = await GetActivityStatusDataList({ ...payLoad, filterLevel: ownerReviewerType.Owner });
     //console.log("response got", data);
 
     //const status = 200;
@@ -105,10 +105,10 @@ const PendingTaskPage = () => {
 
 
   const handleGetTaskListReviewer = async () => {
-console.log({...payLoad , filterLevel: ownerReviewerType.Reviewer });
+    console.log({ ...payLoad, filterLevel: ownerReviewerType.Reviewer });
 
 
-    const { data, error, status } = await GetActivityStatusDataList({...payLoad , filterLevel: ownerReviewerType.Reviewer });
+    const { data, error, status } = await GetActivityStatusDataList({ ...payLoad, filterLevel: ownerReviewerType.Reviewer });
     //console.log("response got", data);
 
     //const status = 200;
@@ -144,7 +144,7 @@ console.log({...payLoad , filterLevel: ownerReviewerType.Reviewer });
 
         <View>
           {
-            DataListOwner.length == 0 && refreshingowner == false?
+            DataListOwner.length == 0 && refreshingowner == false ?
               <NoDataAvailableCard /> :
               <FlatList
                 showsVerticalScrollIndicator={false}
@@ -165,7 +165,7 @@ console.log({...payLoad , filterLevel: ownerReviewerType.Reviewer });
       {taskType === 'APPROVAL' && (
         <View>
           {
-            DataListReviewer.length == 0  && refreshingreviewer == false?
+            DataListReviewer.length == 0 && refreshingreviewer == false ?
               <NoDataAvailableCard /> :
               <FlatList
                 showsVerticalScrollIndicator={false}

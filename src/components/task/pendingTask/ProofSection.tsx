@@ -18,7 +18,7 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) =
     const [selectedImageUri, setSelectedImageUri] = useState<string | null | undefined>(null);
     const [modalVisible, setModalVisible] = useState(false);
     const { token } = React.useContext(AuthContext);
-    console.log("token", token);
+    //console.log("token", token);
 
     useEffect(() => {
         onSelectedImagesChange(selectedImages);
@@ -34,10 +34,10 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) =
         }
 
         const result = await DocumentPicker.getDocumentAsync({});
-        console.log("result", result);
+        //console.log("result", result);
 
         if (!result.canceled) {
-            console.log("result", result);
+            //console.log("result", result);
 
             const filesData = result.assets.map(asset => ({
                 uri: asset.uri,
@@ -62,7 +62,7 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) =
         });
 
         if (!result.canceled) {
-            console.log("result", result);
+            //console.log("result", result);
 
             const filesData = result.assets.map(asset => ({
                 uri: asset.uri,
@@ -85,11 +85,11 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) =
             quality: 1,
         });
 
-        console.log("result",result);
+        //console.log("result",result);
         
 
         if (!result.canceled) {
-            console.log("result", result);
+            //console.log("result", result);
 
             const filesData = result.assets.map(asset => ({
                 uri: asset.uri,
@@ -114,7 +114,7 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) =
         );
     };
 
-    console.log("selectedImages", selectedImages);
+    //console.log("selectedImages", selectedImages);
 
     return (
         <CardContainer>

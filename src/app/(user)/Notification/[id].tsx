@@ -90,7 +90,7 @@ const ShowTaskDetails = () => {
             <BtnFilterHeader
                 firstBtnName='See All'
                 fistBtnOnpress={handleSeeAll}
-                secondBtnName='Closed'
+                //secondBtnName='Closed'
                 secondBtnOnpress={handleClosed}
             />
             <Seperator24 />

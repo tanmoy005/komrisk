@@ -19,7 +19,7 @@ const allnotificationList: React.FC = () => {
       <BtnFilterHeader
         firstBtnName='See All'
         fistBtnOnpress={handleSeeAll}
-        secondBtnName='Closed'
+        //secondBtnName='Closed'
         secondBtnOnpress={handleSeeAll}
       />
       <Seperator24 />
