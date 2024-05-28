@@ -7,13 +7,15 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CardContainer from '../../cards/CardContainer';
 import ProofsListDetails from '@/src/components/task/pendingTask/ProofsListDetails';
 import { AuthContext } from '@/src/provider/AuthProvider';
+import { PendingTaskItemDetailsResponse } from '@/src/types';
 
 
 interface ProofSectionProps {
     onSelectedImagesChange: (images: { uri: string, fileName: string | null | undefined, type: string | null | undefined }[]) => void;
+    pendingTaskDetails: PendingTaskItemDetailsResponse;
 }
 
-const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) => {
+const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange, pendingTaskDetails }) => {
     const [selectedImages, setSelectedImages] = useState<{ uri: string, fileName: string | null | undefined, type: string | null | undefined }[]>([]);
     const [selectedImageUri, setSelectedImageUri] = useState<string | null | undefined>(null);
     const [modalVisible, setModalVisible] = useState(false);
@@ -86,7 +88,7 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) =
         });
 
         //console.log("result",result);
-        
+
 
         if (!result.canceled) {
             //console.log("result", result);
@@ -107,12 +109,15 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) =
             [
                 { text: 'Document', onPress: pickDocument },
                 { text: 'Image', onPress: pickImage },
-                {text: 'Camera', onPress:takePhoto},
+                { text: 'Camera', onPress: takePhoto },
                 { text: 'Cancel', style: 'cancel' }
             ],
             { cancelable: true }
         );
     };
+
+    const taskIDString = pendingTaskDetails.task_id?? "0";
+    const task_id = parseInt(taskIDString, 10);
 
     //console.log("selectedImages", selectedImages);
 
@@ -158,11 +163,13 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange }) =
             <View style={{ marginBottom: 80 }} />
             {/* Render Proofs component here */}
 
-             {/* For Other User get proof list */}
+            {/* For Other User get proof list */}
             {/* <ProofsListDetails taskId={330038} type="COMPLIANCE_PROOF" /> */}
 
             {/* For Sayan Sarkar pdf download api */}
-            <ProofsListDetails taskId={6850084} type="COMPLIANCE_PROOF" />
+            {/* <ProofsListDetails taskId={6850084} type="COMPLIANCE_PROOF" /> */}
+            
+            <ProofsListDetails taskId={task_id} type="COMPLIANCE_PROOF" />
         </CardContainer>
     )
 }

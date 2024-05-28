@@ -25,7 +25,7 @@ const ReassignModal: React.FC<ReassignModalProps> = ({ visible, onSave, onClose 
                     <Text style={styles.boldText}>Enter Reason :</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="Enter reason for reassignment"
+                        placeholder="Enter reason"
                         value={reason}
                         onChangeText={setReason}
                     />

@@ -80,7 +80,7 @@ const PendingTaskPage = () => {
     setRefreshingOwner(true);
     //console.log({...payLoad , filterLevel: ownerReviewerType.Owner });
     const { data, error, status } = await GetActivityStatusDataList({ ...payLoad, filterLevel: ownerReviewerType.Owner });
-    //console.log("response got", data);
+    console.log("response got", data);
 
     //const status = 200;
     if (status === 200) {

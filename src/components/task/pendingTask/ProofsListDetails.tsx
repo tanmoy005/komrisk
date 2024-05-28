@@ -27,6 +27,9 @@ const ProofsListDetails = memo(({ taskId, type }: ProofsListDetailsProps) => {
 
     const [proofDataList, setProofDataList] = useState<ProofListData[]>([]);
 
+    console.log("taskId got",taskId);
+    
+
 
     const handleGetproofListData = async (payLoad: ProofListPayload) => {
         const { data, error, status } = await GetProofDataList(payLoad);

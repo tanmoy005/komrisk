@@ -73,7 +73,11 @@ const NotificationCard = memo(({ data }: notificationCardListDataProps) => {
                             params: {
                                 type: "NOTIFICATION",
                                 id: data?.id,
-                                // complianceId: data?.complianceId,
+                                complianceId: data?.complianceId,
+                                complianceTitle: data?.complianceTitle,
+                                newValue: data?.newValue,
+                                lawNames: data?.lawNames,
+                                updatedOn: data?.updatedOn
                             }
                         } as never)}
                     >

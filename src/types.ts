@@ -1233,6 +1233,23 @@ export interface notificationSeen {
   notificationIdList: string[]
 }
 
+
+export interface NotificationItemDetailsResponse {
+  compliance_title: string | null,
+  compliance_id: string | null,
+  description: string | null,
+  name_of_law: string | null,
+  paramId: string | null,
+  notification_date: string | null
+}
+
+
+export interface NotificationOverViewProps {
+  notificationDetails: NotificationItemDetailsResponse;
+
+}
+
+
 interface UserId {
   id: string | null;
 }

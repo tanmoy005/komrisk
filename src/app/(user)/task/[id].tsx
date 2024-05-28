@@ -40,6 +40,8 @@ const PendingTaskOverViewPage = () => {
 
     const [selectedTaskId] = useState<string>(task_id ?? "");
     const [showModal, setShowModal] = useState(false);
+    const [showApproveModal, setShowApproveModal] = useState(false);
+    const [showRejectModal, setShowRejectModal] = useState(false);
 
 
 
@@ -161,17 +163,32 @@ const PendingTaskOverViewPage = () => {
         taskAction: "complete",
     };
 
+    // const approvepayload: CompleteTaskPayload = {
+    //     taskType: pendingTaskDetails.taskType,
+    //     taskId: pendingTaskDetails.task_id,
+    //     taskComments: commentText,
+    //     taskAction: "approve",
+    // };
+
+    // const rejectpayload: CompleteTaskPayload = {
+    //     taskType: pendingTaskDetails.taskType,
+    //     taskId: pendingTaskDetails.task_id,
+    //     taskComments: commentText,
+    //     taskAction: "reject",
+    // };
+
+
     const approvepayload: CompleteTaskPayload = {
         taskType: pendingTaskDetails.taskType,
         taskId: pendingTaskDetails.task_id,
-        taskComments: commentText,
+        taskComments: " ",
         taskAction: "approve",
     };
 
     const rejectpayload: CompleteTaskPayload = {
         taskType: pendingTaskDetails.taskType,
         taskId: pendingTaskDetails.task_id,
-        taskComments: commentText,
+        taskComments: " ",
         taskAction: "reject",
     };
 
@@ -281,13 +298,57 @@ const PendingTaskOverViewPage = () => {
         setShowModal(false); // Assuming setShowModal is a function to control the modal visibility
     };
 
+    const handleReasonApprove = () => {
+        setShowApproveModal(true);
+    };
+
+    const handleReasonReject = () => {
+        setShowRejectModal(true);
+    };
+
+    const handleCloseApproveModal = () => {
+        setShowApproveModal(false);
+    };
+
+    const handleCloseRejectModal = () => {
+        setShowRejectModal(false);
+    };
+
+    const handleModalApprove = async (reason: string) => {
+        approvepayload.taskComments = reason;
+        console.log("approvepayload", approvepayload);
+
+        const { data, error, status } = await GetCompleteTaskData(approvepayload);
+        if (status === 200) {
+            Alert.alert("Success", "Task approved successfully");
+        } else {
+            Alert.alert("error", error.message);
+        }
+        setShowApproveModal(false);
+    };
+
+    const handleModalReject = async (reason: string) => {
+        rejectpayload.taskComments = reason;
+        console.log("rejectpayload", rejectpayload);
+
+        const { data, error, status } = await GetCompleteTaskData(rejectpayload);
+        if (status === 200) {
+            Alert.alert("Success", "Task rejected");
+        } else {
+            Alert.alert("error", error.message);
+        }
+        setShowRejectModal(false);
+    };
+
+
+
 
 
 
     const handleModalSave = async (reason: string) => {
         // Update reassignpayload with the reason
         reassignpayload.reason = reason;
-        console.log("reassignpayload",reassignpayload);
+        console.log("reassignpayload", reassignpayload);
 
         const { data, error, status } = await GetRequestAssignData(reassignpayload);
         if (status === 200) {
@@ -324,29 +385,31 @@ const PendingTaskOverViewPage = () => {
 
 
 
+    // For not giving any reason as taskcomments to approve
+
+    // const handleApprove = async () => {
+    //     console.log("approvepayload", approvepayload);
+
+    //     const { data, error, status } = await GetCompleteTaskData(approvepayload);
+    //     if (status === 200) {
+    //         Alert.alert("Success", "Task approved successfully");
+    //     } else {
+    //         Alert.alert("error", error.message);
+    //     }
+    // }
 
 
-    const handleApprove = async () => {
-        console.log("approvepayload", approvepayload);
 
-        const { data, error, status } = await GetCompleteTaskData(approvepayload);
-        if (status === 200) {
-            Alert.alert("Success", "Task approved successfully");
-        } else {
-            Alert.alert("error", error.message);
-        }
-    }
+    // const handleReject = async () => {
+    //     console.log("rejectpayload", rejectpayload);
 
-    const handleReject = async () => {
-        console.log("rejectpayload", rejectpayload);
-
-        const { data, error, status } = await GetCompleteTaskData(rejectpayload);
-        if (status === 200) {
-            Alert.alert("Success", "Task rejected");
-        } else {
-            Alert.alert("error", error.message);
-        }
-    }
+    //     const { data, error, status } = await GetCompleteTaskData(rejectpayload);
+    //     if (status === 200) {
+    //         Alert.alert("Success", "Task rejected");
+    //     } else {
+    //         Alert.alert("error", error.message);
+    //     }
+    // }
 
 
 
@@ -386,8 +449,8 @@ const PendingTaskOverViewPage = () => {
                     )}
                     {activeTab === 'Proofs' && (
                         <View>
-                            
-                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} />
+
+                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} pendingTaskDetails={pendingTaskDetails}/>
 
                         </View>
                     )}
@@ -437,8 +500,8 @@ const PendingTaskOverViewPage = () => {
                     )}
                     {activeTab === 'Proofs' && (
                         <View>
-                            
-                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} />
+
+                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} pendingTaskDetails ={pendingTaskDetails} />
 
                         </View>
                     )}
@@ -448,20 +511,22 @@ const PendingTaskOverViewPage = () => {
                             text='Approve'
                             leftIcon='account-multiple-plus'
                             type='md-outline'
-                            onPress={handleApprove}
+                            onPress={handleReasonApprove}
                         />
+
                         <Button
                             btnColor={'#A097DC'}
                             text='Reject'
                             leftIcon='content-save'
                             //type='md-default'
                             type='md-outline'
-                            onPress={handleReject}
+                            onPress={handleReasonReject}
                         />
 
                     </View>
 
-                    <ReassignModal visible={showModal} onSave={handleModalSave} onClose={handleCloseModal} />
+                    <ReassignModal visible={showApproveModal} onSave={handleModalApprove} onClose={handleCloseApproveModal} />
+                    <ReassignModal visible={showRejectModal} onSave={handleModalReject} onClose={handleCloseRejectModal} />
                 </>
             )}
 

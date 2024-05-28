@@ -8,7 +8,7 @@ import GetIncidentDetails from '@/src/components/reports/reportDetails/GetIncide
 const ShowDetailsReport = () => {
 
     const data = useLocalSearchParams();
-    console.log("data got",data);
+    //console.log("data got",data);
     
     const { type, id, taskId } = data;
     
