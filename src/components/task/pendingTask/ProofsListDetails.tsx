@@ -193,7 +193,7 @@ const ProofsListDetails = memo(({ taskId, type }: ProofsListDetailsProps) => {
             {/* <ChartItemSkelton /> */}
         </View> :
             <View style={styles.titleContainer}>
-                <Text>{`${item.docTitle}.${item.extension}`}</Text>
+                <Text>{`${item.docTitle}`}</Text>
                 <TouchableOpacity
                     onPress={() => handleDownload(item.docId)}
                 >
