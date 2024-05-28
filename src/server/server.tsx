@@ -3,6 +3,8 @@ import axios from 'axios';
 import getDataFromAsyncStorage from '../utils/associate/get-from-localstorage';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../provider/AuthProvider';
+import React, { useContext } from 'react';
 
 interface Response {
     data: any,
@@ -58,7 +60,7 @@ const Server = async (payLoad: object | FormData, url: string, method: string, h
             response.status = error.response?.status ?? null;
             if (response.status === 401) {
                 await AsyncStorage.removeItem('token'); // Assuming you store the token in AsyncStorage
-                router.push('/(pages)');
+                router.replace('/(pages)');
             }
         } else {
             response.error = error;

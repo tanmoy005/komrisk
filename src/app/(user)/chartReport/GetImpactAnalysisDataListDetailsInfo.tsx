@@ -65,7 +65,7 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
           setRefreshing(false);
         }
       } else {
-        Alert.alert("error4444", error.message);
+        Alert.alert("error", error.message);
       }
       // setDataList([{}]);
     }

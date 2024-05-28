@@ -56,7 +56,7 @@ const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilte
       setTotalValue(sum);
 
     } else {
-      Alert.alert("error", error.message);
+      // Alert.alert("error", error.message);
     }
   }
 

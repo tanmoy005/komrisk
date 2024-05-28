@@ -50,19 +50,14 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     useEffect(() => {
         const getToken = async () => {
             try {
-                //console.log("0");
-
                 const storedToken = await AsyncStorage.getItem('token');
-
-                //console.log("1", storedToken);
 
                 if (hasValue(storedToken)) {
                     setToken(storedToken);
                     setSession(true)
                 }
             } catch (error) {
-                //console.log("2", "storedToken");
-              //  Alert.alert('Error', 'Failed to retrieve token');
+                Alert.alert('Error', 'Failed to retrieve token');
             } finally {
                 setLoading(false); // Set loading to false regardless of success or failure
             }
