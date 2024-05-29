@@ -1,8 +1,8 @@
-import { View } from "react-native";
-import Button from "../Button";
+import Button from "@/src/components/Button";
 import { styles } from "@/src/style";
 import { BtnFilterHeaderProps } from "@/src/types";
 import { useState } from "react";
+import { View } from "react-native";
 
 const BtnFilterHeader = ({ firstBtnName, fistBtnOnpress, secondBtnName, secondBtnOnpress }: BtnFilterHeaderProps) => {
     const [firstButtonSelected, setFirstButtonSelected] = useState<boolean>(true);

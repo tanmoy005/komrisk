@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View
 } from 'react-native';
-import AccordianCommonHeader from './AccordianCommonHeader';
+//import AccordianCommonHeader from './AccordianCommonHeader';
+import AccordianCommonHeader from '@/src/components/accordians/AccordianCommonHeader';
 import { AccordionItemPros } from '@/src/types';
 
 

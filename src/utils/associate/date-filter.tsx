@@ -1,5 +1,4 @@
 import moment from "moment/moment";
-import { hasValue } from "./has-value";
 
 
 export const DateFormatDDMMYYYY = (dateTime: string | undefined | null) => {

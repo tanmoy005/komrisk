@@ -1,11 +1,10 @@
 import { size12, size24, styles } from '@/src/style'
 import React from 'react'
-import { View } from 'react-native'
-import { Text } from 'react-native'
-import DropDown from '../CustomeDropDown'
+import { Text, View } from 'react-native'
+
+import CustomeDropDown from '@/src/components/CustomeDropDown'
 import { FilterDropdownProps } from '@/src/types'
-import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import CustomeDropDown from '../CustomeDropDown'
+import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const FilterDropdown = ({

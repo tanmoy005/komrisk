@@ -1,6 +1,6 @@
 import { screenWidth, styles } from '@/src/style'
 import React from 'react'
-import { View, Image } from 'react-native'
+import { Image, View } from 'react-native'
 
 
 const HeadImageSection = () => {

@@ -1,6 +1,6 @@
 
 import React from 'react';
-// import FontAwesome5  from '@expo/vector-icons/FontAwesome';
+
 import { FontAwesome5, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons'
 
 import { Tabs } from 'expo-router';

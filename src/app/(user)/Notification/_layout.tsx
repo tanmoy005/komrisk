@@ -1,8 +1,7 @@
-import { View } from '@/src/components/Themed'
-import React from 'react'
-import { StyleSheet } from 'react-native';
-import { Stack } from 'expo-router';
 import { headerColor } from '@/src/style';
+import { Stack } from 'expo-router';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 
 const Notification_Page_layout = () => {

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Modal, StyleSheet, Text, Pressable, View } from 'react-native';
-import CardContainer from '../cards/CardContainer';
-import CardTextContainer from '../cards/CardTextContainer';
-import FilterDropdown from './FilterDropdown';
-import { FilterModalProps } from '@/src/types';
-import ChartUserFilter from './ChartUserFilter';
+import CardContainer from '@/src/components/cards/CardContainer';
+import CardTextContainer from '@/src/components/cards/CardTextContainer';
+import ChartDataFilter from '@/src/components/filter/ChartDataFilter';
+import ChartUserFilter from '@/src/components/filter/ChartUserFilter';
+import FilterDropdown from '@/src/components/filter/FilterDropdown';
 import { screenWidth, styles } from '@/src/style';
-import ChartDataFilter from './ChartDataFilter';
-import Button from '../Button';
-import ChartFilter from './ChartFilter';
+import { FilterModalProps } from '@/src/types';
+import React from 'react';
+import { Modal, Pressable, View } from 'react-native';
+
+import ChartFilter from '@/src/components/filter/ChartFilter';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const FilterModal = ({ setModalVisible,

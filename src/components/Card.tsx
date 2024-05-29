@@ -1,6 +1,6 @@
+import { View } from '@/src/components/Themed'
+import { styles } from '@/src/style'
 import React, { PropsWithChildren } from 'react'
-import { View } from './Themed'
-import { styles } from '../style'
 
 const Card = ({children}: PropsWithChildren):  JSX.Element => {
   return (

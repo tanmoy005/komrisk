@@ -1,10 +1,10 @@
 import CardTextContainer from '@/src/components/cards/CardTextContainer';
 import { SmallHeading } from '@/src/components/headings/SmallHeading';
 import { styles } from '@/src/style';
-import React from 'react'
-import { Text, View } from 'react-native'
+import { CompliancesItemDetailsResponse } from '@/src/types';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
-import { CompliancesItemDetailsResponse } from '../../types';
 
 type Props = {
     compliancesItemData: CompliancesItemDetailsResponse;

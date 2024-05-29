@@ -1,16 +1,16 @@
 
-import React, { createContext, useEffect, useState, ReactNode } from 'react';
-import { Alert } from 'react-native';
+import { removeAuthUserAccessDetails } from '@/src/store/slices/auth-user-access-details-slice';
+import { removeAuthUserDetails } from '@/src/store/slices/auth-user-details-slice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ScreenCapture from 'expo-screen-capture';
-import { removeAuthUserDetails } from '@/src/store/slices/auth-user-details-slice';
-import { removeAuthUserAccessDetails } from '@/src/store/slices/auth-user-access-details-slice';
-import { removeBaseUrl } from '@/src/store/slices/base-url-slice';
-import { removeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice'
+import React, { ReactNode, createContext, useEffect, useState } from 'react';
+import { Alert } from 'react-native';
+//import { removeBaseUrl } from '@/src/store/slices/base-url-slice';
+import { removeAuthUserCred } from '@/src/store/slices/auth-user-cred-slice';
 import { removeIncidentAvailableViews } from '@/src/store/slices/incident-available-views-slice';
 import { useDispatch } from 'react-redux';
-import { hasValue } from '../utils';
-import { removeAllComments } from '../store/slices/task-comments-slice';
+import { hasValue } from '@/src/utils';
+//import { removeAllComments } from '@/src/store/slices/task-comments-slice';
 
 interface AuthProviderProps {
     children: ReactNode;

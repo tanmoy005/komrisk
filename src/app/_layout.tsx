@@ -7,19 +7,16 @@ import React, { useEffect } from 'react';
 
 import { useColorScheme } from '@/src/components/useColorScheme';
 import { Provider } from 'react-redux';
-// import store from '../store';
 
-
-
-import AuthProvider, { AuthContext } from '../provider/AuthProvider';
-import { persistor, store } from '../store';
 import { PersistGate } from 'redux-persist/integration/react';
-import { headerColor } from '../style';
-// import SecureScreen, { ScreenCaptureProvider } from '../provider/SecureScreenProvider';
+import AuthProvider from '@/src/provider/AuthProvider';
+import { persistor, store } from '@/src/store';
+import { headerColor } from '@/src/style';
+
 
 export {
   // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
+  ErrorBoundary
 } from 'expo-router';
 
 export const unstable_settings = {

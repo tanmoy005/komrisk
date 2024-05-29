@@ -1,20 +1,18 @@
 
 
 
-import React from 'react'
-import CardContainer from '../../cards/CardContainer'
-import { SmallHeading } from '../../headings/SmallHeading'
-import ChevronsAccordian2 from '../../accordians/ChevronsAccordian2'
-import PendingTaskAccordianBody from '../PendingTaskAccordianBody'
-import Seperator24 from '../../seperators/Seperator24'
-import LastActivityAccordianBody from '../LastActivityAccordianBody'
-import AccordianCommonHeader from '../../accordians/AccordianCommonHeader'
-import { PendingTaskOverViewProps } from '@/src/types'
+import { RootState } from '@/src/store'
 import { screenHeight } from '@/src/style'
+import { PendingTaskOverViewProps } from '@/src/types'
+import React, { useEffect } from 'react'
 import { ScrollView } from 'react-native'
-import { useDispatch, useSelector} from 'react-redux';
-import { RootState } from '@/src/store';
-import { useState,useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import AccordianCommonHeader from '@/src/components/accordians/AccordianCommonHeader'
+import ChevronsAccordian2 from '@/src/components/accordians/ChevronsAccordian2'
+import CardContainer from '@/src/components/cards/CardContainer'
+import { SmallHeading } from '@/src/components/headings/SmallHeading'
+import Seperator24 from '@/src/components/seperators/Seperator24'
+import PendingTaskAccordianBody from '@/src/components/task/PendingTaskAccordianBody'
 
 const PendingTaskOverView = ({ pendingTaskDetails,shortDescription, lastActivitycomments,commentText, setCommentText, setShortDescription}: PendingTaskOverViewProps) => {
 

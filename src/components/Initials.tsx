@@ -1,9 +1,9 @@
-import React from 'react'
-import { Text, View } from 'react-native'
-import { styles } from '../style'
-import { RootState } from '../store';
+import { RootState } from '@/src/store';
+import { styles } from '@/src/style';
+import { InitialsProps } from '@/src/types';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { InitialsProps } from '../types';
 
 
 const Initials = ({ size, fontSize }: InitialsProps) => {

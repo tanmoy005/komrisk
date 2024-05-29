@@ -1,10 +1,9 @@
+import Workspace from '@/src/app/(pages)';
 import React from 'react';
-import Workspace from './(pages)';
-// import store from '../store';
-import {AuthContext} from '../provider/AuthProvider';
-//import ComplianceStatus from './(user)/dashboard/complianceStatus';
-import TabIndex from './(user)';
-import { router } from 'expo-router';
+
+import { AuthContext } from '@/src/provider/AuthProvider';
+
+import TabIndex from '@/src/app/(user)';
 
 
 const index = () => {

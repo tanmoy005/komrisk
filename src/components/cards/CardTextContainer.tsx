@@ -1,6 +1,6 @@
 import { styles } from '@/src/style'
 import { CustomComponentProp } from '@/src/types'
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 
 

@@ -1,13 +1,13 @@
+import CustomeCard from '@/src/components/cards/CustomeCard';
+import CardSkelton from '@/src/components/skelton/CardSkelton';
+import TaskItemDetails from '@/src/components/task/TaskItemDetails';
 import GetCompliancesItemDetails from '@/src/server/api-functions/TaskDetails/get_compliances_item_details';
 import { RootState } from '@/src/store';
 import { CompliancesItemDetails, CompliancesItemDetailsPayLoad, CompliancesItemDetailsResponse } from '@/src/types';
-import React, { useEffect, useState } from 'react'
-import { Alert, ActivityIndicator } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert } from 'react-native';
 import { useSelector } from 'react-redux';
-import TaskItemDetails from '../../task/TaskItemDetails';
-import CardSkelton from '../../skelton/CardSkelton';
-import CustomeCard from '../../cards/CustomeCard';
-import { View } from 'react-native';
+
 interface ComplianceDetailsProps {
     complianceId: string | null
 }

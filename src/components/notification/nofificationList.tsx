@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Alert, FlatList, RefreshControl, View } from 'react-native'
-import { RootState } from '@/src/store'
-import NotificationCard from '../cards/NotificationCard'
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard'
+import NotificationCard from '@/src/components/cards/NotificationCard'
 import GetComplianceAlertsListDetails from '@/src/server/api-functions/Alerts/get-compliance-alerts-list'
-import { ComplianceStatusDataList, NotificationListDataItem, NotificationDataPayLoad } from '@/src/types'
-import NoDataAvailableCard from '../NoDataAvailableCard'
+import { RootState } from '@/src/store'
+import { ComplianceStatusDataList, NotificationDataPayLoad, NotificationListDataItem } from '@/src/types'
+import React, { useEffect, useState } from 'react'
+import { Alert, FlatList, RefreshControl, View } from 'react-native'
+import { useSelector } from 'react-redux'
 
 const NotificationList = () => {
     const [refreshing, setRefreshing] = useState(true);

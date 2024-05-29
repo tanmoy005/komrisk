@@ -1,6 +1,6 @@
+import { styles } from '@/src/style'
 import React from 'react'
 import { View } from 'react-native'
-import { styles } from '../style'
 
 const Circle = () => {
   return (

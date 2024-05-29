@@ -1,7 +1,6 @@
 import { styles } from '@/src/style';
 import { AccordionItemPros } from '@/src/types';
 import * as React from 'react';
-import { View, Text, ScrollView } from 'react-native';
 import { List } from 'react-native-paper';
 
 const ChevronsAccordian2 = ({ children, title, descriptions }: AccordionItemPros): JSX.Element => (

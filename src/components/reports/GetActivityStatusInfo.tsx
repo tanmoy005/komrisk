@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { ActivityStatusData, ActivityStatusDataPayLoad, ChartProp, ReportChartData } from '../../types';
-import GetActivityStatusData from '../../server/api-functions/Chart/get-activity-status-data';
-import { Alert, Pressable } from 'react-native';
-import { View } from 'react-native';
-import PieChartData from '../charts/PieChart';
-import { useSelector } from 'react-redux';
-import { router } from 'expo-router';
-import BarChartData from '../charts/BarChart';
-import DonatChartData from '../charts/DonatChart';
-import { FontAwesome } from '@expo/vector-icons';
-import { styles } from '../../style';
-import { Card} from 'react-native-elements';
-import CardSkelton from '../skelton/CardSkelton';
-import calculatePercentage from '../../utils/associate/get-percentage';
+import BarChartData from '@/src/components/charts/BarChart';
+import DonatChartData from '@/src/components/charts/DonatChart';
+import PieChartData from '@/src/components/charts/PieChart';
+import CardSkelton from '@/src/components/skelton/CardSkelton';
+import GetActivityStatusData from '@/src/server/api-functions/Chart/get-activity-status-data';
 import { RootState } from '@/src/store';
-import { Text } from 'react-native';
+import { styles } from '@/src/style';
+import { ActivityStatusData, ActivityStatusDataPayLoad, ChartProp, ReportChartData } from '@/src/types';
+import calculatePercentage from '@/src/utils/associate/get-percentage';
+import { FontAwesome } from '@expo/vector-icons';
+import { router } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Alert, Pressable, Text, View } from 'react-native';
+import { Card } from 'react-native-elements';
+import { useSelector } from 'react-redux';
 
 const ActivityStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload, setRefreshing }: ChartProp) => {
   {

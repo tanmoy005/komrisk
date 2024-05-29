@@ -1,9 +1,9 @@
-import { View } from 'react-native';
+import CardSkelton from '@/src/components/skelton/CardSkelton';
+import { scaleCardSize } from '@/src/style';
+import { ReportChartData } from '@/src/types';
 import React, { useEffect, useState } from 'react';
-import { ReportChartData } from '../../types';
-import CardSkelton from '../skelton/CardSkelton';
+import { View } from 'react-native';
 import PieChart from 'react-native-pie-chart';
-import { scaleCardSize, screenWidth } from '../../style';
 
 type ChartItemProps = {
   ReportData: ReportChartData[];

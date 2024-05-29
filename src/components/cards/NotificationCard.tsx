@@ -1,12 +1,12 @@
 
 import { Pressable, Text, View } from 'react-native'
-import CardContainer from './CardContainer'
+import CardContainer from '@/src/components/cards/CardContainer'
 import { styles } from '@/src/style'
-import { SmallHeading } from '../headings/SmallHeading'
+import { SmallHeading } from '@/src/components/headings/SmallHeading'
 import { NotificationListDataItem, notificationCardListData, notificationSeen } from '@/src/types'
-import CardTextContainer from './CardTextContainer'
+import CardTextContainer from '@/src/components/cards/CardTextContainer'
 import { router, usePathname } from 'expo-router'
-import ChartItemSkelton from '../skelton/ChartItemSkelton'
+import ChartItemSkelton from '@/src/components/skelton/ChartItemSkelton'
 import React, { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { RootState } from '@/src/store'

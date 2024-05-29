@@ -1,23 +1,22 @@
 
+import ComplianceChartDataList from '@/assets/data/chartdataList'
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard'
 import { View } from '@/src/components/Themed'
 import CardContainer3 from '@/src/components/cards/CardContainer3'
 import HeadImageSection from '@/src/components/headSection/HeadImageSection'
+import Seperator48 from '@/src/components/seperators/Seperator48'
+import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader'
+import PendingTaskDetails from '@/src/components/task/pendingTask/PendingTaskDetails'
+import GetActivityStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-activity-status-datalist-details'
+import { RootState } from '@/src/store'
 import { screenHeight } from '@/src/style'
+import { ActivityStatusDataListPayLoad, ChartFilterDataPayLoad, PendingTaskDataList, TaskListDataItem, ownerReviewerType } from '@/src/types'
+import { router } from 'expo-router'
+import moment from "moment"
 import React, { useEffect, useState } from 'react'
 import { FlatList, RefreshControl, useColorScheme } from 'react-native'
-import { AuthContext } from '../../../provider/AuthProvider';
-import { router } from 'expo-router';
-import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader'
-import Seperator48 from '@/src/components/seperators/Seperator48'
-import ComplianceChartDataList from '@/assets/data/chartdataList'
-import PendingTaskDetails from '@/src/components/task/pendingTask/PendingTaskDetails'
-import { PendingTaskDataList, TaskListDataItem } from '@/src/types'
-import { RootState } from '@/src/store'
 import { useSelector } from 'react-redux'
-import GetActivityStatusDataList from '@/src/server/api-functions/TaskList_(DataList)/get-activity-status-datalist-details';
-import { ActivityStatusDataListPayLoad, ChartFilterDataPayLoad, ownerReviewerType } from '@/src/types';
-import moment from "moment";
-import NoDataAvailableCard from '@/src/components/NoDataAvailableCard'
+import { AuthContext } from '@/src/provider/AuthProvider'
 
 const PendingTaskPage = () => {
   const colorScheme = useColorScheme();

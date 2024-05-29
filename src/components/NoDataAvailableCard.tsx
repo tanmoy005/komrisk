@@ -1,6 +1,6 @@
+import { screenWidth, styles } from '@/src/style'
 import React from 'react'
 import { Text, View } from 'react-native'
-import { screenWidth, styles } from '../style'
 
 const NoDataAvailableCard = () => {
     return (

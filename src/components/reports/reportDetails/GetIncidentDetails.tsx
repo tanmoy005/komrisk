@@ -1,12 +1,12 @@
+import CustomeCard from '@/src/components/cards/CustomeCard';
+import CardSkelton from '@/src/components/skelton/CardSkelton';
+import IncidentTaskItemDetails from '@/src/components/task/IncidentTaskItemDetails';
 import GetIncidentTaskDataDetails from '@/src/server/api-functions/MapDetails/get-incident-task-data-details';
 import { RootState } from '@/src/store';
 import { DefaultIncidentItemDetailsResponse, IncidentItemDetailsPayLoad, IncidentItemDetailsResponse } from '@/src/types';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
-import IncidentTaskItemDetails from '../../task/IncidentTaskItemDetails';
-import CardSkelton from '../../skelton/CardSkelton';
-import CustomeCard from '../../cards/CustomeCard';
 
 interface IncidentDetailsProps {
     incidentId: string

@@ -1,13 +1,13 @@
+import { RootState } from '@/src/store'
 import React, { useState } from 'react'
 import { View } from 'react-native'
-import { screenWidth, styles } from '../style'
 import { Divider } from 'react-native-elements'
-import CardTextContainer from './cards/CardTextContainer'
-import Text1 from './headings/Label1'
-import InputField from './input-fields/InputField'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/src/store';
-import Initials from './Initials'
+import { screenWidth, styles } from '@/src/style'
+import Initials from '@/src/components/Initials'
+import CardTextContainer from '@/src/components/cards/CardTextContainer'
+import Text1 from '@/src/components/headings/Label1'
+import InputField from '@/src/components/input-fields/InputField'
 
 interface FormLabelProps {
   label: string;

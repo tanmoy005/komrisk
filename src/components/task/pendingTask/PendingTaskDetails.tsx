@@ -1,16 +1,14 @@
 
-import { StyleSheet, Pressable } from "react-native";
-import { ChartListDataItem, PendingTask } from "@/src/types";
-import { Link, router } from "expo-router";
-import { View } from "../../Themed";
-import { Text } from 'react-native';
-import ChartItemSkelton from "../../skelton/ChartItemSkelton";
-import TaskCard from "../../cards/TaskCard";
-import { styles } from "../../../style";
-import CardContainer from "../../cards/CardContainer";
-import CardTextContainer from "../../cards/CardTextContainer";
-import React, { memo } from 'react';
+import { View } from "@/src/components/Themed";
+import CardContainer from "@/src/components/cards/CardContainer";
+import CardTextContainer from "@/src/components/cards/CardTextContainer";
+import TaskCard from "@/src/components/cards/TaskCard";
+import ChartItemSkelton from "@/src/components/skelton/ChartItemSkelton";
+import { styles } from "@/src/style";
 import { TaskListDataItem } from "@/src/types";
+import { router } from "expo-router";
+import React from 'react';
+import { Pressable } from "react-native";
 
 interface PendingTaskDetailsProps {
   data: TaskListDataItem;

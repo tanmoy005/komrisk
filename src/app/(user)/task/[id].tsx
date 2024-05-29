@@ -6,24 +6,19 @@ import Seperator48 from '@/src/components/seperators/Seperator48'
 import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader'
 import PendingTaskOverView from '@/src/components/task/pendingTask/PendingTaskOverView'
 import ProofSection from '@/src/components/task/pendingTask/ProofSection'
-import { RootState } from '@/src/store'
-import { screenHeight, styles } from '@/src/style'
-import { LastActivityComment, PendingTaskItemDetailsResponse } from '@/src/types'
-import { useLocalSearchParams } from 'expo-router'
-import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, ScrollView, View, Alert, ActivityIndicator } from 'react-native'
-import { useSelector } from 'react-redux'
 import GetCompliancesItemDetails from '@/src/server/api-functions/TaskDetails/get_compliances_item_details'
-import { CompliancesItemDetailsPayLoad } from '@/src/types'
-import { CompleteTaskPayload, RequestAssignPayload } from '@/src/types'
 import GetCompleteTaskData from '@/src/server/api-functions/Tasks/get-complete-task-message'
 import GetRequestAssignData from '@/src/server/api-functions/Tasks/get-request-assign-message'
-import ReassignModal from './ReassignModal'
-import { useNavigation } from '@react-navigation/native';
-import PendingTaskPage from './pendingTaskPage'
-import { Link, router } from "expo-router";
-import { Platform } from 'react-native';
-import SaveUploadProof from '@/src/server/api-functions/Tasks/save-upload-proof';
+import SaveUploadProof from '@/src/server/api-functions/Tasks/save-upload-proof'
+import { RootState } from '@/src/store'
+import { styles } from '@/src/style'
+import { CompleteTaskPayload, CompliancesItemDetailsPayLoad, PendingTaskItemDetailsResponse, RequestAssignPayload } from '@/src/types'
+import { useNavigation } from '@react-navigation/native'
+import { router, useLocalSearchParams } from 'expo-router'
+import React, { useEffect, useState } from 'react'
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native'
+import { useSelector } from 'react-redux'
+import ReassignModal from '@/src/app/(user)/task/ReassignModal'
 
 const PendingTaskOverViewPage = () => {
     const data = useLocalSearchParams();

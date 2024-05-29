@@ -1,15 +1,14 @@
-// ====================================== Updated on 16-04-2024 ======================================= //
 
-import { size12, size24, styles } from '@/src/style'
-import React, { useState } from 'react'
-import { Pressable, ScrollView, Text, View } from 'react-native'
-import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import CustomeDropDown from '@/src/components/CustomeDropDown';
+import FilterDropdown from '@/src/components/filter/FilterDropdown';
+import FilterModal from '@/src/components/filter/FilterModal';
+import { size12, size24, styles } from '@/src/style';
 import { DefaultDropDownItem, DropDownItem, FilterProps } from '@/src/types';
 import { hasValue } from '@/src/utils';
-import FilterModal from './FilterModal';
-import FilterDropdown from './FilterDropdown';
-import CustomeDropDown from '../CustomeDropDown';
+import React, { useState } from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const Filter = (

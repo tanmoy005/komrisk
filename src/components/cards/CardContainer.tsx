@@ -1,7 +1,7 @@
-import React from 'react'
 import { styles } from '@/src/style';
-import { View } from 'react-native';
 import { CustomComponentProp } from '@/src/types';
+import React from 'react';
+import { View } from 'react-native';
 
 
 const CardContainer = ({ children, styles: customStyle }: CustomComponentProp): JSX.Element => {

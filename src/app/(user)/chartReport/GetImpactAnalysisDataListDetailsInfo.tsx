@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, RefreshControl, StyleSheet } from 'react-native';
-import { View } from 'react-native';
-import { ChartListDataItem, ImpactAnalysisDataList, ImpactAnalysisDataListPayLoad } from '@/src/types';
-import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
-import { useLocalSearchParams } from 'expo-router';
-import GetImpactAnalysisDataList from '@/src/server/api-functions/TaskList_(DataList)/get-impact-analysis-datalist-details';
-import { useSelector } from 'react-redux';
-import moment from 'moment';
-import { styles } from '@/src/style';
-import HeadImageSection from '@/src/components/headSection/HeadImageSection';
-import { RootState } from '@/src/store';
 import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
+import HeadImageSection from '@/src/components/headSection/HeadImageSection';
+import ComplianceTaskDetails from '@/src/components/task/ComplianceTaskDetails';
+import GetImpactAnalysisDataList from '@/src/server/api-functions/TaskList_(DataList)/get-impact-analysis-datalist-details';
+import { styles } from '@/src/style';
+import { ChartListDataItem, ImpactAnalysisDataList, ImpactAnalysisDataListPayLoad } from '@/src/types';
+import { useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Alert, FlatList, RefreshControl, View } from 'react-native';
 
 
 

@@ -1,20 +1,19 @@
 
-import React, { useEffect, useState } from 'react'
-import { ComplianceStatusDataPayLoad, ReportChartData, ComplianceStatusData, ChartProp } from '../../types';
-import GetComplianceStatusData from '../../server/api-functions/Chart/get-compliance-status-data';
-import { Alert, Pressable, Text } from 'react-native';
-import { View } from 'react-native';
-import PieChartData from '../charts/PieChart';
-import { useSelector } from 'react-redux';
-import DonatChartData from '../charts/DonatChart';
-import BarChartData from '../charts/BarChart';
-import { router } from 'expo-router';
-import { Card } from 'react-native-elements';
-import { styles } from '../../style';
-import { FontAwesome } from '@expo/vector-icons';
-import CardSkelton from '../skelton/CardSkelton';
-import calculatePercentage from '../../utils/associate/get-percentage';
+import BarChartData from '@/src/components/charts/BarChart';
+import DonatChartData from '@/src/components/charts/DonatChart';
+import PieChartData from '@/src/components/charts/PieChart';
+import CardSkelton from '@/src/components/skelton/CardSkelton';
+import GetComplianceStatusData from '@/src/server/api-functions/Chart/get-compliance-status-data';
 import { RootState } from '@/src/store';
+import { styles } from '@/src/style';
+import calculatePercentage from '@/src/utils/associate/get-percentage';
+import { FontAwesome } from '@expo/vector-icons';
+import { router } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Pressable, Text, View } from 'react-native';
+import { Card } from 'react-native-elements';
+import { useSelector } from 'react-redux';
+import { ChartProp, ComplianceStatusData, ComplianceStatusDataPayLoad, ReportChartData } from '@/src/types';
 
 
 const ComplianceStatusInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload, setRefreshing }: ChartProp) => {

@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { IncidentActivityDataPayLoad, ReportChartData, IncidentActivityData, ChartProp } from '../../types';
-import GetIncidentActivityData from '../../server/api-functions/Chart/get-incident-activity-data';
-import { Alert, Pressable } from 'react-native';
-import { View } from 'react-native';
-import PieChartData from '../charts/PieChart';
-import { useSelector } from 'react-redux';
+import BarChartData from '@/src/components/charts/BarChart';
+import DonatChartData from '@/src/components/charts/DonatChart';
+import PieChartData from '@/src/components/charts/PieChart';
+import CardSkelton from '@/src/components/skelton/CardSkelton';
+import GetIncidentActivityData from '@/src/server/api-functions/Chart/get-incident-activity-data';
 import { RootState } from '@/src/store';
-import DonatChartData from '../charts/DonatChart';
-import BarChartData from '../charts/BarChart';
-import { router } from 'expo-router';
-import { Card } from 'react-native-elements';
-import { styles } from '../../style';
+import { styles } from '@/src/style';
+import { ChartProp, IncidentActivityData, IncidentActivityDataPayLoad, ReportChartData } from '@/src/types';
+import calculatePercentage from '@/src/utils/associate/get-percentage';
 import { FontAwesome } from '@expo/vector-icons';
-import CardSkelton from '../skelton/CardSkelton';
-import calculatePercentage from '../../utils/associate/get-percentage';
-import { Text } from 'react-native';
+import { router } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Alert, Pressable, Text, View } from 'react-native';
+import { Card } from 'react-native-elements';
+import { useSelector } from 'react-redux';
 
 const IncidentActivityInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload , setRefreshing}: ChartProp) => {
   {

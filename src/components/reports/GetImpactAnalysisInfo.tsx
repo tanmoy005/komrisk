@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { ImpactAnalysisDataPayLoad, ReportChartData, ImpactAnalysisData, ChartProp } from '../../types';
-import GetImpactAnalysisData from '../../server/api-functions/Chart/get-impact-analysis-data';
-import { Alert, Pressable } from 'react-native';
-import { View } from 'react-native';
-import PieChartData from '../charts/PieChart';
-import { useSelector } from 'react-redux';
+import BarChartData from '@/src/components/charts/BarChart';
+import DonatChartData from '@/src/components/charts/DonatChart';
+import PieChartData from '@/src/components/charts/PieChart';
+import CardSkelton from '@/src/components/skelton/CardSkelton';
+import GetImpactAnalysisData from '@/src/server/api-functions/Chart/get-impact-analysis-data';
 import { RootState } from '@/src/store';
-import DonatChartData from '../charts/DonatChart';
-import BarChartData from '../charts/BarChart';
-import { router } from 'expo-router';
-import { Card } from 'react-native-elements';
-import { styles } from '../../style';
+import { styles } from '@/src/style';
+import calculatePercentage from '@/src/utils/associate/get-percentage';
 import { FontAwesome } from '@expo/vector-icons';
-import CardSkelton from '../skelton/CardSkelton';
-import calculatePercentage from '../../utils/associate/get-percentage';
-import { Text } from 'react-native';
+import { router } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Alert, Pressable, Text, View } from 'react-native';
+import { Card } from 'react-native-elements';
+import { useSelector } from 'react-redux';
+import { ChartProp, ImpactAnalysisData, ImpactAnalysisDataPayLoad, ReportChartData } from '@/src/types';
 
 const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload, chartUserFilterPayload, chartDataFilterPayload , setRefreshing}: ChartProp) => {
   {

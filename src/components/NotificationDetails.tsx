@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import CardContainer from './cards/CardContainer';
-import CardTextContainer from './cards/CardTextContainer';
-import { ScrollView, Text, View, ActivityIndicator } from 'react-native';
-import { SmallHeading } from './headings/SmallHeading';
-import { styles } from '../style';
-import DefaultDivider from './seperators/DefaultDivider';
-import Seperator33 from './seperators/Seperator33';
-import Seperator11 from './seperators/Seperator11';
-import Circle from './Circle';
-import Seperator29 from './seperators/Seperator29';
-import Button from './Button';
-import { router } from 'expo-router';
+import CardContainer from '@/src/components/cards/CardContainer';
+import CardTextContainer from '@/src/components/cards/CardTextContainer';
+import { SmallHeading } from '@/src/components/headings/SmallHeading';
+import DefaultDivider from '@/src/components/seperators/DefaultDivider';
+import Seperator11 from '@/src/components/seperators/Seperator11';
+import Seperator33 from '@/src/components/seperators/Seperator33';
+import { styles } from '@/src/style';
 import { NotificationOverViewProps } from '@/src/types';
+import { router } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
+import Button from '@/src/components/Button';
+import Seperator29 from '@/src/components/seperators/Seperator29';
 
 const NotificationDetails = ({ notificationDetails }: NotificationOverViewProps) => {
     const [loading, setLoading] = useState(true);

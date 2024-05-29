@@ -1,6 +1,6 @@
 import Button from '@/src/components/Button'
 import Profile from '@/src/components/Profile'
-// import Profile from '@/src/components/Profile'
+
 import { View } from '@/src/components/Themed'
 import CardContainer3 from '@/src/components/cards/CardContainer3'
 import HeadImageSection from '@/src/components/headSection/HeadImageSection'
@@ -8,10 +8,8 @@ import { screenHeight, screenWidth } from '@/src/style'
 import React, { useState } from 'react'
 import { useColorScheme } from 'react-native'
 
-
-
-import { AuthContext } from '../../provider/AuthProvider';
-import { router } from 'expo-router';
+import { router } from 'expo-router'
+import { AuthContext } from '@/src/provider/AuthProvider'
 
 const ProfilePage = () => {
   const colorScheme = useColorScheme();

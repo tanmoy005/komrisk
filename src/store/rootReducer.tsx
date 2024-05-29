@@ -1,11 +1,11 @@
+import authUserAccessDetailsSlice from '@/src/store/slices/auth-user-access-details-slice';
+import authUserCredSlice from '@/src/store/slices/auth-user-cred-slice';
+import authUserDetailsSlice from '@/src/store/slices/auth-user-details-slice';
+import baseUrlSlice from '@/src/store/slices/base-url-slice';
+import incidentAvailableViewsSlice from '@/src/store/slices/incident-available-views-slice';
+import notificationSeenSlice from '@/src/store/slices/notification-seen-slice';
+import commentsSlice from '@/src/store/slices/task-comments-slice';
 import { combineReducers } from 'redux';
-import baseUrlSlice from './slices/base-url-slice';
-import authUserCredSlice from './slices/auth-user-cred-slice';
-import authUserAccessDetailsSlice from './slices/auth-user-access-details-slice';
-import authUserDetailsSlice from './slices/auth-user-details-slice';
-import incidentAvailableViewsSlice from './slices/incident-available-views-slice';
-import commentsSlice from './slices/task-comments-slice'
-import notificationSeenSlice from './slices/notification-seen-slice';
 
 const rootReducer = combineReducers({
   baseUrl: baseUrlSlice,

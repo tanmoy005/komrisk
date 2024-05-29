@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, RefreshControl } from 'react-native';
-import { View } from 'react-native';
-import { IncidentActivityDataList, IncidentActivityDataListPayLoad, IncidentChartListDataItem, defaultIncidentChartData } from '@/src/types';
-import { useLocalSearchParams } from 'expo-router';
-import GetIncidentActivityDataList from '@/src/server/api-functions/TaskList_(DataList)/get-incident-activity-datalist-details';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/src/store';
-import { styles } from '@/src/style';
+import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import IncidentTaskDetails from '@/src/components/task/IncidentTaskDetails';
-import NoDataAvailableCard from '@/src/components/NoDataAvailableCard';
+import GetIncidentActivityDataList from '@/src/server/api-functions/TaskList_(DataList)/get-incident-activity-datalist-details';
+import { styles } from '@/src/style';
+import { IncidentActivityDataList, IncidentActivityDataListPayLoad, IncidentChartListDataItem, defaultIncidentChartData } from '@/src/types';
+import { useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Alert, FlatList, RefreshControl, View } from 'react-native';
 
 
 

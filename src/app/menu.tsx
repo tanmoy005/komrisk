@@ -1,13 +1,13 @@
 import { Pressable } from 'react-native';
 
-import { Text, View } from '@/src/components/Themed';
 import Button from '@/src/components/Button';
-import { router } from 'expo-router';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import Initials from '@/src/components/Initials';
+import { Text, View } from '@/src/components/Themed';
 import { RootState } from '@/src/store';
 import { styles } from '@/src/style';
-import Initials from '@/src/components/Initials';
+import { router } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
 

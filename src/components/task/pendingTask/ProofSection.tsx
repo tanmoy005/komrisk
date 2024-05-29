@@ -1,13 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
-import { View, Button, Alert, Platform, StyleSheet, Modal, Image, TouchableOpacity, Text } from 'react-native';
-import * as DocumentPicker from 'expo-document-picker';
-import * as ImagePicker from 'expo-image-picker';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import CardContainer from '../../cards/CardContainer';
 import ProofsListDetails from '@/src/components/task/pendingTask/ProofsListDetails';
 import { AuthContext } from '@/src/provider/AuthProvider';
 import { PendingTaskItemDetailsResponse } from '@/src/types';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as DocumentPicker from 'expo-document-picker';
+import * as ImagePicker from 'expo-image-picker';
+import React, { useEffect, useState } from 'react';
+import { Alert, Button, Image, Modal, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import CardContainer from '@/src/components/cards/CardContainer';
 
 
 interface ProofSectionProps {

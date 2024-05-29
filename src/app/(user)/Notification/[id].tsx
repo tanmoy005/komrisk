@@ -1,18 +1,16 @@
 
-import React, { useEffect, useState } from 'react'
 import NotificationDetails from '@/src/components/NotificationDetails';
 import HeadImageSection from '@/src/components/headSection/HeadImageSection';
 import Seperator24 from '@/src/components/seperators/Seperator24';
 import BtnFilterHeader from '@/src/components/tabs/BtnFilterHeader';
-import { styles } from '@/src/style';
-import { View, Text, SafeAreaView } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/src/store';
 import { storeNotificationSeen } from '@/src/store/slices/notification-seen-slice';
-import { notificationSeen } from '@/src/types';
-import { hasValue } from '@/src/utils';
-import { NotificationItemDetailsResponse } from '@/src/types';
+import { styles } from '@/src/style';
+import { NotificationItemDetailsResponse, notificationSeen } from '@/src/types';
+import { useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 const userNotificationObject = (userId: string | null, notificationIdList: string[]): notificationSeen => {
     return {

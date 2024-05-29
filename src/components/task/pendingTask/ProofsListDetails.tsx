@@ -1,21 +1,15 @@
 
-import { ProofListData, ProofListPayload, Item, ProofsListDetailsProps } from "@/src/types";
-import { View } from "../../Themed";
-import GetProofDataList from "@/src/server/api-functions/Tasks/get-proof-data-list";
-import React, { useEffect, useState } from "react";
-import { Alert, Linking, Platform, RefreshControl, TouchableOpacity } from "react-native";
-import { Text } from 'react-native';
-import { FlatList, StyleSheet } from 'react-native';
-import { screenHeight } from "@/src/style";
-import { memo } from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import * as FileSystem from 'expo-file-system';
-import PDFReader from 'react-native-pdf';
 import GetDownloadProof from "@/src/server/api-functions/Tasks/download-proof";
-import { DownloadProofPayload } from "@/src/types";
-import { btoa } from 'react-native-quick-base64'; // Ensure you have a base64 encoding utility
+import GetProofDataList from "@/src/server/api-functions/Tasks/get-proof-data-list";
+import { screenHeight } from "@/src/style";
+import { DownloadProofPayload, Item, ProofListData, ProofListPayload, ProofsListDetailsProps } from "@/src/types";
+import * as FileSystem from 'expo-file-system';
 import * as IntentLauncherAndroid from 'expo-intent-launcher';
-import * as MediaLibrary from 'expo-media-library';
+import React, { memo, useEffect, useState } from "react";
+import { Alert, FlatList, Linking, Platform, RefreshControl, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { btoa } from 'react-native-quick-base64'; // Ensure you have a base64 encoding utility
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { View } from "@/src/components/Themed";
 
 
 

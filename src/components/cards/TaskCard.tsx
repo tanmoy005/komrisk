@@ -1,12 +1,12 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import CardContainer from './CardContainer'
+import CardContainer from '@/src/components/cards/CardContainer'
 import { styles } from '@/src/style'
-import SmSectionSeperator from '../seperators/SmSectionSeperator'
-import { SmallHeading } from '../headings/SmallHeading'
-import Circle from '../Circle'
+import SmSectionSeperator from '@/src/components/seperators/SmSectionSeperator'
+import { SmallHeading } from '@/src/components/headings/SmallHeading'
+import Circle from '@/src/components/Circle'
 import { taskCardData } from '@/src/types'
-import CardTextContainer from './CardTextContainer'
+import CardTextContainer from '@/src/components/cards/CardTextContainer'
 
 interface taskCardDataProp {
     taskCard: taskCardData

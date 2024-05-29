@@ -1,3 +1,6 @@
+import { styles } from '@/src/style';
+import { DropdownProps } from '@/src/types';
+import { hasValue } from '@/src/utils';
 import React, { useState } from 'react';
 import {
   I18nManager,
@@ -7,9 +10,6 @@ import {
   View,
 } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { DropdownProps } from '../types';
-import { styles } from '../style';
-import { hasValue } from '../utils';
 
 const renderItem = (item: any) => {
   const isLocalImage = hasValue(item?.image?.uri);

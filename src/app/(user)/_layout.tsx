@@ -1,9 +1,8 @@
-import { StyleSheet, Text } from 'react-native';
 import Colors from '@/src/constants/Colors';
+import { headerColor } from '@/src/style';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link, Stack } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
-import { headerColor } from '@/src/style';
 
 export default function TabTwoScreen() {
   const colorScheme = useColorScheme();

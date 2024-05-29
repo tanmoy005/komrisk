@@ -1,6 +1,6 @@
 import React from 'react';
-import { Modal, StyleSheet, Text, Pressable, View } from 'react-native';
-import { screenWidth, styles } from '../style';
+import { Modal, Pressable, Text, View } from 'react-native';
+import { styles } from '@/src/style';
 
 interface ModelProps {
   component: JSX.Element,

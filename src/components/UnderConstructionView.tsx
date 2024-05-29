@@ -1,6 +1,6 @@
+import { Text, View } from '@/src/components/Themed';
 import { Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
-import { Text, View } from '@/src/components/Themed';
 
 
 export default function UnderConstructionView() {

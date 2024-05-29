@@ -1,7 +1,7 @@
 import { styles } from '@/src/style';
 import { InputFieldProps } from '@/src/types';
-import React from 'react'
-import { StyleSheet, TextInput } from 'react-native'
+import React from 'react';
+import { TextInput } from 'react-native';
 
 
 const InputField = ({ value, setInput, placeholder, type, editable = true }: InputFieldProps) => {

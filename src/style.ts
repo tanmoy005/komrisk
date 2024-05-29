@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 
 export const screenWidth = Math.floor(Dimensions.get('window').width);
 export const screenHeight = Math.floor(Dimensions.get('window').height);

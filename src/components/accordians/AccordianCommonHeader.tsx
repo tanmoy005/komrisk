@@ -1,19 +1,19 @@
 
-import { AccordianCommonHeaderProps } from '@/src/types';
-import React, { useState,useEffect} from 'react';
-import {
-    Text,
-    View,
-    TouchableOpacity
-} from 'react-native';
-import InputField from '../input-fields/InputField';
-import Button from '../Button';
-import { styles } from '@/src/style';
-import { useDispatch, useSelector } from 'react-redux';
+import Button from '@/src/components/Button';
+import InputField from '@/src/components/input-fields/InputField';
 import { RootState } from '@/src/store';
 import { addComment, updateComment } from '@/src/store/slices/task-comments-slice'; // Assuming your action creators are named addComment and updateComment
-import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { styles } from '@/src/style';
+import { AccordianCommonHeaderProps } from '@/src/types';
 import { hasValue } from '@/src/utils';
+import React, { useEffect, useState } from 'react';
+import {
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
+import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, type = 'chevron', taskId, commentText, setCommentText,setShortDescription }: AccordianCommonHeaderProps) => {
     //const shortDescription = descriptions && descriptions.length > 64 ? `${descriptions.slice(0, 64)}...` : descriptions;

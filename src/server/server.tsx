@@ -1,10 +1,8 @@
 
-import axios from 'axios';
-import getDataFromAsyncStorage from '../utils/associate/get-from-localstorage';
-import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthContext } from '../provider/AuthProvider';
-import React, { useContext } from 'react';
+import axios from 'axios';
+import { router } from 'expo-router';
+import getDataFromAsyncStorage from '@/src/utils/associate/get-from-localstorage';
 
 interface Response {
     data: any,

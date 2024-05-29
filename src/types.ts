@@ -1,6 +1,5 @@
 
 import { PropsWithChildren, ReactNode } from "react";
-import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 // For profilePage.tsx 
