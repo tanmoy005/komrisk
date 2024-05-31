@@ -8,11 +8,11 @@ import React, { useEffect } from 'react'
 import { ScrollView } from 'react-native'
 import { useSelector } from 'react-redux'
 import AccordianCommonHeader from '@/src/components/accordians/AccordianCommonHeader'
-import ChevronsAccordian2 from '@/src/components/accordians/ChevronsAccordian2'
 import CardContainer from '@/src/components/cards/CardContainer'
 import { SmallHeading } from '@/src/components/headings/SmallHeading'
 import Seperator24 from '@/src/components/seperators/Seperator24'
 import PendingTaskAccordianBody from '@/src/components/task/PendingTaskAccordianBody'
+import AccordianView from '@/src/components/accordians/AccordianView'
 
 const PendingTaskOverView = ({ pendingTaskDetails,shortDescription, lastActivitycomments,commentText, setCommentText, setShortDescription}: PendingTaskOverViewProps) => {
 
@@ -46,25 +46,15 @@ const PendingTaskOverView = ({ pendingTaskDetails,shortDescription, lastActivity
         <CardContainer  >
             <ScrollView style={{ height: screenHeight * 0.60 }} showsVerticalScrollIndicator={false}>
                 <SmallHeading>Task Details</SmallHeading>
-                <ChevronsAccordian2
+                <AccordianView
                     title={'Task Name'}
                     descriptions={pendingTaskDetails.task_name}
                 >
                     <PendingTaskAccordianBody
                         pendingTaskDetails={pendingTaskDetails}
                     />
-                </ChevronsAccordian2>
+                </AccordianView>
                 <Seperator24 />
-                {/* <SmallHeading>Activity</SmallHeading> */}
-                {/* <ChevronsAccordian2
-                    title={'Last Activity'}
-                    descriptions={`${pendingTaskDetails.lastActivity.updatedBy} added comments`}
-                >
-                    <LastActivityAccordianBody
-                        // pendingTaskDetails={pendingTaskDetails}
-                        comments={lastActivitycomments}
-                    />
-                </ChevronsAccordian2> */}
                 <Seperator24 />
                 <SmallHeading>Comments</SmallHeading>
                 <AccordianCommonHeader

@@ -3,7 +3,7 @@ import { AccordionItemPros } from '@/src/types';
 import * as React from 'react';
 import { List } from 'react-native-paper';
 
-const ChevronsAccordian2 = ({ children, title, descriptions }: AccordionItemPros): JSX.Element => (
+const AccordianView = ({ children, title, descriptions }: AccordionItemPros): JSX.Element => (
 
   <List.Accordion
     title={title}
@@ -15,4 +15,4 @@ const ChevronsAccordian2 = ({ children, title, descriptions }: AccordionItemPros
   </List.Accordion>
 );
 
-export default ChevronsAccordian2;
+export default AccordianView;
