@@ -524,6 +524,15 @@ export const styles: { [key: string]: any } = StyleSheet.create({
     defaultSeperator: {
         height: 1,
         backgroundColor: 'rgba(255, 255, 255, 1)'
-    }
+    },
+
+    notificationContainer: {
+        alignItems: 'center', 
+        flexDirection: 'row', 
+        justifyContent: 'center',
+        width: '100%', 
+        height: Math.floor(screenHeight * .625)
+    },
+    
 
 });

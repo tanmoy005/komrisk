@@ -52,6 +52,51 @@ const ProofsListDetails = memo(({ taskId, type }: ProofsListDetailsProps) => {
     }, [taskId, type]);
 
 
+    // const handleDownload = async (docId: number) => {
+    //     const downloadpayload: DownloadProofPayload = { docId: docId.toString() };
+    //     const response = await GetDownloadProof(downloadpayload);
+    
+    //     if (response.status === 200) {
+    //         const arrayBufferString = response.data;
+    
+    //         // Convert the array buffer string to ArrayBuffer
+    //         const binaryString = atob(arrayBufferString); // Decode base64 string
+    //         const len = binaryString.length;
+    //         const bytes = new Uint8Array(len);
+    
+    //         for (let i = 0; i < len; i++) {
+    //             bytes[i] = binaryString.charCodeAt(i);
+    //         }
+    
+    //         const arrayBuffer = bytes.buffer;
+    
+    //         // Create a Blob from the ArrayBuffer
+    //         const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
+    
+    //         // Save the Blob to a file
+    //         const fileUri = FileSystem.documentDirectory + 'downloadedFile.pdf';
+    
+    //         // Create a temporary URL for the Blob
+    //         const reader = new FileReader();
+    //         reader.onload = async () => {
+    //             const base64Data = reader.result.split(',')[1];
+    
+    //             await FileSystem.writeAsStringAsync(fileUri, base64Data, {
+    //                 encoding: FileSystem.EncodingType.Base64,
+    //             });
+    
+    //             // Open the file using Expo Sharing
+    //             await Sharing.shareAsync(fileUri);
+    //         };
+    
+    //         reader.readAsDataURL(blob);
+    //     } else {
+    //         console.error('Failed to download file:', response.status);
+    //         Alert.alert('Error', 'Failed to download file');
+    //     }
+    // };
+
+
 
 
 
