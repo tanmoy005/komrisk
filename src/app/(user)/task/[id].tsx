@@ -282,13 +282,13 @@ const PendingTaskOverViewPage = () => {
 
 
 
-    const handleModalSave = async (reason: string) => {
+    const handleReassignModalSave = async (reason: string) => {
         // Update reassignpayload with the reason
         if (hasValue(reason)) {
             reassignpayload.reason = reason;
             const { data, error, status } = await GetRequestAssignData(reassignpayload);
             if (status === 200) {
-                Alert.alert("Success", "Task reassigned successfully");
+                Alert.alert("Success", "Request for task reassignment saved successfully");
             } else {
                 Alert.alert("error", error.message);
             }
@@ -346,10 +346,6 @@ const PendingTaskOverViewPage = () => {
     //         Alert.alert("error", error.message);
     //     }
     // }
-
-
-
-
 
     return (
 
@@ -413,7 +409,7 @@ const PendingTaskOverViewPage = () => {
                             onPress={handleComplete}
                         />
                     </View>
-                    <ReassignModal visible={showModal} onSave={handleModalSave} onClose={handleCloseModal} />
+                    <ReassignModal visible={showModal} onSave={handleReassignModalSave} onClose={handleCloseModal} />
 
                 </>
             )}
