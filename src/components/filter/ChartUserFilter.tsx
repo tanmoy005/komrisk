@@ -12,10 +12,8 @@ import { RootState } from "@/src/store";
 import { ActivityStatusUserFilterLevelData, ChartUserFilterModalProps, ComplianceStatusUserFilterLevelData, ComplianceUserFilterData, DropDownItem, ImpactAnalysisUserFilterLevelData, IncidentActivityUserFilterLevelData, IncidentComparisonUserFilterLevelData, IncidentUserFilterData, UserFilterDataPayLoad, UserFilterLevelDataPayLoad, UserFilterReportChartData } from "@/src/types";
 import { hasValue } from "@/src/utils";
 import { useEffect, useState } from "react";
-import { Alert, View } from "react-native";
+import { Alert, View, ActivityIndicator } from "react-native";
 import { useSelector } from "react-redux";
-
-
 
 const ChartUserFilter = ({
     setModalVisible,
@@ -28,6 +26,7 @@ const ChartUserFilter = ({
 
     const [selectedFilterType1, setSelectedFilterType1] = useState('');
     const [selectedFilterType2, setSelectedFilterType2] = useState('');
+    const [loading, setLoading] = useState(false); // New loading state
     const [complianceUserFilterChartData, setComplianceUserFilterChartData] = useState<ComplianceUserFilterData>({
         title: null,
         subTitle: null,
@@ -83,7 +82,6 @@ const ChartUserFilter = ({
         chartData: null
     });
 
-
     const [incidentComparisonUserFilterLevelChartData, setIncidentComparisonUserFilterLevelChartData] = useState<IncidentComparisonUserFilterLevelData>({
         title: null,
         subTitle: null,
@@ -92,7 +90,6 @@ const ChartUserFilter = ({
         chartData: null
     });
 
-
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
     const userfilterPayload: UserFilterDataPayLoad = {
         ...useCredential,
@@ -100,6 +97,7 @@ const ChartUserFilter = ({
     };
 
     const handleGetUserFilterData = async (userfilterPayload: UserFilterDataPayLoad) => {
+        setLoading(true); // Show loader
         let apiFunction;
         let setDataFunction;
         if (reportType === 'COMPLIANCE') {
@@ -112,12 +110,14 @@ const ChartUserFilter = ({
             // setDropDown = setIncidentUserDropdown;
         } else {
             // Handle other report types or set a default API function
+            setLoading(false);
             return;
         }
 
         const { data, error, status } = await apiFunction(userfilterPayload);
         
-        
+        setLoading(false); // Hide loader
+
         if (status === 200) {
             const { chartData, title, subTitle } = data;
 
@@ -147,6 +147,7 @@ const ChartUserFilter = ({
     }, []); // This will call the function when the component mounts
 
     const handleGetUserFilterLevelData = async (chartuserfilterlevelPayload: UserFilterLevelDataPayLoad) => {
+        setLoading(true); // Show loader
         let apiFunction;
         let setLevelDataFunction;
         if (reportType === "COMPLIANCE" && selectedTab === "activity_status") {
@@ -171,10 +172,12 @@ const ChartUserFilter = ({
         }
         else {
             // Handle other report types and selected tabs as needed
+            setLoading(false);
             return;
         }
 
         const { data, error, status } = await apiFunction(chartuserfilterlevelPayload);
+        setLoading(false); // Hide loader
         if (status === 200) {
             const { chartData, title, subTitle } = data;
             setLevelDataFunction(data);
@@ -206,14 +209,17 @@ const ChartUserFilter = ({
         if (hasValue(selectedFilterType1)) {
             handleGetUserFilterLevelData(chartuserfilterlevelPayload);
         }
-    }, [selectedFilterType1]); //
+    }, [selectedFilterType1]);
 
     useEffect(() => {
-        let chartDataToLog;
         if (reportType === 'COMPLIANCE') {
-            chartDataToLog = complianceUserFilterChartData;
+            if (filteredChartData) {
+                const ToLog = complianceUserFilterChartData;
+            }
         } else if (reportType === 'INCIDENT') {
-            chartDataToLog = incidentUserFilterChartData;
+            if (filteredChartData) {
+                const ToLog = incidentUserFilterChartData;
+            }
         }
 
     }, [complianceUserFilterChartData, incidentUserFilterChartData, filteredChartData]);
@@ -221,17 +227,25 @@ const ChartUserFilter = ({
     const handleApplyFilters = () => {
         const filtrLevelArray = selectedFilterType2?.toString()?.split(':');       
         const filterLevel = filtrLevelArray.length > 1 ? filtrLevelArray[1] : filtrLevelArray[0];       
-        //chartUserFilterPayload.filterType = selectedFilterType1?.toString();
         chartUserFilterPayload.userFilter = `${selectedFilterType1?.toString()}:${filterLevel}`;
         
-        
-        
         setUserFilterPayload({ ...chartUserFilterPayload });
-        setModalVisible(false)
+        setModalVisible(false);
     }
 
     return (
         <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110 }}>
+            {loading && (
+                <View style={{ 
+                    position: 'absolute', 
+                    top: '50%', 
+                    left: '50%', 
+                    transform: [{ translateX: -25 }, { translateY: -25 }],
+                    zIndex: 2120 
+                }}>
+                    <ActivityIndicator size="large" color="#A097DC" />
+                </View>
+            )}
             <View style={{ zIndex: 2110 }}>
                 <CustomeDropDown
                     dropdownItems={firstFilterDropdown}
@@ -240,8 +254,7 @@ const ChartUserFilter = ({
                     minWidth={'100%'}
                 />
             </View>
-            {
-                filteredLevelChartData.length > 0 &&
+            {filteredLevelChartData.length > 0 && (
                 <View style={{ zIndex: 2108 }}>
                     <CustomeDropDown
                         dropdownItems={filteredLevelChartData}
@@ -250,8 +263,8 @@ const ChartUserFilter = ({
                         minWidth={'100%'}
                     />
                 </View>
-            }
-            <View>
+            )}
+            <View style={{marginTop:25}}>
                 <Button
                     btnColor={'#A097DC'}
                     text='APPLY FILTERS'
@@ -266,7 +279,9 @@ const ChartUserFilter = ({
                 />
             </View>
         </View>
-    )
+    );
+
 }
 
 export default ChartUserFilter
+

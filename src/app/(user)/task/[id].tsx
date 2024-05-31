@@ -19,6 +19,8 @@ import React, { useEffect, useState } from 'react'
 import { Alert, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ReassignModal from '@/src/app/(user)/task/ReassignModal'
+import { useDispatch } from 'react-redux';
+import { removeComment } from '@/src/store/slices/task-comments-slice'
 import { hasValue } from '@/src/utils'
 
 const PendingTaskOverViewPage = () => {
@@ -35,6 +37,10 @@ const PendingTaskOverViewPage = () => {
     const [showModal, setShowModal] = useState(false);
     const [showApproveModal, setShowApproveModal] = useState(false);
     const [showRejectModal, setShowRejectModal] = useState(false);
+    const dispatch = useDispatch();
+
+
+
     const [activeTab, setActiveTab] = useState('Overview'); // Track active tab state
     const [pendingTaskDetails, setPendingTaskDetails] = useState<PendingTaskItemDetailsResponse>({
 
@@ -219,9 +225,34 @@ const PendingTaskOverViewPage = () => {
             const { status, error } = await handleSave();
 
             if (status === 200) {
-                Alert.alert("Success", "Task details saved successfully");
-                handlePressOnOverview();
-            } else {
+                Alert.alert("Success", "Task details saved successfully", [
+                    {
+                        text: "OK",
+                        onPress: () => {
+                            // Handle matching and deletion here
+                            const matchingCommentIndex = comments.findIndex(comment => comment[0].taskID === savepayload.taskId);
+                            //console.log("****",matchingCommentIndex);
+                            if (matchingCommentIndex === -1) {
+                                //console.log("****",matchingCommentIndex);
+                                dispatch(removeComment({ index: matchingCommentIndex }));
+                                
+                               //dispatch(removeComment({ taskID, commentText })); // Assuming you have a deleteComment action
+                            }
+    
+                            handlePressOnOverview();
+                        }
+                    }
+                ]);
+            }
+    
+
+            // if (status === 200) 
+            // {
+            //     Alert.alert("Success", "Task details saved successfully");
+
+            //     handlePressOnOverview();
+            // } 
+            else {
                 Alert.alert("Error", error?.message || "Failed to save task details");
             }
         } catch (error) {
