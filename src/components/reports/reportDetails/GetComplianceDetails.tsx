@@ -28,13 +28,12 @@ const GetComplianceDetails = ({ complianceId }: ComplianceDetailsProps) => {
 
         const { data, error, status } = await GetCompliancesItemDetails(payLoad);
 
-        setLoading(false);
         if (status === 200) {
             setCompliancesItemData(data);
         } else {
             Alert.alert("error", error.message);
         }
-
+        setLoading(false);
     }
     useEffect(() => {
         handleGetCompliancesDetailsData();
