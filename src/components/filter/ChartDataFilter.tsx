@@ -148,20 +148,25 @@ const ChartDataFilter = ({
     }, [selectedFilterType1]);
 
     const handleApplyFilters = () => {
-        chartDataFilterPayload.dataFilter = selectedFilterType2?.toString();
-        setDataFilterPayload({ ...chartDataFilterPayload });
-        setModalVisible(false);
+        if (hasValue(selectedFilterType2)) {
+            chartDataFilterPayload.dataFilter = selectedFilterType2?.toString();
+            setDataFilterPayload({ ...chartDataFilterPayload });
+            setModalVisible(false);
+        } else {
+            Alert.alert("Alert", "Please select some filter criteria.");
+            return;
+        }
     }
 
     return (
         <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110 }}>
             {loading && (
-                <View style={{ 
-                    position: 'absolute', 
-                    top: '50%', 
-                    left: '50%', 
+                <View style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
                     transform: [{ translateX: -25 }, { translateY: -25 }],
-                    zIndex: 2120 
+                    zIndex: 2120
                 }}>
                     <ActivityIndicator size="large" color="#A097DC" />
                 </View>
@@ -184,7 +189,7 @@ const ChartDataFilter = ({
                     />
                 </View>
             )}
-            <View style={{marginTop:25}}>
+            <View style={{ marginTop: 25 }}>
                 <Button
                     btnColor={'#A097DC'}
                     text='APPLY FILTERS'

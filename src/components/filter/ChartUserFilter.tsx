@@ -115,7 +115,7 @@ const ChartUserFilter = ({
         }
 
         const { data, error, status } = await apiFunction(userfilterPayload);
-        
+
         setLoading(false); // Hide loader
 
         if (status === 200) {
@@ -175,7 +175,7 @@ const ChartUserFilter = ({
             setLoading(false);
             return;
         }
-
+        console.log("================================", chartuserfilterlevelPayload);
         const { data, error, status } = await apiFunction(chartuserfilterlevelPayload);
         setLoading(false); // Hide loader
         if (status === 200) {
@@ -185,13 +185,13 @@ const ChartUserFilter = ({
             const userfilteredleveltData: UserFilterReportChartData[] = chartData && chartData.filter((x: UserFilterReportChartData) => x.label !== "NULL");
 
             const userfilteredlevelchartData = userfilteredleveltData && userfilteredleveltData.length > 0 ? userfilteredleveltData?.map((data) => {
-                return { 
+                return {
                     value: data?.userFilter?.toString(),
-                     lable: data.label,  
-                     image: {
+                    lable: data.label,
+                    image: {
                         uri: ''
-                     }
-                    };
+                    }
+                };
             }) : [];
 
             setFilteredLevelChartData(userfilteredlevelchartData);
@@ -225,23 +225,29 @@ const ChartUserFilter = ({
     }, [complianceUserFilterChartData, incidentUserFilterChartData, filteredChartData]);
 
     const handleApplyFilters = () => {
-        const filtrLevelArray = selectedFilterType2?.toString()?.split(':');       
-        const filterLevel = filtrLevelArray.length > 1 ? filtrLevelArray[1] : filtrLevelArray[0];       
-        chartUserFilterPayload.userFilter = `${selectedFilterType1?.toString()}:${filterLevel}`;
-        
-        setUserFilterPayload({ ...chartUserFilterPayload });
-        setModalVisible(false);
+        if (hasValue(selectedFilterType2)) {
+            const filtrLevelArray = selectedFilterType2?.toString()?.split(':');
+            const filterLevel = filtrLevelArray.length > 1 ? filtrLevelArray[1] : filtrLevelArray[0];
+            chartUserFilterPayload.userFilter = `${selectedFilterType1?.toString()}:${filterLevel}`;
+
+            setUserFilterPayload({ ...chartUserFilterPayload });
+            setModalVisible(false);
+        }
+        else {
+            Alert.alert("Alert", "Please select some filter criteria.");
+            return;
+        }
     }
 
     return (
         <View style={{ marginTop: 48, rowGap: 20, zIndex: 2110 }}>
             {loading && (
-                <View style={{ 
-                    position: 'absolute', 
-                    top: '50%', 
-                    left: '50%', 
+                <View style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
                     transform: [{ translateX: -25 }, { translateY: -25 }],
-                    zIndex: 2120 
+                    zIndex: 2120
                 }}>
                     <ActivityIndicator size="large" color="#A097DC" />
                 </View>
@@ -264,7 +270,7 @@ const ChartUserFilter = ({
                     />
                 </View>
             )}
-            <View style={{marginTop:25}}>
+            <View style={{ marginTop: 25 }}>
                 <Button
                     btnColor={'#A097DC'}
                     text='APPLY FILTERS'
