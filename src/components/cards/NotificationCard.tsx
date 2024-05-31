@@ -34,10 +34,6 @@ const NotificationCard = memo(({ data }: notificationCardListDataProps) => {
         }
     }, [currentPath])
 
-    console.log("isNotificationSeen", isNotificationSeen);
-
-
-
     const CardData: notificationCardListData = {
         firstSection: {
             heading: data.complianceNature,

@@ -1,7 +1,7 @@
 // ReassignModal.tsx
 import React, { useState } from 'react';
-import { Modal, Text, TextInput, Button, View, StyleSheet, TouchableOpacity } from 'react-native';
-
+import { Modal, Text, TextInput, View, StyleSheet, TouchableOpacity } from 'react-native';
+import Button from '@/src/components/Button'
 interface ReassignModalProps {
     visible: boolean;
     onSave: (reason: string) => void;
@@ -29,9 +29,11 @@ const ReassignModal: React.FC<ReassignModalProps> = ({ visible, onSave, onClose 
                         value={reason}
                         onChangeText={setReason}
                     />
-                    <View style = {{marginLeft:180}}>
-                        <Button 
-                            title="Save" 
+                    <View style={{ marginLeft: 180 }}>
+                        <Button
+                            btnColor={'#A097DC'}
+                            text="Save"
+                            type='md-outline'
                             onPress={handleSave} />
                     </View>
                 </View>
