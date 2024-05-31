@@ -287,30 +287,44 @@ const PendingTaskOverViewPage = () => {
     };
 
     const handleModalApprove = async (reason: string) => {
-        approvepayload.taskComments = reason;
-        const { data, error, status } = await GetCompleteTaskData(approvepayload);
-        if (status === 200) {
-            Alert.alert("Success", "Task approved successfully");
+        if (hasValue(reason)) {
+            approvepayload.taskComments = reason;
+            const { data, error, status } = await GetCompleteTaskData(approvepayload);
+            if (status === 200) {
+                Alert.alert("Success", "Task approved successfully", [
+                    {
+                        text: "OK",
+                        onPress: () => router.navigate('/(user)/task/pendingTaskPage')
+                    }
+                ]);
+            } else {
+                Alert.alert("error", error.message);
+            }
+            setShowApproveModal(false);
         } else {
-            Alert.alert("error", error.message);
+            Alert.alert("Missing Comments", "Please provide some comments and press Approve.");
         }
-        setShowApproveModal(false);
     };
 
     const handleModalReject = async (reason: string) => {
-        rejectpayload.taskComments = reason;
-        const { data, error, status } = await GetCompleteTaskData(rejectpayload);
-        if (status === 200) {
-            Alert.alert("Success", "Task rejected");
-        } else {
-            Alert.alert("error", error.message);
+        if (hasValue(reason)) {
+            rejectpayload.taskComments = reason;
+            const { data, error, status } = await GetCompleteTaskData(rejectpayload);
+            if (status === 200) {
+                Alert.alert("Success", "Task rejected successfully", [
+                    {
+                        text: "OK",
+                        onPress: () => router.navigate('/(user)/task/pendingTaskPage')
+                    }
+                ]);
+            } else {
+                Alert.alert("error", error.message);
+            }
+            setShowRejectModal(false);
+        }else {
+            Alert.alert("Missing Comments", "Please provide some comments and press Reject.");
         }
-        setShowRejectModal(false);
     };
-
-
-
-
 
 
     const handleReassignModalSave = async (reason: string) => {
@@ -319,14 +333,19 @@ const PendingTaskOverViewPage = () => {
             reassignpayload.reason = reason;
             const { data, error, status } = await GetRequestAssignData(reassignpayload);
             if (status === 200) {
-                Alert.alert("Success", "Request for task reassignment saved successfully");
+                Alert.alert("Success", "Request for task reassignment saved successfully", [
+                    {
+                        text: "OK",
+                        onPress: () => router.navigate('/(user)/task/pendingTaskPage')
+                    }
+                ]);
             } else {
                 Alert.alert("error", error.message);
             }
 
             setShowModal(false);
         } else {
-            Alert.alert("Missing Comments", "Please provide some comments and press Save.");
+            Alert.alert("Missing Comments", "Please provide some comments and press Reassign.");
         }
     };
 
@@ -440,7 +459,7 @@ const PendingTaskOverViewPage = () => {
                             onPress={handleComplete}
                         />
                     </View>
-                    <ReassignModal visible={showModal} onSave={handleReassignModalSave} onClose={handleCloseModal} />
+                    <ReassignModal visible={showModal} onSave={handleReassignModalSave} onClose={handleCloseModal} buttonName={'Reassign'} />
 
                 </>
             )}
@@ -488,8 +507,8 @@ const PendingTaskOverViewPage = () => {
 
                     </View>
 
-                    <ReassignModal visible={showApproveModal} onSave={handleModalApprove} onClose={handleCloseApproveModal} />
-                    <ReassignModal visible={showRejectModal} onSave={handleModalReject} onClose={handleCloseRejectModal} />
+                    <ReassignModal visible={showApproveModal} onSave={handleModalApprove} onClose={handleCloseApproveModal} buttonName={'Approve'} />
+                    <ReassignModal visible={showRejectModal} onSave={handleModalReject} onClose={handleCloseRejectModal} buttonName={'Reject'} />
                 </>
             )}
 

@@ -4,11 +4,12 @@ import { Modal, Text, TextInput, View, StyleSheet, TouchableOpacity } from 'reac
 import Button from '@/src/components/Button'
 interface ReassignModalProps {
     visible: boolean;
+    buttonName: string;
     onSave: (reason: string) => void;
     onClose: () => void;
 }
 
-const ReassignModal: React.FC<ReassignModalProps> = ({ visible, onSave, onClose }) => {
+const ReassignModal: React.FC<ReassignModalProps> = ({ visible, onSave, onClose ,buttonName}) => {
     const [reason, setReason] = useState<string>('');
 
     const handleSave = () => {
@@ -32,7 +33,7 @@ const ReassignModal: React.FC<ReassignModalProps> = ({ visible, onSave, onClose 
                     <View style={{ marginLeft: 180 }}>
                         <Button
                             btnColor={'#A097DC'}
-                            text="Save"
+                            text={buttonName}
                             type='md-outline'
                             onPress={handleSave} />
                     </View>
