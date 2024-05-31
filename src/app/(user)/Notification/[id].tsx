@@ -21,8 +21,6 @@ const userNotificationObject = (userId: string | null, notificationIdList: strin
 
 const ShowTaskDetails = () => {
     const data = useLocalSearchParams();
-    console.log("data ***",data);
-    
     const { type, id,complianceId,complianceTitle,lawNames,newValue,updatedOn  } = data;
     const paramType = typeof type === 'string' ? type : (Array.isArray(type) ? type[0] : '');    
     const paramId = typeof id === 'string' ? id : (Array.isArray(id) ? id[0] : '');
@@ -114,14 +112,13 @@ const ShowTaskDetails = () => {
         setTaskDetails(compliance_id);
     }, [compliance_id]);
 
-    console.log("Notification",notificationDetails);
     
 
     const handleSeeAll = () => {
 
     }
     const handleClosed = () => {
-        console.log();
+        // console.log();
 
     }
     return (

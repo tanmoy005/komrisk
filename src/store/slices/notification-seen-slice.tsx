@@ -9,7 +9,7 @@ interface notificationSeenState {
 // const initialState: CommentsState = {
 //     commentsList: [],
 //   };
-  
+
 const initialState: notificationSeenState = {
 
     payload: [],
@@ -20,8 +20,6 @@ const notificationSeenSlice = createSlice({
     initialState,
     reducers: {
         storeNotificationSeen(state, action: notificationSeenState) {
-            console.log('action', action);
-            
             state.payload = action.payload;
         },
         removeNotificationSeen(state) {

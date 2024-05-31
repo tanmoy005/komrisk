@@ -29,11 +29,15 @@ const Server = async (payLoad: object | FormData, url: string, method: string, h
     const authHeader = {
         ...commonHeader,
         ...contentTypeHeader,
-        "Authorization": hasToken ? `Bearer ${token}` : undefined
+        "Authorization": `Bearer ${token}`
+    };
+    const noAuthHeader = {
+        ...commonHeader,
+        ...contentTypeHeader,
     };
 
     const headers = {
-        headers: authHeader
+        headers: hasToken ? authHeader : noAuthHeader
     };
 
     let response: Response = { data: "", error: "", status: null };
@@ -46,9 +50,22 @@ const Server = async (payLoad: object | FormData, url: string, method: string, h
                 response.status = getStatus;
                 break;
             case 'POST':
-                const { data: postData, status: postStatus } = await api.post(url, payLoad, headers);
+                const { data: postData, status: postStatus } =
+                    //await axios.post(url, { Benefits: payLoad }, { responseType: 'blob' });
+
+                    await api.post(url, payLoad, headers);
                 response.data = postData;
                 response.status = postStatus;
+                break;
+
+            case 'POSTBLOB':
+                const { data: BlobData, status: blobStatus } =
+                    await api.post(url, payLoad, {
+                        headers: authHeader,
+                        responseType: 'blob', // Ensure response is handled as a Blob
+                    });
+                response.data = BlobData;
+                response.status = blobStatus;
                 break;
             // Add other methods (PUT, DELETE, etc.) if needed
         }

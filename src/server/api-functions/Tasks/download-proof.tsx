@@ -3,9 +3,7 @@ import Server from '@/src/server/server'
 
 const GetDownloadProof = async (payLoad: DownloadProofPayload) => {
     const url = `/complianceTasks/downloadProof`;
-    const response = await Server(payLoad, url, 'POST');
-    
-    
+    const response = await Server(payLoad, url, 'POSTBLOB');
     return response
 }
 

@@ -251,7 +251,6 @@ const PendingTaskOverViewPage = () => {
     };
 
     const handleFinalSave = async () => {
-        console.log("savepayload", savepayload);
         try {
             // Check if taskComments is an empty string
             if (!savepayload.taskComments || savepayload.taskComments.trim() === '') {

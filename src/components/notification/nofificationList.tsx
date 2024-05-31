@@ -37,8 +37,6 @@ const NotificationList = () => {
         }
         const { data, error, status } = await GetComplianceAlertsListDetails(payLoad);
 
-        console.log("data",data);
-        
         if (status === 200) {
             const { aaData } = data;         
             setComplianceAlertDataList(data);

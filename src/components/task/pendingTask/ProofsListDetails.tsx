@@ -6,10 +6,10 @@ import { DownloadProofPayload, Item, ProofListData, ProofListPayload, ProofsList
 import * as FileSystem from 'expo-file-system';
 import * as IntentLauncherAndroid from 'expo-intent-launcher';
 import React, { memo, useEffect, useState } from "react";
-import { Alert, FlatList, Linking, Platform, RefreshControl, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { btoa } from 'react-native-quick-base64'; // Ensure you have a base64 encoding utility
+import { Alert, FlatList, Linking, Platform, Pressable, RefreshControl, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { View } from "@/src/components/Themed";
+import ChartItemSkelton from "../../skelton/ChartItemSkelton";
 
 
 
@@ -17,13 +17,7 @@ import { View } from "@/src/components/Themed";
 
 const ProofsListDetails = memo(({ taskId, type }: ProofsListDetailsProps) => {
     const [refreshing, setRefreshing] = useState(true);
-    const [pdfUri, setPdfUri] = useState<string | null>(null);
-
     const [proofDataList, setProofDataList] = useState<ProofListData[]>([]);
-
-    console.log("taskId got",taskId);
-    
-
 
     const handleGetproofListData = async (payLoad: ProofListPayload) => {
         const { data, error, status } = await GetProofDataList(payLoad);
@@ -64,136 +58,81 @@ const ProofsListDetails = memo(({ taskId, type }: ProofsListDetailsProps) => {
 
     // ========================== Working ============================== //
 
-    const handleDownload = async (docId: number) => {
-        //console.log("doc Id got", docId);
+    const handleDownload = async (docId: number, docName: string, docExt: string) => {
+        if (docExt === "pdf" || docExt === "png" || docExt === "txt" || docExt === "doc" || docExt === "jpeg" || docExt === "jpg") {
 
-        const downloadpayload: DownloadProofPayload = { docId: docId.toString() };
-        const response = await GetDownloadProof(downloadpayload);
-
-        if (response.status === 200) {
-            const arrayBufferString = response.data;
-
-            //console.log("arrayBuffer", arrayBufferString);
-
-            // Determine the type based on the content
-            let type = 'application/octet-stream'; // default type
-            if (arrayBufferString.startsWith('%PDF')) {
-                type = 'application/pdf';
+            const fileName = `${docName}.${docExt}`;
+            let filetype = '';
+            switch (docExt) {
+                case 'jpeg':
+                    filetype = 'image/jpeg';
+                    break;
+                case 'jpg':
+                    filetype = 'image/jpg';
+                    break;
+                case 'png':
+                    filetype = 'image/png';
+                    break;
+                case 'pdf':
+                    filetype = 'application/pdf';
+                    break;
+                case 'txt':
+                    filetype = 'text/plain';
+                    break;
+                case 'doc':
+                    filetype = 'application/msword';
+                    break;
+                // Add other methods (PUT, DELETE, etc.) if needed
             }
 
+            const downloadpayload: DownloadProofPayload = { docId: docId.toString() };
+            const response = await GetDownloadProof(downloadpayload);
 
-            // Convert array buffer string to base64 string
-            const base64String = btoa(arrayBufferString);
-            //console.log("Base64 String length:", base64String.length);
-
-            //console.log("base64String", base64String);
-            saveBase64ToFile(base64String, "downloadedFile.pdf").then((path) => {
-                if (path) {
-                    console.log('File saved to:', path);
-                    // openFile(path);
-                    FileSystem.getContentUriAsync(path).then(path => {
-                        console.log('path42423', path);
-
-                        IntentLauncherAndroid.startActivityAsync('android.intent.action.VIEW', {
-                            data: path,
-                            flags: 1,
-                            type: type
+            if (response.status === 200) {
+                const arrayBufferString: Blob = await response.data;
+                var reader = new FileReader();
+                reader.onloadend = async () => {
+                    if (typeof (reader.result) == 'string') {
+                        const fileUri = `${FileSystem.documentDirectory}/${fileName}`;
+                        await FileSystem.writeAsStringAsync(fileUri, reader.result.split(',')[1], { encoding: FileSystem.EncodingType.Base64 });
+                        FileSystem.getContentUriAsync(fileUri).then(path => {
+                            IntentLauncherAndroid.startActivityAsync('android.intent.action.VIEW', {
+                                data: path,
+                                flags: 1,
+                                type: filetype
+                            });
                         });
-                    });
-                } else {
-                    console.log('File save failed');
+                        // setTimeout(async () => {
+                        //     try {
+                        //       await FileSystem.deleteAsync(fileUri, { idempotent: true });
+                        //       console.log('File deleted successfully');
+                        //     } catch (deleteError) {
+                        //       console.error('Error deleting file:', deleteError);
+                        //     }
+                        //   }, 50); // Adjust delay as necessary
+                    }
                 }
-            });
-
-            // const path = FileSystem.documentDirectory + 'downloadedFile.pdf';
-            // console.log("File path11", path);
-
-            // await FileSystem.writeAsStringAsync(path, base64String, {
-            //     encoding: FileSystem.EncodingType.Base64,
-            // });
-            // downloadFile(FileSystem.documentDirectory ?? "", 'downloadedFile.pdf')
-            // Alert.alert('Success', `File downloaded successfully to: ${path}`);
+                reader.readAsDataURL(arrayBufferString);
+            } else {
+                console.error('Failed to download file', response);
+                Alert.alert('Error', 'Failed to download file');
+            }
         } else {
-            console.error('Failed to download file', response);
-            Alert.alert('Error', 'Failed to download file');
+            Alert.alert('Error', 'File view not supported');
         }
     };
-
-    const downloadFile = async (fileUri: string, fileName: string) => {
-        const downloadResumable = FileSystem.createDownloadResumable(
-            fileUri,
-            FileSystem.documentDirectory + fileName
-        );
-
-        try {
-            const uri = await downloadResumable.downloadAsync();
-            console.log('uri', uri);
-
-            return uri; // Local path of the downloaded file
-        } catch (e) {
-            console.error('Error downloading file:', e);
-            return null;
-        }
-    };
-    const openFile = async (filePath:string) => {
-        try {
-          let contentUri;
-          if (Platform.OS === 'android') {
-            contentUri = filePath;
-            console.log("contentUri0",contentUri);
-            
-          } else {
-            console.log("contentUri1",contentUri);
-            contentUri = filePath;
-          }
-      
-          if (Platform.OS === 'android') {
-           
-            await IntentLauncherAndroid.startActivityAsync(
-              'android.intent.action.VIEW',
-              {
-                data: contentUri,
-                flags: 1,
-              }
-            );
-          } else {
-            await Linking.openURL(contentUri);
-          }
-        } catch (e) {
-          console.error('Error opening file:', e);
-        }
-      };
-  
-    const saveBase64ToFile = async (base64String: string, fileName: string) => {
-        const path = FileSystem.documentDirectory + fileName;
-        try {
-            await FileSystem.writeAsStringAsync(path, base64String, {
-                encoding: FileSystem.EncodingType.Base64,
-            });
-            return path;
-        } catch (e) {
-            console.error('Error saving file:', e);
-            return null;
-        }
-    };
-
-
-
-
 
 
     const renderItem = ({ item }: { item: Item }) => (
         item?.docTitle == null ? <View style={styles.titleContainer}>
-            {/* <ChartItemSkelton /> */}
+            <ChartItemSkelton />
         </View> :
-            <View style={styles.titleContainer}>
+            <TouchableOpacity style={styles.titleContainer}  onPress={() => handleDownload(item.docId, item.docTitle, item.extension)}>
                 <Text>{`${item.docTitle}`}</Text>
-                <TouchableOpacity
-                    onPress={() => handleDownload(item.docId)}
-                >
+                {/* <TouchableOpacity> */}
                     <Icon name="download" size={24} color="#000" />
                 </TouchableOpacity>
-            </View>
+            // </Pressable>
     );
 
 
