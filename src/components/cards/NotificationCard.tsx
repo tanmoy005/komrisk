@@ -20,32 +20,22 @@ interface notificationCardListDataProps {
 
 const NotificationCard = memo(({ data }: notificationCardListDataProps) => {
     const notificationSeenList: notificationSeen[] | undefined = useSelector((state: RootState) => state.notificationSeen.payload);
-    console.log('notificationSeenList4234', notificationSeenList);
     const userDetails = useSelector((state: RootState) => state.authUserDetails.payload).userDetails;
-    //console.log('userDetails', userDetails);
     const { username: loggedInUserId } = userDetails;
     const currentPath = usePathname();
-   //console.log('currentPath', currentPath);
     const [isNotificationSeen, setisNotificationSeen] = useState(false);
     const seenCardborderColor = 'rgba(120, 106, 205, 0.8)';
     const unseenCardborderColor = 'rgba(120, 106, 205, 0.16)';
-    console.log('data got here', data);
     useEffect(() => {
-        
+
         if (currentPath === '/notification/notification_tab/alertsnotificationList') {
             const selectedUser = notificationSeenList.filter(({ userId }) => userId === loggedInUserId?.toString())[0];
-            console.log('selectedUser', selectedUser);
             setisNotificationSeen(selectedUser && selectedUser.notificationIdList.includes(data.id.toString()));
         }
-
-        //   if (notificationSeenList.includes(selectedUser.userId)) {
-
-        //   }
-
     }, [currentPath])
 
-    console.log("isNotificationSeen",isNotificationSeen);
-    
+    console.log("isNotificationSeen", isNotificationSeen);
+
 
 
     const CardData: notificationCardListData = {
@@ -56,11 +46,6 @@ const NotificationCard = memo(({ data }: notificationCardListDataProps) => {
         secondSection: {
             dateHeading: 'Notification Date',
             date: data.updatedOn,
-            // sectionRight:
-            // {
-            //     dateHeading: 'Notification Date',
-            //     date: data.updatedOn,
-            // }
         }
     }
     const isObjectEmpty = (objectName: NotificationListDataItem) => {

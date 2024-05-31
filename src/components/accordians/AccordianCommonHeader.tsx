@@ -15,39 +15,20 @@ import {
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 
-const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, type = 'chevron', taskId, commentText, setCommentText,setShortDescription }: AccordianCommonHeaderProps) => {
-    //const shortDescription = descriptions && descriptions.length > 64 ? `${descriptions.slice(0, 64)}...` : descriptions;
+const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, type = 'chevron', taskId, commentText, setCommentText, setShortDescription }: AccordianCommonHeaderProps) => {
     const [expanded, setExpanded] = useState(false)
     const taskID = taskId;
-    //console.log("taskID",taskID);
-    
-    const [currentDescription, setCurrentDescription] = useState<string>(commentText??"");
-    
-    let initialDescription="Your Description";
-
-
+    const [currentDescription, setCurrentDescription] = useState<string>(commentText ?? "");
+    let initialDescription = "Your Description";
     const comments = useSelector((state: RootState) => state.comments.commentsList);
-
-    //console.log("comments",comments);
-    
-
     const dispatch = useDispatch(); // Move inside the component body
 
     function toggleItem() {
         setExpanded(!expanded);
     }
 
-
-    // Handle the submission of the comment having update
     const handleSubmitComment = () => {
-
-
-        
         const existingCommentIndex = comments.findIndex(comment => comment[0].taskID === taskID);
-
-
-        
-
         if (existingCommentIndex !== -1) {
             // Update the comment in the Redux store
             dispatch(updateComment({ taskID, commentText }));
@@ -56,10 +37,7 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
             dispatch(addComment({ taskID, commentText }));
         }
 
-        
-
-        if(setCommentText!=undefined && setCommentText!=null){
-
+        if (setCommentText != undefined && setCommentText != null) {
             setCommentText('')
         } // Clear the comment input after submission
     };
@@ -70,10 +48,6 @@ const AccordianCommonHeader = ({ title, shortDescription,descriptions, icons, ty
             setCurrentDescription(initialDescription);
         }
     }, [commentText]);
-    
-
-
-
 
 
     return (

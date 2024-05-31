@@ -21,31 +21,19 @@ const userNotificationObject = (userId: string | null, notificationIdList: strin
 
 const ShowTaskDetails = () => {
     const data = useLocalSearchParams();
-
-
-    //console.log("data ***",data);
-    
-
-    const { type, id,complianceId,complianceTitle,lawNames,newValue,updatedOn  } = data;
-    const paramType = typeof type === 'string' ? type : (Array.isArray(type) ? type[0] : '');    
+    const { type, id, complianceId, complianceTitle, lawNames, newValue, updatedOn } = data;
+    const paramType = typeof type === 'string' ? type : (Array.isArray(type) ? type[0] : '');
     const paramId = typeof id === 'string' ? id : (Array.isArray(id) ? id[0] : '');
     const compliance_id = typeof complianceId === 'string' ? complianceId : (Array.isArray(complianceId) ? complianceId[0] : '');
     const compliance_title = typeof complianceTitle === 'string' ? complianceTitle : (Array.isArray(complianceTitle) ? complianceTitle[0] : '');
     const name_of_law = typeof lawNames === 'string' ? lawNames : (Array.isArray(lawNames) ? lawNames[0] : '');
     const description = typeof newValue === 'string' ? newValue : (Array.isArray(newValue) ? newValue[0] : '');
     const notification_date = typeof updatedOn === 'string' ? updatedOn : (Array.isArray(updatedOn) ? updatedOn[0] : '');
-    //console.log("Compliance id got",compliance_id);
-
-    //const [selectedComplianceId] = useState<string>(paramId??"");
-    
-
-
     const notificationSeenList: notificationSeen[] | undefined = useSelector((state: RootState) => state.notificationSeen.payload);
     const userDetails = useSelector((state: RootState) => state.authUserDetails.payload).userDetails;
     const { username: loggedInUserId } = userDetails;
-    
-    const [notificationDetails, setNotificationDetails] = useState<NotificationItemDetailsResponse>({
 
+    const [notificationDetails, setNotificationDetails] = useState<NotificationItemDetailsResponse>({
         compliance_title: null,
         compliance_id: null,
         description: null,
@@ -59,8 +47,6 @@ const ShowTaskDetails = () => {
 
         let updatedNotificationUserList: notificationSeen[] = [];
         if (notificationSeenList && notificationSeenList.length > 0) {
-            // const existingUserHistory = notificationSeenList.filter(({ userId }) => userId === userDetails.userId)
-
             let isExistingUser: boolean = false;
             for (let index = 0; index < notificationSeenList.length; index++) {
                 const element = notificationSeenList[index];
@@ -98,33 +84,24 @@ const ShowTaskDetails = () => {
     }, [])
 
     const setTaskDetails = (compliance_id: string) => {
-        //const taskDetails = GetPendingTaskDetails(selectedTaskId);
-        //const { title, description, nameOfLaw, complianceId, activities } = taskDetails;
-        // const { title, description, nameOfLaw, complianceId, activities } = taskDetails;
         setNotificationDetails({
-
-            compliance_title: compliance_title ,           
+            compliance_title: compliance_title,
             description: description,
-            compliance_id:  compliance_id ,
-            name_of_law: name_of_law ,
-            paramId: paramId ,
+            compliance_id: compliance_id,
+            name_of_law: name_of_law,
+            paramId: paramId,
             notification_date: notification_date
         })
-
     }
 
     useEffect(() => {
         setTaskDetails(compliance_id);
     }, [compliance_id]);
 
-    
-
     const handleSeeAll = () => {
-
+        //seeAll();
     }
     const handleClosed = () => {
-        // console.log();
-
     }
     return (
         <SafeAreaView style={styles.dashboardContainer}>
@@ -136,7 +113,7 @@ const ShowTaskDetails = () => {
                 secondBtnOnpress={handleClosed}
             />
             <Seperator24 />
-            <NotificationDetails notificationDetails ={notificationDetails} />
+            <NotificationDetails notificationDetails={notificationDetails} />
         </SafeAreaView>
     )
 }

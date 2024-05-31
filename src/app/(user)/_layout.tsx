@@ -9,7 +9,7 @@ export default function TabTwoScreen() {
 
   return <Stack screenOptions={{
     headerStyle: headerColor,
-    title: "dashboard",
+    title: "Dashboard",
     headerTitleAlign: 'center',
 
     headerRight: () =>

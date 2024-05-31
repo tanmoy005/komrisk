@@ -20,8 +20,6 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange, pen
     const [selectedImageUri, setSelectedImageUri] = useState<string | null | undefined>(null);
     const [modalVisible, setModalVisible] = useState(false);
     const { token } = React.useContext(AuthContext);
-    //console.log("token", token);
-
     useEffect(() => {
         onSelectedImagesChange(selectedImages);
     }, [selectedImages]);
@@ -36,11 +34,7 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange, pen
         }
 
         const result = await DocumentPicker.getDocumentAsync({});
-        //console.log("result", result);
-
         if (!result.canceled) {
-            //console.log("result", result);
-
             const filesData = result.assets.map(asset => ({
                 uri: asset.uri,
                 fileName: asset.name,
@@ -64,8 +58,6 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange, pen
         });
 
         if (!result.canceled) {
-            //console.log("result", result);
-
             const filesData = result.assets.map(asset => ({
                 uri: asset.uri,
                 fileName: asset.fileName,
@@ -87,12 +79,7 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange, pen
             quality: 1,
         });
 
-        //console.log("result",result);
-
-
         if (!result.canceled) {
-            //console.log("result", result);
-
             const filesData = result.assets.map(asset => ({
                 uri: asset.uri,
                 fileName: asset.fileName,
@@ -116,10 +103,8 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange, pen
         );
     };
 
-    const taskIDString = pendingTaskDetails.task_id?? "0";
+    const taskIDString = pendingTaskDetails.task_id ?? "0";
     const task_id = parseInt(taskIDString, 10);
-
-    //console.log("selectedImages", selectedImages);
 
     return (
         <CardContainer>
@@ -168,7 +153,7 @@ const ProofSection: React.FC<ProofSectionProps> = ({ onSelectedImagesChange, pen
 
             {/* For Sayan Sarkar pdf download api */}
             {/* <ProofsListDetails taskId={6850084} type="COMPLIANCE_PROOF" /> */}
-            
+
             <ProofsListDetails taskId={task_id} type="COMPLIANCE_PROOF" />
         </CardContainer>
     )

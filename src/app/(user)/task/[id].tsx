@@ -19,27 +19,22 @@ import React, { useEffect, useState } from 'react'
 import { Alert, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ReassignModal from '@/src/app/(user)/task/ReassignModal'
+import { hasValue } from '@/src/utils'
 
 const PendingTaskOverViewPage = () => {
     const data = useLocalSearchParams();
     const navigation = useNavigation();
     const [loading, setLoading] = useState<boolean>(true);
     const useCredential = useSelector((state: RootState) => state.authUserCred.payload);
-    //console.log("data got", data);
     const task_type = typeof data.task_type === 'string' ? data.task_type : null;
     const compliance_id = typeof data.compliance_id === 'string' ? data.compliance_id : null;
     const task_id = typeof data.task_id === 'string' ? data.task_id : null;
     const map_id = typeof data.map_id === 'string' ? data.map_id : null;
     const [selectedImages, setSelectedImages] = useState<{ uri: string, fileName: string | null | undefined, type: string | null | undefined }[]>([]);
-
-
     const [selectedTaskId] = useState<string>(task_id ?? "");
     const [showModal, setShowModal] = useState(false);
     const [showApproveModal, setShowApproveModal] = useState(false);
     const [showRejectModal, setShowRejectModal] = useState(false);
-
-
-
     const [activeTab, setActiveTab] = useState('Overview'); // Track active tab state
     const [pendingTaskDetails, setPendingTaskDetails] = useState<PendingTaskItemDetailsResponse>({
 
@@ -56,21 +51,12 @@ const PendingTaskOverViewPage = () => {
         ...useCredential,
         complianceId: compliance_id,
     }
-
-
     const setTaskDetails = async (compliance_id: string | null) => {
-
         setLoading(true);
-
         const { data, error, status } = await GetCompliancesItemDetails(payLoad);
-
-        //console.log("taskDetails", data);
-
         setLoading(false);
-
         if (status === 200) {
             setPendingTaskDetails({
-
                 taskType: task_type,
                 task_id: task_id,
                 task_desc: data.description,
@@ -87,8 +73,6 @@ const PendingTaskOverViewPage = () => {
     useEffect(() => {
         setTaskDetails(compliance_id);
     }, [compliance_id]);
-
-
 
     useEffect(() => {
         const filteredComments = comments.filter(comment => comment[0].taskID?.toString() === selectedTaskId);
@@ -111,46 +95,19 @@ const PendingTaskOverViewPage = () => {
     const [commentText, setCommentText] = useState<string | null>("");
 
     const comments = useSelector((state: RootState) => state.comments.commentsList);
-    //console.log("comments here***", comments);
     const taskid = pendingTaskDetails.task_id
-    //console.log("task id", taskid);
-
-
     const [shortDescription, setShortDescription] = useState<string>("");
-
-    // useEffect(() => {
-    //     // Ensure comments is not empty and taskid is valid
-    //     if (comments.length > 0 && taskid) {
-    //         // Filter comments based on taskID
-    //         const filteredComments = comments.filter(comment => String(comment[0].taskID) === taskid);
-
-    //         if (filteredComments.length !== 0) {
-    //             // Update commentText with the filtered comment's text
-    //             setCommentText(filteredComments[0][0].commentText);
-    //         }
-    //     }
-    // }, [comments, taskid]); // Add comments to the dependency array
-
-    //console.log("pendingTaskDetails",pendingTaskDetails);
-    //console.log("commentText here", commentText);
-
-
-
     const savepayload: CompleteTaskPayload = {
         taskType: pendingTaskDetails.taskType,
         taskId: pendingTaskDetails.task_id,
         taskComments: commentText,
         taskAction: "save",
     };
-
     const reassignpayload: RequestAssignPayload = {
-
         taskId: pendingTaskDetails.task_id,
         mapId: pendingTaskDetails.map_id,
         reason: " "
-
     };
-
     const completepayload: CompleteTaskPayload = {
         taskType: pendingTaskDetails.taskType,
         taskId: pendingTaskDetails.task_id,
@@ -189,19 +146,13 @@ const PendingTaskOverViewPage = () => {
 
 
 
-
-
     const saveUploadFile = async () => {
-        //console.log("*************");
-
         if (selectedImages.length === 0) {
             // Handle case where no file is selected
             return false;
         }
-
         const file = selectedImages[0];
         const fileExtension = file.fileName?.split('.').pop() ?? 'pdf'; // Default to 'pdf' if extension cannot be determined
-
         const formData = new FormData();
         formData.append('file', {
             uri: Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''), // Adjust uri for Android
@@ -216,10 +167,6 @@ const PendingTaskOverViewPage = () => {
         formData.append('fileNameWithExt', file.fileName ?? '');
         formData.append('docTitle', file.fileName ?? '');
         formData.append('extension', fileExtension ?? '');
-
-        // console.log("formData type", typeof (formData));
-        // console.log("formData", formData);
-
         try {
             const response = await SaveUploadProof(formData);
 
@@ -310,8 +257,6 @@ const PendingTaskOverViewPage = () => {
 
     const handleModalApprove = async (reason: string) => {
         approvepayload.taskComments = reason;
-        console.log("approvepayload", approvepayload);
-
         const { data, error, status } = await GetCompleteTaskData(approvepayload);
         if (status === 200) {
             Alert.alert("Success", "Task approved successfully");
@@ -323,8 +268,6 @@ const PendingTaskOverViewPage = () => {
 
     const handleModalReject = async (reason: string) => {
         rejectpayload.taskComments = reason;
-        console.log("rejectpayload", rejectpayload);
-
         const { data, error, status } = await GetCompleteTaskData(rejectpayload);
         if (status === 200) {
             Alert.alert("Success", "Task rejected");
@@ -341,49 +284,50 @@ const PendingTaskOverViewPage = () => {
 
     const handleModalSave = async (reason: string) => {
         // Update reassignpayload with the reason
-        reassignpayload.reason = reason;
-        console.log("reassignpayload", reassignpayload);
+        if (hasValue(reason)) {
+            reassignpayload.reason = reason;
+            const { data, error, status } = await GetRequestAssignData(reassignpayload);
+            if (status === 200) {
+                Alert.alert("Success", "Task reassigned successfully");
+            } else {
+                Alert.alert("error", error.message);
+            }
 
-        const { data, error, status } = await GetRequestAssignData(reassignpayload);
-        if (status === 200) {
-            Alert.alert("Success", "Task reassigned successfully");
+            setShowModal(false);
         } else {
-            Alert.alert("error", error.message);
+            Alert.alert("Missing Comments", "Please provide some comments and press Save.");
         }
-
-        setShowModal(false);
-
     };
 
     const handleComplete = async () => {
-        console.log("completepayload", completepayload);
-
-        const { data, error, status } = await GetCompleteTaskData(completepayload);
-        if (status === 200) {
-            Alert.alert("Success", "Task details completed successfully", [
-                {
-                    text: "OK",
-                    onPress: () => router.navigate('/(user)/task/pendingTaskPage')
-                }
-            ]);
+        if (!completepayload.taskComments || completepayload.taskComments.trim() === '') {
+            handlePressOnOverview();
+            Alert.alert("Missing Comments", "Please provide some comments and press Complete.");
+            return; // Exit the function early
         } else {
-            Alert.alert("Error", error.message);
+
+            const { data, error, status } = await GetCompleteTaskData(completepayload);
+            if (status === 200) {
+                Alert.alert("Success", "Task details completed successfully", [
+                    {
+                        text: "OK",
+                        onPress: () => router.navigate('/(user)/task/pendingTaskPage')
+                    }
+                ]);
+            } else {
+                Alert.alert("Error", error.message);
+            }
         }
+
     }
 
     const handleSelectedImagesChange = (images: any) => {
         setSelectedImages(images);
     };
 
-    //console.log("selectedImages got", selectedImages);
-
-
-
     // For not giving any reason as taskcomments to approve
 
     // const handleApprove = async () => {
-    //     console.log("approvepayload", approvepayload);
-
     //     const { data, error, status } = await GetCompleteTaskData(approvepayload);
     //     if (status === 200) {
     //         Alert.alert("Success", "Task approved successfully");
@@ -395,8 +339,6 @@ const PendingTaskOverViewPage = () => {
 
 
     // const handleReject = async () => {
-    //     console.log("rejectpayload", rejectpayload);
-
     //     const { data, error, status } = await GetCompleteTaskData(rejectpayload);
     //     if (status === 200) {
     //         Alert.alert("Success", "Task rejected");
@@ -444,7 +386,7 @@ const PendingTaskOverViewPage = () => {
                     {activeTab === 'Proofs' && (
                         <View>
 
-                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} pendingTaskDetails={pendingTaskDetails}/>
+                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} pendingTaskDetails={pendingTaskDetails} />
 
                         </View>
                     )}
@@ -495,7 +437,7 @@ const PendingTaskOverViewPage = () => {
                     {activeTab === 'Proofs' && (
                         <View>
 
-                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} pendingTaskDetails ={pendingTaskDetails} />
+                            <ProofSection onSelectedImagesChange={handleSelectedImagesChange} pendingTaskDetails={pendingTaskDetails} />
 
                         </View>
                     )}

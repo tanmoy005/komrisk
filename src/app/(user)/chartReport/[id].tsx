@@ -8,19 +8,11 @@ import GetIncidentDetails from '@/src/components/reports/reportDetails/GetIncide
 const ShowDetailsReport = () => {
 
     const data = useLocalSearchParams();
-    //console.log("data got",data);
-    
     const { type, id, taskId } = data;
-    
-    //const paramType = typeof type === 'string' ? type : type[0];
     const paramType = typeof type === 'string' ? type : (Array.isArray(type) ? type[0] : '');
-    //const paramId = typeof id === 'string' ? id : id[0];
-    const paramId = typeof id === 'string' ? id : (Array.isArray(id) ? id[0] : '');   
-    //const paramTaskId = typeof taskId === 'string' ? taskId : taskId[0];
+    const paramId = typeof id === 'string' ? id : (Array.isArray(id) ? id[0] : '');
     const paramTaskId = typeof taskId === 'string' ? taskId : (Array.isArray(taskId) ? taskId[0] : '');
 
-    
-    
     const [taskType, setTaskType] = useState<string>(paramType);
     const [complianceId, setComplianceId] = useState<string>('');
     const [incidentId, setIncidentId] = useState<string>('');
