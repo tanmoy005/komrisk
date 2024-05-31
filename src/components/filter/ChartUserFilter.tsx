@@ -175,7 +175,6 @@ const ChartUserFilter = ({
             setLoading(false);
             return;
         }
-        console.log("================================", chartuserfilterlevelPayload);
         const { data, error, status } = await apiFunction(chartuserfilterlevelPayload);
         setLoading(false); // Hide loader
         if (status === 200) {

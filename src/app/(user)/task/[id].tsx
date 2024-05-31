@@ -231,12 +231,8 @@ const PendingTaskOverViewPage = () => {
                         onPress: () => {
                             // Handle matching and deletion here
                             const matchingCommentIndex = comments.findIndex(comment => comment[0].taskID === savepayload.taskId);
-                            //console.log("****",matchingCommentIndex);
                             if (matchingCommentIndex === -1) {
-                                //console.log("****",matchingCommentIndex);
                                 dispatch(removeComment({ index: matchingCommentIndex }));
-                                
-                               //dispatch(removeComment({ taskID, commentText })); // Assuming you have a deleteComment action
                             }
     
                             handlePressOnOverview();
