@@ -28,6 +28,7 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
     }
 
     const handleSubmitComment = () => {
+        
         const existingCommentIndex = comments.findIndex(comment => comment[0].taskID === taskID);
         if (existingCommentIndex !== -1) {
             // Update the comment in the Redux store
@@ -37,9 +38,9 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
             dispatch(addComment({ taskID, commentText }));
         }
 
-        if (setCommentText != undefined && setCommentText != null) {
-            setCommentText('')
-        } // Clear the comment input after submission
+        // if (setCommentText != undefined && setCommentText != null) {
+        //     setCommentText('')
+        // } // Clear the comment input after submission
     };
 
     useEffect(() => {
