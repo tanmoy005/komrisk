@@ -41,8 +41,6 @@ const ImpactAnalysisInfo = ({ currentChart, chartFilterPayload, chartUserFilterP
 
     const handleGetImpactAnalysisData = async (payLoad: ImpactAnalysisDataPayLoad) => {
 
-
-
       const { data, error, status } = await GetImpactAnalysisData(payLoad);
       if (status === 200) {
         const { chartData, title, subTitle, yAxisName, xAxisName } = data;

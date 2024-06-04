@@ -50,7 +50,6 @@ const GetComplianceStatusDataListDetailsInfo = () => {
     };
 
     const handleGetActivityStatusDataList = async () => {
-
       const { data, error, status } = await GetComplianceStatusDataList(payLoad);
       if (status === 200) {
         const { aaData } = data;

@@ -32,7 +32,7 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
 
 
     const filterStatus = typeof statusType === 'string' ? statusType : (Array.isArray(statusType) ? statusType[0] : '');
-    
+
     const getpayload = typeof payload === 'string' ? payload : (Array.isArray(payload) ? payload[0] : '');
 
 
@@ -51,6 +51,7 @@ const GetImpactAnalysisDataListDetailsInfo = () => {
     };
 
     const handleGetImpactAnalysisDataList = async () => {
+  
 
       const { data, error, status } = await GetImpactAnalysisDataList(payLoad);
       if (status === 200) {

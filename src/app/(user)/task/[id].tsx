@@ -234,13 +234,13 @@ const PendingTaskOverViewPage = () => {
                             if (matchingCommentIndex === -1) {
                                 dispatch(removeComment({ index: matchingCommentIndex }));
                             }
-    
+
                             handlePressOnOverview();
                         }
                     }
                 ]);
             }
-    
+
 
             // if (status === 200) 
             // {
@@ -290,7 +290,7 @@ const PendingTaskOverViewPage = () => {
                 Alert.alert("Success", "Task approved successfully", [
                     {
                         text: "OK",
-                        onPress: () => router.navigate('/(user)/task/pendingTaskPage')
+                        onPress: () => router.push('/(user)/task/pendingTaskPage')
                     }
                 ]);
             } else {
@@ -310,14 +310,14 @@ const PendingTaskOverViewPage = () => {
                 Alert.alert("Success", "Task rejected successfully", [
                     {
                         text: "OK",
-                        onPress: () => router.navigate('/(user)/task/pendingTaskPage')
+                        onPress: () => router.push('/(user)/task/pendingTaskPage')
                     }
                 ]);
             } else {
                 Alert.alert("error", error.message);
             }
             setShowRejectModal(false);
-        }else {
+        } else {
             Alert.alert("Missing Comments", "Please provide some comments and press Reject.");
         }
     };
@@ -332,7 +332,7 @@ const PendingTaskOverViewPage = () => {
                 Alert.alert("Success", "Request for task reassignment saved successfully", [
                     {
                         text: "OK",
-                        onPress: () => router.navigate('/(user)/task/pendingTaskPage')
+                        onPress: () => router.push('/(user)/task/pendingTaskPage')
                     }
                 ]);
             } else {
@@ -351,13 +351,12 @@ const PendingTaskOverViewPage = () => {
             Alert.alert("Missing Comments", "Please provide some comments and press Complete.");
             return; // Exit the function early
         } else {
-
             const { data, error, status } = await GetCompleteTaskData(completepayload);
             if (status === 200) {
-                Alert.alert("Success", "Task details completed successfully", [
+                Alert.alert(data?.info ?? "Success", data?.message ?? "", [
                     {
                         text: "OK",
-                        onPress: () => router.navigate('/(user)/task/pendingTaskPage')
+                        onPress: () => router.push('/(user)/task/pendingTaskPage')
                     }
                 ]);
             } else {
