@@ -10,7 +10,8 @@ import React, { useEffect, useState } from 'react';
 import {
     Text,
     TouchableOpacity,
-    View
+    View,
+    Alert
 } from 'react-native';
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,8 +29,9 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
     }
 
     const handleSubmitComment = () => {
-        
+
         const existingCommentIndex = comments.findIndex(comment => comment[0].taskID === taskID);
+
         if (existingCommentIndex !== -1) {
             // Update the comment in the Redux store
             dispatch(updateComment({ taskID, commentText }));
@@ -37,6 +39,10 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
             // Add a new comment to the Redux store
             dispatch(addComment({ taskID, commentText }));
         }
+
+        Alert.alert("Comment saved as a draft");
+
+
 
         // if (setCommentText != undefined && setCommentText != null) {
         //     setCommentText('')
@@ -50,6 +56,9 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
         }
     }, [commentText]);
 
+    console.log("currentDescription", currentDescription);
+
+
 
     return (
         <TouchableOpacity onPress={toggleItem}>
@@ -58,7 +67,7 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
                     <View style={styles.expandSectionHeader}>
                         <View>
                             <Text style={styles.accordTitle}>{title}</Text>
-                            <Text style={styles.shortDescription}>{currentDescription}</Text>
+                            <Text style={expanded ? styles.accordinanshortDescription : styles.shortDescription}>{currentDescription}</Text>
                         </View>
                         <MuiIcon name={expanded ? 'arrow-expand' : 'arrow-collapse'} size={24} color="#26262C" />
                     </View>
@@ -67,7 +76,7 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
                         <Text style={styles.bodyInfoText}>DD/MM/YY   16:30</Text>
                     </View> */}
                 </View>
-
+    
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={styles.commentInputContainer}>
                         <InputField
@@ -76,7 +85,6 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
                             placeholder='Write here...'
                             type='2'
                             editable={true}
-
                         />
                     </View>
                     <View>
@@ -96,10 +104,10 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
                     </View>
                 </View>
             </View>
-
-
         </TouchableOpacity>
     );
 }
-
+    
 export default AccordianCommonHeader;
+
+

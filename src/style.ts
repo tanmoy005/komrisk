@@ -223,6 +223,14 @@ export const styles: { [key: string]: any } = StyleSheet.create({
         height: 16,
         overflow: 'hidden'
     },
+    accordinanshortDescription: {
+        ...commonFontStyle,
+        lineHeight: 16,
+        fontWeight: '400',
+        paddingRight: 60,
+        // height: 16,
+        // overflow: 'hidden'
+    },
     description: {
         ...commonFontStyle,
         lineHeight: 16,

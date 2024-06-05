@@ -871,15 +871,18 @@ export interface AccordianCommonHeaderProps {
     open: string;
     close: string;
   };
-  setExpanded?: React.Dispatch<React.SetStateAction<boolean>>;// or Dispatch<SetStateAction<boolean>>;
+  setExpanded?: React.Dispatch<React.SetStateAction<boolean>>;
   expanded?: boolean;
+  
 }
+
 export interface InputFieldProps {
   value: string;
   setInput?: React.Dispatch<React.SetStateAction<any>>,
   placeholder: string;
   type: string;
   editable?: boolean;
+  multiline?: boolean; 
 }
 export interface CustomComponentProp extends PropsWithChildren {
   styles?: { [key: string]: any }
