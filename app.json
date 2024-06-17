@@ -24,9 +24,10 @@
         "foregroundImage": "./assets/images/Small-logo-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "minSdkVersion": 29,
-      "package": "com.tan005.komrisk"
-      
+      "minSdkVersion": 31,
+      "package": "com.tan005.komrisk",
+      "enableProguardInReleaseBuilds": true,
+      "proguardConfig": "proguard-rules.pro"
     },
     "web": {
       "bundler": "metro",
