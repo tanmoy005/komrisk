@@ -4,8 +4,14 @@ import { Pressable, Text, View } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import MuiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { size24, styles } from '@/src/style';
+import { DateFormatDDMMYYYY } from '@/src/utils';
 
-const CustomDatePicker = ({ setDate, date, label, _handleConfirm }: CustomeDatePickerProps): JSX.Element => {
+const CustomDatePicker = ({
+  setDate,
+  date = new Date(), // Default date if not provided
+  label = '', // Default label if not provided
+  _handleConfirm
+}: CustomeDatePickerProps): JSX.Element => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -16,26 +22,20 @@ const CustomDatePicker = ({ setDate, date, label, _handleConfirm }: CustomeDateP
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = (date: Date) => {
-    // console.warn("A date has been picked: ", date);
-    setDate(date);
-    hideDatePicker();
-    _handleConfirm &&  _handleConfirm(date);
+  const handleConfirm = (selectedDate: Date) => {
+    if (selectedDate) {
+      setDate(selectedDate);
+      hideDatePicker();
+      _handleConfirm && _handleConfirm(selectedDate);
+    }
   };
 
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-      {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
       <Pressable onPress={showDatePicker}>
-        {/* <TextInput
-          style={{ ...styles.input, ...styles['inputType' + '3'] }}
-          value={DateFormatDDMMYYYY(date && date.toString())}
-          placeholder={'DD/MM/YYYY'}
-          readOnly={true}
-        /> */}
         <View style={styles.datePickerLabelContainer}>
           <MuiIcon name="calendar" size={size24} color="rgba(120, 106, 205, 1)" />
-          <Text style={{...styles.textStyle2, marginLeft: 2}}>{label}</Text>
+          <Text style={{ ...styles.textStyle2, marginLeft: 2 }}>{label}</Text>
         </View>
       </Pressable>
       <DateTimePickerModal

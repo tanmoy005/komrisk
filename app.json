@@ -5,7 +5,7 @@
     "version": "1.2.3",
     "orientation": "portrait",
     "icon": "./assets/images/Icons_Mo.png",
-    "scheme": "myapp",
+    "scheme": "komriskapp",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -15,29 +15,23 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tan005.komrisk"
+      "bundleIdentifier": "komrisk"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/Small-logo-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "minSdkVersion": 31,
-      "package": "com.tan005.komrisk",
-      "enableProguardInReleaseBuilds": true,
-      "proguardConfig": "proguard-rules.pro"
+      "blockedPermissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
@@ -49,6 +43,28 @@
       "eas": {
         "projectId": "72cf5962-6f32-45da-85b6-70d20a8202ed"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 31,
+            "targetSdkVersion": 31,
+            "buildToolsVersion": "31.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "13.4"
+          }
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": ["assets/fonts/SpaceMono-Regular.ttf"]
+        }
+      ]
+
+    ]
   }
 }

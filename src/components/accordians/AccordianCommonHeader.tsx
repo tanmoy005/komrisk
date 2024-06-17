@@ -56,9 +56,6 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
         }
     }, [commentText]);
 
-    console.log("currentDescription", currentDescription);
-
-
 
     return (
         <TouchableOpacity onPress={toggleItem}>
@@ -76,7 +73,7 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
                         <Text style={styles.bodyInfoText}>DD/MM/YY   16:30</Text>
                     </View> */}
                 </View>
-    
+
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={styles.commentInputContainer}>
                         <InputField
@@ -107,7 +104,7 @@ const AccordianCommonHeader = ({ title, shortDescription, descriptions, icons, t
         </TouchableOpacity>
     );
 }
-    
+
 export default AccordianCommonHeader;
 
 
