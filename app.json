@@ -15,7 +15,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "komrisk"
@@ -25,7 +24,10 @@
         "foregroundImage": "./assets/images/Small-logo-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "blockedPermissions": ["android.permission.RECORD_AUDIO"]
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.tan005.komrisk"
     },
     "web": {
       "bundler": "metro",
@@ -49,9 +51,9 @@
         "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 31,
-            "targetSdkVersion": 31,
-            "buildToolsVersion": "31.0.0"
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0"
           },
           "ios": {
             "deploymentTarget": "13.4"
@@ -61,10 +63,11 @@
       [
         "expo-font",
         {
-          "fonts": ["assets/fonts/SpaceMono-Regular.ttf"]
+          "fonts": [
+            "assets/fonts/SpaceMono-Regular.ttf"
+          ]
         }
       ]
-
     ]
   }
 }
