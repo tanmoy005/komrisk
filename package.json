@@ -4,8 +4,8 @@
   "version": "1.2.2",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --watchAll"
   },
@@ -13,13 +13,13 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.0.0",
+    "@expo/vector-icons": "^14.0.2",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/datetimepicker": "8.0.1",
     "@react-navigation/native": "^6.0.2",
     "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.6.7",
-    "expo": "~51.0.14",
+    "expo": "~51.0.17",
     "expo-build-properties": "^0.12.3",
     "expo-constants": "~16.0.2",
     "expo-device": "~6.0.2",
@@ -27,13 +27,13 @@
     "expo-file-system": "~17.0.1",
     "expo-font": "~12.0.4",
     "expo-haptics": "~13.0.1",
-    "expo-image-picker": "~15.0.5",
+    "expo-image-picker": "~15.0.6",
     "expo-intent-launcher": "^11.0.1",
     "expo-linking": "~6.3.1",
     "expo-notifications": "~0.28.9",
-    "expo-router": "~3.5.16",
+    "expo-router": "~3.5.17",
     "expo-screen-capture": "~6.0.1",
-    "expo-secure-store": "^13.0.1",
+    "expo-secure-store": "~13.0.2",
     "expo-splash-screen": "~0.27.5",
     "expo-status-bar": "~1.12.1",
     "expo-web-browser": "~13.0.3",
@@ -54,12 +54,12 @@
     "react-redux": "^9.1.1",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
-    "expo-updates": "~0.25.17"
+    "expo-updates": "~0.25.18"
   },
   "devDependencies": {
     "@types/react": "~18.2.79",
     "jest": "^29.2.1",
-    "jest-expo": "~51.0.2",
+    "jest-expo": "~51.0.3",
     "react-test-renderer": "18.2.0"
   },
   "private": true
